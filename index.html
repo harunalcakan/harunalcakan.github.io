@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Kişisel Site — GitHub Pages</title>
+  <meta name="description" content="Kısa kişisel tanıtım sayfası. GitHub Pages üzerinde yayınlanmak üzere tek dosyalık şablon." />
+  <style>
+    :root{
+      --bg:#0b0e14; --muted:#121723; --text:#e6e6e6; --soft:#c7c7c7; --brand:#7cc4ff; --accent:#9ef0a3;
+      --card:#111522; --border:#22304a;
+    }
+    html{scroll-behavior:smooth}
+    body{margin:0; font-family: system-ui,-apple-system,Segoe UI,Roboto,Inter,Helvetica,Arial,sans-serif; color:var(--text); background:linear-gradient(180deg,var(--bg),#0f1525 30%, #0a0f1a 100%);} 
+    .wrap{max-width:980px; margin:0 auto; padding:24px}
+    header{position:sticky; top:0; backdrop-filter: blur(8px); background:rgba(11,14,20,.6); border-bottom:1px solid var(--border); z-index:20}
+    nav{display:flex; gap:18px; align-items:center; justify-content:space-between; padding:12px 0}
+    nav a{color:var(--soft); text-decoration:none; font-weight:600}
+    nav a:hover{color:var(--brand)}
+    .brand{display:flex; gap:12px; align-items:center}
+    .logo{width:28px; height:28px; border:1px solid var(--border); border-radius:8px; display:grid; place-items:center; font-size:14px; color:var(--brand); background:var(--card)}
+    .cta{padding:10px 14px; border:1px solid var(--border); border-radius:10px; color:var(--text)}
+    .hero{display:grid; gap:18px; padding:48px 0 24px}
+    .title{font-size:clamp(28px,4vw,44px); line-height:1.1; font-weight:800}
+    .subtitle{font-size:clamp(16px,2vw,18px); color:#b9c4d0}
+    .chipbar{display:flex; flex-wrap:wrap; gap:10px}
+    .chip{font-size:12px; border:1px solid var(--border); padding:6px 10px; border-radius:999px; color:#b9c4d0; background:rgba(124,196,255,.06)}
+    .grid{display:grid; gap:18px; grid-template-columns: repeat(12,1fr)}
+    .card{grid-column:span 12; border:1px solid var(--border); background:var(--card); border-radius:16px; padding:18px}
+    @media(min-width:880px){ .card.split{display:grid; grid-template-columns:1.2fr 2fr; gap:22px} }
+    h2{font-size:22px; margin:0 0 10px 0}
+    h3{font-size:16px; margin:12px 0 6px}
+    .muted{color:#99a6b6}
+    ul{margin:6px 0 0 18px}
+    .kicker{color:var(--accent); font-weight:700; letter-spacing:.12em; text-transform:uppercase; font-size:12px}
+    .footer{display:flex; gap:14px; flex-wrap:wrap; justify-content:space-between; border-top:1px solid var(--border); margin-top:32px; padding:18px 0 48px}
+    .pill{display:inline-flex; gap:8px; align-items:center; border:1px solid var(--border); border-radius:999px; padding:8px 12px}
+    .tag{font-size:12px; color:#a8b6c8}
+    .btn{display:inline-block; margin-top:8px; font-weight:700}
+    .btn a{color:var(--brand); text-decoration:none}
+    .btn a:hover{text-decoration:underline}
+    .contact-links a{color:var(--soft); text-decoration:none}
+    .contact-links a:hover{color:var(--brand)}
+    code{background:#0b1220; border:1px solid var(--border); padding:2px 6px; border-radius:6px}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <nav>
+        <div class="brand">
+          <div class="logo">GH</div>
+          <a href="#top"><strong>Benim Sitem</strong></a>
+        </div>
+        <div class="links">
+          <a href="#hakkimda">Hakkımda</a>
+          <a href="#yayinlar">Yayınlar</a>
+          <a href="#projeler">Projeler</a>
+          <a href="#iletisim">İletişim</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top" class="wrap">
+    <section class="hero">
+      <div class="kicker">Merhaba</div>
+      <h1 class="title">Kısa bir kişisel tanıtım başlığı — araştırma alanlarınız / ilgi konuları</h1>
+      <p class="subtitle">Bu şablon GitHub Pages üzerinde anında yayınlanabilecek tek dosyalık bir sitedir. Metinleri kendi bilgilerinizle değiştirin, yeni bölümler ekleyin.</p>
+      <div class="chipbar">
+        <div class="chip">Computational Chemistry</div>
+        <div class="chip">Molecular Docking</div>
+        <div class="chip">Electrochemistry</div>
+        <div class="chip">3D Printing</div>
+      </div>
+    </section>
+
+    <section id="hakkimda" class="grid">
+      <article class="card split">
+        <div>
+          <h2>Hakkımda</h2>
+          <p>Buraya 4–6 cümlelik bir biyografi ekleyin. Örn: “X Üniversitesi'nde araştırma görevlisi/öğrenciyim. İlgi alanlarım DFT, moleküler dinamik ve elektrokimya. Şu anda Y projesi üzerinde çalışıyorum.”</p>
+          <p class="muted">Bu site <code>username.github.io</code> repo adıyla GitHub Pages’da barındırılabilir. Aşağıdaki “Yayınla” bölümündeki adımları izleyin.</p>
+          <div class="btn"><a href="#yayinla">Yayınla adımlarına git →</a></div>
+        </div>
+        <div>
+          <h3>Öne çıkanlar</h3>
+          <ul>
+            <li>🔬 Çalışma alanı: Kısa madde</li>
+            <li>📄 Yayın sayısı / poster / konuşma</li>
+            <li>🧪 Devam eden proje: Proje adı</li>
+          </ul>
+          <h3>Bağlantılar</h3>
+          <p class="contact-links">
+            <a href="#">Google Scholar</a> · 
+            <a href="#">ORCID</a> · 
+            <a href="#">ResearchGate</a> · 
+            <a href="#">LinkedIn</a>
+          </p>
+        </div>
+      </article>
+    </section>
+
+    <section id="yayinlar" class="grid">
+      <article class="card">
+        <h2>Seçili Yayınlar</h2>
+        <ul>
+          <li><strong>Makale başlığı</strong> — Yazarlar (Yıl). <em>Dergi</em>. DOI: 10.xxxx/xxxx</li>
+          <li><strong>Makale başlığı</strong> — Yazarlar (Yıl). <em>Dergi</em>. DOI: 10.xxxx/xxxx</li>
+          <li><strong>Poster/Tebliğ başlığı</strong> — Etkinlik (Yıl)</li>
+        </ul>
+      </article>
+    </section>
+
+    <section id="projeler" class="grid">
+      <article class="card">
+        <h2>Projeler</h2>
+        <ul>
+          <li><strong>Proje 1</strong> — Kısa açıklama, repo: <a href="#">github.com/kullanici/proje1</a></li>
+          <li><strong>Proje 2</strong> — Kısa açıklama, repo: <a href="#">github.com/kullanici/proje2</a></li>
+        </ul>
+      </article>
+    </section>
+
+    <section id="iletisim" class="grid">
+      <article class="card">
+        <h2>İletişim</h2>
+        <p>E‑posta: <a href="mailto:ad.soyad@mail.com">ad.soyad@mail.com</a></p>
+        <p>Şehir, Ülke</p>
+      </article>
+    </section>
+
+    <section id="yayinla" class="grid">
+      <article class="card">
+        <h2>GitHub Pages’ta Yayınlama (kısa rehber)</h2>
+        <ol>
+          <li><strong>GitHub hesabınızla</strong> oturum açın veya kayıt olun.</li>
+          <li><strong>Yeni repo oluşturun:</strong> adı tam olarak <code>username.github.io</code> (username = GitHub kullanıcı adınız, örn. <code>harunnalcakan.github.io</code>).</li>
+          <li>Repo <strong>Public</strong> olsun. <em>Add file → Create new file</em> deyip bu dosyanın adını <code>index.html</code> olarak kaydedin ve <em>Commit</em> edin (bu sayfanın tamamını yapıştırın).</li>
+          <li>Repo içinde <strong>Settings → Pages</strong> bölümüne gidin. <em>Branch</em> olarak <code>main</code> ve <em>Folder</em> olarak <code>/ (root)</code> seçili olsun. <em>Save</em> edin.</li>
+          <li>Site adresiniz <code>https://username.github.io</code> olarak yayına alınır. <strong>Enforce HTTPS</strong> seçeneğini açın.</li>
+        </ol>
+        <p class="muted">Hazır hissetmiyorsanız: <strong>Settings → Pages → Theme Chooser</strong> ile bir Jekyll teması seçip başlangıç sayfası oluşturabilirsiniz.</p>
+      </article>
+    </section>
+
+    <section class="grid">
+      <article class="card">
+        <h2>İpucu</h2>
+        <ul>
+          <li>Bu dosya tek başına yeterli. Daha sonra <code>assets/</code> klasörü ve çoklu sayfalar ekleyebilirsiniz.</li>
+          <li><code>README.md</code> içine kısaca sitenizi açıklayın. Lisans için <code>LICENSE</code> ekleyin.</li>
+          <li>Özel alan adı kullanacaksanız repo köküne <code>CNAME</code> dosyası ekleyin.</li>
+        </ul>
+      </article>
+    </section>
+
+    <footer class="footer">
+      <span class="tag">© <span id="yil"></span> — Kişisel Site</span>
+      <span class="tag">GitHub Pages · Tek dosyalık şablon</span>
+    </footer>
+  </main>
+
+  <script>
+    document.getElementById('yil').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
