@@ -1,57 +1,201 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-  <meta charset="utf-8">
-  <title>Harun Nalçakan</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Harun Nalçakan — Research</title>
+  <meta name="description" content="Harun Nalçakan | Computational chemistry, molecular docking, electrochemistry. Personal academic homepage on GitHub Pages with Turkish/English toggle." />
   <style>
-    body { font-family: Arial, sans-serif; margin:0; padding:0; background:#0b0e14; color:#e6e6e6; }
-    header { background:#121723; padding:20px; text-align:center; }
-    header h1 { margin:0; color:#7cc4ff; }
-    nav { margin-top:10px; }
-    nav a { color:#c7c7c7; text-decoration:none; margin:0 10px; }
-    nav a:hover { color:#7cc4ff; }
-    section { max-width:800px; margin:40px auto; padding:20px; background:#111522; border-radius:12px; }
-    h2 { color:#9ef0a3; }
-    a { color:#7cc4ff; }
-    footer { text-align:center; padding:20px; color:#999; font-size:14px; }
+    :root{
+      --bg:#0b0e14; --panel:#0f1422; --text:#e7e9ee; --muted:#a8b0c0; --line:#1f2940; --brand:#79c2ff; --accent:#88f0aa;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:linear-gradient(180deg,var(--bg),#0c1220 40%,#0a0f1a);color:var(--text);font:16px/1.6 Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif}
+    a{color:var(--brand);text-decoration:none}
+    a:hover{text-decoration:underline}
+    .wrap{max-width:980px;margin:0 auto;padding:24px}
+    header{position:sticky;top:0;background:rgba(11,14,20,.6);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);z-index:10}
+    .nav{display:flex;gap:18px;align-items:center;justify-content:space-between;padding:12px 0}
+    .brand{display:flex;gap:12px;align-items:center}
+    .logo{width:28px;height:28px;border:1px solid var(--line);border-radius:7px;display:grid;place-items:center;color:var(--brand);background:var(--panel);font-weight:800}
+    .links{display:flex;gap:16px;flex-wrap:wrap}
+    .lang{display:flex;gap:8px;align-items:center}
+    .btn{border:1px solid var(--line);background:var(--panel);padding:8px 10px;border-radius:10px;color:var(--text);cursor:pointer}
+    .btn:disabled{opacity:.6;cursor:default}
+    .hero{display:grid;gap:14px;padding:42px 0 28px}
+    .title{font-size:clamp(28px,4vw,44px);line-height:1.1;font-weight:900}
+    .subtitle{color:var(--muted)}
+    .chips{display:flex;gap:10px;flex-wrap:wrap}
+    .chip{font-size:12px;border:1px solid var(--line);padding:6px 10px;border-radius:999px;color:#c8d0df;background:rgba(124,196,255,.07)}
+    .grid{display:grid;gap:18px;grid-template-columns:repeat(12,1fr)}
+    .card{grid-column:span 12;border:1px solid var(--line);background:var(--panel);border-radius:16px;padding:18px}
+    @media(min-width:880px){.split{display:grid;grid-template-columns:1.2fr 2fr;gap:22px}}
+    h2{font-size:22px;margin:0 0 10px}
+    h3{font-size:16px;margin:12px 0 6px}
+    .muted{color:var(--muted)}
+    .footer{display:flex;gap:14px;flex-wrap:wrap;justify-content:space-between;border-top:1px solid var(--line);margin-top:32px;padding:18px 0 48px}
+    code{background:#0a1220;border:1px solid var(--line);padding:2px 6px;border-radius:6px}
+    /* simple section anchors offset for sticky header */
+    section{scroll-margin-top:84px}
   </style>
 </head>
 <body>
   <header>
-    <h1>Harun Nalçakan</h1>
-    <p>Computational Chemistry · Molecular Docking · Electrochemistry</p>
-    <nav>
-      <a href="#hakkimda">Hakkımda</a>
-      <a href="#projeler">Projeler</a>
-      <a href="#iletisim">İletişim</a>
-    </nav>
+    <div class="wrap">
+      <nav class="nav">
+        <div class="brand">
+          <div class="logo">HN</div>
+          <a href="#top"><strong data-i18n="brand">Harun Nalçakan</strong></a>
+        </div>
+        <div class="links">
+          <a href="#about" data-i18n="nav_about">Hakkımda</a>
+          <a href="#pubs" data-i18n="nav_pubs">Yayınlar</a>
+          <a href="#projects" data-i18n="nav_projects">Projeler</a>
+          <a href="#contact" data-i18n="nav_contact">İletişim</a>
+          <div class="lang">
+            <button class="btn" id="trBtn">TR</button>
+            <button class="btn" id="enBtn">EN</button>
+          </div>
+        </div>
+      </nav>
+    </div>
   </header>
 
-  <section id="hakkimda">
-    <h2>Hakkımda</h2>
-    <p>Ben Harun Nalçakan, Ankara Üniversitesi Kimya Bölümü Fizikokimya Anabilim Dalı’nda araştırma görevlisiyim. 
-       İlgi alanlarım arasında yoğunluk fonksiyonel teorisi (DFT), moleküler docking, moleküler dinamik simülasyonları 
-       ve elektrokimya yer almaktadır. Ayrıca 3D baskı ve lazer indüklenmiş grafen üzerine çalışıyorum.</p>
-  </section>
+  <main id="top" class="wrap">
+    <section class="hero">
+      <h1 class="title" data-i18n="hero_title">Computational Chemistry & Electrochemistry</h1>
+      <p class="subtitle" data-i18n="hero_sub">DFT, molecular docking & dynamics (AutoDock Vina / GROMACS), and laser‑induced graphene based electrochemical sensors.</p>
+      <div class="chips">
+        <div class="chip">DFT</div>
+        <div class="chip">Docking</div>
+        <div class="chip">MD</div>
+        <div class="chip">Electrochemistry</div>
+        <div class="chip">LIG</div>
+      </div>
+    </section>
 
-  <section id="projeler">
-    <h2>Projeler</h2>
-    <ul>
-      <li><strong>Advisor Tool</strong> — Moleküler docking doğrulama ve optimizasyon aracı (AutoDock Vina + Bayesian Optimization)</li>
-      <li><strong>LIG Sensör</strong> — Lazer indüklenmiş grafen elektrotlarla nitroaromatik bileşiklerin elektrokimyasal tespiti</li>
-    </ul>
-  </section>
+    <section id="about" class="grid">
+      <article class="card split">
+        <div>
+          <h2 data-i18n="about_h">Hakkımda</h2>
+          <p class="muted" data-i18n="about_p1">Ankara Üniversitesi, Kimya (Fizikokimya) araştırma görevlisi. Yoğunluk fonksiyonel teorisi (DFT), moleküler docking/dinamik ve elektrokimya çalışıyorum. Sensörler için lazer indüklenmiş grafen (LIG) üzerine deneysel ve hesaplamalı çalışmalar yürütüyorum.</p>
+          <p class="muted" data-i18n="about_p2">Hedefim; açık, tekrar üretilebilir iş akışları ve pratik araçlar (ör. ADViSOR: Vina grid optimizasyonu + BO) geliştirerek ilaç tasarımı ve malzeme/sensör araştırmalarında verimi artırmak.</p>
+          <div>
+            <h3 data-i18n="about_links_h">Bağlantılar</h3>
+            <p>
+              <a href="https://scholar.google.com" target="_blank">Google Scholar</a> ·
+              <a href="https://orcid.org" target="_blank">ORCID</a> ·
+              <a href="https://researchgate.net" target="_blank">ResearchGate</a> ·
+              <a href="https://github.com/harunalcakan" target="_blank">GitHub</a>
+            </p>
+          </div>
+        </div>
+        <div>
+          <h3 data-i18n="highlights_h">Öne Çıkanlar</h3>
+          <ul>
+            <li data-i18n="hl1">ADViSOR — AutoDock Vina doğrulama & grid optimizasyon (Bayesçi Opt.)</li>
+            <li data-i18n="hl2">LIG elektrotlarla 4‑nitrofenol tespiti (amperometri)</li>
+            <li data-i18n="hl3">CA izoenzimlerine yönelik in‑silico taramalar</li>
+          </ul>
+        </div>
+      </article>
+    </section>
 
-  <section id="iletisim">
-    <h2>İletişim</h2>
-    <p>Email: <a href="mailto:harun.nalcakan@gmail.com">harun.nalcakan@gmail.com</a></p>
-    <p>GitHub: <a href="https://github.com/harunalcakan" target="_blank">github.com/harunalcakan</a></p>
-    <p>LinkedIn: <a href="#" target="_blank">Profilim</a></p>
-  </section>
+    <section id="pubs" class="grid">
+      <article class="card">
+        <h2 data-i18n="pubs_h">Seçili Yayınlar</h2>
+        <ul>
+          <li><strong>Example article title</strong> — Authors (Year). <em>Journal</em>. DOI: 10.xxxx/xxxx</li>
+          <li><strong>Poster/Talk</strong> — Event (Year)</li>
+        </ul>
+        <p class="muted" data-i18n="pubs_note">Daha fazla yayın yakında eklenecek.</p>
+      </article>
+    </section>
 
-  <footer>
-    © 2025 Harun Nalçakan · GitHub Pages
-  </footer>
+    <section id="projects" class="grid">
+      <article class="card">
+        <h2 data-i18n="projects_h">Projeler</h2>
+        <ul>
+          <li><strong>ADViSOR</strong> — <span data-i18n="prj1">Vina grid kutusu merkez/ebatlarını BO ile optimize eden doğrulama aracı</span></li>
+          <li><strong>LIG Sensor</strong> — <span data-i18n="prj2">Diode‑laser ile Kapton üzerinde LIG üretimi ve amperometrik algılama</span></li>
+        </ul>
+      </article>
+    </section>
+
+    <section id="contact" class="grid">
+      <article class="card">
+        <h2 data-i18n="contact_h">İletişim</h2>
+        <p><span data-i18n="email">E‑posta</span>: <a href="mailto:harun.nalcakan@gmail.com">harun.nalcakan@gmail.com</a></p>
+        <p>Ankara, Türkiye</p>
+      </article>
+    </section>
+
+    <section id="publish" class="grid">
+      <article class="card">
+        <h2 data-i18n="deploy_h">Yayınlama İpucu</h2>
+        <p class="muted" data-i18n="deploy_p">Bu site tek dosyadan çalışır (<code>index.html</code>). İçerikleri doğrudan bu dosyada düzenleyebilirsiniz. İlerde çok dilli içerik/alt sayfalar eklemek isterseniz <code>assets/</code> klasörü oluşturabilirsiniz.</p>
+      </article>
+    </section>
+
+    <footer class="footer">
+      <span>© <span id="yil"></span> · Harun Nalçakan</span>
+      <span data-i18n="footer_note">GitHub Pages üzerinde barındırılıyor</span>
+    </footer>
+  </main>
+
+  <script>
+    // Simple i18n system — Turkish (tr) & English (en)
+    const i18n = {
+      tr: {
+        brand: 'Harun Nalçakan',
+        nav_about: 'Hakkımda', nav_pubs: 'Yayınlar', nav_projects: 'Projeler', nav_contact: 'İletişim',
+        hero_title: 'Hesaplamalı Kimya & Elektrokimya',
+        hero_sub: 'DFT, moleküler docking & dinamik (AutoDock Vina / GROMACS) ve lazer indüklenmiş grafen tabanlı elektrokimyasal sensörler.',
+        about_h: 'Hakkımda',
+        about_p1: 'Ankara Üniversitesi, Kimya (Fizikokimya) araştırma görevlisi. Yoğunluk fonksiyonel teorisi (DFT), moleküler docking/dinamik ve elektrokimya çalışıyorum. Sensörler için lazer indüklenmiş grafen (LIG) üzerine deneysel ve hesaplamalı çalışmalar yürütüyorum.',
+        about_p2: 'Hedefim; açık, tekrar üretilebilir iş akışları ve pratik araçlar (ör. ADViSOR: Vina grid optimizasyonu + BO) geliştirerek ilaç tasarımı ve malzeme/sensör araştırmalarında verimi artırmak.',
+        about_links_h: 'Bağlantılar',
+        highlights_h: 'Öne Çıkanlar', hl1:'ADViSOR — AutoDock Vina doğrulama & grid optimizasyon (Bayesçi Opt.)', hl2:'LIG elektrotlarla 4‑nitrofenol tespiti (amperometri)', hl3:'CA izoenzimlerine yönelik in‑silico taramalar',
+        pubs_h:'Seçili Yayınlar', pubs_note:'Daha fazla yayın yakında eklenecek.',
+        projects_h:'Projeler', prj1:'Vina grid kutusu merkez/ebatlarını BO ile optimize eden doğrulama aracı', prj2:'Diode‑laser ile Kapton üzerinde LIG üretimi ve amperometrik algılama',
+        contact_h:'İletişim', email:'E‑posta',
+        deploy_h:'Yayınlama İpucu', deploy_p:'Bu site tek dosyadan çalışır (index.html). İçerikleri doğrudan bu dosyada düzenleyebilirsiniz. İlerde çok dilli içerik/alt sayfalar eklemek isterseniz assets/ klasörü oluşturabilirsiniz.',
+        footer_note:'GitHub Pages üzerinde barındırılıyor'
+      },
+      en: {
+        brand: 'Harun Nalçakan',
+        nav_about: 'About', nav_pubs: 'Publications', nav_projects: 'Projects', nav_contact: 'Contact',
+        hero_title: 'Computational Chemistry & Electrochemistry',
+        hero_sub: 'DFT, molecular docking & dynamics (AutoDock Vina / GROMACS), and laser‑induced graphene based electrochemical sensors.',
+        about_h: 'About',
+        about_p1: 'Research assistant in Physical Chemistry at Ankara University. I work on DFT, molecular docking/dynamics, and electrochemistry. I also study laser‑induced graphene (LIG) for sensing.',
+        about_p2: 'My goal is to build open, reproducible workflows and practical tools (e.g., ADViSOR: Vina grid optimization with BO) to accelerate drug design and materials/sensor research.',
+        about_links_h: 'Links',
+        highlights_h: 'Highlights', hl1:'ADViSOR — AutoDock Vina validation & grid optimization (Bayesian Opt.)', hl2:'4‑nitrophenol detection with LIG electrodes (amperometry)', hl3:'In‑silico screens for carbonic anhydrases',
+        pubs_h:'Selected Publications', pubs_note:'More to come.',
+        projects_h:'Projects', prj1:'Validation tool that optimizes Vina grid center/size with BO', prj2:'LIG on Kapton using diode laser; amperometric detection',
+        contact_h:'Contact', email:'Email',
+        deploy_h:'Publishing tip', deploy_p:'This site runs from a single file (index.html). Edit content here; add assets/ later for multi‑page setups.',
+        footer_note:'Hosted on GitHub Pages'
+      }
+    };
+
+    const $ = (s, root=document) => root.querySelectorAll(s);
+    const setLang = lang => {
+      const dict = i18n[lang] || i18n.tr;
+      $('[data-i18n]').forEach(el=>{ const k = el.getAttribute('data-i18n'); if(dict[k]) el.textContent = dict[k]; });
+      localStorage.setItem('lang', lang);
+      document.documentElement.lang = lang === 'en' ? 'en' : 'tr';
+      // button states
+      document.getElementById('trBtn').disabled = (lang==='tr');
+      document.getElementById('enBtn').disabled = (lang==='en');
+    };
+    document.getElementById('trBtn').addEventListener('click',()=>setLang('tr'));
+    document.getElementById('enBtn').addEventListener('click',()=>setLang('en'));
+    // init
+    setLang(localStorage.getItem('lang')||'tr');
+    document.getElementById('yil').textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
