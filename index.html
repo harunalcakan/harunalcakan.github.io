@@ -32,7 +32,10 @@
     .nav a:hover{background:rgba(255,255,255,.05);opacity:1}
     .cta{background:linear-gradient(90deg,var(--brand),#9ae3ff);color:#06101d;padding:9px 14px;border-radius:12px;font-weight:600;box-shadow:var(--shadow)}
 
-    .lang-toggle{display:flex;align-items:center;gap:8px;border:1px solid var(--line);padding:6px 10px;border-radius:12px;cursor:pointer}
+    .lang-toggle{display:flex;align-items:center;gap:8px;border:1px solid var(--line);padding:6px 10px;border-radius:12px}
+    .lang-toggle button{background:transparent;border:1px solid transparent;color:var(--muted);padding:6px 10px;border-radius:10px;cursor:pointer}
+    .lang-toggle button[aria-pressed="true"]{color:var(--text);border-color:var(--brand);box-shadow:var(--shadow)}
+    .lang-toggle button:hover{border-color:var(--line);color:var(--text)}
     .lang-toggle span{font-size:13px;color:var(--muted)}
 
     /* Hero */
@@ -108,10 +111,10 @@
       <a class="cta i18n en" href="#pubs">View Publications</a>
       <a class="cta i18n tr" href="#pubs">Yayınları Gör</a>
 
-      <div id="langBtn" class="lang-toggle" title="Switch language">
-        <span>EN</span>
-        <input type="checkbox" id="langSwitch" aria-label="Dil Değiştir / Switch language" />
-        <span>TR</span>
+      <div id="langBtn" class="lang-toggle" title="Switch language" role="group" aria-label="Language">
+        <button id="btnEN" type="button" aria-pressed="true">EN</button>
+        <input type="checkbox" id="langSwitch" aria-label="Dil Değiştir / Switch language" style="display:none" />
+        <button id="btnTR" type="button" aria-pressed="false">TR</button>
       </div>
     </div>
   </header>
@@ -400,6 +403,47 @@
       root.setAttribute('data-lang', lang);
       localStorage.setItem('lang', lang);
     });
+    </script>
+  <script>
+    // i18n util helpers
+    const root = document.documentElement;
+    const sw = document.getElementById('langSwitch');
+    const btnEN = document.getElementById('btnEN');
+    const btnTR = document.getElementById('btnTR');
+
+    function setLang(lang){
+      const val = (lang === 'tr') ? 'tr' : 'en';
+      root.setAttribute('data-lang', val);
+      root.lang = val;
+      localStorage.setItem('lang', val);
+      if (sw) sw.checked = (val === 'tr');
+      if (btnEN && btnTR){
+        btnEN.setAttribute('aria-pressed', String(val==='en'));
+        btnTR.setAttribute('aria-pressed', String(val==='tr'));
+      }
+    }
+    function getLangFromURL(){
+      const p = new URLSearchParams(location.search).get('lang');
+      if(p==='en' || p==='tr') return p;
+      const h = location.hash?.replace('#','');
+      if(h==='en' || h==='tr') return h;
+      return null;
+    }
+
+    // Initial language: URL > localStorage > default(en)
+    const saved = localStorage.getItem('lang');
+    setLang(getLangFromURL() || saved || 'en');
+
+    // Checkbox toggle support (if used)
+    sw?.addEventListener('change', () => setLang(sw.checked ? 'tr' : 'en'));
+
+    // Buttons and container clicks
+    btnEN?.addEventListener('click', ()=> setLang('en'));
+    btnTR?.addEventListener('click', ()=> setLang('tr'));
+
+    // Listen for URL changes (allow links like ?lang=tr or #tr)
+    window.addEventListener('hashchange', ()=>{ const l=getLangFromURL(); if(l) setLang(l); });
+    window.addEventListener('popstate', ()=>{ const l=getLangFromURL(); if(l) setLang(l); });
   </script>
 </body>
 </html>
