@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Harun Nalçakan — Research</title>
-  <meta name="description" content="Harun Nalçakan | Computational & Physical Chemistry — One‑page academic site (DFT, Docking, MD, Electrochemistry, LIG sensors)." />
+  <meta name="description" content="Harun Nalçakan | Computational & Physical Chemistry — Bilingual one‑page site (EN/TR)." />
   <style>
     :root{
       --bg:#0b0e14; --bg2:#0c1220; --panel:#0f1422; --text:#e8ecf2; --muted:#a6afc1; --line:#1e273c;
@@ -18,6 +18,11 @@
     a:hover{text-decoration:underline}
     .container{max-width:var(--maxw);margin:0 auto;padding:0 20px}
 
+    /* i18n visibility */
+    .i18n{display:none}
+    [data-lang='en'] .en{display:block}
+    [data-lang='tr'] .tr{display:block}
+
     /* Header / Nav */
     header{position:sticky;top:0;z-index:50;backdrop-filter:saturate(180%) blur(10px);background:rgba(12,18,32,.6);border-bottom:1px solid var(--line)}
     .nav{display:flex;align-items:center;gap:18px;height:64px}
@@ -26,6 +31,9 @@
     .nav a{color:var(--text);opacity:.85;padding:8px 10px;border-radius:10px}
     .nav a:hover{background:rgba(255,255,255,.05);opacity:1}
     .cta{background:linear-gradient(90deg,var(--brand),#9ae3ff);color:#06101d;padding:9px 14px;border-radius:12px;font-weight:600;box-shadow:var(--shadow)}
+
+    .lang-toggle{display:flex;align-items:center;gap:8px;border:1px solid var(--line);padding:6px 10px;border-radius:12px;cursor:pointer}
+    .lang-toggle span{font-size:13px;color:var(--muted)}
 
     /* Hero */
     .hero{padding:72px 0 48px}
@@ -75,15 +83,36 @@
   <header>
     <div class="container nav">
       <div class="brand">Harun Nalçakan</div>
-      <a href="#home">Home</a>
-      <a href="#about">CV / About</a>
-      <a href="#pubs">Publications</a>
-      <a href="#projects">Projects</a>
-      <a href="#software">Software</a>
-      <a href="#teaching">Teaching</a>
-      <a href="#contact">Contact</a>
+      <a href="#home" class="i18n en">Home</a>
+      <a href="#home" class="i18n tr">Ana Sayfa</a>
+
+      <a href="#about" class="i18n en">CV / About</a>
+      <a href="#about" class="i18n tr">CV / Hakkımda</a>
+
+      <a href="#pubs" class="i18n en">Publications</a>
+      <a href="#pubs" class="i18n tr">Yayınlar</a>
+
+      <a href="#projects" class="i18n en">Projects</a>
+      <a href="#projects" class="i18n tr">Projeler</a>
+
+      <a href="#software" class="i18n en">Software</a>
+      <a href="#software" class="i18n tr">Yazılımlar</a>
+
+      <a href="#teaching" class="i18n en">Teaching</a>
+      <a href="#teaching" class="i18n tr">Öğretim</a>
+
+      <a href="#contact" class="i18n en">Contact</a>
+      <a href="#contact" class="i18n tr">İletişim</a>
+
       <div class="spacer"></div>
-      <a class="cta" href="#pubs">View Publications</a>
+      <a class="cta i18n en" href="#pubs">View Publications</a>
+      <a class="cta i18n tr" href="#pubs">Yayınları Gör</a>
+
+      <div id="langBtn" class="lang-toggle" title="Switch language">
+        <span>EN</span>
+        <input type="checkbox" id="langSwitch" aria-label="Dil Değiştir / Switch language" />
+        <span>TR</span>
+      </div>
     </div>
   </header>
 
@@ -91,31 +120,47 @@
   <main id="home" class="hero">
     <div class="container hero-wrap">
       <div>
-        <span class="badge">Computational & Physical Chemistry • DFT • Docking • MD • Electrochemistry • LIG Sensors</span>
-        <h1>Computational Chemistry & Electrochemistry</h1>
-        <p class="lead">I work on density functional theory (DFT), molecular docking & dynamics (MD), and electrochemical sensing with laser‑induced graphene (LIG). This page centralizes my CV, publications, projects, and software tools.</p>
+        <span class="badge i18n en">Computational & Physical Chemistry • DFT • Docking • MD • Electrochemistry • LIG Sensors</span>
+        <span class="badge i18n tr">Hesaplamalı & Fizikokimya • DFT • Docking • MD • Elektrokimya • LIG Sensörler</span>
+
+        <h1 class="i18n en">Computational Chemistry & Electrochemistry</h1>
+        <h1 class="i18n tr">Hesaplamalı Kimya & Elektrokimya</h1>
+
+        <p class="lead i18n en">I work on density functional theory (DFT), molecular docking & dynamics (MD), and electrochemical sensing with laser‑induced graphene (LIG). This page centralizes my CV, publications, projects, and software tools.</p>
+        <p class="lead i18n tr">Yoğunluk fonksiyoneli teorisi (DFT), moleküler yerleştirme ve dinamikler (MD) ile lazerle indüklenen grafen (LIG) tabanlı elektrokimyasal sensörler üzerine çalışıyorum. Bu sayfa CV, yayın, proje ve yazılımları tek yerde toplar.</p>
+
         <div class="hero-cards">
           <a class="card" href="#pubs">
-            <h3>Publications</h3>
-            <p>Peer‑reviewed articles, conference talks & posters with DOI and PDF links.</p>
+            <h3 class="i18n en">Publications</h3>
+            <h3 class="i18n tr">Yayınlar</h3>
+            <p class="i18n en">Peer‑reviewed articles, conference talks & posters with DOI and PDF links.</p>
+            <p class="i18n tr">Hakemli makaleler, konferans konuşmaları & posterler; DOI ve PDF bağlantılarıyla.</p>
           </a>
           <a class="card" href="#projects">
-            <h3>Projects</h3>
-            <p>ADEP/BAP projects, DSSC modeling, LIG electrodes, and ongoing work.</p>
+            <h3 class="i18n en">Projects</h3>
+            <h3 class="i18n tr">Projeler</h3>
+            <p class="i18n en">ADEP/BAP projects, DSSC modeling, LIG electrodes, and ongoing work.</p>
+            <p class="i18n tr">ADEP/BAP projeleri, DSSC modelleme, LIG elektrotlar ve devam eden çalışmalar.</p>
           </a>
           <a class="card" href="#software">
-            <h3>Software</h3>
-            <p>ADViSOR (AutoDock Vina grid‑box optimization & validation) and scripts.</p>
+            <h3 class="i18n en">Software</h3>
+            <h3 class="i18n tr">Yazılımlar</h3>
+            <p class="i18n en">ADViSOR (AutoDock Vina grid‑box optimization & validation) and scripts.</p>
+            <p class="i18n tr">ADViSOR (AutoDock Vina ızgara kutusu optimizasyonu & doğrulama) ve betikler.</p>
           </a>
         </div>
       </div>
       <div class="card">
-        <h3>Quick Links</h3>
-        <p class="muted">Add or update these URLs in the markup below.</p>
+        <h3 class="i18n en">Quick Links</h3>
+        <h3 class="i18n tr">Hızlı Bağlantılar</h3>
+        <p class="muted i18n en">Add or update these URLs in the markup below.</p>
+        <p class="muted i18n tr">Aşağıdaki adresleri gerektiğinde düzenleyin.</p>
         <div class="row" style="margin-top:8px">
-          <a class="pill" href="/cv.pdf">Download CV (PDF)</a>
+          <a class="pill i18n en" href="/cv.pdf">Download CV (PDF)</a>
+          <a class="pill i18n tr" href="/cv.pdf">CV İndir (PDF)</a>
           <a class="pill" href="https://www.researchgate.net/profile/Harun-Nalcakan" target="_blank" rel="noopener">ResearchGate</a>
-          <a class="pill" href="#contact">Google Scholar / ORCID</a>
+          <a class="pill i18n en" href="#contact">Google Scholar / ORCID</a>
+          <a class="pill i18n tr" href="#contact">Google Scholar / ORCID</a>
         </div>
       </div>
     </div>
@@ -124,38 +169,51 @@
   <!-- About / CV -->
   <section id="about">
     <div class="container">
-      <h2>CV / About</h2>
-      <p class="muted">Short professional bio (3–4 sentences). Replace this text with your profile summary.</p>
+      <h2 class="i18n en">CV / About</h2>
+      <h2 class="i18n tr">CV / Hakkımda</h2>
+      <p class="muted i18n en">Short professional bio (3–4 sentences). Replace this text with your profile summary.</p>
+      <p class="muted i18n tr">Kısa profesyonel biyografi (3–4 cümle). Bu metni kendi profil özetinle değiştir.</p>
       <div class="grid-2" style="margin-top:10px">
         <div class="item">
-          <h3>Education</h3>
+          <h3 class="i18n en">Education</h3>
+          <h3 class="i18n tr">Eğitim</h3>
           <ul>
-            <li><b>PhD (Chemistry)</b> — Ankara University, Physical Chemistry — <span class="muted">202X–</span></li>
-            <li><b>MSc (Chemistry)</b> — ... — <span class="muted">Year</span></li>
-            <li><b>BSc (Chemistry)</b> — ... — <span class="muted">Year</span></li>
+            <li class="i18n en"><b>PhD (Chemistry)</b> — Ankara University, Physical Chemistry — <span class="muted">202X–</span></li>
+            <li class="i18n tr"><b>Doktora (Kimya)</b> — Ankara Üniversitesi, Fizikokimya — <span class="muted">202X–</span></li>
+            <li class="i18n en"><b>MSc (Chemistry)</b> — … — <span class="muted">Year</span></li>
+            <li class="i18n tr"><b>Yüksek Lisans (Kimya)</b> — … — <span class="muted">Yıl</span></li>
+            <li class="i18n en"><b>BSc (Chemistry)</b> — … — <span class="muted">Year</span></li>
+            <li class="i18n tr"><b>Lisans (Kimya)</b> — … — <span class="muted">Yıl</span></li>
           </ul>
         </div>
         <div class="item">
-          <h3>Positions</h3>
+          <h3 class="i18n en">Positions</h3>
+          <h3 class="i18n tr">Görevler</h3>
           <ul>
-            <li><b>Research Assistant</b> — Ankara University — <span class="muted">2023–present</span></li>
-            <li><b>...</b> — ... — <span class="muted">Year–Year</span></li>
+            <li class="i18n en"><b>Research Assistant</b> — Ankara University — <span class="muted">2023–present</span></li>
+            <li class="i18n tr"><b>Araştırma Görevlisi</b> — Ankara Üniversitesi — <span class="muted">2023–günümüz</span></li>
+            <li><b>…</b> — … — <span class="muted i18n en">Year–Year</span><span class="muted i18n tr">Yıl–Yıl</span></li>
           </ul>
         </div>
       </div>
       <div class="grid-2" style="margin-top:10px">
         <div class="item">
-          <h3>Skills</h3>
-          <p class="muted">DFT (Gaussian, ORCA), MD (GROMACS, Desmond), Docking (Vina, Glide), Electrochemistry (CV/DPV/LSV/EIS), Python/R.</p>
+          <h3 class="i18n en">Skills</h3>
+          <h3 class="i18n tr">Yetenekler</h3>
+          <p class="muted i18n en">DFT (Gaussian, ORCA), MD (GROMACS, Desmond), Docking (Vina, Glide), Electrochemistry (CV/DPV/LSV/EIS), Python/R.</p>
+          <p class="muted i18n tr">DFT (Gaussian, ORCA), MD (GROMACS, Desmond), Docking (Vina, Glide), Elektrokimya (CV/DPV/LSV/EIS), Python/R.</p>
           <div class="row" style="margin-top:6px">
-            <span class="tag">DFT</span><span class="tag">Docking</span><span class="tag">MD</span><span class="tag">Electrochemistry</span><span class="tag">LIG</span><span class="tag">Python</span>
+            <span class="tag">DFT</span><span class="tag">Docking</span><span class="tag">MD</span><span class="tag i18n en">Electrochemistry</span><span class="tag i18n tr">Elektrokimya</span><span class="tag">LIG</span><span class="tag">Python</span>
           </div>
         </div>
         <div class="item">
-          <h3>Awards / Certificates</h3>
+          <h3 class="i18n en">Awards / Certificates</h3>
+          <h3 class="i18n tr">Ödüller / Sertifikalar</h3>
           <ul>
-            <li>Example award — <span class="muted">2024</span></li>
-            <li>Example certificate — <span class="muted">2023</span></li>
+            <li class="i18n en">Example award — <span class="muted">2024</span></li>
+            <li class="i18n tr">Örnek ödül — <span class="muted">2024</span></li>
+            <li class="i18n en">Example certificate — <span class="muted">2023</span></li>
+            <li class="i18n tr">Örnek sertifika — <span class="muted">2023</span></li>
           </ul>
         </div>
       </div>
@@ -165,48 +223,59 @@
   <!-- Publications -->
   <section id="pubs">
     <div class="container">
-      <h2>Publications</h2>
-      <p class="muted">Add your papers below. Duplicate an <em>item</em> block for each paper. Keep ~1–3 lines per entry.</p>
+      <h2 class="i18n en">Publications</h2>
+      <h2 class="i18n tr">Yayınlar</h2>
+      <p class="muted i18n en">Add your papers below. Duplicate an <em>item</em> block for each paper. Keep ~1–3 lines per entry.</p>
+      <p class="muted i18n tr">Aşağıya makalelerini ekle. Her makale için bir <em>item</em> bloğunu kopyala. Girdi başına 1–3 satır yeterlidir.</p>
       <div class="item">
         <b>Laser‑Induced Graphene Electrochemical Sensors for Nitro‑PAHs</b><br/>
         H. Nalçakan, et al. <span class="meta">J. Mater. Chem. C, 2024</span>
         <div class="row" style="margin-top:6px">
-          <a class="pill" href="#" target="_blank" rel="noopener">DOI</a>
-          <a class="pill" href="#">PDF</a>
-          <span class="tag">LIG</span><span class="tag">Electrochemistry</span><span class="tag">Sensors</span>
+          <a class="pill i18n en" href="#" target="_blank" rel="noopener">DOI</a>
+          <a class="pill i18n tr" href="#" target="_blank" rel="noopener">DOI</a>
+          <a class="pill i18n en" href="#">PDF</a>
+          <a class="pill i18n tr" href="#">PDF</a>
+          <span class="tag">LIG</span><span class="tag i18n en">Electrochemistry</span><span class="tag i18n tr">Elektrokimya</span><span class="tag">Sensors</span>
         </div>
       </div>
       <div class="item" style="margin-top:10px">
         <b>Computational insights into D‑π‑A photosensitizers for DSSCs</b><br/>
         H. Nalçakan, et al. <span class="meta">J. Mol. Graph. Model., 2023</span>
         <div class="row" style="margin-top:6px">
-          <a class="pill" href="#" target="_blank" rel="noopener">DOI</a>
-          <a class="pill" href="#">PDF</a>
+          <a class="pill i18n en" href="#" target="_blank" rel="noopener">DOI</a>
+          <a class="pill i18n tr" href="#" target="_blank" rel="noopener">DOI</a>
+          <a class="pill i18n en" href="#">PDF</a>
+          <a class="pill i18n tr" href="#">PDF</a>
           <span class="tag">DFT</span><span class="tag">TD‑DFT</span><span class="tag">DSSC</span>
         </div>
       </div>
-      <!-- Add more items here -->
     </div>
   </section>
 
   <!-- Projects -->
   <section id="projects">
     <div class="container">
-      <h2>Projects</h2>
+      <h2 class="i18n en">Projects</h2>
+      <h2 class="i18n tr">Projeler</h2>
       <div class="grid">
         <div class="item">
-          <h3>ADEP — LIG Electrochemical Sensors</h3>
-          <p class="muted">Developing low‑resistance LIG electrodes on Kapton for nitro‑aromatic sensing; optimizing laser parameters and electrode geometry.</p>
-          <div class="row" style="margin-top:6px"><span class="tag">LIG</span><span class="tag">Electrochemistry</span><span class="tag">Sensors</span></div>
+          <h3 class="i18n en">ADEP — LIG Electrochemical Sensors</h3>
+          <h3 class="i18n tr">ADEP — LIG Elektrokimyasal Sensörler</h3>
+          <p class="muted i18n en">Developing low‑resistance LIG electrodes on Kapton for nitro‑aromatic sensing; optimizing laser parameters and electrode geometry.</p>
+          <p class="muted i18n tr">Nitro‑aromatiklerin tayini için Kapton üzerinde düşük dirençli LIG elektrotlar; lazer parametreleri ve elektrot geometrisinin optimizasyonu.</p>
+          <div class="row" style="margin-top:6px"><span class="tag">LIG</span><span class="tag i18n en">Electrochemistry</span><span class="tag i18n tr">Elektrokimya</span><span class="tag i18n en">Sensors</span><span class="tag i18n tr">Sensörler</span></div>
         </div>
         <div class="item">
           <h3>ADViSOR — Docking Grid Optimization</h3>
-          <p class="muted">AutoDock Vina validation with native‑ligand redocking and Bayesian Optimization for grid center/size; RMSD‑based evaluation.</p>
+          <p class="muted i18n en">AutoDock Vina validation with native‑ligand redocking and Bayesian Optimization for grid center/size; RMSD‑based evaluation.</p>
+          <p class="muted i18n tr">Native ligand yeniden yerleştirme ve ızgara merkez/boyut için Bayesçi Optimizasyon ile AutoDock Vina doğrulaması; RMSD temelli değerlendirme.</p>
           <div class="row" style="margin-top:6px"><span class="tag">Docking</span><span class="tag">MD</span><span class="tag">Python</span></div>
         </div>
         <div class="item">
-          <h3>DSSC Modeling</h3>
-          <p class="muted">Quantum‑chemical modeling of donor‑π‑acceptor dyes and TiO₂ interfaces; excited‑state analyses and device‑level implications.</p>
+          <h3 class="i18n en">DSSC Modeling</h3>
+          <h3 class="i18n tr">DSSC Modellemesi</h3>
+          <p class="muted i18n en">Quantum‑chemical modeling of donor‑π‑acceptor dyes and TiO₂ interfaces; excited‑state analyses and device‑level implications.</p>
+          <p class="muted i18n tr">Verici‑π‑alıcı boyalar ve TiO₂ arayüzleri için kuantum‑kimyasal modelleme; uyarılmış hâl analizleri ve cihaz düzeyindeki etkiler.</p>
           <div class="row" style="margin-top:6px"><span class="tag">DFT</span><span class="tag">TD‑DFT</span><span class="tag">DSSC</span></div>
         </div>
       </div>
@@ -216,20 +285,27 @@
   <!-- Software -->
   <section id="software">
     <div class="container">
-      <h2>Software</h2>
+      <h2 class="i18n en">Software</h2>
+      <h2 class="i18n tr">Yazılımlar</h2>
       <div class="grid-2">
         <div class="item">
           <h3>ADViSOR</h3>
-          <p class="muted">AutoDock Vina Search Optimization & Redocking. Grid‑box auto‑init, Bayesian Optimization loop, RMSD validation, organized logging.</p>
+          <p class="muted i18n en">AutoDock Vina Search Optimization & Redocking. Grid‑box auto‑init, Bayesian Optimization loop, RMSD validation, organized logging.</p>
+          <p class="muted i18n tr">AutoDock Vina arama optimizasyonu & yeniden yerleştirme. Izgara kutusu otomatik başlatma, Bayesçi optimizasyon döngüsü, RMSD doğrulama, düzenli günlükleme.</p>
           <div class="row" style="margin-top:6px">
-            <a class="pill" href="#" target="_blank" rel="noopener">GitHub</a>
-            <a class="pill" href="#">Docs / README</a>
-            <a class="pill" href="#">Screenshots</a>
+            <a class="pill i18n en" href="#" target="_blank" rel="noopener">GitHub</a>
+            <a class="pill i18n tr" href="#" target="_blank" rel="noopener">GitHub</a>
+            <a class="pill i18n en" href="#">Docs / README</a>
+            <a class="pill i18n tr" href="#">Doküman / README</a>
+            <a class="pill i18n en" href="#">Screenshots</a>
+            <a class="pill i18n tr" href="#">Ekran Görüntüleri</a>
           </div>
         </div>
         <div class="item">
-          <h3>Utilities</h3>
-          <p class="muted">CGenFF / GROMACS helpers, file converters, plotting notebooks. (List or link when ready.)</p>
+          <h3 class="i18n en">Utilities</h3>
+          <h3 class="i18n tr">Araçlar</h3>
+          <p class="muted i18n en">CGenFF / GROMACS helpers, file converters, plotting notebooks. (List or link when ready.)</p>
+          <p class="muted i18n tr">CGenFF / GROMACS yardımcıları, dosya dönüştürücüler, çizim defterleri. (Hazır olduğunda listeleyin.)</p>
         </div>
       </div>
     </div>
@@ -238,19 +314,26 @@
   <!-- Teaching -->
   <section id="teaching">
     <div class="container">
-      <h2>Teaching</h2>
+      <h2 class="i18n en">Teaching</h2>
+      <h2 class="i18n tr">Öğretim</h2>
       <div class="grid">
         <div class="item">
-          <h3>Physical Chemistry Lab</h3>
-          <p class="muted">Syllabi, lab manuals, and selected worksheets (to be added).</p>
+          <h3 class="i18n en">Physical Chemistry Lab</h3>
+          <h3 class="i18n tr">Fizikokimya Laboratuvarı</h3>
+          <p class="muted i18n en">Syllabi, lab manuals, and selected worksheets (to be added).</p>
+          <p class="muted i18n tr">Ders izlenceleri, laboratuvar kılavuzları ve seçili çalışma kâğıtları (eklencek).</p>
         </div>
         <div class="item">
-          <h3>Computational Chemistry</h3>
-          <p class="muted">Docking/MD tutorials, DFT primers, datasets, slides (to be added).</p>
+          <h3 class="i18n en">Computational Chemistry</h3>
+          <h3 class="i18n tr">Hesaplamalı Kimya</h3>
+          <p class="muted i18n en">Docking/MD tutorials, DFT primers, datasets, slides (to be added).</p>
+          <p class="muted i18n tr">Docking/MD eğitimleri, DFT özetleri, veri kümeleri, slaytlar (eklencek).</p>
         </div>
         <div class="item">
-          <h3>Electrochemistry</h3>
-          <p class="muted">CV/DPV/LSV/SWV/EIS short notes and example datasets (to be added).</p>
+          <h3 class="i18n en">Electrochemistry</h3>
+          <h3 class="i18n tr">Elektrokimya</h3>
+          <p class="muted i18n en">CV/DPV/LSV/SWV/EIS short notes and example datasets (to be added).</p>
+          <p class="muted i18n tr">CV/DPV/LSV/SWV/EIS kısa notlar ve örnek veri kümeleri (eklencek).</p>
         </div>
       </div>
     </div>
@@ -259,24 +342,32 @@
   <!-- Contact -->
   <section id="contact">
     <div class="container">
-      <h2>Contact</h2>
+      <h2 class="i18n en">Contact</h2>
+      <h2 class="i18n tr">İletişim</h2>
       <div class="grid-2">
         <div class="item">
-          <h3>Get in touch</h3>
-          <p class="muted">University email, personal email, and profiles.</p>
+          <h3 class="i18n en">Get in touch</h3>
+          <h3 class="i18n tr">İletişime geç</h3>
+          <p class="muted i18n en">University email, personal email, and profiles.</p>
+          <p class="muted i18n tr">Kurumsal e‑posta, kişisel e‑posta ve profiller.</p>
           <ul>
-            <li><b>Email</b>: name@ankara.edu.tr</li>
+            <li class="i18n en"><b>Email</b>: name@ankara.edu.tr</li>
+            <li class="i18n tr"><b>E‑posta</b>: name@ankara.edu.tr</li>
             <li><b>ResearchGate</b>: <a href="https://www.researchgate.net/profile/Harun-Nalcakan" target="_blank" rel="noopener">/Harun-Nalcakan</a></li>
             <li><b>Google Scholar</b>: <a href="#" target="_blank" rel="noopener">Link</a></li>
             <li><b>ORCID</b>: <a href="#" target="_blank" rel="noopener">Link</a></li>
           </ul>
         </div>
         <div class="item">
-          <h3>Downloadables</h3>
-          <p class="muted">Keep your latest files in the repo and link below.</p>
+          <h3 class="i18n en">Downloadables</h3>
+          <h3 class="i18n tr">İndirilebilirler</h3>
+          <p class="muted i18n en">Keep your latest files in the repo and link below.</p>
+          <p class="muted i18n tr">Güncel dosyalarını repoda tut ve aşağıya bağla.</p>
           <div class="row">
-            <a class="pill" href="/cv.pdf">CV (PDF)</a>
-            <a class="pill" href="/assets/papers">Papers (folder)</a>
+            <a class="pill i18n en" href="/cv.pdf">CV (PDF)</a>
+            <a class="pill i18n tr" href="/cv.pdf">CV (PDF)</a>
+            <a class="pill i18n en" href="/assets/papers">Papers (folder)</a>
+            <a class="pill i18n tr" href="/assets/papers">Makaleler (klasör)</a>
           </div>
         </div>
       </div>
@@ -288,14 +379,27 @@
       <div class="row">
         <span>© <span id="y"></span> Harun Nalçakan</span>
         <span>•</span>
-        <span class="muted">Built for GitHub Pages — one‑page version</span>
+        <span class="muted i18n en">Built for GitHub Pages — bilingual one‑page</span>
+        <span class="muted i18n tr">GitHub Pages için oluşturuldu — iki dilli tek sayfa</span>
       </div>
     </div>
   </footer>
 
   <script>
-    // Update footer year
+    // Footer year
     document.getElementById('y').textContent = new Date().getFullYear();
+
+    // Language toggle with persistence
+    const root = document.documentElement;
+    const sw = document.getElementById('langSwitch');
+    const saved = localStorage.getItem('lang');
+    if(saved === 'tr'){ root.setAttribute('data-lang','tr'); sw.checked = true; }
+    if(saved === 'en'){ root.setAttribute('data-lang','en'); sw.checked = false; }
+    sw?.addEventListener('change', () => {
+      const lang = sw.checked ? 'tr' : 'en';
+      root.setAttribute('data-lang', lang);
+      localStorage.setItem('lang', lang);
+    });
   </script>
 </body>
 </html>
