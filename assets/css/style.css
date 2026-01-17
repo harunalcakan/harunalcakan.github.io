@@ -1,0 +1,492 @@
+/* Computational Minimalism - Custom Styles */
+
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&display=swap');
+
+/* CSS Variables for Theme */
+:root {
+    --bg-light: #ffffff;
+    --text-light: #000000;
+    --bg-dark: #0a0a0a;
+    --text-dark: #e0e0e0;
+    --accent-light: #000000;
+    --accent-dark: #00ff41;
+    --accent-cyan: #00d9ff;
+    --border-light: #e5e5e5;
+    --border-dark: #2a2a2a;
+}
+
+/* Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Light Mode */
+body.light-mode {
+    background-color: var(--bg-light);
+    color: var(--text-light);
+}
+
+/* Dark Mode */
+body.dark-mode {
+    background-color: var(--bg-dark);
+    color: var(--text-dark);
+}
+
+body.dark-mode .accent-text {
+    color: var(--accent-dark);
+}
+
+body.light-mode .accent-text {
+    color: var(--accent-light);
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Fira Code', monospace;
+    font-weight: 600;
+}
+
+/* Navbar Anthracite Background */
+.navbar-anthracite {
+    background-color: #1e293b !important; /* Anthracite/Slate-900 */
+    border-color: #334155 !important; /* Slate-700 */
+}
+
+.navbar-anthracite .nav-link {
+    color: #e2e8f0 !important; /* Slate-200 */
+}
+
+.navbar-anthracite .nav-link:hover {
+    opacity: 0.8;
+}
+
+.navbar-anthracite .nav-link.nav-active {
+    color: #f97316 !important; /* Orange */
+    border-bottom-color: #f97316 !important;
+}
+
+/* Navbar Typewriter Effect (Command-line style) */
+.typewriter-nav {
+    font-family: 'Fira Code', monospace;
+    font-size: 16px;
+    display: inline-block;
+    letter-spacing: 0.05em;
+}
+
+.typewriter-nav::after {
+    content: '_';
+    animation: blink-cursor 1s step-end infinite;
+}
+
+@keyframes blink-cursor {
+    0%, 50% {
+        opacity: 1;
+    }
+    51%, 100% {
+        opacity: 0;
+    }
+}
+
+/* Name Colors */
+.name-first {
+    color: #f97316; /* Orange */
+}
+
+.name-last {
+    color: #06b6d4; /* Cyan/Teal */
+}
+
+.nav-prompt {
+    font-family: 'Fira Code', monospace;
+    font-size: 16px;
+    margin-right: 0.5rem;
+    color: #06b6d4; /* Cyan */
+}
+
+.nav-brand-link {
+    display: inline-flex;
+    align-items: center;
+    transition: opacity 0.3s ease;
+}
+
+.nav-brand-link:hover {
+    opacity: 0.8;
+}
+
+/* Glow Effects */
+.glow-effect {
+    transition: text-shadow 0.3s ease;
+}
+
+body.dark-mode .glow-effect:hover {
+    text-shadow: 0 0 10px var(--accent-dark), 0 0 20px var(--accent-dark), 0 0 30px var(--accent-dark);
+}
+
+body.light-mode .glow-effect:hover {
+    text-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+}
+
+/* Project Cards */
+.project-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid;
+}
+
+body.light-mode .project-card {
+    border-color: var(--border-light);
+}
+
+body.dark-mode .project-card {
+    border-color: var(--border-dark);
+}
+
+.project-card:hover {
+    transform: translateY(-5px);
+}
+
+body.dark-mode .project-card:hover {
+    box-shadow: 0 10px 30px rgba(0, 255, 65, 0.2);
+    border-color: var(--accent-dark);
+}
+
+body.light-mode .project-card:hover {
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+/* Publication Items */
+.publication-item {
+    transition: border-color 0.3s ease, padding 0.3s ease;
+    border-left: 3px solid transparent;
+    padding-left: 1rem;
+}
+
+body.dark-mode .publication-item:hover {
+    border-left-color: var(--accent-dark);
+    padding-left: 1.5rem;
+}
+
+body.light-mode .publication-item:hover {
+    border-left-color: var(--accent-light);
+    padding-left: 1.5rem;
+}
+
+/* Links */
+a {
+    transition: color 0.3s ease;
+    text-decoration: none;
+}
+
+body.dark-mode a {
+    color: var(--accent-cyan);
+}
+
+body.dark-mode a:hover {
+    color: var(--accent-dark);
+}
+
+body.light-mode a {
+    color: var(--accent-light);
+}
+
+body.light-mode a:hover {
+    opacity: 0.7;
+}
+
+/* Buttons */
+.btn-toggle {
+    transition: all 0.3s ease;
+    font-family: 'Fira Code', monospace;
+    border: 1px solid;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    background: transparent;
+}
+
+body.dark-mode .btn-toggle {
+    border-color: var(--accent-dark);
+    color: var(--accent-dark);
+}
+
+body.dark-mode .btn-toggle:hover {
+    background-color: var(--accent-dark);
+    color: var(--bg-dark);
+    box-shadow: 0 0 10px var(--accent-dark);
+}
+
+body.light-mode .btn-toggle {
+    border-color: var(--accent-light);
+    color: var(--accent-light);
+}
+
+body.light-mode .btn-toggle:hover {
+    background-color: var(--accent-light);
+    color: var(--bg-light);
+}
+
+/* Section Dividers */
+.section-divider {
+    height: 1px;
+    margin: 3rem 0;
+}
+
+body.light-mode .section-divider {
+    background: linear-gradient(to right, transparent, var(--border-light), transparent);
+}
+
+body.dark-mode .section-divider {
+    background: linear-gradient(to right, transparent, var(--border-dark), transparent);
+}
+
+/* Terminal-style code blocks */
+.terminal-style {
+    font-family: 'Fira Code', monospace;
+    padding: 1rem;
+    border-radius: 0.25rem;
+}
+
+body.dark-mode .terminal-style {
+    background-color: #1a1a1a;
+    border: 1px solid var(--border-dark);
+    color: var(--accent-dark);
+}
+
+body.light-mode .terminal-style {
+    background-color: #f5f5f5;
+    border: 1px solid var(--border-light);
+    color: var(--text-light);
+}
+
+/* Smooth Scroll */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Research Interest Tags */
+.research-tag {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    margin: 0.25rem;
+    border-radius: 0.25rem;
+    font-size: 0.875rem;
+    transition: all 0.3s ease;
+    border: 1px solid;
+}
+
+body.dark-mode .research-tag {
+    border-color: var(--border-dark);
+    background-color: rgba(0, 255, 65, 0.1);
+}
+
+body.dark-mode .research-tag:hover {
+    background-color: rgba(0, 255, 65, 0.2);
+    border-color: var(--accent-dark);
+    transform: scale(1.05);
+}
+
+body.light-mode .research-tag {
+    border-color: var(--border-light);
+    background-color: #f9f9f9;
+}
+
+body.light-mode .research-tag:hover {
+    background-color: #f0f0f0;
+    border-color: var(--accent-light);
+    transform: scale(1.05);
+}
+
+/* Technology Tags */
+.tech-tag {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    margin: 0.25rem;
+    border-radius: 0.125rem;
+    font-size: 0.75rem;
+    font-family: 'Fira Code', monospace;
+}
+
+body.dark-mode .tech-tag {
+    background-color: rgba(0, 217, 255, 0.15);
+    color: var(--accent-cyan);
+}
+
+body.light-mode .tech-tag {
+    background-color: #e5e5e5;
+    color: var(--text-light);
+}
+
+/* Fade-in Animation */
+.fade-in {
+    animation: fadeIn 0.6s ease-in;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Navigation Links */
+.nav-link {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.95rem;
+    padding: 0.5rem 0.75rem;
+    transition: all 0.3s ease;
+    border-bottom: 2px solid transparent;
+    text-decoration: none;
+}
+
+body.dark-mode .nav-link {
+    color: var(--text-dark);
+}
+
+body.light-mode .nav-link {
+    color: var(--text-light);
+}
+
+.nav-link:hover {
+    opacity: 0.7;
+}
+
+.nav-link.nav-active {
+    font-weight: 600;
+    border-bottom-color: currentColor;
+}
+
+body.dark-mode .nav-link.nav-active {
+    color: var(--accent-dark);
+    border-bottom-color: var(--accent-dark);
+}
+
+body.light-mode .nav-link.nav-active {
+    color: var(--accent-light);
+    border-bottom-color: var(--accent-light);
+}
+
+/* Language Toggle Switch */
+.language-toggle-container {
+    position: relative;
+    display: inline-block;
+}
+
+.language-toggle-input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.language-toggle-label {
+    display: block;
+    width: 60px;
+    height: 30px;
+    background-color: #334155; /* Slate-700 */
+    border-radius: 30px;
+    position: relative;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.language-toggle-input:checked + .language-toggle-label {
+    background-color: #334155; /* Keep same background */
+}
+
+.language-toggle-slider {
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 24px;
+    height: 24px;
+    background-color: #1e293b; /* Slate-900 */
+    border-radius: 50%;
+    transition: transform 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.language-toggle-input:checked + .language-toggle-label .language-toggle-slider {
+    transform: translateX(30px);
+}
+
+.language-toggle-flag {
+    font-size: 14px;
+    line-height: 1;
+    transition: opacity 0.3s ease;
+}
+
+/* Highlight Cards */
+.highlight-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid;
+}
+
+body.light-mode .highlight-card {
+    border-color: var(--border-light);
+    background-color: #f9fafb;
+}
+
+body.dark-mode .highlight-card {
+    border-color: var(--border-dark);
+    background-color: #1a1a1a;
+}
+
+.highlight-card:hover {
+    transform: translateY(-3px);
+}
+
+body.dark-mode .highlight-card:hover {
+    box-shadow: 0 8px 24px rgba(0, 255, 65, 0.15);
+    border-color: var(--accent-dark);
+}
+
+body.light-mode .highlight-card:hover {
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .typewriter-nav {
+        font-size: 14px;
+    }
+    
+    .nav-prompt {
+        font-size: 14px;
+    }
+    
+    .nav-link {
+        font-size: 0.85rem;
+        padding: 0.4rem 0.5rem;
+    }
+    
+    .language-toggle-label {
+        width: 50px;
+        height: 26px;
+    }
+    
+    .language-toggle-slider {
+        width: 20px;
+        height: 20px;
+    }
+    
+    .language-toggle-input:checked + .language-toggle-label .language-toggle-slider {
+        transform: translateX(24px);
+    }
+    
+    .language-toggle-flag {
+        font-size: 12px;
+    }
+}
