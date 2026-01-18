@@ -67,6 +67,20 @@ const data = {
                 github: "#"
             }
         ],
+        workExperience: [
+            {
+                role: "Research Assistant",
+                institution: "[University/Institution Name]",
+                year: "2020-Present",
+                description: "Conducting research in computational chemistry and material science."
+            },
+            {
+                role: "Teaching Assistant",
+                institution: "[University Name]",
+                year: "2018-2020",
+                description: "Assisted in undergraduate courses and laboratory sessions."
+            }
+        ],
         education: [
             {
                 degree: "Ph.D. in [Field]",
@@ -106,29 +120,82 @@ const data = {
         ],
         sections: {
             about: "About",
-            research: "Research",
-            tools: "Tools & Software",
+            portfolio: "Research Portfolio",
             publications: "Publications",
-            projects: "Projects",
-            education: "Education",
             contact: "Contact",
             news: "Latest News",
             home: "Home",
-            downloadCV: "Download CV"
+            downloadCV: "Download CV",
+            education: "Education",
+            academicCompetency: "Academic & Technical Competency",
+            researchAreas: "Research Areas",
+            scientificTools: "Scientific Tools",
+            theme_light: "Light",
+            theme_dark: "Dark",
+            projects: "Projects",
+            tools: "Tools & Software",
+            workExperience: "Work Experience"
         },
         researchIntro: "My research focuses on computational chemistry and material science, exploring novel methodologies for sensor design and molecular interactions.",
         researchAreas: [
             {
-                title: "LIG Sensor Design",
-                description: "Development of Laser-Induced Graphene (LIG) sensors for various applications.",
-                methodology: "Computational modeling and experimental validation"
+                title: "LIG Surface Optimization",
+                description: "Advanced computational methods for optimizing Laser-Induced Graphene (LIG) surface properties and sensor performance.",
+                methodology: "DFT calculations, molecular dynamics simulations, and experimental validation"
             },
             {
-                title: "Molecular Docking",
-                description: "Computational studies of molecular interactions and binding mechanisms.",
-                methodology: "Structure-based drug design and virtual screening"
+                title: "In Silico Drug Design",
+                description: "Computational approaches to drug discovery and molecular interaction studies.",
+                methodology: "Structure-based drug design, virtual screening, and binding affinity prediction"
+            },
+            {
+                title: "Computational Material Science",
+                description: "Modeling and simulation of material properties for sensor applications.",
+                methodology: "Quantum mechanical calculations, machine learning, and experimental correlation"
             }
         ],
+        skillMatrix: {
+            computational: {
+                title: "Computational Chemistry",
+                skills: [
+                    "Density Functional Theory (DFT)",
+                    "Molecular Dynamics (MD) Simulations",
+                    "Quantum Chemistry Calculations",
+                    "Structure-Based Drug Design",
+                    "Virtual Screening"
+                ]
+            },
+            experimental: {
+                title: "Experimental Techniques",
+                skills: [
+                    "Laser-Induced Graphene (LIG) Fabrication",
+                    "Sensor Characterization",
+                    "Electrochemical Analysis",
+                    "Material Synthesis",
+                    "Spectroscopic Methods"
+                ]
+            },
+            software: {
+                title: "Software & Programming",
+                skills: [
+                    "Python, MATLAB, R",
+                    "Gaussian, AutoDock, VMD",
+                    "Machine Learning (TensorFlow, PyTorch)",
+                    "Data Analysis & Visualization",
+                    "Scientific Computing"
+                ]
+            },
+            academic: {
+                title: "Academic & Soft Skills",
+                skills: [
+                    "Scientific Writing & Communication",
+                    "Grant Writing & Proposal Development",
+                    "Collaborative Research",
+                    "Mentoring & Teaching",
+                    "Project Management"
+                ]
+            }
+        },
         tools: {
             developedTitle: "Developed Tools",
             techStackTitle: "Tech Stack",
@@ -159,7 +226,16 @@ const data = {
                 "MATLAB"
             ]
         },
-        cvLink: "#"
+        cvLink: "#",
+        contact: {
+            email: "[your.email@university.edu]",
+            location: "[City, Country]",
+            affiliation: "[University Name]",
+            orcid: "https://orcid.org/0000-0000-0000-0000",
+            linkedin: "https://linkedin.com/in/yourprofile",
+            googleScholar: "https://scholar.google.com/citations?user=YOUR_ID",
+            github: "https://github.com/yourusername"
+        }
     },
     "tr": {
         name: "[Adınız Buraya]",
@@ -226,6 +302,20 @@ const data = {
                 github: "#"
             }
         ],
+        workExperience: [
+            {
+                role: "Araştırma Görevlisi",
+                institution: "[Üniversite/Kurum Adı]",
+                year: "2020-Günümüz",
+                description: "Hesaplamalı kimya ve malzeme bilimi alanında araştırma yürütülmektedir."
+            },
+            {
+                role: "Öğretim Görevlisi",
+                institution: "[Üniversite Adı]",
+                year: "2018-2020",
+                description: "Lisans dersleri ve laboratuvar oturumlarında asistanlık yapılmıştır."
+            }
+        ],
         education: [
             {
                 degree: "[Alan] Doktora",
@@ -265,29 +355,82 @@ const data = {
         ],
         sections: {
             about: "Hakkımda",
-            research: "Araştırma",
-            tools: "Araçlar ve Yazılım",
+            portfolio: "Araştırma Portföyü",
             publications: "Yayınlar",
-            projects: "Projeler",
-            education: "Eğitim",
             contact: "İletişim",
             news: "Son Haberler",
             home: "Ana Sayfa",
-            downloadCV: "CV İndir"
+            downloadCV: "CV İndir",
+            education: "Eğitim",
+            academicCompetency: "Akademik ve Teknik Yeterlilik",
+            researchAreas: "Araştırma Alanları",
+            scientificTools: "Bilimsel Araçlar",
+            theme_light: "Açık",
+            theme_dark: "Koyu",
+            projects: "Projeler",
+            tools: "Araçlar ve Yazılım",
+            workExperience: "İş Deneyimi"
         },
         researchIntro: "Araştırmalarım hesaplamalı kimya ve malzeme bilimi üzerine odaklanmakta, sensör tasarımı ve moleküler etkileşimler için yeni metodolojiler keşfetmektedir.",
         researchAreas: [
             {
-                title: "LIG Sensör Tasarımı",
-                description: "Çeşitli uygulamalar için Lazer İndüklemeli Grafen (LIG) sensörlerinin geliştirilmesi.",
-                methodology: "Hesaplamalı modelleme ve deneysel doğrulama"
+                title: "LIG Yüzey Optimizasyonu",
+                description: "Lazer İndüklemeli Grafen (LIG) yüzey özelliklerini ve sensör performansını optimize etmek için gelişmiş hesaplamalı yöntemler.",
+                methodology: "DFT hesaplamaları, moleküler dinamik simülasyonları ve deneysel doğrulama"
             },
             {
-                title: "Moleküler Docking",
-                description: "Moleküler etkileşimler ve bağlanma mekanizmalarının hesaplamalı çalışmaları.",
-                methodology: "Yapı tabanlı ilaç tasarımı ve sanal tarama"
+                title: "In Silico İlaç Tasarımı",
+                description: "İlaç keşfi ve moleküler etkileşim çalışmaları için hesaplamalı yaklaşımlar.",
+                methodology: "Yapı tabanlı ilaç tasarımı, sanal tarama ve bağlanma afinitesi tahmini"
+            },
+            {
+                title: "Hesaplamalı Malzeme Bilimi",
+                description: "Sensör uygulamaları için malzeme özelliklerinin modellenmesi ve simülasyonu.",
+                methodology: "Kuantum mekanik hesaplamalar, makine öğrenmesi ve deneysel korelasyon"
             }
         ],
+        skillMatrix: {
+            computational: {
+                title: "Hesaplamalı Kimya",
+                skills: [
+                    "Yoğunluk Fonksiyonel Teorisi (DFT)",
+                    "Moleküler Dinamik (MD) Simülasyonları",
+                    "Kuantum Kimyası Hesaplamaları",
+                    "Yapı Tabanlı İlaç Tasarımı",
+                    "Sanal Tarama"
+                ]
+            },
+            experimental: {
+                title: "Deneysel Teknikler",
+                skills: [
+                    "Lazer İndüklemeli Grafen (LIG) Üretimi",
+                    "Sensör Karakterizasyonu",
+                    "Elektrokimyasal Analiz",
+                    "Malzeme Sentezi",
+                    "Spektroskopik Yöntemler"
+                ]
+            },
+            software: {
+                title: "Yazılım ve Programlama",
+                skills: [
+                    "Python, MATLAB, R",
+                    "Gaussian, AutoDock, VMD",
+                    "Makine Öğrenmesi (TensorFlow, PyTorch)",
+                    "Veri Analizi ve Görselleştirme",
+                    "Bilimsel Hesaplama"
+                ]
+            },
+            academic: {
+                title: "Akademik ve Yumuşak Beceriler",
+                skills: [
+                    "Bilimsel Yazma ve İletişim",
+                    "Proje Yazma ve Geliştirme",
+                    "İşbirlikçi Araştırma",
+                    "Mentorluk ve Öğretim",
+                    "Proje Yönetimi"
+                ]
+            }
+        },
         tools: {
             developedTitle: "Geliştirilen Araçlar",
             techStackTitle: "Teknoloji Yığını",
@@ -318,6 +461,15 @@ const data = {
                 "MATLAB"
             ]
         },
-        cvLink: "#"
+        cvLink: "#",
+        contact: {
+            email: "[email@universite.edu]",
+            location: "[Şehir, Ülke]",
+            affiliation: "[Üniversite Adı]",
+            orcid: "https://orcid.org/0000-0000-0000-0000",
+            linkedin: "https://linkedin.com/in/yourprofile",
+            googleScholar: "https://scholar.google.com/citations?user=YOUR_ID",
+            github: "https://github.com/yourusername"
+        }
     }
 };

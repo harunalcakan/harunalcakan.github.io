@@ -615,6 +615,198 @@ body.light-mode .tech-badge:hover {
     transform: scale(1.05);
 }
 
+/* Skill Cards */
+.skill-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid;
+}
+
+body.light-mode .skill-card {
+    border-color: var(--border-light);
+    background-color: #f9fafb;
+}
+
+body.dark-mode .skill-card {
+    border-color: var(--border-dark);
+    background-color: #1a1a1a;
+}
+
+.skill-card:hover {
+    transform: translateY(-3px);
+}
+
+body.dark-mode .skill-card:hover {
+    box-shadow: 0 8px 24px rgba(0, 255, 65, 0.15);
+    border-color: var(--accent-dark);
+}
+
+body.light-mode .skill-card:hover {
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+}
+
+/* Contact Link Cards */
+.contact-link-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid;
+    display: block;
+}
+
+body.light-mode .contact-link-card {
+    border-color: var(--border-light);
+    background-color: #f9fafb;
+}
+
+body.dark-mode .contact-link-card {
+    border-color: var(--border-dark);
+    background-color: #1a1a1a;
+}
+
+.contact-link-card:hover {
+    transform: translateY(-3px);
+}
+
+body.dark-mode .contact-link-card:hover {
+    box-shadow: 0 8px 24px rgba(0, 255, 65, 0.15);
+    border-color: var(--accent-dark);
+}
+
+body.light-mode .contact-link-card:hover {
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+}
+
+/* Contact Info Card */
+.contact-info-card {
+    border: 1px solid;
+}
+
+body.light-mode .contact-info-card {
+    border-color: var(--border-light);
+    background-color: #f9fafb;
+}
+
+body.dark-mode .contact-info-card {
+    border-color: var(--border-dark);
+    background-color: #1a1a1a;
+}
+
+/* Timeline Styles */
+.timeline-container {
+    position: relative;
+    padding-left: 2rem;
+    padding-right: 1rem;
+}
+
+.timeline-container::before {
+    content: '';
+    position: absolute;
+    left: 0.5rem;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(to bottom, 
+        var(--accent-cyan) 0%, 
+        var(--accent-dark) 50%, 
+        var(--accent-cyan) 100%);
+}
+
+body.light-mode .timeline-container::before {
+    background: linear-gradient(to bottom, 
+        var(--accent-light) 0%, 
+        rgba(0, 0, 0, 0.3) 50%, 
+        var(--accent-light) 100%);
+}
+
+.timeline-item {
+    position: relative;
+    margin-bottom: 2rem;
+    padding-left: 2rem;
+}
+
+.timeline-marker {
+    position: absolute;
+    left: -1.5rem;
+    top: 0.25rem;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: 2px solid;
+    background-color: var(--bg-light);
+    z-index: 2;
+}
+
+body.dark-mode .timeline-marker {
+    background-color: var(--bg-dark);
+    border-color: var(--accent-dark);
+    box-shadow: 0 0 8px rgba(0, 255, 65, 0.5);
+}
+
+body.light-mode .timeline-marker {
+    border-color: var(--accent-light);
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+}
+
+.timeline-content {
+    position: relative;
+}
+
+.timeline-badge {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    margin-bottom: 0.5rem;
+    border-radius: 0.25rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    font-family: 'Fira Code', monospace;
+}
+
+body.dark-mode .timeline-badge {
+    background-color: rgba(0, 255, 65, 0.15);
+    color: var(--accent-dark);
+    border: 1px solid rgba(0, 255, 65, 0.3);
+}
+
+body.light-mode .timeline-badge {
+    background-color: rgba(0, 0, 0, 0.05);
+    color: var(--text-light);
+    border: 1px solid var(--border-light);
+}
+
+.timeline-title {
+    margin-bottom: 0.25rem;
+}
+
+body.dark-mode .timeline-title {
+    color: var(--accent-dark);
+}
+
+body.light-mode .timeline-title {
+    color: var(--accent-light);
+}
+
+.timeline-institution {
+    opacity: 0.9;
+}
+
+.timeline-description {
+    margin-top: 0.5rem;
+}
+
+@media (max-width: 768px) {
+    .timeline-container {
+        padding-left: 1.5rem;
+    }
+    
+    .timeline-marker {
+        left: -1.25rem;
+        width: 10px;
+        height: 10px;
+    }
+    
+    .timeline-item {
+        padding-left: 1.5rem;
+    }
+}
+
 /* Language class support */
 body.lang-en .lang-tr-only {
     display: none;

@@ -6,6 +6,7 @@ let currentTheme = localStorage.getItem('theme') || 'light';
 
 // Event listener references for cleanup
 let languageToggleHandler = null;
+let themeToggleHandler = null;
 let mobileMenuClickHandler = null;
 let mobileMenuOutsideClickHandler = null;
 let mobileMenuResizeHandler = null;
@@ -37,9 +38,9 @@ function injectNavbar() {
     const navLinks = [
         { href: 'index.html', label: content.sections.home, id: 'nav-home' },
         { href: 'about.html', label: content.sections.about, id: 'nav-about' },
-        { href: 'research.html', label: content.sections.research, id: 'nav-research' },
-        { href: 'tools.html', label: content.sections.tools, id: 'nav-tools' },
-        { href: 'publications.html', label: content.sections.publications, id: 'nav-publications' }
+        { href: 'portfolio.html', label: content.sections.portfolio, id: 'nav-portfolio' },
+        { href: 'publications.html', label: content.sections.publications, id: 'nav-publications' },
+        { href: 'contact.html', label: content.sections.contact, id: 'nav-contact' }
     ];
 
     const activeClass = (link) => {
@@ -91,7 +92,7 @@ function injectNavbar() {
                                 </span>
                             </span>
                         </button>
-                        <button id="theme-toggle" class="btn-toggle text-xs md:text-sm">${currentTheme === 'dark' ? '☀️ Light' : '🌙 Dark'}</button>
+                        <button id="theme-toggle" class="btn-toggle text-xs md:text-sm">${currentTheme === 'dark' ? `☀️ ${content.sections.theme_light}` : `🌙 ${content.sections.theme_dark}`}</button>
                     </div>
                 </div>
             </div>
@@ -110,6 +111,10 @@ function injectNavbar() {
     // Setup language toggle
     setupLanguageToggle();
     updateLanguageToggle();
+    
+    // Setup theme toggle
+    setupThemeToggle();
+    updateThemeToggle();
 }
 
 // Typewriter Effect for Navbar Brand (Infinite Loop)
@@ -227,10 +232,35 @@ function toggleTheme() {
     initializeTheme();
 }
 
+function setupThemeToggle() {
+    const themeToggle = document.getElementById('theme-toggle');
+    if (themeToggle) {
+        // Remove old listener if it exists
+        if (themeToggleHandler) {
+            themeToggle.removeEventListener('click', themeToggleHandler);
+        }
+        
+        // Create new handler and store reference
+        themeToggleHandler = () => {
+            toggleTheme();
+        };
+        
+        themeToggle.addEventListener('click', themeToggleHandler);
+    }
+}
+
 function updateThemeToggle() {
     const themeBtn = document.getElementById('theme-toggle');
     if (themeBtn) {
-        themeBtn.textContent = currentTheme === 'dark' ? '☀️ Light' : '🌙 Dark';
+        const content = data[currentLanguage];
+        if (content && content.sections) {
+            const lightLabel = content.sections.theme_light || 'Light';
+            const darkLabel = content.sections.theme_dark || 'Dark';
+            themeBtn.textContent = currentTheme === 'dark' ? `☀️ ${lightLabel}` : `🌙 ${darkLabel}`;
+        } else {
+            // Fallback if translations not available
+            themeBtn.textContent = currentTheme === 'dark' ? '☀️ Light' : '🌙 Dark';
+        }
     }
 }
 
@@ -399,14 +429,21 @@ function renderCurrentPage() {
         case 'about':
             renderAboutPage(content);
             break;
-        case 'research':
-            renderResearchPage(content);
-            break;
-        case 'tools':
-            renderToolsPage(content);
+        case 'portfolio':
+            renderPortfolioPage(content);
             break;
         case 'publications':
             renderPublicationsPage(content);
+            break;
+        case 'contact':
+            renderContactPage(content);
+            break;
+        // Legacy support for old URLs
+        case 'research':
+            renderPortfolioPage(content);
+            break;
+        case 'tools':
+            renderPortfolioPage(content);
             break;
         case 'projects':
             renderProjectsPage(content);
@@ -458,21 +495,6 @@ function renderAboutPage(content) {
     const mainContent = document.querySelector('main');
     if (!mainContent) return;
 
-    const researchTags = content.researchInterests
-        .map(interest => `<span class="research-tag">${interest}</span>`)
-        .join('');
-
-    const educationHTML = content.education
-        .map((edu, index) => `
-            <div class="mb-6 fade-in" style="animation-delay: ${index * 0.1}s">
-                <h3 class="text-xl font-semibold mb-1 font-mono">${edu.degree}</h3>
-                <p class="text-lg mb-1">${edu.institution}</p>
-                <p class="text-sm opacity-75 mb-1">${edu.year}</p>
-                <p class="text-sm opacity-90">${edu.description}</p>
-            </div>
-        `)
-        .join('');
-
     const cvButtonHTML = content.cvLink ? `
         <div class="mb-8">
             <a href="${content.cvLink}" target="_blank" class="inline-block btn-toggle">
@@ -481,8 +503,58 @@ function renderAboutPage(content) {
         </div>
     ` : '';
 
+    // Timeline: Combine work experience and education, sorted by year (most recent first)
+    const timelineItems = [];
+    
+    // Add work experience
+    if (content.workExperience && content.workExperience.length > 0) {
+        content.workExperience.forEach(item => {
+            timelineItems.push({
+                type: 'work',
+                title: item.role,
+                institution: item.institution,
+                year: item.year,
+                description: item.description
+            });
+        });
+    }
+    
+    // Add education
+    if (content.education && content.education.length > 0) {
+        content.education.forEach(item => {
+            timelineItems.push({
+                type: 'education',
+                title: item.degree,
+                institution: item.institution,
+                year: item.year,
+                description: item.description
+            });
+        });
+    }
+
+    // Sort by year (extract start year for sorting)
+    timelineItems.sort((a, b) => {
+        const yearA = parseInt(a.year.split('-')[0]) || 0;
+        const yearB = parseInt(b.year.split('-')[0]) || 0;
+        return yearB - yearA; // Most recent first
+    });
+
+    const timelineHTML = timelineItems
+        .map((item, index) => `
+            <div class="timeline-item fade-in" style="animation-delay: ${index * 0.1}s">
+                <div class="timeline-marker"></div>
+                <div class="timeline-content">
+                    <div class="timeline-badge">${item.year}</div>
+                    <h3 class="timeline-title font-mono font-bold text-lg md:text-xl mb-1">${item.title}</h3>
+                    <p class="timeline-institution text-base md:text-lg mb-2 font-semibold">${item.institution}</p>
+                    <p class="timeline-description text-sm md:text-base opacity-90">${item.description}</p>
+                </div>
+            </div>
+        `)
+        .join('');
+
     mainContent.innerHTML = `
-        <section class="container mx-auto px-4 md:px-6 py-12 max-w-4xl">
+        <section class="container mx-auto px-4 md:px-6 py-12 max-w-5xl">
             <div class="fade-in">
                 <h1 class="text-3xl md:text-4xl font-bold mb-8 font-mono">${content.sections.about}</h1>
                 <div class="mb-12">
@@ -492,26 +564,30 @@ function renderAboutPage(content) {
                 
                 ${cvButtonHTML}
                 
-                <div class="mb-12">
-                    <h2 class="text-2xl md:text-3xl font-bold mb-6 font-mono">${content.sections.research}</h2>
-                    <div class="flex flex-wrap">
-                        ${researchTags}
+                <!-- Work & Education Timeline -->
+                <div class="mb-16">
+                    <h2 class="text-2xl md:text-3xl font-bold mb-8 font-mono">${content.sections.workExperience} & ${content.sections.education}</h2>
+                    <div class="timeline-container">
+                        ${timelineHTML}
                     </div>
                 </div>
-
+                
+                <!-- Academic & Technical Competency -->
                 <div class="mb-12">
-                    <h2 class="text-2xl md:text-3xl font-bold mb-6 font-mono">${content.sections.education}</h2>
-                    <div>
-                        ${educationHTML}
+                    <h2 class="text-2xl md:text-3xl font-bold mb-6 font-mono">${content.sections.academicCompetency}</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        ${Object.values(content.skillMatrix).map((category, index) => `
+                            <div class="skill-card p-6 rounded-lg fade-in" style="animation-delay: ${index * 0.1}s">
+                                <h3 class="text-xl font-bold mb-4 font-mono">${category.title}</h3>
+                                <ul class="space-y-2">
+                                    ${category.skills.map(skill => `<li class="text-sm md:text-base flex items-start">
+                                        <span class="text-orange-500 mr-2">•</span>
+                                        <span>${skill}</span>
+                                    </li>`).join('')}
+                                </ul>
+                            </div>
+                        `).join('')}
                     </div>
-                </div>
-
-                <div class="mb-12">
-                    <h2 class="text-2xl md:text-3xl font-bold mb-6 font-mono">${content.sections.contact}</h2>
-                    <p class="text-base md:text-lg mb-4">
-                        <a href="mailto:${content.email}" class="underline">${content.email}</a>
-                    </p>
-                    <p class="text-sm md:text-base opacity-75">${content.location}</p>
                 </div>
             </div>
         </section>
@@ -548,8 +624,8 @@ function renderPublicationsPage(content) {
     `;
 }
 
-// Research Page Render
-function renderResearchPage(content) {
+// Portfolio Page Render
+function renderPortfolioPage(content) {
     const mainContent = document.querySelector('main');
     if (!mainContent) return;
 
@@ -563,19 +639,42 @@ function renderResearchPage(content) {
         `)
         .join('');
 
+    const scientificToolsHTML = content.tools.developed
+        .map((tool, index) => `
+            <div class="tool-card p-6 rounded-lg fade-in" style="animation-delay: ${index * 0.1}s">
+                <h3 class="text-2xl font-bold mb-3 font-mono">${tool.name}</h3>
+                <p class="text-base mb-4 leading-relaxed">${tool.description}</p>
+                ${tool.link !== '#' ? `<a href="${tool.link}" target="_blank" class="underline">${content.tools.viewProject || 'View Project'}</a>` : ''}
+            </div>
+        `)
+        .join('');
+
     mainContent.innerHTML = `
-        <section class="container mx-auto px-4 md:px-6 py-12 max-w-4xl">
+        <section class="container mx-auto px-4 md:px-6 py-12 max-w-6xl">
             <div class="fade-in">
-                <h1 class="text-4xl font-bold mb-8 font-mono">${content.sections.research}</h1>
-                <div class="mb-8">
-                    <p class="text-lg leading-relaxed mb-6">${content.researchIntro || content.bio}</p>
+                <h1 class="text-3xl md:text-4xl font-bold mb-8 font-mono text-center">${content.sections.portfolio}</h1>
+                
+                <div class="mb-16">
+                    <h2 class="text-2xl md:text-3xl font-bold mb-6 font-mono">${content.sections.researchAreas}</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        ${researchAreasHTML}
+                    </div>
                 </div>
-                <div class="space-y-6">
-                    ${researchAreasHTML}
+
+                <div class="mb-12">
+                    <h2 class="text-2xl md:text-3xl font-bold mb-6 font-mono">${content.sections.scientificTools}</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        ${scientificToolsHTML}
+                    </div>
                 </div>
             </div>
         </section>
     `;
+}
+
+// Research Page Render (Legacy support)
+function renderResearchPage(content) {
+    renderPortfolioPage(content);
 }
 
 // Projects Page Render
@@ -666,6 +765,90 @@ function renderToolsPage(content) {
     `;
 }
 
+// Contact Page Render
+function renderContactPage(content) {
+    const mainContent = document.querySelector('main');
+    if (!mainContent) return;
+
+    const contact = content.contact || {};
+    
+    const academicLinksHTML = `
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+            ${contact.orcid ? `
+                <a href="${contact.orcid}" target="_blank" class="contact-link-card p-6 rounded-lg fade-in">
+                    <div class="flex items-center gap-4">
+                        <span class="text-3xl">🔬</span>
+                        <div>
+                            <h3 class="text-lg font-bold font-mono">ORCID</h3>
+                            <p class="text-sm opacity-75">Academic Profile</p>
+                        </div>
+                    </div>
+                </a>
+            ` : ''}
+            ${contact.googleScholar ? `
+                <a href="${contact.googleScholar}" target="_blank" class="contact-link-card p-6 rounded-lg fade-in">
+                    <div class="flex items-center gap-4">
+                        <span class="text-3xl">📚</span>
+                        <div>
+                            <h3 class="text-lg font-bold font-mono">Google Scholar</h3>
+                            <p class="text-sm opacity-75">Publications & Citations</p>
+                        </div>
+                    </div>
+                </a>
+            ` : ''}
+            ${contact.linkedin ? `
+                <a href="${contact.linkedin}" target="_blank" class="contact-link-card p-6 rounded-lg fade-in">
+                    <div class="flex items-center gap-4">
+                        <span class="text-3xl">💼</span>
+                        <div>
+                            <h3 class="text-lg font-bold font-mono">LinkedIn</h3>
+                            <p class="text-sm opacity-75">Professional Network</p>
+                        </div>
+                    </div>
+                </a>
+            ` : ''}
+            ${contact.github ? `
+                <a href="${contact.github}" target="_blank" class="contact-link-card p-6 rounded-lg fade-in">
+                    <div class="flex items-center gap-4">
+                        <span class="text-3xl">💻</span>
+                        <div>
+                            <h3 class="text-lg font-bold font-mono">GitHub</h3>
+                            <p class="text-sm opacity-75">Code & Projects</p>
+                        </div>
+                    </div>
+                </a>
+            ` : ''}
+        </div>
+    `;
+
+    mainContent.innerHTML = `
+        <section class="container mx-auto px-4 md:px-6 py-12 max-w-4xl">
+            <div class="fade-in">
+                <h1 class="text-3xl md:text-4xl font-bold mb-8 font-mono text-center">${content.sections.contact}</h1>
+                
+                <div class="mb-12 text-center">
+                    <h2 class="text-2xl md:text-3xl font-bold mb-4 font-mono">${contact.affiliation || content.affiliation || '[University Name]'}</h2>
+                    <p class="text-lg mb-2 opacity-90">${contact.location || content.location || '[City, Country]'}</p>
+                </div>
+
+                <div class="mb-12">
+                    <div class="contact-info-card p-6 md:p-8 rounded-lg text-center">
+                        <h3 class="text-xl font-bold mb-4 font-mono">Email</h3>
+                        <a href="mailto:${contact.email || content.email}" class="text-lg md:text-xl underline break-all">
+                            ${contact.email || content.email}
+                        </a>
+                    </div>
+                </div>
+
+                <div class="mb-8">
+                    <h2 class="text-2xl font-bold mb-6 font-mono text-center">Academic Links</h2>
+                    ${academicLinksHTML}
+                </div>
+            </div>
+        </section>
+    `;
+}
+
 // Utility Functions
 function formatDate(dateString) {
     const date = new Date(dateString);
@@ -678,15 +861,9 @@ function formatDate(dateString) {
 
 // Event Listeners
 function setupEventListeners() {
-    const themeToggle = document.getElementById('theme-toggle');
-
-    if (themeToggle) {
-        themeToggle.addEventListener('click', toggleTheme);
-    }
-
-    // Language toggle is handled by setupLanguageToggle()
-    setupLanguageToggle();
-
+    // Theme toggle is handled by setupThemeToggle() which is called in injectNavbar()
+    // Language toggle is handled by setupLanguageToggle() which is called in injectNavbar()
+    
     // Observer for theme changes to update navbar
     const observer = new MutationObserver(() => {
         updateNavbarBackground();
