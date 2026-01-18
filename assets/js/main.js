@@ -4,6 +4,12 @@
 let currentLanguage = localStorage.getItem('language') || 'en';
 let currentTheme = localStorage.getItem('theme') || 'light';
 
+// Event listener references for cleanup
+let languageToggleHandler = null;
+let mobileMenuClickHandler = null;
+let mobileMenuOutsideClickHandler = null;
+let mobileMenuResizeHandler = null;
+
 // Get current page name
 function getCurrentPage() {
     const path = window.location.pathname;
@@ -31,8 +37,9 @@ function injectNavbar() {
     const navLinks = [
         { href: 'index.html', label: content.sections.home, id: 'nav-home' },
         { href: 'about.html', label: content.sections.about, id: 'nav-about' },
-        { href: 'publications.html', label: content.sections.publications, id: 'nav-publications' },
-        { href: 'projects.html', label: content.sections.projects, id: 'nav-projects' }
+        { href: 'research.html', label: content.sections.research, id: 'nav-research' },
+        { href: 'tools.html', label: content.sections.tools, id: 'nav-tools' },
+        { href: 'publications.html', label: content.sections.publications, id: 'nav-publications' }
     ];
 
     const activeClass = (link) => {
@@ -42,14 +49,15 @@ function injectNavbar() {
 
     const navbarHTML = `
         <nav class="fixed top-0 w-full z-50 backdrop-blur-sm bg-opacity-90 border-b transition-colors duration-300 navbar-anthracite" id="navbar">
-            <div class="container mx-auto px-6 py-4">
+            <div class="container mx-auto px-4 md:px-6 py-4">
                 <div class="flex justify-between items-center">
-                    <div class="font-mono text-base md:text-lg">
+                    <div class="font-mono text-sm md:text-base lg:text-lg">
                         <a href="index.html" class="nav-brand-link" id="nav-brand">
                             <span class="nav-prompt">></span> <span id="typewriter-text" class="typewriter-nav"></span>
                         </a>
                     </div>
-                    <div class="flex items-center gap-4 md:gap-6">
+                    <div class="flex items-center gap-2 md:gap-4 lg:gap-6 relative">
+                        <!-- Desktop Navigation -->
                         <div class="hidden md:flex gap-4">
                             ${navLinks.map(link => `
                                 <a href="${link.href}" class="nav-link ${activeClass(link)}" id="${link.id}">
@@ -57,14 +65,32 @@ function injectNavbar() {
                                 </a>
                             `).join('')}
                         </div>
-                        <div class="language-toggle-container">
-                            <input type="checkbox" id="language-toggle-switch" class="language-toggle-input" ${currentLanguage === 'tr' ? 'checked' : ''}>
-                            <label for="language-toggle-switch" class="language-toggle-label">
-                                <span class="language-toggle-slider">
-                                    <span class="language-toggle-flag">${currentLanguage === 'en' ? '🇬🇧' : '🇹🇷'}</span>
-                                </span>
-                            </label>
+                        <!-- Mobile Hamburger Menu -->
+                        <button id="mobile-menu-toggle" class="md:hidden text-white p-2 focus:outline-none z-50" aria-label="Toggle menu">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path id="menu-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                                <path id="close-icon" class="hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                            </svg>
+                        </button>
+                        <!-- Mobile Menu -->
+                        <div id="mobile-menu" class="hidden md:hidden absolute top-full left-0 w-full bg-slate-900 border-b border-slate-700 shadow-lg z-40">
+                            <div class="container mx-auto px-4 py-4 space-y-2">
+                                ${navLinks.map(link => `
+                                    <a href="${link.href}" class="block nav-link ${activeClass(link)} py-2 px-4 hover:bg-slate-800 rounded" id="${link.id}-mobile">
+                                        ${link.label}
+                                    </a>
+                                `).join('')}
+                            </div>
                         </div>
+                        <!-- Language Toggle Pill Button -->
+                        <button id="language-toggle-btn" class="language-toggle-pill ${currentLanguage === 'tr' ? 'language-toggle-active' : ''}" aria-label="Toggle language">
+                            <span class="language-toggle-track">
+                                <span class="language-toggle-slider">
+                                    <span class="language-toggle-flag language-flag-en">🇬🇧</span>
+                                    <span class="language-toggle-flag language-flag-tr">🇹🇷</span>
+                                </span>
+                            </span>
+                        </button>
                         <button id="theme-toggle" class="btn-toggle text-xs md:text-sm">${currentTheme === 'dark' ? '☀️ Light' : '🌙 Dark'}</button>
                     </div>
                 </div>
@@ -77,6 +103,13 @@ function injectNavbar() {
     
     // Start typewriter effect
     startTypewriter();
+    
+    // Setup mobile menu toggle
+    setupMobileMenu();
+    
+    // Setup language toggle
+    setupLanguageToggle();
+    updateLanguageToggle();
 }
 
 // Typewriter Effect for Navbar Brand (Infinite Loop)
@@ -214,36 +247,142 @@ function updateNavbarBackground() {
 
 // Language Management
 function initializeLanguage() {
+    // Set language class and data-lang attribute on body
+    document.body.classList.remove('lang-en', 'lang-tr');
+    document.body.classList.add(`lang-${currentLanguage}`);
+    document.body.setAttribute('data-lang', currentLanguage);
+    
     updateLanguageToggle();
-    setupLanguageToggle();
+    // Don't call setupLanguageToggle() here - it's called in injectNavbar() and setupEventListeners()
 }
 
 function setupLanguageToggle() {
-    const toggleSwitch = document.getElementById('language-toggle-switch');
-    if (toggleSwitch) {
-        toggleSwitch.addEventListener('change', () => {
+    const toggleBtn = document.getElementById('language-toggle-btn');
+    if (toggleBtn) {
+        // Remove old listener if it exists
+        if (languageToggleHandler) {
+            toggleBtn.removeEventListener('click', languageToggleHandler);
+        }
+        
+        // Create new handler and store reference
+        languageToggleHandler = (e) => {
+            e.preventDefault();
+            e.stopPropagation();
             toggleLanguage();
-        });
+        };
+        
+        toggleBtn.addEventListener('click', languageToggleHandler);
     }
 }
 
 function toggleLanguage() {
     currentLanguage = currentLanguage === 'en' ? 'tr' : 'en';
     localStorage.setItem('language', currentLanguage);
-    // Reload page to re-render with new language
-    window.location.reload();
+    
+    // Update body class and data-lang attribute
+    document.body.classList.remove('lang-en', 'lang-tr');
+    document.body.classList.add(`lang-${currentLanguage}`);
+    document.body.setAttribute('data-lang', currentLanguage);
+    
+    // Clean up mobile menu listeners before removing navbar
+    cleanupMobileMenu();
+    
+    // Remove old navbar and footer before re-injecting
+    const oldNavbar = document.getElementById('navbar');
+    const oldFooter = document.querySelector('footer');
+    if (oldNavbar) oldNavbar.remove();
+    if (oldFooter) oldFooter.remove();
+    
+    // Re-render navbar and content without full page reload
+    injectNavbar();
+    renderCurrentPage();
+    injectFooter();
 }
 
 function updateLanguageToggle() {
-    const toggleSwitch = document.getElementById('language-toggle-switch');
-    const flagElement = document.querySelector('.language-toggle-flag');
-    
-    if (toggleSwitch) {
-        toggleSwitch.checked = currentLanguage === 'tr';
+    const toggleBtn = document.getElementById('language-toggle-btn');
+    if (toggleBtn) {
+        if (currentLanguage === 'tr') {
+            toggleBtn.classList.add('language-toggle-active');
+        } else {
+            toggleBtn.classList.remove('language-toggle-active');
+        }
     }
+}
+
+// Mobile Menu Management
+function cleanupMobileMenu() {
+    // Remove old event listeners if they exist
+    if (mobileMenuClickHandler) {
+        document.removeEventListener('click', mobileMenuOutsideClickHandler);
+        window.removeEventListener('resize', mobileMenuResizeHandler);
+        mobileMenuClickHandler = null;
+        mobileMenuOutsideClickHandler = null;
+        mobileMenuResizeHandler = null;
+    }
+}
+
+function setupMobileMenu() {
+    // Clean up old listeners first
+    cleanupMobileMenu();
     
-    if (flagElement) {
-        flagElement.textContent = currentLanguage === 'en' ? '🇬🇧' : '🇹🇷';
+    const menuToggle = document.getElementById('mobile-menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const menuIcon = document.getElementById('menu-icon');
+    const closeIcon = document.getElementById('close-icon');
+    
+    if (menuToggle && mobileMenu && menuIcon && closeIcon) {
+        // Toggle menu on button click
+        mobileMenuClickHandler = (e) => {
+            e.stopPropagation();
+            const isHidden = mobileMenu.classList.contains('hidden');
+            
+            if (isHidden) {
+                mobileMenu.classList.remove('hidden');
+                menuIcon.classList.add('hidden');
+                closeIcon.classList.remove('hidden');
+            } else {
+                mobileMenu.classList.add('hidden');
+                menuIcon.classList.remove('hidden');
+                closeIcon.classList.add('hidden');
+            }
+        };
+        
+        menuToggle.addEventListener('click', mobileMenuClickHandler);
+        
+        // Close menu when clicking on a link
+        const mobileLinks = mobileMenu.querySelectorAll('a');
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                menuIcon.classList.remove('hidden');
+                closeIcon.classList.add('hidden');
+            });
+        });
+        
+        // Close menu when clicking outside
+        mobileMenuOutsideClickHandler = (e) => {
+            if (mobileMenu && !mobileMenu.classList.contains('hidden')) {
+                if (!menuToggle.contains(e.target) && !mobileMenu.contains(e.target)) {
+                    mobileMenu.classList.add('hidden');
+                    menuIcon.classList.remove('hidden');
+                    closeIcon.classList.add('hidden');
+                }
+            }
+        };
+        
+        document.addEventListener('click', mobileMenuOutsideClickHandler);
+        
+        // Close menu on window resize if it becomes desktop size
+        mobileMenuResizeHandler = () => {
+            if (window.innerWidth >= 768) {
+                mobileMenu.classList.add('hidden');
+                menuIcon.classList.remove('hidden');
+                closeIcon.classList.add('hidden');
+            }
+        };
+        
+        window.addEventListener('resize', mobileMenuResizeHandler);
     }
 }
 
@@ -259,6 +398,12 @@ function renderCurrentPage() {
             break;
         case 'about':
             renderAboutPage(content);
+            break;
+        case 'research':
+            renderResearchPage(content);
+            break;
+        case 'tools':
+            renderToolsPage(content);
             break;
         case 'publications':
             renderPublicationsPage(content);
@@ -278,25 +423,25 @@ function renderHomePage(content) {
 
     // Hero Section with intro text
     const heroHTML = `
-        <section class="container mx-auto px-6 py-20 min-h-[50vh] flex items-center">
+        <section class="container mx-auto px-4 md:px-6 py-20 min-h-[50vh] flex items-center">
             <div class="text-center w-full fade-in max-w-3xl mx-auto">
-                <p class="text-2xl md:text-3xl leading-relaxed font-mono mb-8">${content.heroIntro || content.bio}</p>
+                <p class="text-xl md:text-2xl lg:text-3xl leading-relaxed font-mono mb-8">${content.heroIntro || content.bio}</p>
             </div>
         </section>
     `;
 
     // Highlights Section (Latest News or Featured Project)
     const highlightsHTML = content.news && content.news.length > 0 ? `
-        <section class="container mx-auto px-6 py-12 max-w-4xl">
-            <h2 class="text-3xl font-bold mb-8 font-mono text-center">${content.sections.news}</h2>
+        <section class="container mx-auto px-4 md:px-6 py-12 max-w-4xl">
+            <h2 class="text-2xl md:text-3xl font-bold mb-8 font-mono text-center">${content.sections.news}</h2>
             <div class="space-y-6">
                 ${content.news.slice(0, 3).map((item, index) => `
-                    <div class="fade-in highlight-card p-6 rounded-lg" style="animation-delay: ${index * 0.1}s">
-                        <div class="flex items-start gap-4">
-                            <div class="text-sm opacity-75 font-mono min-w-[100px]">${formatDate(item.date)}</div>
+                    <div class="fade-in highlight-card p-4 md:p-6 rounded-lg" style="animation-delay: ${index * 0.1}s">
+                        <div class="flex flex-col md:flex-row items-start gap-4">
+                            <div class="text-sm opacity-75 font-mono md:min-w-[100px]">${formatDate(item.date)}</div>
                             <div class="flex-1">
-                                <h3 class="text-xl font-semibold mb-2 font-mono">${item.title}</h3>
-                                <p class="text-base opacity-90 leading-relaxed">${item.content}</p>
+                                <h3 class="text-lg md:text-xl font-semibold mb-2 font-mono">${item.title}</h3>
+                                <p class="text-sm md:text-base opacity-90 leading-relaxed">${item.content}</p>
                             </div>
                         </div>
                     </div>
@@ -328,35 +473,45 @@ function renderAboutPage(content) {
         `)
         .join('');
 
+    const cvButtonHTML = content.cvLink ? `
+        <div class="mb-8">
+            <a href="${content.cvLink}" target="_blank" class="inline-block btn-toggle">
+                ${content.sections.downloadCV || 'Download CV'}
+            </a>
+        </div>
+    ` : '';
+
     mainContent.innerHTML = `
-        <section class="container mx-auto px-6 py-12 max-w-4xl">
+        <section class="container mx-auto px-4 md:px-6 py-12 max-w-4xl">
             <div class="fade-in">
-                <h1 class="text-4xl font-bold mb-8 font-mono">${content.sections.about}</h1>
+                <h1 class="text-3xl md:text-4xl font-bold mb-8 font-mono">${content.sections.about}</h1>
                 <div class="mb-12">
-                    <p class="text-lg leading-relaxed mb-4">${content.bio}</p>
-                    <p class="text-lg leading-relaxed">${content.about}</p>
+                    <p class="text-base md:text-lg leading-relaxed mb-4">${content.bio}</p>
+                    <p class="text-base md:text-lg leading-relaxed">${content.about}</p>
                 </div>
                 
+                ${cvButtonHTML}
+                
                 <div class="mb-12">
-                    <h2 class="text-3xl font-bold mb-6 font-mono">${content.sections.research}</h2>
+                    <h2 class="text-2xl md:text-3xl font-bold mb-6 font-mono">${content.sections.research}</h2>
                     <div class="flex flex-wrap">
                         ${researchTags}
                     </div>
                 </div>
 
                 <div class="mb-12">
-                    <h2 class="text-3xl font-bold mb-6 font-mono">${content.sections.education}</h2>
+                    <h2 class="text-2xl md:text-3xl font-bold mb-6 font-mono">${content.sections.education}</h2>
                     <div>
                         ${educationHTML}
                     </div>
                 </div>
 
                 <div class="mb-12">
-                    <h2 class="text-3xl font-bold mb-6 font-mono">${content.sections.contact}</h2>
-                    <p class="text-lg mb-4">
+                    <h2 class="text-2xl md:text-3xl font-bold mb-6 font-mono">${content.sections.contact}</h2>
+                    <p class="text-base md:text-lg mb-4">
                         <a href="mailto:${content.email}" class="underline">${content.email}</a>
                     </p>
-                    <p class="text-base opacity-75">${content.location}</p>
+                    <p class="text-sm md:text-base opacity-75">${content.location}</p>
                 </div>
             </div>
         </section>
@@ -382,11 +537,41 @@ function renderPublicationsPage(content) {
         .join('');
 
     mainContent.innerHTML = `
-        <section class="container mx-auto px-6 py-12 max-w-4xl">
+        <section class="container mx-auto px-4 md:px-6 py-12 max-w-4xl">
             <div class="fade-in">
-                <h1 class="text-4xl font-bold mb-8 font-mono">${content.sections.publications}</h1>
+                <h1 class="text-3xl md:text-4xl font-bold mb-8 font-mono">${content.sections.publications}</h1>
                 <div>
                     ${publicationsHTML}
+                </div>
+            </div>
+        </section>
+    `;
+}
+
+// Research Page Render
+function renderResearchPage(content) {
+    const mainContent = document.querySelector('main');
+    if (!mainContent) return;
+
+    const researchAreasHTML = content.researchAreas
+        .map((area, index) => `
+            <div class="research-area-card p-6 rounded-lg fade-in" style="animation-delay: ${index * 0.1}s">
+                <h3 class="text-2xl font-bold mb-3 font-mono">${area.title}</h3>
+                <p class="text-base mb-4 leading-relaxed">${area.description}</p>
+                ${area.methodology ? `<p class="text-sm opacity-75 italic">${area.methodology}</p>` : ''}
+            </div>
+        `)
+        .join('');
+
+    mainContent.innerHTML = `
+        <section class="container mx-auto px-4 md:px-6 py-12 max-w-4xl">
+            <div class="fade-in">
+                <h1 class="text-4xl font-bold mb-8 font-mono">${content.sections.research}</h1>
+                <div class="mb-8">
+                    <p class="text-lg leading-relaxed mb-6">${content.researchIntro || content.bio}</p>
+                </div>
+                <div class="space-y-6">
+                    ${researchAreasHTML}
                 </div>
             </div>
         </section>
@@ -421,11 +606,60 @@ function renderProjectsPage(content) {
         .join('');
 
     mainContent.innerHTML = `
-        <section class="container mx-auto px-6 py-12 max-w-4xl">
+        <section class="container mx-auto px-4 md:px-6 py-12 max-w-4xl">
             <div class="fade-in">
-                <h1 class="text-4xl font-bold mb-8 font-mono">${content.sections.projects}</h1>
+                <h1 class="text-3xl md:text-4xl font-bold mb-8 font-mono">${content.sections.projects}</h1>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     ${projectsHTML}
+                </div>
+            </div>
+        </section>
+    `;
+}
+
+// Tools Page Render
+function renderToolsPage(content) {
+    const mainContent = document.querySelector('main');
+    if (!mainContent) return;
+
+    const developedToolsHTML = content.tools.developed
+        .map((tool, index) => `
+            <div class="tool-card p-6 rounded-lg fade-in" style="animation-delay: ${index * 0.1}s">
+                <h3 class="text-2xl font-bold mb-3 font-mono">${tool.name}</h3>
+                <p class="text-base mb-4 leading-relaxed">${tool.description}</p>
+                ${tool.link !== '#' ? `<a href="${tool.link}" target="_blank" class="underline">${content.tools.viewProject || 'View Project'}</a>` : ''}
+            </div>
+        `)
+        .join('');
+
+    const techStackHTML = `
+        <div class="tech-stack-section fade-in">
+            <h3 class="text-2xl font-bold mb-4 font-mono">${content.tools.hardware || 'Hardware'}</h3>
+            <div class="flex flex-wrap gap-2 mb-6">
+                ${content.tools.hardwareItems.map(item => `<span class="tech-badge">${item}</span>`).join('')}
+            </div>
+            <h3 class="text-2xl font-bold mb-4 font-mono">${content.tools.software || 'Software'}</h3>
+            <div class="flex flex-wrap gap-2">
+                ${content.tools.softwareItems.map(item => `<span class="tech-badge">${item}</span>`).join('')}
+            </div>
+        </div>
+    `;
+
+    mainContent.innerHTML = `
+        <section class="container mx-auto px-4 md:px-6 py-12 max-w-4xl">
+            <div class="fade-in">
+                <h1 class="text-4xl font-bold mb-8 font-mono">${content.sections.tools}</h1>
+                
+                <div class="mb-12">
+                    <h2 class="text-3xl font-bold mb-6 font-mono">${content.tools.developedTitle || 'Developed Tools'}</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        ${developedToolsHTML}
+                    </div>
+                </div>
+
+                <div class="mb-12">
+                    <h2 class="text-3xl font-bold mb-6 font-mono">${content.tools.techStackTitle || 'Tech Stack'}</h2>
+                    ${techStackHTML}
                 </div>
             </div>
         </section>

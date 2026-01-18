@@ -106,14 +106,60 @@ const data = {
         ],
         sections: {
             about: "About",
-            research: "Research Interests",
+            research: "Research",
+            tools: "Tools & Software",
             publications: "Publications",
             projects: "Projects",
             education: "Education",
             contact: "Contact",
             news: "Latest News",
-            home: "Home"
-        }
+            home: "Home",
+            downloadCV: "Download CV"
+        },
+        researchIntro: "My research focuses on computational chemistry and material science, exploring novel methodologies for sensor design and molecular interactions.",
+        researchAreas: [
+            {
+                title: "LIG Sensor Design",
+                description: "Development of Laser-Induced Graphene (LIG) sensors for various applications.",
+                methodology: "Computational modeling and experimental validation"
+            },
+            {
+                title: "Molecular Docking",
+                description: "Computational studies of molecular interactions and binding mechanisms.",
+                methodology: "Structure-based drug design and virtual screening"
+            }
+        ],
+        tools: {
+            developedTitle: "Developed Tools",
+            techStackTitle: "Tech Stack",
+            viewProject: "View Project",
+            hardware: "Hardware",
+            software: "Software",
+            developed: [
+                {
+                    name: "ADVISOR",
+                    description: "Advanced computational tool for sensor design and analysis.",
+                    link: "#"
+                },
+                {
+                    name: "SnapChem",
+                    description: "Molecular visualization and analysis software.",
+                    link: "#"
+                }
+            ],
+            hardwareItems: [
+                "Creality Falcon 2",
+                "3D Printers",
+                "Laboratory Equipment"
+            ],
+            softwareItems: [
+                "Gaussian",
+                "AutoDock",
+                "Python",
+                "MATLAB"
+            ]
+        },
+        cvLink: "#"
     },
     "tr": {
         name: "[Adınız Buraya]",
@@ -219,13 +265,59 @@ const data = {
         ],
         sections: {
             about: "Hakkımda",
-            research: "Araştırma İlgi Alanları",
+            research: "Araştırma",
+            tools: "Araçlar ve Yazılım",
             publications: "Yayınlar",
             projects: "Projeler",
             education: "Eğitim",
             contact: "İletişim",
             news: "Son Haberler",
-            home: "Ana Sayfa"
-        }
+            home: "Ana Sayfa",
+            downloadCV: "CV İndir"
+        },
+        researchIntro: "Araştırmalarım hesaplamalı kimya ve malzeme bilimi üzerine odaklanmakta, sensör tasarımı ve moleküler etkileşimler için yeni metodolojiler keşfetmektedir.",
+        researchAreas: [
+            {
+                title: "LIG Sensör Tasarımı",
+                description: "Çeşitli uygulamalar için Lazer İndüklemeli Grafen (LIG) sensörlerinin geliştirilmesi.",
+                methodology: "Hesaplamalı modelleme ve deneysel doğrulama"
+            },
+            {
+                title: "Moleküler Docking",
+                description: "Moleküler etkileşimler ve bağlanma mekanizmalarının hesaplamalı çalışmaları.",
+                methodology: "Yapı tabanlı ilaç tasarımı ve sanal tarama"
+            }
+        ],
+        tools: {
+            developedTitle: "Geliştirilen Araçlar",
+            techStackTitle: "Teknoloji Yığını",
+            viewProject: "Projeyi Görüntüle",
+            hardware: "Donanım",
+            software: "Yazılım",
+            developed: [
+                {
+                    name: "ADVISOR",
+                    description: "Sensör tasarımı ve analizi için gelişmiş hesaplamalı araç.",
+                    link: "#"
+                },
+                {
+                    name: "SnapChem",
+                    description: "Moleküler görselleştirme ve analiz yazılımı.",
+                    link: "#"
+                }
+            ],
+            hardwareItems: [
+                "Creality Falcon 2",
+                "3D Yazıcılar",
+                "Laboratuvar Ekipmanları"
+            ],
+            softwareItems: [
+                "Gaussian",
+                "AutoDock",
+                "Python",
+                "MATLAB"
+            ]
+        },
+        cvLink: "#"
     }
 };
