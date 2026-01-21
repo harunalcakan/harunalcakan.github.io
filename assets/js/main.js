@@ -470,7 +470,7 @@ function renderHomePage(content) {
                 <!-- Left: Intro text -->
                 <div class="w-full md:w-1/2 text-center md:text-left space-y-4">
                     <p class="text-sm md:text-base uppercase tracking-wide text-orange-400 font-mono">Hello, I'm</p>
-                    <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold font-mono leading-tight">
+                    <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight hero-heading">
                         <span class="name-first">${firstName}</span>
                         ${lastName ? `<span class=\"\"> </span><span class=\"name-last\">${lastName}</span>` : ''}
                     </h1>
@@ -489,6 +489,16 @@ function renderHomePage(content) {
                         <span class="text-xs md:text-sm text-slate-300 font-mono opacity-70">Profile Photo</span>
                     </div>
                 </div>
+            </div>
+        </section>
+    `;
+
+    // NGL 3D Viewer Section (homepage)
+    const nglSectionHTML = `
+        <section class="container mx-auto px-4 md:px-6 pb-12 max-w-5xl">
+            <div class="fade-in">
+                <div id="ngl-viewer-container" class="ngl-viewer-container"></div>
+                <p class="ngl-attribution">Powered by NGL Viewer</p>
             </div>
         </section>
     `;
@@ -513,7 +523,39 @@ function renderHomePage(content) {
         </section>
     ` : '';
 
-    mainContent.innerHTML = heroHTML + highlightsHTML;
+    mainContent.innerHTML = heroHTML + nglSectionHTML + highlightsHTML;
+
+    // Initialize NGL viewer after DOM is updated
+    initNGLViewer();
+}
+
+// NGL Viewer Initialization (homepage)
+function initNGLViewer() {
+    // NGL library is only loaded on index.html
+    if (typeof NGL === 'undefined') return;
+
+    const container = document.getElementById('ngl-viewer-container');
+    if (!container) return;
+
+    try {
+        const stage = new NGL.Stage(container, { backgroundColor: 'transparent' });
+
+        // Handle responsive resize
+        window.addEventListener('resize', () => {
+            stage.handleResize();
+        });
+
+        // Load sample protein (PDB ID 1crn - Crambin)
+        stage.loadFile('rcsb://1crn').then(component => {
+            component.addRepresentation('cartoon', {
+                colorScheme: 'chainid'
+            });
+            component.autoView();
+            stage.setSpin(true);
+        });
+    } catch (e) {
+        console.error('NGL viewer initialization failed:', e);
+    }
 }
 
 // About Page Render
