@@ -106,11 +106,12 @@ h1, h2, h3, h4, h5, h6 {
     font-family: 'Fira Code', monospace;
     font-size: 16px;
     display: inline-block;
-    letter-spacing: 0.05em;
+    letter-spacing: -0.01em;
 }
 
 .typewriter-nav::after {
     content: '_';
+    color: #2dd4bf; /* Teal cursor to match brand last name */
     animation: blink-cursor 1s step-end infinite;
 }
 
@@ -711,57 +712,56 @@ body.dark-mode .contact-info-card {
 /* Timeline Styles */
 .timeline-container {
     position: relative;
-    padding-left: 2rem;
+    padding-left: 2.5rem;
     padding-right: 1rem;
 }
 
 .timeline-container::before {
     content: '';
     position: absolute;
-    left: 0.5rem;
+    left: 0.7rem;
     top: 0;
     bottom: 0;
     width: 2px;
-    background: linear-gradient(to bottom, 
-        var(--accent-cyan) 0%, 
-        var(--accent-dark) 50%, 
-        var(--accent-cyan) 100%);
+    background: linear-gradient(to bottom,
+        rgba(148, 163, 184, 0.4) 0%,
+        rgba(56, 189, 248, 0.7) 40%,
+        rgba(148, 163, 184, 0.4) 100%);
 }
 
 body.light-mode .timeline-container::before {
-    background: linear-gradient(to bottom, 
-        var(--accent-light) 0%, 
-        rgba(0, 0, 0, 0.3) 50%, 
-        var(--accent-light) 100%);
+    background: linear-gradient(to bottom,
+        rgba(148, 163, 184, 0.5) 0%,
+        rgba(15, 23, 42, 0.8) 40%,
+        rgba(148, 163, 184, 0.5) 100%);
 }
 
 .timeline-item {
     position: relative;
-    margin-bottom: 2rem;
-    padding-left: 2rem;
+    margin-bottom: 2.5rem;
+    padding-left: 2.75rem;
 }
 
 .timeline-marker {
     position: absolute;
-    left: -1.5rem;
-    top: 0.25rem;
-    width: 12px;
-    height: 12px;
+    left: 1.1rem;
+    top: 0.4rem;
+    width: 9px;
+    height: 9px;
     border-radius: 50%;
     border: 2px solid;
-    background-color: var(--bg-light);
+    background-color: transparent; /* hollow ring */
     z-index: 2;
 }
 
 body.dark-mode .timeline-marker {
-    background-color: var(--bg-dark);
-    border-color: var(--accent-dark);
-    box-shadow: 0 0 8px rgba(0, 255, 65, 0.5);
+    border-color: rgba(45, 212, 191, 0.9);
+    box-shadow: 0 0 6px rgba(45, 212, 191, 0.5);
 }
 
 body.light-mode .timeline-marker {
-    border-color: var(--accent-light);
-    box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+    border-color: rgba(148, 163, 184, 0.9);
+    box-shadow: 0 0 3px rgba(148, 163, 184, 0.6);
 }
 
 .timeline-content {
@@ -776,6 +776,11 @@ body.light-mode .timeline-marker {
     font-size: 0.75rem;
     font-weight: 600;
     font-family: 'Fira Code', monospace;
+}
+
+/* Home hero profile placeholder - subtle shadow */
+.home-profile-circle {
+    box-shadow: 0 12px 30px rgba(15, 23, 42, 0.55);
 }
 
 body.dark-mode .timeline-badge {

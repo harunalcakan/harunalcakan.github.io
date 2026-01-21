@@ -458,30 +458,56 @@ function renderHomePage(content) {
     const mainContent = document.querySelector('main');
     if (!mainContent) return;
 
-    // Hero Section with intro text
+    // Compute full name for greeting (aligned with typewriter data)
+    const firstName = content.firstName || (content.name ? content.name.split(' ')[0] : '');
+    const lastName = content.lastName || (content.name ? content.name.split(' ').slice(1).join(' ') : '');
+    const fullName = `${firstName} ${lastName}`.trim();
+
+    // Hero Section: two-column layout (intro text + circular profile placeholder)
     const heroHTML = `
-        <section class="container mx-auto px-4 md:px-6 py-20 min-h-[50vh] flex items-center">
-            <div class="text-center w-full fade-in max-w-3xl mx-auto">
-                <p class="text-xl md:text-2xl lg:text-3xl leading-relaxed font-mono mb-8">${content.heroIntro || content.bio}</p>
+        <section class="container mx-auto px-4 md:px-6 pt-24 pb-16 min-h-[60vh] flex items-center">
+            <div class="w-full flex flex-col-reverse md:flex-row items-center md:items-start gap-10 fade-in max-w-5xl mx-auto">
+                <!-- Left: Intro text -->
+                <div class="w-full md:w-1/2 text-center md:text-left space-y-4">
+                    <p class="text-sm md:text-base uppercase tracking-wide text-orange-400 font-mono">Hello, I'm</p>
+                    <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold font-mono leading-tight">
+                        <span class="name-first">${firstName}</span>
+                        ${lastName ? `<span class=\"\"> </span><span class=\"name-last\">${lastName}</span>` : ''}
+                    </h1>
+                    <p class="text-sm md:text-base text-slate-300 font-mono">
+                        Research Assistant · Ankara University
+                    </p>
+                    <p class="text-base md:text-lg leading-relaxed mt-4 max-w-xl mx-auto md:mx-0">
+                        ${content.heroIntro || 'I explore the synergy between in silico molecular modeling and electrochemical sensing platforms to design, optimize, and understand next-generation analytical systems.'}
+                    </p>
+                </div>
+
+                <!-- Right: Circular profile image placeholder -->
+                <div class="w-full md:w-1/2 flex justify-center md:justify-end">
+                    <div class="w-40 h-40 md:w-52 md:h-52 rounded-full border-2 border-slate-500 flex items-center justify-center overflow-hidden bg-slate-800/60 home-profile-circle">
+                        <!-- Replace this span with an <img> tag when a real profile photo is available -->
+                        <span class="text-xs md:text-sm text-slate-300 font-mono opacity-70">Profile Photo</span>
+                    </div>
+                </div>
             </div>
         </section>
     `;
 
-    // Highlights Section (Latest News or Featured Project)
+    // Highlights Section (Latest News)
     const highlightsHTML = content.news && content.news.length > 0 ? `
         <section class="container mx-auto px-4 md:px-6 py-12 max-w-4xl">
             <h2 class="text-2xl md:text-3xl font-bold mb-8 font-mono text-center">${content.sections.news}</h2>
-            <div class="space-y-6">
+            <div class="space-y-4">
                 ${content.news.slice(0, 3).map((item, index) => `
-                    <div class="fade-in highlight-card p-4 md:p-6 rounded-lg" style="animation-delay: ${index * 0.1}s">
-                        <div class="flex flex-col md:flex-row items-start gap-4">
-                            <div class="text-sm opacity-75 font-mono md:min-w-[100px]">${formatDate(item.date)}</div>
+                    <article class="fade-in highlight-card p-4 md:p-5 rounded-lg" style="animation-delay: ${index * 0.1}s">
+                        <div class="flex flex-col md:flex-row items-start gap-3">
+                            <div class="text-xs md:text-sm opacity-75 font-mono md:min-w-[110px]">${formatDate(item.date)}</div>
                             <div class="flex-1">
-                                <h3 class="text-lg md:text-xl font-semibold mb-2 font-mono">${item.title}</h3>
+                                <h3 class="text-base md:text-lg font-semibold mb-1 font-mono">${item.title}</h3>
                                 <p class="text-sm md:text-base opacity-90 leading-relaxed">${item.content}</p>
                             </div>
                         </div>
-                    </div>
+                    </article>
                 `).join('')}
             </div>
         </section>
