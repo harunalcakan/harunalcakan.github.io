@@ -11,6 +11,7 @@ const data = {
         email: "[your.email@university.edu]",
         location: "[City, Country]",
         heroIntro: "Exploring the intersection of Computational Chemistry and Material Science.",
+        aboutSummary: "Exploring the intersection of Computational Chemistry and Material Science.",
         bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
         researchInterests: [
             "Research Area 1",
@@ -146,6 +147,7 @@ const data = {
             workExperience: "Work Experience"
         },
         researchIntro: "My research focuses on computational chemistry and material science, exploring novel methodologies for sensor design and molecular interactions.",
+        pdbCode: "1crn",
         researchAreas: [
             {
                 title: "Advanced Electrochemical Sensing Platforms",
@@ -262,6 +264,7 @@ const data = {
         email: "[email@universite.edu]",
         location: "[Şehir, Ülke]",
         heroIntro: "Hesaplamalı Kimya ve Malzeme Bilimi kesişimini keşfediyorum.",
+        aboutSummary: "Hesaplamalı Kimya ve Malzeme Bilimi kesişimini keşfediyorum.",
         bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
         researchInterests: [
             "Araştırma Alanı 1",
@@ -397,6 +400,7 @@ const data = {
             workExperience: "İş Deneyimi"
         },
         researchIntro: "Araştırmalarım hesaplamalı kimya ve malzeme bilimi üzerine odaklanmakta, sensör tasarımı ve moleküler etkileşimler için yeni metodolojiler keşfetmektedir.",
+        pdbCode: "1crn",
         researchAreas: [
             {
                 title: "İleri Elektrokimyasal Algılama Platformları",

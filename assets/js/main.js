@@ -482,23 +482,17 @@ function renderHomePage(content) {
                     </p>
                 </div>
 
-                <!-- Right: Circular profile image placeholder -->
-                <div class="w-full md:w-1/2 flex justify-center md:justify-end">
+                <!-- Right: Circular profile image placeholder + 3D viewer on desktop -->
+                <div class="w-full md:w-1/2 flex flex-col items-center md:items-end gap-4">
                     <div class="w-40 h-40 md:w-52 md:h-52 rounded-full border-2 border-slate-500 flex items-center justify-center overflow-hidden bg-slate-800/60 home-profile-circle">
                         <!-- Replace this span with an <img> tag when a real profile photo is available -->
                         <span class="text-xs md:text-sm text-slate-300 font-mono opacity-70">Profile Photo</span>
                     </div>
+                    <div class="w-full flex justify-center md:justify-end">
+                        <div id="ngl-viewer-container" class="ngl-viewer-container"></div>
+                    </div>
+                    <p class="ngl-attribution w-full md:text-right">Powered by NGL Viewer</p>
                 </div>
-            </div>
-        </section>
-    `;
-
-    // NGL 3D Viewer Section (homepage)
-    const nglSectionHTML = `
-        <section class="container mx-auto px-4 md:px-6 pb-12 max-w-5xl">
-            <div class="fade-in">
-                <div id="ngl-viewer-container" class="ngl-viewer-container"></div>
-                <p class="ngl-attribution">Powered by NGL Viewer</p>
             </div>
         </section>
     `;
@@ -523,7 +517,7 @@ function renderHomePage(content) {
         </section>
     ` : '';
 
-    mainContent.innerHTML = heroHTML + nglSectionHTML + highlightsHTML;
+    mainContent.innerHTML = heroHTML + highlightsHTML;
 
     // Initialize NGL viewer after DOM is updated
     initNGLViewer();
