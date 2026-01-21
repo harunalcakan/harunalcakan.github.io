@@ -17,6 +17,33 @@
     --border-dark: #2a2a2a;
 }
 
+/* About page skills (minimal two-column layout) */
+.about-skills-grid {
+    align-items: flex-start;
+}
+
+.about-skills-column {
+    min-width: 0;
+}
+
+.about-skills-column h3 {
+    font-family: 'Inter', sans-serif;
+}
+
+.about-skill-bullet {
+    font-family: 'Fira Code', monospace;
+    font-size: 0.8rem;
+    line-height: 1.5;
+}
+
+body.light-mode .about-skill-bullet {
+    color: #f97316; /* subtle orange */
+}
+
+body.dark-mode .about-skill-bullet {
+    color: #2dd4bf; /* teal in dark mode */
+}
+
 /* Base Styles */
 * {
     margin: 0;
@@ -387,6 +414,10 @@ body.light-mode .nav-link.nav-active {
     padding: 0;
     outline: none;
     transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 50;
 }
 
 .language-toggle-track {
@@ -615,33 +646,21 @@ body.light-mode .tech-badge:hover {
     transform: scale(1.05);
 }
 
-/* Skill Cards */
+/* Skill Cards - softened for more minimal look (kept for legacy usage) */
 .skill-card {
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    border: 1px solid;
+    border: none;
+    background: transparent;
+    transition: color 0.2s ease;
 }
 
+body.dark-mode .skill-card,
 body.light-mode .skill-card {
-    border-color: var(--border-light);
-    background-color: #f9fafb;
-}
-
-body.dark-mode .skill-card {
-    border-color: var(--border-dark);
-    background-color: #1a1a1a;
+    background: transparent;
 }
 
 .skill-card:hover {
-    transform: translateY(-3px);
-}
-
-body.dark-mode .skill-card:hover {
-    box-shadow: 0 8px 24px rgba(0, 255, 65, 0.15);
-    border-color: var(--accent-dark);
-}
-
-body.light-mode .skill-card:hover {
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    transform: none;
+    box-shadow: none;
 }
 
 /* Contact Link Cards */

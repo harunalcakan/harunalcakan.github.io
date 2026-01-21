@@ -575,18 +575,45 @@ function renderAboutPage(content) {
                 <!-- Academic & Technical Competency -->
                 <div class="mb-12">
                     <h2 class="text-2xl md:text-3xl font-bold mb-6 font-mono">${content.sections.academicCompetency}</h2>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        ${Object.values(content.skillMatrix).map((category, index) => `
-                            <div class="skill-card p-6 rounded-lg fade-in" style="animation-delay: ${index * 0.1}s">
-                                <h3 class="text-xl font-bold mb-4 font-mono">${category.title}</h3>
-                                <ul class="space-y-2">
-                                    ${category.skills.map(skill => `<li class="text-sm md:text-base flex items-start">
-                                        <span class="text-orange-500 mr-2">•</span>
-                                        <span>${skill}</span>
-                                    </li>`).join('')}
-                                </ul>
-                            </div>
-                        `).join('')}
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 about-skills-grid">
+                        <div class="about-skills-column">
+                            <h3 class="text-xl font-semibold mb-4">Research Methodologies</h3>
+                            <ul class="space-y-2 text-sm md:text-base">
+                                <li class="flex items-start">
+                                    <span class="about-skill-bullet mr-2">•</span>
+                                    <span>Computational: Molecular Docking, In Silico Drug Design, Molecular Dynamics</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="about-skill-bullet mr-2">•</span>
+                                    <span>Experimental: Laser-Induced Graphene (LIG), 3D Printing for Sensors, Electrochemical Analysis</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="about-skills-column">
+                            <h3 class="text-xl font-semibold mb-4">Software & Tools</h3>
+                            <ul class="space-y-2 text-sm md:text-base">
+                                <li class="flex items-start">
+                                    <span class="about-skill-bullet mr-2">•</span>
+                                    <span>Gaussian</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="about-skill-bullet mr-2">•</span>
+                                    <span>AutoDock</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="about-skill-bullet mr-2">•</span>
+                                    <span>VMD</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="about-skill-bullet mr-2">•</span>
+                                    <span>Python</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="about-skill-bullet mr-2">•</span>
+                                    <span>MATLAB</span>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
