@@ -469,7 +469,7 @@ function renderHomePage(content) {
             <div class="w-full fade-in max-w-5xl mx-auto flex flex-col gap-10">
 
                 <!-- Top row: Profile + 3D viewer -->
-                <div class="w-full flex flex-col md:flex-row items-center justify-center gap-8">
+                <div class="w-full flex flex-col md:flex-row items-center justify-center gap-8 md:gap-16">
                     <div class="flex justify-center w-full md:w-auto">
                         <div class="w-40 h-40 md:w-48 md:h-48 rounded-full border-2 border-slate-500 flex items-center justify-center overflow-hidden bg-slate-800/60 home-profile-circle">
                             <!-- Replace this span with an <img> tag when a real profile photo is available -->
@@ -485,10 +485,9 @@ function renderHomePage(content) {
 
                 <!-- Bottom: Intro text -->
                 <div class="w-full text-center space-y-4">
-                    <p class="text-sm md:text-base uppercase tracking-wide text-orange-400">Hello, I'm</p>
+                    <p class="text-sm md:text-base uppercase tracking-wide">Hello, I'm</p>
                     <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight hero-heading">
-                        <span class="name-first">${firstName}</span>
-                        ${lastName ? `<span class=\"\"> </span><span class=\"name-last\">${lastName}</span>` : ''}
+                        ${fullName || firstName || ''}
                     </h1>
                     <p class="text-sm md:text-base hero-subtitle">
                         Research Assistant · Ankara University
