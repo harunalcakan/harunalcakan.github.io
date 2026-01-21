@@ -463,35 +463,39 @@ function renderHomePage(content) {
     const lastName = content.lastName || (content.name ? content.name.split(' ').slice(1).join(' ') : '');
     const fullName = `${firstName} ${lastName}`.trim();
 
-    // Hero Section: two-column layout (intro text + circular profile placeholder)
+    // Hero Section: top visual row (profile + 3D viewer) and bottom text block
     const heroHTML = `
         <section class="container mx-auto px-4 md:px-6 pt-24 pb-16 min-h-[60vh] flex items-center">
-            <div class="w-full flex flex-col-reverse md:flex-row items-center md:items-start gap-10 fade-in max-w-5xl mx-auto">
-                <!-- Left: Intro text -->
-                <div class="w-full md:w-1/2 text-center md:text-left space-y-4">
-                    <p class="text-sm md:text-base uppercase tracking-wide text-orange-400 font-mono">Hello, I'm</p>
+            <div class="w-full fade-in max-w-5xl mx-auto flex flex-col gap-10">
+
+                <!-- Top row: Profile + 3D viewer -->
+                <div class="w-full flex flex-col md:flex-row items-center justify-center gap-8">
+                    <div class="flex justify-center w-full md:w-auto">
+                        <div class="w-40 h-40 md:w-48 md:h-48 rounded-full border-2 border-slate-500 flex items-center justify-center overflow-hidden bg-slate-800/60 home-profile-circle">
+                            <!-- Replace this span with an <img> tag when a real profile photo is available -->
+                            <span class="text-xs md:text-sm text-slate-300 opacity-70">Profile Photo</span>
+                        </div>
+                    </div>
+                    <div class="flex justify-center w-full md:w-auto">
+                        <div id="ngl-viewer-container" class="ngl-viewer-container"></div>
+                    </div>
+                </div>
+
+                <p class="ngl-attribution w-full text-center md:text-right">Powered by NGL Viewer</p>
+
+                <!-- Bottom: Intro text -->
+                <div class="w-full text-center space-y-4">
+                    <p class="text-sm md:text-base uppercase tracking-wide text-orange-400">Hello, I'm</p>
                     <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight hero-heading">
                         <span class="name-first">${firstName}</span>
                         ${lastName ? `<span class=\"\"> </span><span class=\"name-last\">${lastName}</span>` : ''}
                     </h1>
-                    <p class="text-sm md:text-base font-mono hero-subtitle">
+                    <p class="text-sm md:text-base hero-subtitle">
                         Research Assistant · Ankara University
                     </p>
-                    <p class="text-base md:text-lg leading-relaxed mt-4 max-w-xl mx-auto md:mx-0">
-                        ${content.heroIntro || 'I explore the synergy between in silico molecular modeling and electrochemical sensing platforms to design, optimize, and understand next-generation analytical systems.'}
+                    <p class="text-base md:text-lg leading-relaxed mt-4 max-w-xl mx-auto">
+                        ${content.heroIntro || 'I explore the intersection of electrochemical sensing platforms and computational drug discovery to design, optimize, and understand next-generation analytical systems.'}
                     </p>
-                </div>
-
-                <!-- Right: Circular profile image placeholder + 3D viewer on desktop -->
-                <div class="w-full md:w-1/2 flex flex-col items-center md:items-end gap-4">
-                    <div class="w-40 h-40 md:w-52 md:h-52 rounded-full border-2 border-slate-500 flex items-center justify-center overflow-hidden bg-slate-800/60 home-profile-circle">
-                        <!-- Replace this span with an <img> tag when a real profile photo is available -->
-                        <span class="text-xs md:text-sm text-slate-300 font-mono opacity-70">Profile Photo</span>
-                    </div>
-                    <div class="w-full flex justify-center md:justify-end">
-                        <div id="ngl-viewer-container" class="ngl-viewer-container"></div>
-                    </div>
-                    <p class="ngl-attribution w-full md:text-right">Powered by NGL Viewer</p>
                 </div>
             </div>
         </section>
@@ -532,7 +536,7 @@ function initNGLViewer() {
     if (!container) return;
 
     try {
-        const stage = new NGL.Stage(container, { backgroundColor: 'transparent' });
+        const stage = new NGL.Stage(container, { backgroundColor: '#ffffff' });
 
         // Handle responsive resize
         window.addEventListener('resize', () => {
