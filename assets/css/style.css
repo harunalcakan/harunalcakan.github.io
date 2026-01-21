@@ -25,9 +25,16 @@
     border-radius: 15px;
     margin: 0 auto;
     overflow: hidden;
-    background-color: #ffffff;
     border: 1px solid #e2e8f0; /* subtle border against page background */
     box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
+}
+
+body.light-mode .ngl-viewer-container {
+    background-color: #ffffff;
+}
+
+body.dark-mode .ngl-viewer-container {
+    background-color: #020617; /* near-black slate for dark mode */
 }
 
 @media (min-width: 768px) {

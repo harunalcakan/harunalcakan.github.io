@@ -536,7 +536,7 @@ function initNGLViewer() {
     if (!container) return;
 
     try {
-        const stage = new NGL.Stage(container, { backgroundColor: '#ffffff' });
+        const stage = new NGL.Stage(container, { backgroundColor: 'transparent' });
 
         // Handle responsive resize
         window.addEventListener('resize', () => {
