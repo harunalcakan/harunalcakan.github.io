@@ -59,22 +59,22 @@ function injectNavbar() {
                     </div>
                     <div class="flex items-center gap-2 md:gap-4 lg:gap-6 relative">
                         <!-- Desktop Navigation -->
-                        <div class="hidden md:flex gap-4">
+                        <div class="hidden lg:flex gap-4">
                             ${navLinks.map(link => `
                                 <a href="${link.href}" class="nav-link ${activeClass(link)}" id="${link.id}">
                                     ${link.label}
                                 </a>
                             `).join('')}
                         </div>
-                        <!-- Mobile Hamburger Menu -->
-                        <button id="mobile-menu-toggle" class="md:hidden text-white p-2 focus:outline-none z-50" aria-label="Toggle menu">
+                        <!-- Mobile/Tablet Hamburger Menu -->
+                        <button id="mobile-menu-toggle" class="lg:hidden text-white p-2 focus:outline-none z-50" aria-label="Toggle menu">
                             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path id="menu-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
                                 <path id="close-icon" class="hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
                             </svg>
                         </button>
-                        <!-- Mobile Menu -->
-                        <div id="mobile-menu" class="hidden md:hidden absolute top-full left-0 w-full bg-slate-900 border-b border-slate-700 shadow-lg z-40">
+                        <!-- Mobile/Tablet Menu -->
+                        <div id="mobile-menu" class="hidden lg:hidden absolute top-full left-0 w-full bg-slate-900 border-b border-slate-700 shadow-lg z-40">
                             <div class="container mx-auto px-4 py-4 space-y-2">
                                 ${navLinks.map(link => `
                                     <a href="${link.href}" class="block nav-link ${activeClass(link)} py-2 px-4 hover:bg-slate-800 rounded" id="${link.id}-mobile">
@@ -474,7 +474,7 @@ function renderHomePage(content) {
                         <span class="name-first">${firstName}</span>
                         ${lastName ? `<span class=\"\"> </span><span class=\"name-last\">${lastName}</span>` : ''}
                     </h1>
-                    <p class="text-sm md:text-base text-slate-300 font-mono">
+                    <p class="text-sm md:text-base font-mono hero-subtitle">
                         Research Assistant · Ankara University
                     </p>
                     <p class="text-base md:text-lg leading-relaxed mt-4 max-w-xl mx-auto md:mx-0">

@@ -50,21 +50,30 @@ const data = {
                 description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
                 technologies: ["Technology A", "Technology B", "Technology C"],
                 link: "#",
-                github: "#"
+                github: "#",
+                project_status: "Research Phase",
+                collaboration_tag: "Open for Computational Partnerships",
+                molecule_path: "#"
             },
             {
                 title: "Project Title 2",
                 description: "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
                 technologies: ["Technology D", "Technology E"],
                 link: "#",
-                github: "#"
+                github: "#",
+                project_status: "Stable",
+                collaboration_tag: "Collaborations by request",
+                molecule_path: "#"
             },
             {
                 title: "Project Title 3",
                 description: "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
                 technologies: ["Technology F", "Technology G", "Technology H"],
                 link: "#",
-                github: "#"
+                github: "#",
+                project_status: "Beta",
+                collaboration_tag: "Open for Experimental Validation",
+                molecule_path: "#"
             }
         ],
         workExperience: [
@@ -139,8 +148,8 @@ const data = {
         researchIntro: "My research focuses on computational chemistry and material science, exploring novel methodologies for sensor design and molecular interactions.",
         researchAreas: [
             {
-                title: "LIG Surface Optimization",
-                description: "Advanced computational methods for optimizing Laser-Induced Graphene (LIG) surface properties and sensor performance.",
+                title: "Advanced Electrochemical Sensing Platforms",
+                description: "Computational and experimental strategies for optimizing carbon-based electrochemical interfaces and sensor performance.",
                 methodology: "DFT calculations, molecular dynamics simulations, and experimental validation"
             },
             {
@@ -168,8 +177,8 @@ const data = {
             experimental: {
                 title: "Experimental Techniques",
                 skills: [
-                    "Laser-Induced Graphene (LIG) Fabrication",
-                    "Sensor Characterization",
+                    "Carbon-Based Material Synthesis",
+                    "Advanced Electrochemical Sensing Platforms",
                     "Electrochemical Analysis",
                     "Material Synthesis",
                     "Spectroscopic Methods"
@@ -206,12 +215,18 @@ const data = {
                 {
                     name: "ADVISOR",
                     description: "Advanced computational tool for sensor design and analysis.",
-                    link: "#"
+                    link: "#",
+                    project_status: "Beta",
+                    collaboration_tag: "Open for Computational Partnerships",
+                    molecule_path: "https://3Dmol.csb.pitt.edu/tests/auto/data/1crn.pdb"
                 },
                 {
                     name: "SnapChem",
                     description: "Molecular visualization and analysis software.",
-                    link: "#"
+                    link: "#",
+                    project_status: "Beta",
+                    collaboration_tag: "Open for Visualization Collaborations",
+                    molecule_path: "https://3Dmol.csb.pitt.edu/tests/auto/data/ligand.pdb"
                 }
             ],
             hardwareItems: [
@@ -234,7 +249,8 @@ const data = {
             orcid: "https://orcid.org/0000-0000-0000-0000",
             linkedin: "https://linkedin.com/in/yourprofile",
             googleScholar: "https://scholar.google.com/citations?user=YOUR_ID",
-            github: "https://github.com/yourusername"
+            github: "https://github.com/yourusername",
+            collaboration_tag: "Open for computational and electrochemical collaborations"
         }
     },
     "tr": {
@@ -285,21 +301,30 @@ const data = {
                 description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
                 technologies: ["Teknoloji A", "Teknoloji B", "Teknoloji C"],
                 link: "#",
-                github: "#"
+                github: "#",
+                project_status: "Araştırma Aşaması",
+                collaboration_tag: "Hesaplamalı işbirliklerine açık",
+                molecule_path: "#"
             },
             {
                 title: "Proje Başlığı 2",
                 description: "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
                 technologies: ["Teknoloji D", "Teknoloji E"],
                 link: "#",
-                github: "#"
+                github: "#",
+                project_status: "Kararlı",
+                collaboration_tag: "İşbirlikleri talep üzerine",
+                molecule_path: "#"
             },
             {
                 title: "Proje Başlığı 3",
                 description: "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
                 technologies: ["Teknoloji F", "Teknoloji G", "Teknoloji H"],
                 link: "#",
-                github: "#"
+                github: "#",
+                project_status: "Beta",
+                collaboration_tag: "Deneysel doğrulama için açık",
+                molecule_path: "#"
             }
         ],
         workExperience: [
@@ -374,8 +399,8 @@ const data = {
         researchIntro: "Araştırmalarım hesaplamalı kimya ve malzeme bilimi üzerine odaklanmakta, sensör tasarımı ve moleküler etkileşimler için yeni metodolojiler keşfetmektedir.",
         researchAreas: [
             {
-                title: "LIG Yüzey Optimizasyonu",
-                description: "Lazer İndüklemeli Grafen (LIG) yüzey özelliklerini ve sensör performansını optimize etmek için gelişmiş hesaplamalı yöntemler.",
+                title: "İleri Elektrokimyasal Algılama Platformları",
+                description: "Karbon bazlı elektrokimyasal arayüzleri ve sensör performansını optimize etmek için hesaplamalı ve deneysel stratejiler.",
                 methodology: "DFT hesaplamaları, moleküler dinamik simülasyonları ve deneysel doğrulama"
             },
             {
@@ -403,8 +428,8 @@ const data = {
             experimental: {
                 title: "Deneysel Teknikler",
                 skills: [
-                    "Lazer İndüklemeli Grafen (LIG) Üretimi",
-                    "Sensör Karakterizasyonu",
+                    "Karbon Bazlı Malzeme Sentezi",
+                    "İleri Elektrokimyasal Algılama Platformları",
                     "Elektrokimyasal Analiz",
                     "Malzeme Sentezi",
                     "Spektroskopik Yöntemler"
@@ -469,7 +494,8 @@ const data = {
             orcid: "https://orcid.org/0000-0000-0000-0000",
             linkedin: "https://linkedin.com/in/yourprofile",
             googleScholar: "https://scholar.google.com/citations?user=YOUR_ID",
-            github: "https://github.com/yourusername"
+            github: "https://github.com/yourusername",
+            collaboration_tag: "Hesaplamalı ve elektrokimyasal işbirliklerine açık"
         }
     }
 };

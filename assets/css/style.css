@@ -8,13 +8,52 @@
 :root {
     --bg-light: #ffffff;
     --text-light: #000000;
-    --bg-dark: #0a0a0a;
+    --bg-dark: #121212; /* Graphene Grey */
     --text-dark: #e0e0e0;
     --accent-light: #000000;
     --accent-dark: #00ff41;
     --accent-cyan: #00d9ff;
     --border-light: #e5e5e5;
     --border-dark: #2a2a2a;
+}
+
+/* 3D Molecule Viewer */
+.molecule-viewer-container {
+    width: 100%;
+    height: 260px;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    background: transparent;
+}
+
+@media (min-width: 768px) {
+    .molecule-viewer-container {
+        height: 320px;
+    }
+}
+
+/* Status Badges */
+.status-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.15rem 0.6rem;
+    border-radius: 999px;
+    font-size: 0.7rem;
+    font-family: 'Fira Code', monospace;
+    letter-spacing: 0.03em;
+}
+
+.status-stable {
+    background-color: rgba(34, 197, 94, 0.12);
+    color: #22c55e;
+    box-shadow: 0 0 8px rgba(34, 197, 94, 0.35);
+}
+
+.status-beta {
+    background: radial-gradient(circle at 0 0, rgba(249, 115, 22, 0.25), transparent 55%),
+                radial-gradient(circle at 100% 100%, rgba(45, 212, 191, 0.25), transparent 55%);
+    color: #fdba74;
+    box-shadow: 0 0 8px rgba(249, 115, 22, 0.4);
 }
 
 /* About page skills (minimal two-column layout) */
@@ -54,6 +93,15 @@ body.dark-mode .about-skill-bullet {
 body {
     font-family: 'Inter', sans-serif;
     transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Hero subtitle (Research Assistant · Ankara University) */
+.hero-subtitle {
+    color: #e2e8f0; /* default for dark backgrounds */
+}
+
+body.light-mode .hero-subtitle {
+    color: #64748b; /* slate-500 for better readability in light mode */
 }
 
 /* Light Mode */
