@@ -1,212 +1,180 @@
-// THE CONTENT DATABASE - All text content goes here
-// Replace placeholders with your actual information
+// THE CONTENT DATABASE - Harun Nalçakan
+// This file defines the multilingual content structure consumed by main.js.
 
 const data = {
     "en": {
-        name: "[Your Name Here]",
-        firstName: "[Your First Name]",
-        lastName: "[Your Last Name]",
-        title: "[Your Academic Title]",
-        affiliation: "[University Name]",
-        email: "[your.email@university.edu]",
-        location: "[City, Country]",
-        heroIntro: "Exploring the intersection of Computational Chemistry and Material Science.",
-        aboutSummary: "Exploring the intersection of Computational Chemistry and Material Science.",
-        bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
-        researchInterests: [
-            "Research Area 1",
-            "Research Area 2",
-            "Research Area 3"
-        ],
-        about: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-        publications: [
-            {
-                title: "Publication Title 1",
-                authors: "Author A, Author B, [Your Name]",
-                venue: "Conference/Journal Name 2024",
-                year: "2024",
-                link: "#",
-                abstract: "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
-            },
-            {
-                title: "Publication Title 2",
-                authors: "[Your Name], Author C",
-                venue: "Journal Name 2023",
-                year: "2023",
-                link: "#",
-                abstract: "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-            },
-            {
-                title: "Publication Title 3",
-                authors: "Author D, [Your Name], Author E",
-                venue: "Workshop Name 2023",
-                year: "2023",
-                link: "#",
-                abstract: "Ut enim ad minim veniam, quis nostrud exercitation."
-            }
-        ],
-        projects: [
-            {
-                title: "Project Title 1",
-                description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-                technologies: ["Technology A", "Technology B", "Technology C"],
-                link: "#",
-                github: "#",
-                project_status: "Research Phase",
-                collaboration_tag: "Open for Computational Partnerships",
-                molecule_path: "#"
-            },
-            {
-                title: "Project Title 2",
-                description: "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-                technologies: ["Technology D", "Technology E"],
-                link: "#",
-                github: "#",
-                project_status: "Stable",
-                collaboration_tag: "Collaborations by request",
-                molecule_path: "#"
-            },
-            {
-                title: "Project Title 3",
-                description: "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
-                technologies: ["Technology F", "Technology G", "Technology H"],
-                link: "#",
-                github: "#",
-                project_status: "Beta",
-                collaboration_tag: "Open for Experimental Validation",
-                molecule_path: "#"
-            }
-        ],
-        workExperience: [
-            {
-                role: "Research Assistant",
-                institution: "[University/Institution Name]",
-                year: "2020-Present",
-                description: "Conducting research in computational chemistry and material science."
-            },
-            {
-                role: "Teaching Assistant",
-                institution: "[University Name]",
-                year: "2018-2020",
-                description: "Assisted in undergraduate courses and laboratory sessions."
-            }
-        ],
-        education: [
-            {
-                degree: "Ph.D. in [Field]",
-                institution: "[University Name]",
-                year: "2020-2024",
-                description: "Thesis: Lorem ipsum dolor sit amet"
-            },
-            {
-                degree: "M.Sc. in [Field]",
-                institution: "[University Name]",
-                year: "2018-2020",
-                description: "Thesis: Consectetur adipiscing elit"
-            },
-            {
-                degree: "B.Sc. in [Field]",
-                institution: "[University Name]",
-                year: "2014-2018",
-                description: "Graduated with honors"
-            }
-        ],
-        news: [
-            {
-                date: "2024-01-15",
-                title: "New Publication Accepted",
-                content: "Our latest paper on machine learning has been accepted to Conference Name 2024."
-            },
-            {
-                date: "2023-12-10",
-                title: "Project Update",
-                content: "Released new version of research project with improved features."
-            },
-            {
-                date: "2023-11-05",
-                title: "Conference Presentation",
-                content: "Presented research findings at International Conference 2023."
-            }
-        ],
+        // Identity
+        name: "Harun Nalçakan",
+        firstName: "Harun",
+        lastName: "Nalçakan",
+        title: "Research Assistant",
+        affiliation: "Ankara University, Faculty of Science, Chemistry Department",
+        email: "hnalcakan@ankara.edu.tr",
+        location: "Ankara, Türkiye",
+
+        // Hero / About
+        heroIntro: "Synthesizing Computational Precision with Experimental Reality.",
+        aboutSummary: "I conduct research at Ankara University integrating both computational and experimental chemistry.",
+        bio: "My research focuses on bridging the gap between theoretical modeling techniques and the development of advanced electrochemical sensors. I leverage in silico tools to predict and optimize molecular interactions, which are then validated through experimental electrochemical protocols.",
+        about: "I conduct research at Ankara University integrating both computational and experimental chemistry, with a focus on electrochemical sensing platforms and computational drug discovery.",
+
+        // Section labels used by main.js (navbar, headings, toggles)
         sections: {
+            home: "Home",
             about: "About",
             portfolio: "Research Portfolio",
             publications: "Publications",
             contact: "Contact",
             news: "Latest News",
-            home: "Home",
             downloadCV: "Download CV",
             education: "Education",
+            workExperience: "Work Experience",
             academicCompetency: "Academic & Technical Competency",
             researchAreas: "Research Areas",
             scientificTools: "Scientific Tools",
-            theme_light: "Light",
-            theme_dark: "Dark",
-            projects: "Projects",
             tools: "Tools & Software",
-            workExperience: "Work Experience"
+            projects: "Projects",
+            theme_light: "Light",
+            theme_dark: "Dark"
         },
-        researchIntro: "My research focuses on computational chemistry and material science, exploring novel methodologies for sensor design and molecular interactions.",
-        pdbCode: "1crn",
-        researchAreas: [
+
+        // Education
+        education: [
             {
-                title: "Advanced Electrochemical Sensing Platforms",
-                description: "Computational and experimental strategies for optimizing carbon-based electrochemical interfaces and sensor performance.",
-                methodology: "DFT calculations, molecular dynamics simulations, and experimental validation"
+                degree: "Ph.D. in Chemistry",
+                institution: "Ankara University",
+                year: "2026-Ongoing",
+                description: "Advanced doctoral research phase."
             },
             {
-                title: "In Silico Drug Design",
-                description: "Computational approaches to drug discovery and molecular interaction studies.",
-                methodology: "Structure-based drug design, virtual screening, and binding affinity prediction"
+                degree: "M.Sc. in Chemistry",
+                institution: "Ankara University",
+                year: "2023-2026",
+                description: "GPA: 3.93/4.00 | Thesis: 3D-Printed Electrodes for Nitro-PAH determination."
             },
             {
-                title: "Computational Material Science",
-                description: "Modeling and simulation of material properties for sensor applications.",
-                methodology: "Quantum mechanical calculations, machine learning, and experimental correlation"
+                degree: "B.Sc. in Chemistry",
+                institution: "Ankara University",
+                year: "2016-2021",
+                description: "GPA: 3.34/4.00"
             }
         ],
+
+        // Work Experience
+        workExperience: [
+            {
+                role: "Research Assistant",
+                institution: "Ankara University",
+                year: "2023-Present",
+                description: "Focusing on surface chemistry and computational modeling."
+            }
+        ],
+
+        // News (used by home page "Latest News" section)
+        news: [
+            {
+                date: "2024-09-01",
+                title: "Targeting LIMK1 in Alzheimer's Disease",
+                content: "Targeting LIMK1 in Alzheimer's Disease (J. Turk. Chem. Soc. Sect. A, Sept 2024)."
+            },
+            {
+                date: "2024-01-15",
+                title: "An in silico Pharmacokinetic Investigation",
+                content: "An in silico Pharmacokinetic Investigation of Organic Luminogens (Ankara Univ. Eczacilik Fak. Derg., Jan 2024)."
+            },
+            {
+                date: "2023-09-01",
+                title: "Bridging Molecular Docking to Molecular Dynamics",
+                content: "Bridging Molecular Docking to Molecular Dynamics (J. Adv. Res. Nat. Appl. Sci., Sept 2023)."
+            },
+            {
+                date: "2023-04-01",
+                title: "Computational insights into bis-N,N-dimethylaniline based D-π-A systems",
+                content: "Computational insights into bis-N,N-dimethylaniline based D-π-A systems (J. Mol. Graph. Model., April 2023)."
+            }
+        ],
+
+        // Research areas (used by portfolio page)
+        researchAreas: [
+            {
+                title: "Electrochemical Sensing Platforms",
+                description: "Design and optimization of advanced electrochemical sensors using both experimental protocols and computational modeling.",
+                methodology: "Surface chemistry, electrochemical analysis, molecular modeling, and structure–function correlation."
+            },
+            {
+                title: "Computational Drug Discovery",
+                description: "In silico exploration of molecular interactions to support ligand design and mechanism-of-action studies.",
+                methodology: "Cheminformatics, molecular docking, MD simulations, and basic ADME profiling."
+            }
+        ],
+
+        // Competency (not directly rendered, but kept for completeness)
         skillMatrix: {
             computational: {
-                title: "Computational Chemistry",
+                title: "In Silico (Computational) Expertise",
                 skills: [
-                    "Density Functional Theory (DFT)",
-                    "Molecular Dynamics (MD) Simulations",
-                    "Quantum Chemistry Calculations",
-                    "Structure-Based Drug Design",
-                    "Virtual Screening"
+                    "Cheminformatics",
+                    "Molecular Docking",
+                    "MD Simulations",
+                    "DFT"
                 ]
             },
             experimental: {
-                title: "Experimental Techniques",
+                title: "In Vitro (Experimental) Expertise",
                 skills: [
-                    "Carbon-Based Material Synthesis",
+                    "Physical Chemistry",
+                    "Electrochemistry",
                     "Advanced Electrochemical Sensing Platforms",
-                    "Electrochemical Analysis",
-                    "Material Synthesis",
-                    "Spectroscopic Methods"
+                    "Material Characterization"
                 ]
             },
             software: {
-                title: "Software & Programming",
+                title: "Software & Technical Stack",
                 skills: [
                     "Python, MATLAB, R",
                     "Gaussian, AutoDock, VMD",
-                    "Machine Learning (TensorFlow, PyTorch)",
-                    "Data Analysis & Visualization",
                     "Scientific Computing"
-                ]
-            },
-            academic: {
-                title: "Academic & Soft Skills",
-                skills: [
-                    "Scientific Writing & Communication",
-                    "Grant Writing & Proposal Development",
-                    "Collaborative Research",
-                    "Mentoring & Teaching",
-                    "Project Management"
                 ]
             }
         },
+
+        // Publications page (main.js expects a flat array)
+        publications: [
+            {
+                title: "Targeting LIMK1 in Alzheimer's Disease",
+                authors: "Defne Eşkin, Harun Nalçakan et al.",
+                venue: "J. Turk. Chem. Soc. Sect. A",
+                year: "2024",
+                link: "#",
+                abstract: ""
+            },
+            {
+                title: "An in silico Pharmacokinetic Investigation of Organic Luminogens",
+                authors: "Harun Nalçakan et al.",
+                venue: "Ankara Univ. Eczacilik Fak. Derg.",
+                year: "2024",
+                link: "#",
+                abstract: ""
+            },
+            {
+                title: "Bridging Molecular Docking to Molecular Dynamics",
+                authors: "Harun Nalçakan et al.",
+                venue: "J. Adv. Res. Nat. Appl. Sci.",
+                year: "2023",
+                link: "#",
+                abstract: ""
+            },
+            {
+                title: "Computational insights into bis-N,N-dimethylaniline based D-π-A systems",
+                authors: "Harun Nalçakan et al.",
+                venue: "J. Mol. Graph. Model.",
+                year: "2023",
+                link: "#",
+                abstract: ""
+            }
+        ],
+
+        // Tools / software (used by portfolio and tools views)
         tools: {
             developedTitle: "Developed Tools",
             techStackTitle: "Tech Stack",
@@ -216,25 +184,21 @@ const data = {
             developed: [
                 {
                     name: "ADVISOR",
-                    description: "Advanced computational tool for sensor design and analysis.",
+                    description: "Advanced computational platform.",
                     link: "#",
-                    project_status: "Beta",
-                    collaboration_tag: "Open for Computational Partnerships",
-                    molecule_path: "https://3Dmol.csb.pitt.edu/tests/auto/data/1crn.pdb"
+                    project_status: "Under Development"
                 },
                 {
                     name: "SnapChem",
-                    description: "Molecular visualization and analysis software.",
+                    description: "Chemical data visualization tool.",
                     link: "#",
-                    project_status: "Beta",
-                    collaboration_tag: "Open for Visualization Collaborations",
-                    molecule_path: "https://3Dmol.csb.pitt.edu/tests/auto/data/ligand.pdb"
+                    project_status: "Under Development"
                 }
             ],
             hardwareItems: [
                 "Creality Falcon 2",
-                "3D Printers",
-                "Laboratory Equipment"
+                "3D printers",
+                "Laboratory equipment"
             ],
             softwareItems: [
                 "Gaussian",
@@ -243,223 +207,206 @@ const data = {
                 "MATLAB"
             ]
         },
-        cvLink: "#",
-        contact: {
-            email: "[your.email@university.edu]",
-            location: "[City, Country]",
-            affiliation: "[University Name]",
-            orcid: "https://orcid.org/0000-0000-0000-0000",
-            linkedin: "https://linkedin.com/in/yourprofile",
-            googleScholar: "https://scholar.google.com/citations?user=YOUR_ID",
-            github: "https://github.com/yourusername",
-            collaboration_tag: "Open for computational and electrochemical collaborations"
-        }
-    },
-    "tr": {
-        name: "[Adınız Buraya]",
-        firstName: "[Adınız]",
-        lastName: "[Soyadınız]",
-        title: "[Akademik Unvanınız]",
-        affiliation: "[Üniversite Adı]",
-        email: "[email@universite.edu]",
-        location: "[Şehir, Ülke]",
-        heroIntro: "Hesaplamalı Kimya ve Malzeme Bilimi kesişimini keşfediyorum.",
-        aboutSummary: "Hesaplamalı Kimya ve Malzeme Bilimi kesişimini keşfediyorum.",
-        bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
-        researchInterests: [
-            "Araştırma Alanı 1",
-            "Araştırma Alanı 2",
-            "Araştırma Alanı 3"
-        ],
-        about: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-        publications: [
-            {
-                title: "Yayın Başlığı 1",
-                authors: "Yazar A, Yazar B, [Adınız]",
-                venue: "Konferans/Dergi Adı 2024",
-                year: "2024",
-                link: "#",
-                abstract: "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
-            },
-            {
-                title: "Yayın Başlığı 2",
-                authors: "[Adınız], Yazar C",
-                venue: "Dergi Adı 2023",
-                year: "2023",
-                link: "#",
-                abstract: "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-            },
-            {
-                title: "Yayın Başlığı 3",
-                authors: "Yazar D, [Adınız], Yazar E",
-                venue: "Çalıştay Adı 2023",
-                year: "2023",
-                link: "#",
-                abstract: "Ut enim ad minim veniam, quis nostrud exercitation."
-            }
-        ],
+
+        // Optional explicit projects list (for /projects legacy route)
         projects: [
             {
-                title: "Proje Başlığı 1",
-                description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-                technologies: ["Teknoloji A", "Teknoloji B", "Teknoloji C"],
+                title: "ADVISOR",
+                description: "Advanced computational platform for sensor and molecular design.",
+                technologies: ["Python", "Gaussian", "Cheminformatics"],
                 link: "#",
                 github: "#",
-                project_status: "Araştırma Aşaması",
-                collaboration_tag: "Hesaplamalı işbirliklerine açık",
-                molecule_path: "#"
+                project_status: "Under Development"
             },
             {
-                title: "Proje Başlığı 2",
-                description: "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-                technologies: ["Teknoloji D", "Teknoloji E"],
+                title: "SnapChem",
+                description: "Chemical data visualization and analysis tool.",
+                technologies: ["Python", "Data Visualization"],
                 link: "#",
                 github: "#",
-                project_status: "Kararlı",
-                collaboration_tag: "İşbirlikleri talep üzerine",
-                molecule_path: "#"
-            },
-            {
-                title: "Proje Başlığı 3",
-                description: "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
-                technologies: ["Teknoloji F", "Teknoloji G", "Teknoloji H"],
-                link: "#",
-                github: "#",
-                project_status: "Beta",
-                collaboration_tag: "Deneysel doğrulama için açık",
-                molecule_path: "#"
+                project_status: "Under Development"
             }
         ],
-        workExperience: [
-            {
-                role: "Araştırma Görevlisi",
-                institution: "[Üniversite/Kurum Adı]",
-                year: "2020-Günümüz",
-                description: "Hesaplamalı kimya ve malzeme bilimi alanında araştırma yürütülmektedir."
-            },
-            {
-                role: "Öğretim Görevlisi",
-                institution: "[Üniversite Adı]",
-                year: "2018-2020",
-                description: "Lisans dersleri ve laboratuvar oturumlarında asistanlık yapılmıştır."
-            }
-        ],
-        education: [
-            {
-                degree: "[Alan] Doktora",
-                institution: "[Üniversite Adı]",
-                year: "2020-2024",
-                description: "Tez: Lorem ipsum dolor sit amet"
-            },
-            {
-                degree: "[Alan] Yüksek Lisans",
-                institution: "[Üniversite Adı]",
-                year: "2018-2020",
-                description: "Tez: Consectetur adipiscing elit"
-            },
-            {
-                degree: "[Alan] Lisans",
-                institution: "[Üniversite Adı]",
-                year: "2014-2018",
-                description: "Onur derecesi ile mezun"
-            }
-        ],
-        news: [
-            {
-                date: "2024-01-15",
-                title: "Yeni Yayın Kabul Edildi",
-                content: "Makine öğrenmesi üzerine son makalemiz Conference Name 2024'e kabul edildi."
-            },
-            {
-                date: "2023-12-10",
-                title: "Proje Güncellemesi",
-                content: "Geliştirilmiş özelliklerle araştırma projesinin yeni versiyonu yayınlandı."
-            },
-            {
-                date: "2023-11-05",
-                title: "Konferans Sunumu",
-                content: "Araştırma bulguları International Conference 2023'te sunuldu."
-            }
-        ],
+
+        // Structure support
+        pdbCode: "1crn",
+
+        contact: {
+            email: "hnalcakan@ankara.edu.tr",
+            location: "Ankara, Türkiye",
+            affiliation: "Ankara University, Faculty of Science, Chemistry Department",
+            orcid: "0000-0003-3821-8681",
+            linkedin: "https://linkedin.com/in/nalcakanharun",
+            github: "https://github.com/harunalcakan",
+            researchgate: "https://www.researchgate.net/profile/Harun-Nalcakan"
+        }
+    },
+
+    "tr": {
+        // Kimlik
+        name: "Harun Nalçakan",
+        firstName: "Harun",
+        lastName: "Nalçakan",
+        title: "Araştırma Görevlisi",
+        affiliation: "Ankara Üniversitesi Fen Fakültesi Kimya Bölümü",
+        email: "hnalcakan@ankara.edu.tr",
+        location: "Ankara, Türkiye",
+
+        // Hero / Hakkımda
+        heroIntro: "Hesaplamalı Kimya ve Deneysel Doğrulamayı Sentezliyorum.",
+        aboutSummary: "Ankara Üniversitesi'nde hesaplamalı ve deneysel kimyayı birlikte ele alan araştırmalar yürütüyorum.",
+        bio: "Araştırmalarım, teorik modelleme teknikleri ile ileri elektrokimyasal sensörlerin geliştirilmesi arasındaki köprüyü kurmaya odaklanmaktadır. In silico araçları moleküler etkileşimleri öngörmek ve optimize etmek için kullanıyor, bu öngörüleri deneysel elektrokimyasal protokollerle doğruluyorum.",
+        about: "Ankara Üniversitesi'nde, elektrokimyasal algılama platformları ve hesaplamalı ilaç keşfi odaklı hesaplamalı ve deneysel kimya araştırmaları yürütmekteyim.",
+
         sections: {
+            home: "Ana Sayfa",
             about: "Hakkımda",
             portfolio: "Araştırma Portföyü",
             publications: "Yayınlar",
             contact: "İletişim",
-            news: "Son Haberler",
-            home: "Ana Sayfa",
+            news: "Haberler",
             downloadCV: "CV İndir",
             education: "Eğitim",
+            workExperience: "İş Deneyimi",
             academicCompetency: "Akademik ve Teknik Yeterlilik",
             researchAreas: "Araştırma Alanları",
             scientificTools: "Bilimsel Araçlar",
-            theme_light: "Açık",
-            theme_dark: "Koyu",
-            projects: "Projeler",
             tools: "Araçlar ve Yazılım",
-            workExperience: "İş Deneyimi"
+            projects: "Projeler",
+            theme_light: "Açık",
+            theme_dark: "Koyu"
         },
-        researchIntro: "Araştırmalarım hesaplamalı kimya ve malzeme bilimi üzerine odaklanmakta, sensör tasarımı ve moleküler etkileşimler için yeni metodolojiler keşfetmektedir.",
-        pdbCode: "1crn",
-        researchAreas: [
+
+        education: [
             {
-                title: "İleri Elektrokimyasal Algılama Platformları",
-                description: "Karbon bazlı elektrokimyasal arayüzleri ve sensör performansını optimize etmek için hesaplamalı ve deneysel stratejiler.",
-                methodology: "DFT hesaplamaları, moleküler dinamik simülasyonları ve deneysel doğrulama"
+                degree: "Kimya Doktora",
+                institution: "Ankara Üniversitesi",
+                year: "2026-Devam ediyor",
+                description: "İleri doktora araştırma aşaması."
             },
             {
-                title: "In Silico İlaç Tasarımı",
-                description: "İlaç keşfi ve moleküler etkileşim çalışmaları için hesaplamalı yaklaşımlar.",
-                methodology: "Yapı tabanlı ilaç tasarımı, sanal tarama ve bağlanma afinitesi tahmini"
+                degree: "Kimya Yüksek Lisans",
+                institution: "Ankara Üniversitesi",
+                year: "2023-2026",
+                description: "GNO: 3.93/4.00 | Tez: Nitro-PAH tayini için 3B baskılı elektrotların geliştirilmesi."
             },
             {
-                title: "Hesaplamalı Malzeme Bilimi",
-                description: "Sensör uygulamaları için malzeme özelliklerinin modellenmesi ve simülasyonu.",
-                methodology: "Kuantum mekanik hesaplamalar, makine öğrenmesi ve deneysel korelasyon"
+                degree: "Kimya Lisans",
+                institution: "Ankara Üniversitesi",
+                year: "2016-2021",
+                description: "GNO: 3.34/4.00"
             }
         ],
+
+        workExperience: [
+            {
+                role: "Araştırma Görevlisi",
+                institution: "Ankara Üniversitesi",
+                year: "2023-Günümüz",
+                description: "Yüzey kimyası ve hesaplamalı modelleme üzerine odaklanmaktadır."
+            }
+        ],
+
+        news: [
+            {
+                date: "2024-09-01",
+                title: "Targeting LIMK1 in Alzheimer's Disease",
+                content: "Targeting LIMK1 in Alzheimer's Disease (J. Turk. Chem. Soc. Sect. A, Eylül 2024)."
+            },
+            {
+                date: "2024-01-15",
+                title: "An in silico Pharmacokinetic Investigation",
+                content: "An in silico Pharmacokinetic Investigation of Organic Luminogens (Ankara Univ. Eczacilik Fak. Derg., Ocak 2024)."
+            },
+            {
+                date: "2023-09-01",
+                title: "Bridging Molecular Docking to Molecular Dynamics",
+                content: "Bridging Molecular Docking to Molecular Dynamics (J. Adv. Res. Nat. Appl. Sci., Eylül 2023)."
+            },
+            {
+                date: "2023-04-01",
+                title: "Computational insights into bis-N,N-dimethylaniline based D-π-A systems",
+                content: "Computational insights into bis-N,N-dimethylaniline based D-π-A systems (J. Mol. Graph. Model., Nisan 2023)."
+            }
+        ],
+
+        researchAreas: [
+            {
+                title: "Elektrokimyasal Algılama Platformları",
+                description: "Hem deneysel protokoller hem de hesaplamalı modelleme ile ileri elektrokimyasal sensörlerin tasarımı ve optimizasyonu.",
+                methodology: "Yüzey kimyası, elektrokimyasal analiz ve yapı–özellik ilişkileri."
+            },
+            {
+                title: "Hesaplamalı İlaç Keşfi",
+                description: "Moleküler etkileşimlerin in silico olarak incelenmesi ve ligand tasarımına destek sağlanması.",
+                methodology: "Kemoinformatik, moleküler yerleştirme ve temel ADME incelemeleri."
+            }
+        ],
+
         skillMatrix: {
             computational: {
-                title: "Hesaplamalı Kimya",
+                title: "In Silico (Hesaplamalı) Yetkinlik",
                 skills: [
-                    "Yoğunluk Fonksiyonel Teorisi (DFT)",
-                    "Moleküler Dinamik (MD) Simülasyonları",
-                    "Kuantum Kimyası Hesaplamaları",
-                    "Yapı Tabanlı İlaç Tasarımı",
-                    "Sanal Tarama"
+                    "Kemoinformatik",
+                    "Moleküler Yerleştirme (Docking)",
+                    "MD Simülasyonları",
+                    "DFT"
                 ]
             },
             experimental: {
-                title: "Deneysel Teknikler",
+                title: "In Vitro (Deneysel) Yetkinlik",
                 skills: [
-                    "Karbon Bazlı Malzeme Sentezi",
+                    "Fizikokimya",
+                    "Elektrokimya",
                     "İleri Elektrokimyasal Algılama Platformları",
-                    "Elektrokimyasal Analiz",
-                    "Malzeme Sentezi",
-                    "Spektroskopik Yöntemler"
+                    "Malzeme Karakterizasyonu"
                 ]
             },
             software: {
-                title: "Yazılım ve Programlama",
+                title: "Yazılım ve Teknik Altyapı",
                 skills: [
                     "Python, MATLAB, R",
                     "Gaussian, AutoDock, VMD",
-                    "Makine Öğrenmesi (TensorFlow, PyTorch)",
-                    "Veri Analizi ve Görselleştirme",
                     "Bilimsel Hesaplama"
-                ]
-            },
-            academic: {
-                title: "Akademik ve Yumuşak Beceriler",
-                skills: [
-                    "Bilimsel Yazma ve İletişim",
-                    "Proje Yazma ve Geliştirme",
-                    "İşbirlikçi Araştırma",
-                    "Mentorluk ve Öğretim",
-                    "Proje Yönetimi"
                 ]
             }
         },
+
+        publications: [
+            {
+                title: "Targeting LIMK1 in Alzheimer's Disease",
+                authors: "Defne Eşkin, Harun Nalçakan ve diğerleri",
+                venue: "J. Turk. Chem. Soc. Sect. A",
+                year: "2024",
+                link: "#",
+                abstract: ""
+            },
+            {
+                title: "An in silico Pharmacokinetic Investigation of Organic Luminogens",
+                authors: "Harun Nalçakan ve diğerleri",
+                venue: "Ankara Univ. Eczacilik Fak. Derg.",
+                year: "2024",
+                link: "#",
+                abstract: ""
+            },
+            {
+                title: "Bridging Molecular Docking to Molecular Dynamics",
+                authors: "Harun Nalçakan ve diğerleri",
+                venue: "J. Adv. Res. Nat. Appl. Sci.",
+                year: "2023",
+                link: "#",
+                abstract: ""
+            },
+            {
+                title: "Computational insights into bis-N,N-dimethylaniline based D-π-A systems",
+                authors: "Harun Nalçakan ve diğerleri",
+                venue: "J. Mol. Graph. Model.",
+                year: "2023",
+                link: "#",
+                abstract: ""
+            }
+        ],
+
         tools: {
             developedTitle: "Geliştirilen Araçlar",
             techStackTitle: "Teknoloji Yığını",
@@ -469,19 +416,21 @@ const data = {
             developed: [
                 {
                     name: "ADVISOR",
-                    description: "Sensör tasarımı ve analizi için gelişmiş hesaplamalı araç.",
-                    link: "#"
+                    description: "Gelişmiş hesaplamalı platform.",
+                    link: "#",
+                    project_status: "Geliştirme Aşamasında"
                 },
                 {
                     name: "SnapChem",
-                    description: "Moleküler görselleştirme ve analiz yazılımı.",
-                    link: "#"
+                    description: "Kimyasal veri görselleştirme aracı.",
+                    link: "#",
+                    project_status: "Geliştirme Aşamasında"
                 }
             ],
             hardwareItems: [
                 "Creality Falcon 2",
-                "3D Yazıcılar",
-                "Laboratuvar Ekipmanları"
+                "3B yazıcılar",
+                "Laboratuvar ekipmanları"
             ],
             softwareItems: [
                 "Gaussian",
@@ -490,16 +439,41 @@ const data = {
                 "MATLAB"
             ]
         },
-        cvLink: "#",
+
+        projects: [
+            {
+                title: "ADVISOR",
+                description: "Sensör ve moleküler tasarım için gelişmiş hesaplamalı platform.",
+                technologies: ["Python", "Gaussian", "Kemoinformatik"],
+                link: "#",
+                github: "#",
+                project_status: "Geliştirme Aşamasında"
+            },
+            {
+                title: "SnapChem",
+                description: "Kimyasal veri görselleştirme ve analiz aracı.",
+                technologies: ["Python", "Veri Görselleştirme"],
+                link: "#",
+                github: "#",
+                project_status: "Geliştirme Aşamasında"
+            }
+        ],
+
+        pdbCode: "1crn",
+
         contact: {
-            email: "[email@universite.edu]",
-            location: "[Şehir, Ülke]",
-            affiliation: "[Üniversite Adı]",
-            orcid: "https://orcid.org/0000-0000-0000-0000",
-            linkedin: "https://linkedin.com/in/yourprofile",
-            googleScholar: "https://scholar.google.com/citations?user=YOUR_ID",
-            github: "https://github.com/yourusername",
-            collaboration_tag: "Hesaplamalı ve elektrokimyasal işbirliklerine açık"
+            email: "hnalcakan@ankara.edu.tr",
+            location: "Ankara, Türkiye",
+            affiliation: "Ankara Üniversitesi Fen Fakültesi Kimya Bölümü",
+            orcid: "0000-0003-3821-8681",
+            linkedin: "https://linkedin.com/in/nalcakanharun",
+            github: "https://github.com/harunalcakan",
+            researchgate: "https://www.researchgate.net/profile/Harun-Nalcakan"
         }
     }
 };
+
+// Expose globally for main.js (non-module scripts)
+if (typeof window !== "undefined") {
+    window.data = data;
+}
