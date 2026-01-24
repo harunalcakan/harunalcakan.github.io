@@ -138,41 +138,84 @@ const data = {
             }
         },
 
-        // Publications page (main.js expects a flat array)
-        publications: [
-            {
-                title: "Targeting LIMK1 in Alzheimer's Disease",
-                authors: "Defne Eşkin, Harun Nalçakan et al.",
-                venue: "J. Turk. Chem. Soc. Sect. A",
-                year: "2024",
-                link: "#",
-                abstract: ""
-            },
-            {
-                title: "An in silico Pharmacokinetic Investigation of Organic Luminogens",
-                authors: "Harun Nalçakan et al.",
-                venue: "Ankara Univ. Eczacilik Fak. Derg.",
-                year: "2024",
-                link: "#",
-                abstract: ""
-            },
-            {
-                title: "Bridging Molecular Docking to Molecular Dynamics",
-                authors: "Harun Nalçakan et al.",
-                venue: "J. Adv. Res. Nat. Appl. Sci.",
-                year: "2023",
-                link: "#",
-                abstract: ""
-            },
-            {
-                title: "Computational insights into bis-N,N-dimethylaniline based D-π-A systems",
-                authors: "Harun Nalçakan et al.",
-                venue: "J. Mol. Graph. Model.",
-                year: "2023",
-                link: "#",
-                abstract: ""
-            }
-        ],
+        // Publications page: APA 7 citations + conference papers
+        publications: {
+            articles: [
+                {
+                    title: "Targeting LIMK1 in Alzheimer's Disease: A Multifaceted Computational Investigation Involving ADMET, Virtual Screening, Molecular Docking, and Molecular Dynamics",
+                    apa_citation: "Eşkin, D., Nalçakan, H., Kurtay, G., Akkan, Y., Türk, M., & Uras, B. (2024). Targeting LIMK1 in Alzheimer's Disease: A Multifaceted Computational Investigation Involving ADMET, Virtual Screening, Molecular Docking, and Molecular Dynamics. Journal of the Turkish Chemical Society Section A: Chemistry, 11(4), 1425–1440.",
+                    doi_link: "https://doi.org/10.18596/jotcsa.1465547"
+                },
+                {
+                    title: "An In Silico Pharmacokinetic Investigation of Organic Luminogens: Understanding the NIR AIEgens and Their Interactions with Serum Albumins",
+                    apa_citation: "Nalçakan, H., Kurtay, G., Özdil, D. T., & Yılmaz, Z. (2024). An In Silico Pharmacokinetic Investigation of Organic Luminogens: Understanding the NIR AIEgens and Their Interactions with Serum Albumins. Journal of Faculty of Pharmacy of Ankara University, 48(1), 56–74.",
+                    doi_link: "https://doi.org/10.33483/jfpau.1335047"
+                },
+                {
+                    title: "Bridging Molecular Docking to Molecular Dynamics to Enlighten Recognition Processes of Tailored D-A/D-A-D Types' AIEgens with HSA/BSA",
+                    apa_citation: "Nalçakan, H., & Kurtay, G. (2023). Bridging Molecular Docking to Molecular Dynamics to Enlighten Recognition Processes of Tailored D-A/D-A-D Types' AIEgens with HSA/BSA. Journal of Advanced Research in Natural and Applied Sciences, 9(3).",
+                    doi_link: "https://doi.org/10.28979/jarnas.1186322"
+                },
+                {
+                    title: "Computational insights into bis-N,N-dimethylaniline based D-π-A photosensitizers bearing divergent-type of π-linkers for DSSCs",
+                    apa_citation: "Nalçakan, H., Kurtay, G., Sarıkavak, K., & Sevin, F. (2023). Computational insights into bis-N,N-dimethylaniline based D-π-A photosensitizers bearing divergent-type of π-linkers for DSSCs. Journal of Molecular Graphics and Modelling, 120, 108485.",
+                    doi_link: "https://doi.org/10.1016/j.jmgm.2023.108485"
+                }
+            ],
+            conferences: [
+                // 2023
+                {
+                    title: "Crafting Excellence in LIM Kinase 1 Inhibition: Pharmacophore-Based Virtual Screening and AI-Boosted ADMET Insight",
+                    venue: "9th International BAU Drug Design Congress (November 2023)"
+                },
+                {
+                    title: "Guiding TRK Inhibition Strategies: Revelations from Pharmacophore-Based Virtual Screening and AI-Facilitated In Silico ADMET Profiling",
+                    venue: "9th International BAU Drug Design Congress (November 2023)"
+                },
+                {
+                    title: "Assessment of KRAS Inhibitors through Pharmacophore-Based Virtual Screening and AI-Enhanced ADMET Profiling via the Pharmit Server",
+                    venue: "9th International BAU Drug Design Congress (November 2023)"
+                },
+                {
+                    title: "Computational Evaluation of potent SGLT1 Inhibitors: Sotagliflozin Derivatives Explored with AI-Guided ADMET Assessment",
+                    venue: "9th International BAU Drug Design Congress (November 2023)"
+                },
+                {
+                    title: "Alzheimer's Alchemy: Unveiling the Dual-Inhibitory Potential of Tacrine-Donepezil Hybrids",
+                    venue: "6th International Eurasian Conference on Biological and Chemical Sciences (October 2023)"
+                },
+                {
+                    title: "Computational Modeling of Novel Filgotinib Derivatives as Potent Janus Kinase (JAK1/JAK2) Inhibitors",
+                    venue: "11. International Drug Chemistry Conference (March 2023)"
+                },
+                {
+                    title: "Molecular Docking and in-silico ADMET Studies of Newly Designed Pyrrolo[2,3-d]pyrimidine Derivatives to Inhibit Janus Kinases",
+                    venue: "11. International Drug Chemistry Conference (March 2023)"
+                },
+                // 2022
+                {
+                    title: "Molecular Docking, in silico ADMET Analyses and Computational Approach of Novel Fedratinib Derivatives as Potent JAK2 Inhibitors",
+                    venue: "8th International BAU Drug Design Congress (December 2022)"
+                },
+                {
+                    title: "Computational Modelling of Abrocitinib Derivatives/Metabolites and Unveiling their Janus Kinase (JAK) Inhibitory Activities",
+                    venue: "5th International Eurasian Conference on Biological and Chemical Sciences (November 2022)"
+                },
+                {
+                    title: "Boyaya Duyarlı Güneş Hücrelerine Yönelik Yeni D-π-A Tipi Organik Boyarmaddelerin Teorik Olarak Modellenmesi ve İncelenmesi",
+                    venue: "34. Ulusal Kimya Kongresi (Eylül 2022)"
+                },
+                {
+                    title: "Molecular Docking Approach to Enlighten Photodynamic Therapy Applicability of the Tailored D-A or D-A-D Types' AIEgens",
+                    venue: "2. Computer-Aided Drug Design Symposium and Workshop (Mayıs 2022)"
+                },
+                // 2021
+                {
+                    title: "Molecular Design and Theoretical Investigation of bis-N,N-dimethylaniline-based Novel D-π-a Photosensitizers",
+                    venue: "5th International Organic Chemistry Congress (October 2021)"
+                }
+            ]
+        },
 
         // Tools / software (used by portfolio and tools views)
         tools: {
@@ -372,40 +415,83 @@ const data = {
             }
         },
 
-        publications: [
-            {
-                title: "Targeting LIMK1 in Alzheimer's Disease",
-                authors: "Defne Eşkin, Harun Nalçakan ve diğerleri",
-                venue: "J. Turk. Chem. Soc. Sect. A",
-                year: "2024",
-                link: "#",
-                abstract: ""
-            },
-            {
-                title: "An in silico Pharmacokinetic Investigation of Organic Luminogens",
-                authors: "Harun Nalçakan ve diğerleri",
-                venue: "Ankara Univ. Eczacilik Fak. Derg.",
-                year: "2024",
-                link: "#",
-                abstract: ""
-            },
-            {
-                title: "Bridging Molecular Docking to Molecular Dynamics",
-                authors: "Harun Nalçakan ve diğerleri",
-                venue: "J. Adv. Res. Nat. Appl. Sci.",
-                year: "2023",
-                link: "#",
-                abstract: ""
-            },
-            {
-                title: "Computational insights into bis-N,N-dimethylaniline based D-π-A systems",
-                authors: "Harun Nalçakan ve diğerleri",
-                venue: "J. Mol. Graph. Model.",
-                year: "2023",
-                link: "#",
-                abstract: ""
-            }
-        ],
+        publications: {
+            articles: [
+                {
+                    title: "Targeting LIMK1 in Alzheimer's Disease: A Multifaceted Computational Investigation Involving ADMET, Virtual Screening, Molecular Docking, and Molecular Dynamics",
+                    apa_citation: "Eşkin, D., Nalçakan, H., Kurtay, G., Akkan, Y., Türk, M., & Uras, B. (2024). Targeting LIMK1 in Alzheimer's Disease: A Multifaceted Computational Investigation Involving ADMET, Virtual Screening, Molecular Docking, and Molecular Dynamics. Journal of the Turkish Chemical Society Section A: Chemistry, 11(4), 1425–1440.",
+                    doi_link: "https://doi.org/10.18596/jotcsa.1465547"
+                },
+                {
+                    title: "An In Silico Pharmacokinetic Investigation of Organic Luminogens: Understanding the NIR AIEgens and Their Interactions with Serum Albumins",
+                    apa_citation: "Nalçakan, H., Kurtay, G., Özdil, D. T., & Yılmaz, Z. (2024). An In Silico Pharmacokinetic Investigation of Organic Luminogens: Understanding the NIR AIEgens and Their Interactions with Serum Albumins. Journal of Faculty of Pharmacy of Ankara University, 48(1), 56–74.",
+                    doi_link: "https://doi.org/10.33483/jfpau.1335047"
+                },
+                {
+                    title: "Bridging Molecular Docking to Molecular Dynamics to Enlighten Recognition Processes of Tailored D-A/D-A-D Types' AIEgens with HSA/BSA",
+                    apa_citation: "Nalçakan, H., & Kurtay, G. (2023). Bridging Molecular Docking to Molecular Dynamics to Enlighten Recognition Processes of Tailored D-A/D-A-D Types' AIEgens with HSA/BSA. Journal of Advanced Research in Natural and Applied Sciences, 9(3).",
+                    doi_link: "https://doi.org/10.28979/jarnas.1186322"
+                },
+                {
+                    title: "Computational insights into bis-N,N-dimethylaniline based D-π-A photosensitizers bearing divergent-type of π-linkers for DSSCs",
+                    apa_citation: "Nalçakan, H., Kurtay, G., Sarıkavak, K., & Sevin, F. (2023). Computational insights into bis-N,N-dimethylaniline based D-π-A photosensitizers bearing divergent-type of π-linkers for DSSCs. Journal of Molecular Graphics and Modelling, 120, 108485.",
+                    doi_link: "https://doi.org/10.1016/j.jmgm.2023.108485"
+                }
+            ],
+            conferences: [
+                // 2023
+                {
+                    title: "Crafting Excellence in LIM Kinase 1 Inhibition: Pharmacophore-Based Virtual Screening and AI-Boosted ADMET Insight",
+                    venue: "9th International BAU Drug Design Congress (November 2023)"
+                },
+                {
+                    title: "Guiding TRK Inhibition Strategies: Revelations from Pharmacophore-Based Virtual Screening and AI-Facilitated In Silico ADMET Profiling",
+                    venue: "9th International BAU Drug Design Congress (November 2023)"
+                },
+                {
+                    title: "Assessment of KRAS Inhibitors through Pharmacophore-Based Virtual Screening and AI-Enhanced ADMET Profiling via the Pharmit Server",
+                    venue: "9th International BAU Drug Design Congress (November 2023)"
+                },
+                {
+                    title: "Computational Evaluation of potent SGLT1 Inhibitors: Sotagliflozin Derivatives Explored with AI-Guided ADMET Assessment",
+                    venue: "9th International BAU Drug Design Congress (November 2023)"
+                },
+                {
+                    title: "Alzheimer's Alchemy: Unveiling the Dual-Inhibitory Potential of Tacrine-Donepezil Hybrids",
+                    venue: "6th International Eurasian Conference on Biological and Chemical Sciences (October 2023)"
+                },
+                {
+                    title: "Computational Modeling of Novel Filgotinib Derivatives as Potent Janus Kinase (JAK1/JAK2) Inhibitors",
+                    venue: "11. International Drug Chemistry Conference (March 2023)"
+                },
+                {
+                    title: "Molecular Docking and in-silico ADMET Studies of Newly Designed Pyrrolo[2,3-d]pyrimidine Derivatives to Inhibit Janus Kinases",
+                    venue: "11. International Drug Chemistry Conference (March 2023)"
+                },
+                // 2022
+                {
+                    title: "Molecular Docking, in silico ADMET Analyses and Computational Approach of Novel Fedratinib Derivatives as Potent JAK2 Inhibitors",
+                    venue: "8th International BAU Drug Design Congress (December 2022)"
+                },
+                {
+                    title: "Computational Modelling of Abrocitinib Derivatives/Metabolites and Unveiling their Janus Kinase (JAK) Inhibitory Activities",
+                    venue: "5th International Eurasian Conference on Biological and Chemical Sciences (November 2022)"
+                },
+                {
+                    title: "Boyaya Duyarlı Güneş Hücrelerine Yönelik Yeni D-π-A Tipi Organik Boyarmaddelerin Teorik Olarak Modellenmesi ve İncelenmesi",
+                    venue: "34. Ulusal Kimya Kongresi (Eylül 2022)"
+                },
+                {
+                    title: "Molecular Docking Approach to Enlighten Photodynamic Therapy Applicability of the Tailored D-A or D-A-D Types' AIEgens",
+                    venue: "2. Computer-Aided Drug Design Symposium and Workshop (Mayıs 2022)"
+                },
+                // 2021
+                {
+                    title: "Molecular Design and Theoretical Investigation of bis-N,N-dimethylaniline-based Novel D-π-a Photosensitizers",
+                    venue: "5th International Organic Chemistry Congress (October 2021)"
+                }
+            ]
+        },
 
         tools: {
             developedTitle: "Geliştirilen Araçlar",

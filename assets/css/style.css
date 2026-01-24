@@ -237,6 +237,30 @@ h1, h2, h3, h4, h5, h6 {
     opacity: 0.8;
 }
 
+/* Publications styling */
+.publication-title-link {
+    color: #2dd4bf; /* Cyan/teal accent */
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.publication-title-link:hover {
+    text-decoration: underline;
+}
+
+.publication-citation {
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+body.light-mode .publication-citation {
+    color: #4b5563; /* slate-600 */
+}
+
+body.dark-mode .publication-citation {
+    color: #e5e7eb; /* slate-200 */
+}
+
 /* Glow Effects */
 .glow-effect {
     transition: text-shadow 0.3s ease;

@@ -691,15 +691,47 @@ function renderPublicationsPage(content) {
     const mainContent = document.querySelector('main');
     if (!mainContent) return;
 
-    const publicationsHTML = content.publications
-        .map((pub, index) => `
+    // Support both new structure (publications.articles) and legacy flat array
+    const publicationsData = content.publications || {};
+
+    const articles = Array.isArray(publicationsData.articles)
+        ? publicationsData.articles
+        : (Array.isArray(content.publications) ? content.publications : []);
+
+    const conferences = Array.isArray(publicationsData.conferences)
+        ? publicationsData.conferences
+        : [];
+
+    const publicationsHTML = articles
+        .map((pub, index) => {
+            const doiLink = pub.doi_link || pub.link || '#';
+            const apaCitation = pub.apa_citation || [
+                pub.authors,
+                pub.year ? `(${pub.year}).` : '',
+                pub.title,
+                pub.venue
+            ].filter(Boolean).join(' ');
+
+            return `
             <div class="publication-item mb-6 fade-in" style="animation-delay: ${index * 0.1}s">
                 <h3 class="text-xl font-semibold mb-2">
-                    <a href="${pub.link}" target="_blank" class="hover:underline">${pub.title}</a>
+                    <a href="${doiLink}" target="_blank" rel="noopener" class="publication-title-link">${pub.title}</a>
                 </h3>
-                <p class="text-base mb-2 opacity-90">${pub.authors}</p>
-                <p class="text-sm mb-2 italic">${pub.venue}, ${pub.year}</p>
-                <p class="text-sm opacity-75">${pub.abstract}</p>
+                <p class="publication-citation">
+                    ${apaCitation}
+                </p>
+            </div>
+            `;
+        })
+        .join('');
+
+    const conferencesHTML = conferences
+        .map((conf, index) => `
+            <div class="publication-item mb-5 fade-in" style="animation-delay: ${(index * 0.1) + 0.4}s">
+                <h3 class="text-lg font-semibold mb-1">
+                    <span class="publication-title-link">${conf.title}</span>
+                </h3>
+                <p class="publication-citation">${conf.venue}</p>
             </div>
         `)
         .join('');
@@ -711,6 +743,12 @@ function renderPublicationsPage(content) {
                 <div>
                     ${publicationsHTML}
                 </div>
+                ${conferencesHTML ? `
+                <div class="mt-10">
+                    <h2 class="text-2xl md:text-3xl font-bold mb-6 font-mono">Conference Papers</h2>
+                    ${conferencesHTML}
+                </div>
+                ` : ''}
             </div>
         </section>
     `;
