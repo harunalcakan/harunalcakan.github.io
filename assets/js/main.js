@@ -636,51 +636,6 @@ function renderAboutPage(content) {
                         ${timelineHTML}
                     </div>
                 </div>
-                
-                <!-- Academic & Technical Competency -->
-                <div class="mb-12">
-                    <h2 class="text-2xl md:text-3xl font-bold mb-6 font-mono">${content.sections.academicCompetency}</h2>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 about-skills-grid">
-                        <div class="about-skills-column">
-                            <h3 class="text-xl font-semibold mb-4">Research Methodologies</h3>
-                            <ul class="space-y-2 text-sm md:text-base">
-                                <li class="flex items-start">
-                                    <span class="about-skill-bullet mr-2">•</span>
-                                    <span>Computational: Molecular Docking, In Silico Drug Design, Molecular Dynamics</span>
-                                </li>
-                                <li class="flex items-start">
-                                    <span class="about-skill-bullet mr-2">•</span>
-                                    <span>Experimental: Laser-Induced Graphene (LIG), 3D Printing for Sensors, Electrochemical Analysis</span>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="about-skills-column">
-                            <h3 class="text-xl font-semibold mb-4">Software & Tools</h3>
-                            <ul class="space-y-2 text-sm md:text-base">
-                                <li class="flex items-start">
-                                    <span class="about-skill-bullet mr-2">•</span>
-                                    <span>Gaussian</span>
-                                </li>
-                                <li class="flex items-start">
-                                    <span class="about-skill-bullet mr-2">•</span>
-                                    <span>AutoDock</span>
-                                </li>
-                                <li class="flex items-start">
-                                    <span class="about-skill-bullet mr-2">•</span>
-                                    <span>VMD</span>
-                                </li>
-                                <li class="flex items-start">
-                                    <span class="about-skill-bullet mr-2">•</span>
-                                    <span>Python</span>
-                                </li>
-                                <li class="flex items-start">
-                                    <span class="about-skill-bullet mr-2">•</span>
-                                    <span>MATLAB</span>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
             </div>
         </section>
     `;
@@ -779,6 +734,71 @@ function renderPortfolioPage(content) {
         `)
         .join('');
 
+    // Technical Modules section (In Silico / In Vitro + Software & Tools)
+    const skillMatrix = content.skillMatrix || {};
+    const computationalSkills = skillMatrix.computational && Array.isArray(skillMatrix.computational.skills)
+        ? skillMatrix.computational.skills
+        : [];
+    const experimentalSkills = skillMatrix.experimental && Array.isArray(skillMatrix.experimental.skills)
+        ? skillMatrix.experimental.skills
+        : [];
+
+    const inSilicoListHTML = computationalSkills
+        .map(skill => `
+            <li class="flex items-start">
+                <span class="about-skill-bullet mr-2">•</span>
+                <span>${skill}</span>
+            </li>
+        `)
+        .join('');
+
+    const inVitroListHTML = experimentalSkills
+        .map(skill => `
+            <li class="flex items-start">
+                <span class="about-skill-bullet mr-2">•</span>
+                <span>${skill}</span>
+            </li>
+        `)
+        .join('');
+
+    const techTagsBase = (content.tools && Array.isArray(content.tools.softwareItems))
+        ? [...content.tools.softwareItems]
+        : [];
+
+    ['VMD', 'R'].forEach(tag => {
+        if (!techTagsBase.includes(tag)) techTagsBase.push(tag);
+    });
+
+    const techTagsHTML = techTagsBase
+        .map(tag => `<span class="tech-badge">${tag}</span>`)
+        .join('');
+
+    const technicalModulesHTML = `
+        <div class="mb-16">
+            <h2 class="text-2xl md:text-3xl font-bold mb-6 font-mono">${content.sections.academicCompetency || 'Technical Modules'}</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                <div class="research-area-card p-6 rounded-lg">
+                    <h3 class="text-xl font-semibold mb-3 text-cyan-300">In Silico Methodologies</h3>
+                    <ul class="space-y-2 text-sm md:text-base">
+                        ${inSilicoListHTML}
+                    </ul>
+                </div>
+                <div class="research-area-card p-6 rounded-lg">
+                    <h3 class="text-xl font-semibold mb-3 text-cyan-300">In Vitro Methodologies</h3>
+                    <ul class="space-y-2 text-sm md:text-base">
+                        ${inVitroListHTML}
+                    </ul>
+                </div>
+            </div>
+            <div>
+                <h3 class="text-xl font-semibold mb-3 text-cyan-300">Software & Tools</h3>
+                <div class="flex flex-wrap gap-2">
+                    ${techTagsHTML}
+                </div>
+            </div>
+        </div>
+    `;
+
     mainContent.innerHTML = `
         <section class="container mx-auto px-4 md:px-6 py-12 max-w-6xl">
             <div class="fade-in">
@@ -790,6 +810,7 @@ function renderPortfolioPage(content) {
                         ${researchAreasHTML}
                     </div>
                 </div>
+                ${technicalModulesHTML}
 
                 <div class="mb-12">
                     <h2 class="text-2xl md:text-3xl font-bold mb-6 font-mono">${content.sections.scientificTools}</h2>
