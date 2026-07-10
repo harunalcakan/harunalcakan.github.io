@@ -11,10 +11,18 @@ const data = {
         affiliation: "Ankara University, Faculty of Science, Chemistry Department",
         email: "hnalcakan@ankara.edu.tr",
         location: "Ankara, Türkiye",
+        cvLink: "assets/cv/harun-nalcakan-cv.pdf",
+
+        site: {
+            baseUrl: "https://harunalcakan.github.io",
+            ogImage: "assets/images/og-card.png",
+            twitterCard: "summary_large_image"
+        },
 
         // Hero / About
         heroIntro: "Synthesizing Computational Precision with Experimental Reality.",
-        aboutSummary: "I conduct research at Ankara University integrating both computational and experimental chemistry.",
+        heroGreeting: "Hello, I'm",
+        heroAffiliationShort: "Ankara University",
         bio: "My research focuses on bridging the gap between theoretical modeling techniques and the development of advanced electrochemical sensors. I leverage in silico tools to predict and optimize molecular interactions, which are then validated through experimental electrochemical protocols.",
         about: "I conduct research at Ankara University integrating both computational and experimental chemistry, with a focus on electrochemical sensing platforms and computational drug discovery.",
 
@@ -29,13 +37,43 @@ const data = {
             downloadCV: "Download CV",
             education: "Education",
             workExperience: "Work Experience",
+            workAndEducation: "Work Experience & Education",
             academicCompetency: "Academic & Technical Competency",
             researchAreas: "Research Areas",
             scientificTools: "Scientific Tools",
-            tools: "Tools & Software",
-            projects: "Projects",
+            conferencePapers: "Conference Papers",
+            peerReviewed: "Peer-Reviewed Articles",
+            profilePhoto: "Profile Photo",
+            nglAttribution: "Powered by NGL Viewer",
+            footerTagline: "Built with Computational Minimalism.",
             theme_light: "Light",
             theme_dark: "Dark"
+        },
+
+        pageTitles: {
+            index: "Harun Nalçakan — Academic Portfolio",
+            about: "About — Harun Nalçakan",
+            portfolio: "Research Portfolio — Harun Nalçakan",
+            publications: "Publications — Harun Nalçakan",
+            contact: "Contact — Harun Nalçakan"
+        },
+
+        metaDescriptions: {
+            index: "Harun Nalçakan — Research Assistant at Ankara University. Computational and experimental chemistry, electrochemical sensing, and drug discovery.",
+            about: "Biography, education, and work experience of Harun Nalçakan, Research Assistant in Chemistry at Ankara University.",
+            portfolio: "Research areas, scientific tools, and technical competencies in computational and experimental chemistry.",
+            publications: "Peer-reviewed articles and conference presentations by Harun Nalçakan in computational chemistry and drug discovery.",
+            contact: "Contact Harun Nalçakan — email, ORCID, ResearchGate, LinkedIn, and GitHub."
+        },
+
+        contactLabels: {
+            email: "Email",
+            academicLinks: "Academic Links",
+            orcid: "Academic Profile",
+            googleScholar: "Publications & Citations",
+            linkedin: "Professional Network",
+            github: "Code & Projects",
+            researchgate: "Research Network"
         },
 
         // Education
@@ -163,54 +201,63 @@ const data = {
                 }
             ],
             conferences: [
-                // 2023
                 {
+                    year: 2023,
                     title: "Crafting Excellence in LIM Kinase 1 Inhibition: Pharmacophore-Based Virtual Screening and AI-Boosted ADMET Insight",
                     venue: "9th International BAU Drug Design Congress (November 2023)"
                 },
                 {
+                    year: 2023,
                     title: "Guiding TRK Inhibition Strategies: Revelations from Pharmacophore-Based Virtual Screening and AI-Facilitated In Silico ADMET Profiling",
                     venue: "9th International BAU Drug Design Congress (November 2023)"
                 },
                 {
+                    year: 2023,
                     title: "Assessment of KRAS Inhibitors through Pharmacophore-Based Virtual Screening and AI-Enhanced ADMET Profiling via the Pharmit Server",
                     venue: "9th International BAU Drug Design Congress (November 2023)"
                 },
                 {
+                    year: 2023,
                     title: "Computational Evaluation of potent SGLT1 Inhibitors: Sotagliflozin Derivatives Explored with AI-Guided ADMET Assessment",
                     venue: "9th International BAU Drug Design Congress (November 2023)"
                 },
                 {
+                    year: 2023,
                     title: "Alzheimer's Alchemy: Unveiling the Dual-Inhibitory Potential of Tacrine-Donepezil Hybrids",
                     venue: "6th International Eurasian Conference on Biological and Chemical Sciences (October 2023)"
                 },
                 {
+                    year: 2023,
                     title: "Computational Modeling of Novel Filgotinib Derivatives as Potent Janus Kinase (JAK1/JAK2) Inhibitors",
                     venue: "11. International Drug Chemistry Conference (March 2023)"
                 },
                 {
+                    year: 2023,
                     title: "Molecular Docking and in-silico ADMET Studies of Newly Designed Pyrrolo[2,3-d]pyrimidine Derivatives to Inhibit Janus Kinases",
                     venue: "11. International Drug Chemistry Conference (March 2023)"
                 },
-                // 2022
                 {
+                    year: 2022,
                     title: "Molecular Docking, in silico ADMET Analyses and Computational Approach of Novel Fedratinib Derivatives as Potent JAK2 Inhibitors",
                     venue: "8th International BAU Drug Design Congress (December 2022)"
                 },
                 {
+                    year: 2022,
                     title: "Computational Modelling of Abrocitinib Derivatives/Metabolites and Unveiling their Janus Kinase (JAK) Inhibitory Activities",
                     venue: "5th International Eurasian Conference on Biological and Chemical Sciences (November 2022)"
                 },
                 {
+                    year: 2022,
                     title: "Boyaya Duyarlı Güneş Hücrelerine Yönelik Yeni D-π-A Tipi Organik Boyarmaddelerin Teorik Olarak Modellenmesi ve İncelenmesi",
                     venue: "34. Ulusal Kimya Kongresi (Eylül 2022)"
                 },
                 {
+                    year: 2022,
                     title: "Molecular Docking Approach to Enlighten Photodynamic Therapy Applicability of the Tailored D-A or D-A-D Types' AIEgens",
                     venue: "2. Computer-Aided Drug Design Symposium and Workshop (Mayıs 2022)"
                 },
-                // 2021
                 {
+                    year: 2021,
                     title: "Molecular Design and Theoretical Investigation of bis-N,N-dimethylaniline-based Novel D-π-a Photosensitizers",
                     venue: "5th International Organic Chemistry Congress (October 2021)"
                 }
@@ -251,34 +298,13 @@ const data = {
             ]
         },
 
-        // Optional explicit projects list (for /projects legacy route)
-        projects: [
-            {
-                title: "ADVISOR",
-                description: "Advanced computational platform for sensor and molecular design.",
-                technologies: ["Python", "Gaussian", "Cheminformatics"],
-                link: "#",
-                github: "#",
-                project_status: "Under Development"
-            },
-            {
-                title: "SnapChem",
-                description: "Chemical data visualization and analysis tool.",
-                technologies: ["Python", "Data Visualization"],
-                link: "#",
-                github: "#",
-                project_status: "Under Development"
-            }
-        ],
-
-        // Structure support
         pdbCode: "1crn",
 
         contact: {
             email: "hnalcakan@ankara.edu.tr",
             location: "Ankara, Türkiye",
             affiliation: "Ankara University, Faculty of Science, Chemistry Department",
-            orcid: "0000-0003-3821-8681",
+            orcid: "https://orcid.org/0000-0003-3821-8681",
             linkedin: "https://linkedin.com/in/nalcakanharun",
             github: "https://github.com/harunalcakan",
             researchgate: "https://www.researchgate.net/profile/Harun-Nalcakan"
@@ -294,10 +320,18 @@ const data = {
         affiliation: "Ankara Üniversitesi Fen Fakültesi Kimya Bölümü",
         email: "hnalcakan@ankara.edu.tr",
         location: "Ankara, Türkiye",
+        cvLink: "assets/cv/harun-nalcakan-cv.pdf",
+
+        site: {
+            baseUrl: "https://harunalcakan.github.io",
+            ogImage: "assets/images/og-card.png",
+            twitterCard: "summary_large_image"
+        },
 
         // Hero / Hakkımda
         heroIntro: "Hesaplamalı Kimya ve Deneysel Doğrulamayı Sentezliyorum.",
-        aboutSummary: "Ankara Üniversitesi'nde hesaplamalı ve deneysel kimyayı birlikte ele alan araştırmalar yürütüyorum.",
+        heroGreeting: "Merhaba, ben",
+        heroAffiliationShort: "Ankara Üniversitesi",
         bio: "Araştırmalarım, teorik modelleme teknikleri ile ileri elektrokimyasal sensörlerin geliştirilmesi arasındaki köprüyü kurmaya odaklanmaktadır. In silico araçları moleküler etkileşimleri öngörmek ve optimize etmek için kullanıyor, bu öngörüleri deneysel elektrokimyasal protokollerle doğruluyorum.",
         about: "Ankara Üniversitesi'nde, elektrokimyasal algılama platformları ve hesaplamalı ilaç keşfi odaklı hesaplamalı ve deneysel kimya araştırmaları yürütmekteyim.",
 
@@ -311,13 +345,43 @@ const data = {
             downloadCV: "CV İndir",
             education: "Eğitim",
             workExperience: "İş Deneyimi",
+            workAndEducation: "İş Deneyimi ve Eğitim",
             academicCompetency: "Akademik ve Teknik Yeterlilik",
             researchAreas: "Araştırma Alanları",
             scientificTools: "Bilimsel Araçlar",
-            tools: "Araçlar ve Yazılım",
-            projects: "Projeler",
+            conferencePapers: "Konferans Bildirileri",
+            peerReviewed: "Hakemli Makaleler",
+            profilePhoto: "Profil Fotoğrafı",
+            nglAttribution: "NGL Viewer ile desteklenmektedir",
+            footerTagline: "Computational Minimalism ile geliştirildi.",
             theme_light: "Açık",
             theme_dark: "Koyu"
+        },
+
+        pageTitles: {
+            index: "Harun Nalçakan — Akademik Portföy",
+            about: "Hakkımda — Harun Nalçakan",
+            portfolio: "Araştırma Portföyü — Harun Nalçakan",
+            publications: "Yayınlar — Harun Nalçakan",
+            contact: "İletişim — Harun Nalçakan"
+        },
+
+        metaDescriptions: {
+            index: "Harun Nalçakan — Ankara Üniversitesi Kimya Bölümü Araştırma Görevlisi. Hesaplamalı ve deneysel kimya, elektrokimyasal algılama ve ilaç keşfi.",
+            about: "Ankara Üniversitesi Kimya Bölümü Araştırma Görevlisi Harun Nalçakan'ın özgeçmişi, eğitimi ve iş deneyimi.",
+            portfolio: "Hesaplamalı ve deneysel kimya alanında araştırma alanları, bilimsel araçlar ve teknik yeterlilikler.",
+            publications: "Harun Nalçakan'ın hesaplamalı kimya ve ilaç keşfi alanındaki hakemli makaleleri ve konferans bildirileri.",
+            contact: "Harun Nalçakan ile iletişim — e-posta, ORCID, ResearchGate, LinkedIn ve GitHub."
+        },
+
+        contactLabels: {
+            email: "E-posta",
+            academicLinks: "Akademik Bağlantılar",
+            orcid: "Akademik Profil",
+            googleScholar: "Yayınlar ve Atıflar",
+            linkedin: "Profesyonel Ağ",
+            github: "Kod ve Projeler",
+            researchgate: "Araştırma Ağı"
         },
 
         education: [
@@ -439,54 +503,63 @@ const data = {
                 }
             ],
             conferences: [
-                // 2023
                 {
+                    year: 2023,
                     title: "Crafting Excellence in LIM Kinase 1 Inhibition: Pharmacophore-Based Virtual Screening and AI-Boosted ADMET Insight",
                     venue: "9th International BAU Drug Design Congress (November 2023)"
                 },
                 {
+                    year: 2023,
                     title: "Guiding TRK Inhibition Strategies: Revelations from Pharmacophore-Based Virtual Screening and AI-Facilitated In Silico ADMET Profiling",
                     venue: "9th International BAU Drug Design Congress (November 2023)"
                 },
                 {
+                    year: 2023,
                     title: "Assessment of KRAS Inhibitors through Pharmacophore-Based Virtual Screening and AI-Enhanced ADMET Profiling via the Pharmit Server",
                     venue: "9th International BAU Drug Design Congress (November 2023)"
                 },
                 {
+                    year: 2023,
                     title: "Computational Evaluation of potent SGLT1 Inhibitors: Sotagliflozin Derivatives Explored with AI-Guided ADMET Assessment",
                     venue: "9th International BAU Drug Design Congress (November 2023)"
                 },
                 {
+                    year: 2023,
                     title: "Alzheimer's Alchemy: Unveiling the Dual-Inhibitory Potential of Tacrine-Donepezil Hybrids",
                     venue: "6th International Eurasian Conference on Biological and Chemical Sciences (October 2023)"
                 },
                 {
+                    year: 2023,
                     title: "Computational Modeling of Novel Filgotinib Derivatives as Potent Janus Kinase (JAK1/JAK2) Inhibitors",
                     venue: "11. International Drug Chemistry Conference (March 2023)"
                 },
                 {
+                    year: 2023,
                     title: "Molecular Docking and in-silico ADMET Studies of Newly Designed Pyrrolo[2,3-d]pyrimidine Derivatives to Inhibit Janus Kinases",
                     venue: "11. International Drug Chemistry Conference (March 2023)"
                 },
-                // 2022
                 {
+                    year: 2022,
                     title: "Molecular Docking, in silico ADMET Analyses and Computational Approach of Novel Fedratinib Derivatives as Potent JAK2 Inhibitors",
                     venue: "8th International BAU Drug Design Congress (December 2022)"
                 },
                 {
+                    year: 2022,
                     title: "Computational Modelling of Abrocitinib Derivatives/Metabolites and Unveiling their Janus Kinase (JAK) Inhibitory Activities",
                     venue: "5th International Eurasian Conference on Biological and Chemical Sciences (November 2022)"
                 },
                 {
+                    year: 2022,
                     title: "Boyaya Duyarlı Güneş Hücrelerine Yönelik Yeni D-π-A Tipi Organik Boyarmaddelerin Teorik Olarak Modellenmesi ve İncelenmesi",
                     venue: "34. Ulusal Kimya Kongresi (Eylül 2022)"
                 },
                 {
+                    year: 2022,
                     title: "Molecular Docking Approach to Enlighten Photodynamic Therapy Applicability of the Tailored D-A or D-A-D Types' AIEgens",
                     venue: "2. Computer-Aided Drug Design Symposium and Workshop (Mayıs 2022)"
                 },
-                // 2021
                 {
+                    year: 2021,
                     title: "Molecular Design and Theoretical Investigation of bis-N,N-dimethylaniline-based Novel D-π-a Photosensitizers",
                     venue: "5th International Organic Chemistry Congress (October 2021)"
                 }
@@ -526,32 +599,13 @@ const data = {
             ]
         },
 
-        projects: [
-            {
-                title: "ADVISOR",
-                description: "Sensör ve moleküler tasarım için gelişmiş hesaplamalı platform.",
-                technologies: ["Python", "Gaussian", "Kemoinformatik"],
-                link: "#",
-                github: "#",
-                project_status: "Geliştirme Aşamasında"
-            },
-            {
-                title: "SnapChem",
-                description: "Kimyasal veri görselleştirme ve analiz aracı.",
-                technologies: ["Python", "Veri Görselleştirme"],
-                link: "#",
-                github: "#",
-                project_status: "Geliştirme Aşamasında"
-            }
-        ],
-
         pdbCode: "1crn",
 
         contact: {
             email: "hnalcakan@ankara.edu.tr",
             location: "Ankara, Türkiye",
             affiliation: "Ankara Üniversitesi Fen Fakültesi Kimya Bölümü",
-            orcid: "0000-0003-3821-8681",
+            orcid: "https://orcid.org/0000-0003-3821-8681",
             linkedin: "https://linkedin.com/in/nalcakanharun",
             github: "https://github.com/harunalcakan",
             researchgate: "https://www.researchgate.net/profile/Harun-Nalcakan"

@@ -29,12 +29,14 @@
     box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
 }
 
-body.light-mode .ngl-viewer-container {
-    background-color: #ffffff;
+body.dark-mode .ngl-viewer-container {
+    background-color: #020617;
+    border-color: #334155;
 }
 
-body.dark-mode .ngl-viewer-container {
-    background-color: #020617; /* near-black slate for dark mode */
+body.light-mode .ngl-viewer-container {
+    background-color: #ffffff;
+    border-color: #e2e8f0;
 }
 
 @media (min-width: 768px) {
@@ -55,58 +57,45 @@ body.dark-mode .ngl-viewer-container {
     font-family: 'Inter', sans-serif;
 }
 
-/* 3D Molecule Viewer */
-.molecule-viewer-container {
-    width: 100%;
-    height: 260px;
-    border-radius: 0.5rem;
-    overflow: hidden;
-    background: transparent;
+/* Hero greeting */
+.hero-greeting {
+    opacity: 0.85;
 }
 
-@media (min-width: 768px) {
-    .molecule-viewer-container {
-        height: 320px;
-    }
+/* Home profile placeholder */
+body.light-mode .home-profile-circle {
+    border-color: #cbd5e1;
+    background-color: rgba(241, 245, 249, 0.9);
 }
 
-/* Status Badges */
-.status-badge {
-    display: inline-flex;
-    align-items: center;
-    padding: 0.15rem 0.6rem;
-    border-radius: 999px;
-    font-size: 0.7rem;
-    font-family: 'Fira Code', monospace;
-    letter-spacing: 0.03em;
+body.dark-mode .home-profile-circle {
+    border-color: #64748b;
+    background-color: rgba(30, 41, 59, 0.6);
 }
 
-.status-stable {
-    background-color: rgba(34, 197, 94, 0.12);
-    color: #22c55e;
-    box-shadow: 0 0 8px rgba(34, 197, 94, 0.35);
+body.light-mode .home-profile-placeholder {
+    color: #64748b;
 }
 
-.status-beta {
-    background: radial-gradient(circle at 0 0, rgba(249, 115, 22, 0.25), transparent 55%),
-                radial-gradient(circle at 100% 100%, rgba(45, 212, 191, 0.25), transparent 55%);
-    color: #fdba74;
-    box-shadow: 0 0 8px rgba(249, 115, 22, 0.4);
+body.dark-mode .home-profile-placeholder {
+    color: #cbd5e1;
 }
 
-/* About page skills (minimal two-column layout) */
-.about-skills-grid {
-    align-items: flex-start;
-}
-
-.about-skills-column {
-    min-width: 0;
-}
-
-.about-skills-column h3 {
+/* Portfolio module headings */
+.module-heading {
     font-family: 'Inter', sans-serif;
+    font-weight: 600;
 }
 
+body.light-mode .module-heading {
+    color: #0e7490;
+}
+
+body.dark-mode .module-heading {
+    color: #2dd4bf;
+}
+
+/* About page skill bullets */
 .about-skill-bullet {
     font-family: 'Fira Code', monospace;
     font-size: 0.8rem;
@@ -261,46 +250,6 @@ body.dark-mode .publication-citation {
     color: #e5e7eb; /* slate-200 */
 }
 
-/* Glow Effects */
-.glow-effect {
-    transition: text-shadow 0.3s ease;
-}
-
-body.dark-mode .glow-effect:hover {
-    text-shadow: 0 0 10px var(--accent-dark), 0 0 20px var(--accent-dark), 0 0 30px var(--accent-dark);
-}
-
-body.light-mode .glow-effect:hover {
-    text-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
-}
-
-/* Project Cards */
-.project-card {
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    border: 1px solid;
-}
-
-body.light-mode .project-card {
-    border-color: var(--border-light);
-}
-
-body.dark-mode .project-card {
-    border-color: var(--border-dark);
-}
-
-.project-card:hover {
-    transform: translateY(-5px);
-}
-
-body.dark-mode .project-card:hover {
-    box-shadow: 0 10px 30px rgba(0, 255, 65, 0.2);
-    border-color: var(--accent-dark);
-}
-
-body.light-mode .project-card:hover {
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-}
-
 /* Publication Items */
 .publication-item {
     transition: border-color 0.3s ease, padding 0.3s ease;
@@ -371,95 +320,22 @@ body.light-mode .btn-toggle:hover {
     color: var(--bg-light);
 }
 
-/* Section Dividers */
-.section-divider {
-    height: 1px;
-    margin: 3rem 0;
+/* Navbar controls always sit on dark background */
+#navbar .btn-toggle {
+    border-color: #94a3b8;
+    color: #e2e8f0;
 }
 
-body.light-mode .section-divider {
-    background: linear-gradient(to right, transparent, var(--border-light), transparent);
-}
-
-body.dark-mode .section-divider {
-    background: linear-gradient(to right, transparent, var(--border-dark), transparent);
-}
-
-/* Terminal-style code blocks */
-.terminal-style {
-    font-family: 'Fira Code', monospace;
-    padding: 1rem;
-    border-radius: 0.25rem;
-}
-
-body.dark-mode .terminal-style {
-    background-color: #1a1a1a;
-    border: 1px solid var(--border-dark);
-    color: var(--accent-dark);
-}
-
-body.light-mode .terminal-style {
-    background-color: #f5f5f5;
-    border: 1px solid var(--border-light);
-    color: var(--text-light);
+#navbar .btn-toggle:hover {
+    background-color: #f97316;
+    border-color: #f97316;
+    color: #0f172a;
+    box-shadow: none;
 }
 
 /* Smooth Scroll */
 html {
     scroll-behavior: smooth;
-}
-
-/* Research Interest Tags */
-.research-tag {
-    display: inline-block;
-    padding: 0.5rem 1rem;
-    margin: 0.25rem;
-    border-radius: 0.25rem;
-    font-size: 0.875rem;
-    transition: all 0.3s ease;
-    border: 1px solid;
-}
-
-body.dark-mode .research-tag {
-    border-color: var(--border-dark);
-    background-color: rgba(0, 255, 65, 0.1);
-}
-
-body.dark-mode .research-tag:hover {
-    background-color: rgba(0, 255, 65, 0.2);
-    border-color: var(--accent-dark);
-    transform: scale(1.05);
-}
-
-body.light-mode .research-tag {
-    border-color: var(--border-light);
-    background-color: #f9f9f9;
-}
-
-body.light-mode .research-tag:hover {
-    background-color: #f0f0f0;
-    border-color: var(--accent-light);
-    transform: scale(1.05);
-}
-
-/* Technology Tags */
-.tech-tag {
-    display: inline-block;
-    padding: 0.25rem 0.75rem;
-    margin: 0.25rem;
-    border-radius: 0.125rem;
-    font-size: 0.75rem;
-    font-family: 'Fira Code', monospace;
-}
-
-body.dark-mode .tech-tag {
-    background-color: rgba(0, 217, 255, 0.15);
-    color: var(--accent-cyan);
-}
-
-body.light-mode .tech-tag {
-    background-color: #e5e5e5;
-    color: var(--text-light);
 }
 
 /* Fade-in Animation */
@@ -758,23 +634,6 @@ body.light-mode .tech-badge:hover {
     transform: scale(1.05);
 }
 
-/* Skill Cards - softened for more minimal look (kept for legacy usage) */
-.skill-card {
-    border: none;
-    background: transparent;
-    transition: color 0.2s ease;
-}
-
-body.dark-mode .skill-card,
-body.light-mode .skill-card {
-    background: transparent;
-}
-
-.skill-card:hover {
-    transform: none;
-    box-shadow: none;
-}
-
 /* Contact Link Cards */
 .contact-link-card {
     transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -942,13 +801,24 @@ body.light-mode .timeline-title {
     }
 }
 
-/* Language class support */
-body.lang-en .lang-tr-only {
-    display: none;
+/* Conference year groups (publications page) */
+.conference-year-heading {
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid;
 }
 
-body.lang-tr .lang-en-only {
-    display: none;
+body.light-mode .conference-year-heading {
+    color: var(--text-light);
+    border-color: var(--border-light);
+}
+
+body.dark-mode .conference-year-heading {
+    color: var(--accent-dark);
+    border-color: rgba(0, 255, 65, 0.35);
+}
+
+.conference-year-group:last-child {
+    margin-bottom: 0;
 }
 
 /* Responsive adjustments */

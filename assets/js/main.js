@@ -10,6 +10,190 @@ let themeToggleHandler = null;
 let mobileMenuClickHandler = null;
 let mobileMenuOutsideClickHandler = null;
 let mobileMenuResizeHandler = null;
+let nglResizeHandler = null;
+
+// Utility helpers
+function isValidLink(link) {
+    return Boolean(link && link !== '#' && !String(link).endsWith('#'));
+}
+
+function getPagePath(page) {
+    return page === 'index' ? '' : `${page}.html`;
+}
+
+function getAbsolutePageUrl(content, page) {
+    const baseUrl = (content.site?.baseUrl || window.location.origin).replace(/\/$/, '');
+    const path = getPagePath(page);
+    return path ? `${baseUrl}/${path}` : `${baseUrl}/`;
+}
+
+function getAbsoluteAssetUrl(content, assetPath) {
+    const baseUrl = (content.site?.baseUrl || window.location.origin).replace(/\/$/, '');
+    const normalized = String(assetPath || '').replace(/^\//, '');
+    return `${baseUrl}/${normalized}`;
+}
+
+function upsertMetaTag(selector, attributes) {
+    const key = Object.entries(attributes).map(([k, v]) => `${k}=${v}`).join(';');
+    let el = document.head.querySelector(selector);
+    if (!el) {
+        el = document.createElement('meta');
+        Object.entries(attributes).forEach(([name, value]) => el.setAttribute(name, value));
+        el.dataset.seoKey = key;
+        document.head.appendChild(el);
+    }
+    if (attributes.content !== undefined) {
+        el.setAttribute('content', attributes.content);
+    }
+}
+
+function upsertLinkTag(rel, href) {
+    let el = document.head.querySelector(`link[rel="${rel}"]`);
+    if (!el) {
+        el = document.createElement('link');
+        el.setAttribute('rel', rel);
+        document.head.appendChild(el);
+    }
+    el.setAttribute('href', href);
+}
+
+function extractConferenceYear(conf) {
+    if (conf.year) return Number(conf.year);
+    const match = String(conf.venue || '').match(/\b(20\d{2})\b/);
+    return match ? parseInt(match[1], 10) : 0;
+}
+
+function groupConferencesByYear(conferences) {
+    const groups = new Map();
+    conferences.forEach(conf => {
+        const year = extractConferenceYear(conf);
+        if (!groups.has(year)) groups.set(year, []);
+        groups.get(year).push(conf);
+    });
+    return Array.from(groups.entries())
+        .sort((a, b) => b[0] - a[0])
+        .map(([year, items]) => ({ year, items }));
+}
+
+function buildPersonSchema(content) {
+    const contact = content.contact || {};
+    const sameAs = [
+        contact.orcid,
+        contact.researchgate,
+        contact.linkedin,
+        contact.github,
+        contact.googleScholar
+    ].filter(isValidLink);
+
+    return {
+        '@context': 'https://schema.org',
+        '@type': 'Person',
+        name: content.name,
+        jobTitle: content.title,
+        email: `mailto:${contact.email || content.email}`,
+        url: getAbsolutePageUrl(content, 'index'),
+        image: getAbsoluteAssetUrl(content, content.site?.ogImage),
+        affiliation: {
+            '@type': 'Organization',
+            name: content.heroAffiliationShort || content.affiliation
+        },
+        sameAs
+    };
+}
+
+function buildPageSchema(content, page) {
+    const pageUrl = getAbsolutePageUrl(content, page);
+    const descriptions = content.metaDescriptions || {};
+    const titles = content.pageTitles || {};
+
+    const graph = [
+        buildPersonSchema(content),
+        {
+            '@type': 'WebPage',
+            '@id': `${pageUrl}#webpage`,
+            url: pageUrl,
+            name: titles[page] || titles.index,
+            description: descriptions[page] || descriptions.index,
+            inLanguage: currentLanguage === 'tr' ? 'tr-TR' : 'en-US',
+            isPartOf: {
+                '@type': 'WebSite',
+                name: content.name,
+                url: getAbsolutePageUrl(content, 'index')
+            }
+        }
+    ];
+
+    if (page === 'publications') {
+        const articles = content.publications?.articles || [];
+        articles.forEach((article, index) => {
+            if (!isValidLink(article.doi_link)) return;
+            graph.push({
+                '@type': 'ScholarlyArticle',
+                '@id': `${pageUrl}#article-${index + 1}`,
+                headline: article.title,
+                url: article.doi_link,
+                author: { '@type': 'Person', name: content.name },
+                isPartOf: { '@id': `${pageUrl}#webpage` }
+            });
+        });
+    }
+
+    return {
+        '@context': 'https://schema.org',
+        '@graph': graph
+    };
+}
+
+function updateJsonLd(content, page) {
+    let script = document.getElementById('jsonld-schema');
+    if (!script) {
+        script = document.createElement('script');
+        script.type = 'application/ld+json';
+        script.id = 'jsonld-schema';
+        document.head.appendChild(script);
+    }
+    script.textContent = JSON.stringify(buildPageSchema(content, page));
+}
+
+function updatePageMeta() {
+    const content = data[currentLanguage];
+    if (!content) return;
+
+    const page = getCurrentPage();
+    const titles = content.pageTitles || {};
+    const descriptions = content.metaDescriptions || {};
+    const title = titles[page] || titles.index || content.name;
+    const description = descriptions[page] || descriptions.index || content.heroIntro;
+    const pageUrl = getAbsolutePageUrl(content, page);
+    const imageUrl = getAbsoluteAssetUrl(content, content.site?.ogImage);
+    const locale = currentLanguage === 'tr' ? 'tr_TR' : 'en_US';
+    const altLocale = currentLanguage === 'tr' ? 'en_US' : 'tr_TR';
+
+    document.title = title;
+    document.documentElement.lang = currentLanguage;
+
+    upsertMetaTag('meta[name="description"]', { name: 'description', content: description });
+
+    upsertMetaTag('meta[property="og:type"]', { property: 'og:type', content: 'website' });
+    upsertMetaTag('meta[property="og:site_name"]', { property: 'og:site_name', content: content.name });
+    upsertMetaTag('meta[property="og:title"]', { property: 'og:title', content: title });
+    upsertMetaTag('meta[property="og:description"]', { property: 'og:description', content: description });
+    upsertMetaTag('meta[property="og:url"]', { property: 'og:url', content: pageUrl });
+    upsertMetaTag('meta[property="og:image"]', { property: 'og:image', content: imageUrl });
+    upsertMetaTag('meta[property="og:locale"]', { property: 'og:locale', content: locale });
+    upsertMetaTag('meta[property="og:locale:alternate"]', { property: 'og:locale:alternate', content: altLocale });
+
+    upsertMetaTag('meta[name="twitter:card"]', {
+        name: 'twitter:card',
+        content: content.site?.twitterCard || 'summary_large_image'
+    });
+    upsertMetaTag('meta[name="twitter:title"]', { name: 'twitter:title', content: title });
+    upsertMetaTag('meta[name="twitter:description"]', { name: 'twitter:description', content: description });
+    upsertMetaTag('meta[name="twitter:image"]', { name: 'twitter:image', content: imageUrl });
+
+    upsertLinkTag('canonical', pageUrl);
+    updateJsonLd(content, page);
+}
 
 // Get current page name
 function getCurrentPage() {
@@ -24,6 +208,7 @@ document.addEventListener('DOMContentLoaded', () => {
     injectFooter();
     initializeTheme();
     initializeLanguage();
+    updatePageMeta();
     renderCurrentPage();
     setupEventListeners();
     updateNavbarBackground();
@@ -199,7 +384,7 @@ function injectFooter() {
 
     const footerHTML = `
         <footer class="container mx-auto px-6 py-8 text-center opacity-75 text-sm mt-12">
-            <p>&copy; <span id="current-year"></span> ${content.name}. Built with Computational Minimalism.</p>
+            <p>&copy; <span id="current-year"></span> ${content.name}. ${content.sections.footerTagline}</p>
         </footer>
     `;
 
@@ -215,13 +400,10 @@ function injectFooter() {
 
 // Theme Management
 function initializeTheme() {
-    if (currentTheme === 'dark') {
-        document.body.classList.add('dark-mode');
-        document.body.classList.remove('light-mode');
-    } else {
-        document.body.classList.add('light-mode');
-        document.body.classList.remove('dark-mode');
-    }
+    const isDark = currentTheme === 'dark';
+    document.body.classList.toggle('dark-mode', isDark);
+    document.body.classList.toggle('light-mode', !isDark);
+    document.documentElement.style.colorScheme = isDark ? 'dark' : 'light';
     updateThemeToggle();
     updateNavbarBackground();
 }
@@ -230,6 +412,7 @@ function toggleTheme() {
     currentTheme = currentTheme === 'light' ? 'dark' : 'light';
     localStorage.setItem('theme', currentTheme);
     initializeTheme();
+    renderCurrentPage();
 }
 
 function setupThemeToggle() {
@@ -325,6 +508,7 @@ function toggleLanguage() {
     
     // Re-render navbar and content without full page reload
     injectNavbar();
+    updatePageMeta();
     renderCurrentPage();
     injectFooter();
 }
@@ -405,7 +589,7 @@ function setupMobileMenu() {
         
         // Close menu on window resize if it becomes desktop size
         mobileMenuResizeHandler = () => {
-            if (window.innerWidth >= 768) {
+            if (window.innerWidth >= 1024) {
                 mobileMenu.classList.add('hidden');
                 menuIcon.classList.remove('hidden');
                 closeIcon.classList.add('hidden');
@@ -438,16 +622,6 @@ function renderCurrentPage() {
         case 'contact':
             renderContactPage(content);
             break;
-        // Legacy support for old URLs
-        case 'research':
-            renderPortfolioPage(content);
-            break;
-        case 'tools':
-            renderPortfolioPage(content);
-            break;
-        case 'projects':
-            renderProjectsPage(content);
-            break;
         default:
             renderHomePage(content);
     }
@@ -463,6 +637,8 @@ function renderHomePage(content) {
     const lastName = content.lastName || (content.name ? content.name.split(' ').slice(1).join(' ') : '');
     const fullName = `${firstName} ${lastName}`.trim();
 
+    const heroSubtitle = `${content.title} · ${content.heroAffiliationShort || ''}`;
+
     // Hero Section: top visual row (profile + 3D viewer) and bottom text block
     const heroHTML = `
         <section class="container mx-auto px-4 md:px-6 pt-24 pb-16 min-h-[60vh] flex items-center">
@@ -471,9 +647,8 @@ function renderHomePage(content) {
                 <!-- Top row: Profile + 3D viewer -->
                 <div class="w-full flex flex-col md:flex-row items-center justify-center gap-8 md:gap-16">
                     <div class="flex justify-center w-full md:w-auto">
-                        <div class="w-40 h-40 md:w-48 md:h-48 rounded-full border-2 border-slate-500 flex items-center justify-center overflow-hidden bg-slate-800/60 home-profile-circle">
-                            <!-- Replace this span with an <img> tag when a real profile photo is available -->
-                            <span class="text-xs md:text-sm text-slate-300 opacity-70">Profile Photo</span>
+                        <div class="w-40 h-40 md:w-48 md:h-48 rounded-full border-2 flex items-center justify-center overflow-hidden home-profile-circle">
+                            <span class="text-xs md:text-sm opacity-70 home-profile-placeholder">${content.sections.profilePhoto}</span>
                         </div>
                     </div>
                     <div class="flex justify-center w-full md:w-auto">
@@ -481,19 +656,19 @@ function renderHomePage(content) {
                     </div>
                 </div>
 
-                <p class="ngl-attribution w-full text-center md:text-right">Powered by NGL Viewer</p>
+                <p class="ngl-attribution w-full text-center md:text-right">${content.sections.nglAttribution}</p>
 
                 <!-- Bottom: Intro text -->
                 <div class="w-full text-center space-y-4">
-                    <p class="text-sm md:text-base uppercase tracking-wide">Hello, I'm</p>
+                    <p class="text-sm md:text-base uppercase tracking-wide hero-greeting">${content.heroGreeting}</p>
                     <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight hero-heading">
                         ${fullName || firstName || ''}
                     </h1>
                     <p class="text-sm md:text-base hero-subtitle">
-                        Research Assistant · Ankara University
+                        ${heroSubtitle}
                     </p>
                     <p class="text-base md:text-lg leading-relaxed mt-4 max-w-xl mx-auto">
-                        ${content.heroIntro || 'I explore the intersection of electrochemical sensing platforms and computational drug discovery to design, optimize, and understand next-generation analytical systems.'}
+                        ${content.heroIntro}
                     </p>
                 </div>
             </div>
@@ -528,22 +703,26 @@ function renderHomePage(content) {
 
 // NGL Viewer Initialization (homepage)
 function initNGLViewer() {
-    // NGL library is only loaded on index.html
     if (typeof NGL === 'undefined') return;
 
     const container = document.getElementById('ngl-viewer-container');
     if (!container) return;
 
+    if (nglResizeHandler) {
+        window.removeEventListener('resize', nglResizeHandler);
+        nglResizeHandler = null;
+    }
+
+    container.innerHTML = '';
+
     try {
         const stage = new NGL.Stage(container, { backgroundColor: 'transparent' });
 
-        // Handle responsive resize
-        window.addEventListener('resize', () => {
-            stage.handleResize();
-        });
+        nglResizeHandler = () => stage.handleResize();
+        window.addEventListener('resize', nglResizeHandler);
 
-        // Load sample protein (PDB ID 1crn - Crambin)
-        stage.loadFile('rcsb://1crn').then(component => {
+        const pdbCode = data[currentLanguage]?.pdbCode || '1crn';
+        stage.loadFile(`rcsb://${pdbCode}`).then(component => {
             component.addRepresentation('cartoon', {
                 colorScheme: 'chainid'
             });
@@ -560,10 +739,10 @@ function renderAboutPage(content) {
     const mainContent = document.querySelector('main');
     if (!mainContent) return;
 
-    const cvButtonHTML = content.cvLink ? `
+    const cvButtonHTML = content.cvLink && isValidLink(content.cvLink) ? `
         <div class="mb-8">
-            <a href="${content.cvLink}" target="_blank" class="inline-block btn-toggle">
-                ${content.sections.downloadCV || 'Download CV'}
+            <a href="${content.cvLink}" target="_blank" rel="noopener" download class="inline-block btn-toggle">
+                ${content.sections.downloadCV}
             </a>
         </div>
     ` : '';
@@ -631,7 +810,7 @@ function renderAboutPage(content) {
                 
                 <!-- Work & Education Timeline -->
                 <div class="mb-16">
-                    <h2 class="text-2xl md:text-3xl font-bold mb-8 font-mono">${content.sections.workExperience} & ${content.sections.education}</h2>
+                    <h2 class="text-2xl md:text-3xl font-bold mb-8 font-mono">${content.sections.workAndEducation}</h2>
                     <div class="timeline-container">
                         ${timelineHTML}
                     </div>
@@ -680,27 +859,37 @@ function renderPublicationsPage(content) {
         })
         .join('');
 
-    const conferencesHTML = conferences
-        .map((conf, index) => `
-            <div class="publication-item mb-5 fade-in" style="animation-delay: ${(index * 0.1) + 0.4}s">
-                <h3 class="text-lg font-semibold mb-1">
-                    <span class="publication-title-link">${conf.title}</span>
-                </h3>
-                <p class="publication-citation">${conf.venue}</p>
-            </div>
-        `)
+    const conferencesHTML = groupConferencesByYear(conferences)
+        .map((group, groupIndex) => {
+            const itemsHTML = group.items.map((conf, index) => `
+                <div class="publication-item mb-5 fade-in" style="animation-delay: ${((groupIndex * 0.15) + (index * 0.08))}s">
+                    <h3 class="text-lg font-semibold mb-1">
+                        <span class="publication-title-link">${conf.title}</span>
+                    </h3>
+                    <p class="publication-citation">${conf.venue}</p>
+                </div>
+            `).join('');
+
+            return `
+                <div class="conference-year-group mb-8">
+                    <h3 class="conference-year-heading text-xl md:text-2xl font-bold mb-4 font-mono">${group.year}</h3>
+                    ${itemsHTML}
+                </div>
+            `;
+        })
         .join('');
 
     mainContent.innerHTML = `
         <section class="container mx-auto px-4 md:px-6 py-12 max-w-4xl">
             <div class="fade-in">
                 <h1 class="text-3xl md:text-4xl font-bold mb-8 font-mono">${content.sections.publications}</h1>
-                <div>
+                <div class="mb-10">
+                    <h2 class="text-2xl md:text-3xl font-bold mb-6 font-mono">${content.sections.peerReviewed}</h2>
                     ${publicationsHTML}
                 </div>
                 ${conferencesHTML ? `
                 <div class="mt-10">
-                    <h2 class="text-2xl md:text-3xl font-bold mb-6 font-mono">Conference Papers</h2>
+                    <h2 class="text-2xl md:text-3xl font-bold mb-6 font-mono">${content.sections.conferencePapers}</h2>
                     ${conferencesHTML}
                 </div>
                 ` : ''}
@@ -729,19 +918,19 @@ function renderPortfolioPage(content) {
             <div class="tool-card p-6 rounded-lg fade-in" style="animation-delay: ${index * 0.1}s">
                 <h3 class="text-2xl font-bold mb-3 font-mono">${tool.name}</h3>
                 <p class="text-base mb-4 leading-relaxed">${tool.description}</p>
-                ${tool.link !== '#' ? `<a href="${tool.link}" target="_blank" class="underline">${content.tools.viewProject || 'View Project'}</a>` : ''}
+                ${isValidLink(tool.link) ? `<a href="${tool.link}" target="_blank" rel="noopener" class="underline">${content.tools.viewProject}</a>` : ''}
+                ${!isValidLink(tool.link) && tool.project_status ? `<p class="text-sm opacity-75 italic">${tool.project_status}</p>` : ''}
             </div>
         `)
         .join('');
 
     // Technical Modules section (In Silico / In Vitro + Software & Tools)
     const skillMatrix = content.skillMatrix || {};
-    const computationalSkills = skillMatrix.computational && Array.isArray(skillMatrix.computational.skills)
-        ? skillMatrix.computational.skills
-        : [];
-    const experimentalSkills = skillMatrix.experimental && Array.isArray(skillMatrix.experimental.skills)
-        ? skillMatrix.experimental.skills
-        : [];
+    const computationalSkills = skillMatrix.computational?.skills || [];
+    const experimentalSkills = skillMatrix.experimental?.skills || [];
+    const computationalTitle = skillMatrix.computational?.title || content.sections.academicCompetency;
+    const experimentalTitle = skillMatrix.experimental?.title || content.sections.academicCompetency;
+    const softwareTitle = skillMatrix.software?.title || content.tools.software;
 
     const inSilicoListHTML = computationalSkills
         .map(skill => `
@@ -775,23 +964,23 @@ function renderPortfolioPage(content) {
 
     const technicalModulesHTML = `
         <div class="mb-16">
-            <h2 class="text-2xl md:text-3xl font-bold mb-6 font-mono">${content.sections.academicCompetency || 'Technical Modules'}</h2>
+            <h2 class="text-2xl md:text-3xl font-bold mb-6 font-mono">${content.sections.academicCompetency}</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
                 <div class="research-area-card p-6 rounded-lg">
-                    <h3 class="text-xl font-semibold mb-3 text-cyan-300">In Silico Methodologies</h3>
+                    <h3 class="text-xl font-semibold mb-3 module-heading">${computationalTitle}</h3>
                     <ul class="space-y-2 text-sm md:text-base">
                         ${inSilicoListHTML}
                     </ul>
                 </div>
                 <div class="research-area-card p-6 rounded-lg">
-                    <h3 class="text-xl font-semibold mb-3 text-cyan-300">In Vitro Methodologies</h3>
+                    <h3 class="text-xl font-semibold mb-3 module-heading">${experimentalTitle}</h3>
                     <ul class="space-y-2 text-sm md:text-base">
                         ${inVitroListHTML}
                     </ul>
                 </div>
             </div>
             <div>
-                <h3 class="text-xl font-semibold mb-3 text-cyan-300">Software & Tools</h3>
+                <h3 class="text-xl font-semibold mb-3 module-heading">${softwareTitle}</h3>
                 <div class="flex flex-wrap gap-2">
                     ${techTagsHTML}
                 </div>
@@ -823,148 +1012,67 @@ function renderPortfolioPage(content) {
     `;
 }
 
-// Research Page Render (Legacy support)
-function renderResearchPage(content) {
-    renderPortfolioPage(content);
-}
-
-// Projects Page Render
-function renderProjectsPage(content) {
-    const mainContent = document.querySelector('main');
-    if (!mainContent) return;
-
-    const projectsHTML = content.projects
-        .map((project, index) => {
-            const techTags = project.technologies
-                .map(tech => `<span class="tech-tag">${tech}</span>`)
-                .join('');
-
-            return `
-                <div class="project-card p-6 rounded-lg fade-in" style="animation-delay: ${index * 0.1}s">
-                    <h3 class="text-2xl font-bold mb-3 font-mono">${project.title}</h3>
-                    <p class="text-base mb-4 leading-relaxed">${project.description}</p>
-                    <div class="mb-4 flex flex-wrap">
-                        ${techTags}
-                    </div>
-                    <div class="flex gap-4">
-                        ${project.link !== '#' ? `<a href="${project.link}" target="_blank" class="underline">View Project</a>` : ''}
-                        ${project.github !== '#' ? `<a href="${project.github}" target="_blank" class="underline">GitHub</a>` : ''}
-                    </div>
-                </div>
-            `;
-        })
-        .join('');
-
-    mainContent.innerHTML = `
-        <section class="container mx-auto px-4 md:px-6 py-12 max-w-4xl">
-            <div class="fade-in">
-                <h1 class="text-3xl md:text-4xl font-bold mb-8 font-mono">${content.sections.projects}</h1>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    ${projectsHTML}
-                </div>
-            </div>
-        </section>
-    `;
-}
-
-// Tools Page Render
-function renderToolsPage(content) {
-    const mainContent = document.querySelector('main');
-    if (!mainContent) return;
-
-    const developedToolsHTML = content.tools.developed
-        .map((tool, index) => `
-            <div class="tool-card p-6 rounded-lg fade-in" style="animation-delay: ${index * 0.1}s">
-                <h3 class="text-2xl font-bold mb-3 font-mono">${tool.name}</h3>
-                <p class="text-base mb-4 leading-relaxed">${tool.description}</p>
-                ${tool.link !== '#' ? `<a href="${tool.link}" target="_blank" class="underline">${content.tools.viewProject || 'View Project'}</a>` : ''}
-            </div>
-        `)
-        .join('');
-
-    const techStackHTML = `
-        <div class="tech-stack-section fade-in">
-            <h3 class="text-2xl font-bold mb-4 font-mono">${content.tools.hardware || 'Hardware'}</h3>
-            <div class="flex flex-wrap gap-2 mb-6">
-                ${content.tools.hardwareItems.map(item => `<span class="tech-badge">${item}</span>`).join('')}
-            </div>
-            <h3 class="text-2xl font-bold mb-4 font-mono">${content.tools.software || 'Software'}</h3>
-            <div class="flex flex-wrap gap-2">
-                ${content.tools.softwareItems.map(item => `<span class="tech-badge">${item}</span>`).join('')}
-            </div>
-        </div>
-    `;
-
-    mainContent.innerHTML = `
-        <section class="container mx-auto px-4 md:px-6 py-12 max-w-4xl">
-            <div class="fade-in">
-                <h1 class="text-4xl font-bold mb-8 font-mono">${content.sections.tools}</h1>
-                
-                <div class="mb-12">
-                    <h2 class="text-3xl font-bold mb-6 font-mono">${content.tools.developedTitle || 'Developed Tools'}</h2>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        ${developedToolsHTML}
-                    </div>
-                </div>
-
-                <div class="mb-12">
-                    <h2 class="text-3xl font-bold mb-6 font-mono">${content.tools.techStackTitle || 'Tech Stack'}</h2>
-                    ${techStackHTML}
-                </div>
-            </div>
-        </section>
-    `;
-}
-
 // Contact Page Render
 function renderContactPage(content) {
     const mainContent = document.querySelector('main');
     if (!mainContent) return;
 
     const contact = content.contact || {};
+    const labels = content.contactLabels || {};
     
     const academicLinksHTML = `
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
             ${contact.orcid ? `
-                <a href="${contact.orcid}" target="_blank" class="contact-link-card p-6 rounded-lg fade-in">
+                <a href="${contact.orcid}" target="_blank" rel="noopener" class="contact-link-card p-6 rounded-lg fade-in">
                     <div class="flex items-center gap-4">
                         <span class="text-3xl">🔬</span>
                         <div>
                             <h3 class="text-lg font-bold font-mono">ORCID</h3>
-                            <p class="text-sm opacity-75">Academic Profile</p>
+                            <p class="text-sm opacity-75">${labels.orcid}</p>
                         </div>
                     </div>
                 </a>
             ` : ''}
-            ${contact.googleScholar ? `
-                <a href="${contact.googleScholar}" target="_blank" class="contact-link-card p-6 rounded-lg fade-in">
+            ${contact.googleScholar && isValidLink(contact.googleScholar) ? `
+                <a href="${contact.googleScholar}" target="_blank" rel="noopener" class="contact-link-card p-6 rounded-lg fade-in">
                     <div class="flex items-center gap-4">
                         <span class="text-3xl">📚</span>
                         <div>
                             <h3 class="text-lg font-bold font-mono">Google Scholar</h3>
-                            <p class="text-sm opacity-75">Publications & Citations</p>
+                            <p class="text-sm opacity-75">${labels.googleScholar}</p>
                         </div>
                     </div>
                 </a>
             ` : ''}
-            ${contact.linkedin ? `
-                <a href="${contact.linkedin}" target="_blank" class="contact-link-card p-6 rounded-lg fade-in">
+            ${contact.researchgate && isValidLink(contact.researchgate) ? `
+                <a href="${contact.researchgate}" target="_blank" rel="noopener" class="contact-link-card p-6 rounded-lg fade-in">
+                    <div class="flex items-center gap-4">
+                        <span class="text-3xl">📖</span>
+                        <div>
+                            <h3 class="text-lg font-bold font-mono">ResearchGate</h3>
+                            <p class="text-sm opacity-75">${labels.researchgate}</p>
+                        </div>
+                    </div>
+                </a>
+            ` : ''}
+            ${contact.linkedin && isValidLink(contact.linkedin) ? `
+                <a href="${contact.linkedin}" target="_blank" rel="noopener" class="contact-link-card p-6 rounded-lg fade-in">
                     <div class="flex items-center gap-4">
                         <span class="text-3xl">💼</span>
                         <div>
                             <h3 class="text-lg font-bold font-mono">LinkedIn</h3>
-                            <p class="text-sm opacity-75">Professional Network</p>
+                            <p class="text-sm opacity-75">${labels.linkedin}</p>
                         </div>
                     </div>
                 </a>
             ` : ''}
-            ${contact.github ? `
-                <a href="${contact.github}" target="_blank" class="contact-link-card p-6 rounded-lg fade-in">
+            ${contact.github && isValidLink(contact.github) ? `
+                <a href="${contact.github}" target="_blank" rel="noopener" class="contact-link-card p-6 rounded-lg fade-in">
                     <div class="flex items-center gap-4">
                         <span class="text-3xl">💻</span>
                         <div>
                             <h3 class="text-lg font-bold font-mono">GitHub</h3>
-                            <p class="text-sm opacity-75">Code & Projects</p>
+                            <p class="text-sm opacity-75">${labels.github}</p>
                         </div>
                     </div>
                 </a>
@@ -978,13 +1086,13 @@ function renderContactPage(content) {
                 <h1 class="text-3xl md:text-4xl font-bold mb-8 font-mono text-center">${content.sections.contact}</h1>
                 
                 <div class="mb-12 text-center">
-                    <h2 class="text-2xl md:text-3xl font-bold mb-4 font-mono">${contact.affiliation || content.affiliation || '[University Name]'}</h2>
-                    <p class="text-lg mb-2 opacity-90">${contact.location || content.location || '[City, Country]'}</p>
+                    <h2 class="text-2xl md:text-3xl font-bold mb-4 font-mono">${contact.affiliation || content.affiliation}</h2>
+                    <p class="text-lg mb-2 opacity-90">${contact.location || content.location}</p>
                 </div>
 
                 <div class="mb-12">
                     <div class="contact-info-card p-6 md:p-8 rounded-lg text-center">
-                        <h3 class="text-xl font-bold mb-4 font-mono">Email</h3>
+                        <h3 class="text-xl font-bold mb-4 font-mono">${labels.email}</h3>
                         <a href="mailto:${contact.email || content.email}" class="text-lg md:text-xl underline break-all">
                             ${contact.email || content.email}
                         </a>
@@ -992,7 +1100,7 @@ function renderContactPage(content) {
                 </div>
 
                 <div class="mb-8">
-                    <h2 class="text-2xl font-bold mb-6 font-mono text-center">Academic Links</h2>
+                    <h2 class="text-2xl font-bold mb-6 font-mono text-center">${labels.academicLinks}</h2>
                     ${academicLinksHTML}
                 </div>
             </div>

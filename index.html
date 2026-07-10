@@ -3,8 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Academic Personal Website Template">
-    <title>[Your Name Here] - Academic Portfolio</title>
+    <meta name="description" content="Harun Nalçakan — Research Assistant at Ankara University. Computational and experimental chemistry, electrochemical sensing, and drug discovery.">
+    <title>Harun Nalçakan — Academic Portfolio</title>
+
+    <!-- Open Graph / Twitter (static fallback for crawlers) -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Harun Nalçakan">
+    <meta property="og:title" content="Harun Nalçakan — Academic Portfolio">
+    <meta property="og:description" content="Harun Nalçakan — Research Assistant at Ankara University. Computational and experimental chemistry, electrochemical sensing, and drug discovery.">
+    <meta property="og:url" content="https://harunalcakan.github.io/">
+    <meta property="og:image" content="https://harunalcakan.github.io/assets/images/og-card.png">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:locale:alternate" content="tr_TR">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Harun Nalçakan — Academic Portfolio">
+    <meta name="twitter:description" content="Harun Nalçakan — Research Assistant at Ankara University. Computational and experimental chemistry, electrochemical sensing, and drug discovery.">
+    <meta name="twitter:image" content="https://harunalcakan.github.io/assets/images/og-card.png">
+    <link rel="canonical" href="https://harunalcakan.github.io/">
+    <script type="application/ld+json" id="jsonld-schema">{"@context":"https://schema.org","@graph":[{"@type":"Person","name":"Harun Nalçakan","jobTitle":"Research Assistant","url":"https://harunalcakan.github.io/","affiliation":{"@type":"Organization","name":"Ankara University"}},{"@type":"WebPage","name":"Harun Nalçakan — Academic Portfolio","url":"https://harunalcakan.github.io/"}]}</script>
     
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -25,6 +41,14 @@
                 }
             }
         }
+    </script>
+    <script>
+        try {
+            var theme = localStorage.getItem('theme') || 'light';
+            var lang = localStorage.getItem('language') || 'en';
+            document.documentElement.lang = lang;
+            document.documentElement.style.colorScheme = theme === 'dark' ? 'dark' : 'light';
+        } catch (e) {}
     </script>
 </head>
 <body class="light-mode">
