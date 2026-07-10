@@ -821,6 +821,107 @@ body.dark-mode .conference-year-heading {
     margin-bottom: 0;
 }
 
+/* Home page — stats, tags, CTAs */
+.home-stat-card {
+    border: 1px solid;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+body.light-mode .home-stat-card {
+    border-color: var(--border-light);
+    background-color: #f9fafb;
+}
+
+body.dark-mode .home-stat-card {
+    border-color: var(--border-dark);
+    background-color: #1a1a1a;
+}
+
+.home-stat-card:hover {
+    transform: translateY(-2px);
+}
+
+.research-tag {
+    display: inline-block;
+    padding: 0.35rem 0.85rem;
+    border-radius: 9999px;
+    font-size: 0.8rem;
+    font-family: 'Fira Code', monospace;
+    border: 1px solid;
+    transition: transform 0.2s ease;
+}
+
+body.light-mode .research-tag {
+    border-color: var(--border-light);
+    background-color: #f3f4f6;
+    color: var(--text-light);
+}
+
+body.dark-mode .research-tag {
+    border-color: rgba(0, 255, 65, 0.25);
+    background-color: rgba(0, 255, 65, 0.06);
+    color: var(--accent-dark);
+}
+
+.research-tag:hover {
+    transform: translateY(-1px);
+}
+
+.home-cta-btn {
+    display: inline-block;
+    padding: 0.6rem 1.25rem;
+    border-radius: 0.375rem;
+    font-family: 'Fira Code', monospace;
+    font-size: 0.85rem;
+    font-weight: 600;
+    border: 1px solid;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    text-decoration: none;
+}
+
+body.light-mode .home-cta-btn {
+    border-color: var(--border-light);
+    background-color: #ffffff;
+    color: var(--text-light);
+}
+
+body.dark-mode .home-cta-btn {
+    border-color: var(--border-dark);
+    background-color: #1a1a1a;
+    color: var(--text-dark);
+}
+
+body.dark-mode .home-cta-btn-accent {
+    border-color: rgba(0, 255, 65, 0.45);
+    color: var(--accent-dark);
+}
+
+.home-cta-btn:hover {
+    transform: translateY(-2px);
+}
+
+body.dark-mode .home-cta-btn:hover {
+    box-shadow: 0 4px 16px rgba(0, 255, 65, 0.12);
+}
+
+/* Thesis card (about page) */
+.thesis-card {
+    border: 1px solid;
+    border-left-width: 3px;
+}
+
+body.light-mode .thesis-card {
+    border-color: var(--border-light);
+    border-left-color: #374151;
+    background-color: #f9fafb;
+}
+
+body.dark-mode .thesis-card {
+    border-color: var(--border-dark);
+    border-left-color: var(--accent-dark);
+    background-color: #141414;
+}
+
 /* Responsive adjustments */
 @media (max-width: 768px) {
     .typewriter-nav {

@@ -20,11 +20,46 @@ const data = {
         },
 
         // Hero / About
-        heroIntro: "Synthesizing Computational Precision with Experimental Reality.",
+        heroIntro: "Bridging molecular-scale modeling with experimental validation in electrochemical sensing and drug discovery.",
         heroGreeting: "Hello, I'm",
         heroAffiliationShort: "Ankara University",
-        bio: "My research focuses on bridging the gap between theoretical modeling techniques and the development of advanced electrochemical sensors. I leverage in silico tools to predict and optimize molecular interactions, which are then validated through experimental electrochemical protocols.",
-        about: "I conduct research at Ankara University integrating both computational and experimental chemistry, with a focus on electrochemical sensing platforms and computational drug discovery.",
+        bio: "I am a Research Assistant at Ankara University, where I integrate computational chemistry—molecular docking, dynamics, and ADME profiling—with experimental work on electrochemical sensing platforms. I aim to connect predictive in silico models with measurable laboratory outcomes.",
+        about: "My path began in computational organic chemistry and cheminformatics; I am now extending this foundation toward 3D-printed electrochemical sensors for environmental and pharmaceutical analysis. I value rigorous methodology, open collaboration, and steady progress in science.",
+
+        homeStats: {
+            articles: 4,
+            conferences: 13,
+            focus: "3D-printed electrochemical sensors & computational drug discovery"
+        },
+
+        researchInterests: [
+            "Computational Chemistry",
+            "Molecular Docking & MD",
+            "ADME / ADMET Profiling",
+            "Electrochemical Sensing",
+            "3D-Printed Electrodes",
+            "Cheminformatics"
+        ],
+
+        thesis: {
+            degree: "M.Sc. in Chemistry",
+            degreeLabel: "Master's Thesis",
+            title: "Development of 3D-Printed Electrodes for the Determination of Nitro-Polycyclic Aromatic Hydrocarbons (Nitro-PAHs)",
+            institution: "Ankara University, Graduate School of Natural and Applied Sciences",
+            period: "2023–2026",
+            gpa: "3.93/4.00",
+            advisor: "Assoc. Prof. Müşerref Önal",
+            summary: "Stereolithography/FDM-based 3D-printed electrochemical cells with graphene-doped electrodes for the amperometric detection of endocrine-disrupting nitro-PAHs.",
+            link: "https://www.researchgate.net/profile/Harun-Nalcakan"
+        },
+
+        awards: [
+            {
+                year: 2025,
+                title: "First Place Poster Award — MÜEFKON",
+                description: "Computer-aided design of heterogeneous cancer cell membranes for drug discovery. Marmara University Faculty of Pharmacy National Congress (May 2025)."
+            }
+        ],
 
         // Section labels used by main.js (navbar, headings, toggles)
         sections: {
@@ -41,8 +76,21 @@ const data = {
             academicCompetency: "Academic & Technical Competency",
             researchAreas: "Research Areas",
             scientificTools: "Scientific Tools",
-            conferencePapers: "Conference Papers",
+            conferencePapers: "Poster & Conference Presentations",
+            conferencePapersNote: "Click any title to view on ResearchGate.",
             peerReviewed: "Peer-Reviewed Articles",
+            thesis: "Master's Thesis",
+            thesisAdvisor: "Advisor",
+            thesisGpa: "GPA",
+            awards: "Awards & Recognition",
+            researchFocus: "Research Focus",
+            atAGlance: "At a Glance",
+            publicationsCount: "Peer-reviewed articles",
+            conferenceCount: "Poster & conference presentations",
+            currentFocus: "Current focus",
+            explorePublications: "Explore Publications",
+            researchPortfolio: "Research Portfolio",
+            viewOnResearchGate: "View on ResearchGate",
             profilePhoto: "Profile Photo",
             nglAttribution: "Powered by NGL Viewer",
             footerTagline: "Built with Computational Minimalism.",
@@ -202,6 +250,11 @@ const data = {
             ],
             conferences: [
                 {
+                    year: 2025,
+                    title: "Computer-Aided Design of Heterogeneous Cancer Cell Membranes for Drug Discovery",
+                    venue: "Marmara University Faculty of Pharmacy National Congress — MÜEFKON (May 2025) · First Place Poster Award"
+                },
+                {
                     year: 2023,
                     title: "Crafting Excellence in LIM Kinase 1 Inhibition: Pharmacophore-Based Virtual Screening and AI-Boosted ADMET Insight",
                     venue: "9th International BAU Drug Design Congress (November 2023)"
@@ -329,11 +382,46 @@ const data = {
         },
 
         // Hero / Hakkımda
-        heroIntro: "Hesaplamalı Kimya ve Deneysel Doğrulamayı Sentezliyorum.",
+        heroIntro: "Moleküler ölçekteki modellemeyi elektrokimyasal algılama ve ilaç keşfinde deneysel doğrulamayla buluşturuyorum.",
         heroGreeting: "Merhaba, ben",
         heroAffiliationShort: "Ankara Üniversitesi",
-        bio: "Araştırmalarım, teorik modelleme teknikleri ile ileri elektrokimyasal sensörlerin geliştirilmesi arasındaki köprüyü kurmaya odaklanmaktadır. In silico araçları moleküler etkileşimleri öngörmek ve optimize etmek için kullanıyor, bu öngörüleri deneysel elektrokimyasal protokollerle doğruluyorum.",
-        about: "Ankara Üniversitesi'nde, elektrokimyasal algılama platformları ve hesaplamalı ilaç keşfi odaklı hesaplamalı ve deneysel kimya araştırmaları yürütmekteyim.",
+        bio: "Ankara Üniversitesi'nde araştırma görevlisi olarak hesaplamalı kimya (moleküler yerleştirme, dinamik simülasyonlar, ADME profilleme) ile elektrokimyasal algılama platformları üzerine deneysel çalışmaları bir arada yürütüyorum. In silico öngörüleri ölçülebilir laboratuvar sonuçlarıyla ilişkilendirmeyi hedefliyorum.",
+        about: "Araştırma yolculuğuma hesaplamalı organik kimya ve kemoinformatik ile başladım; bu birikimi çevresel ve farmasötik analiz için 3B baskılı elektrokimyasal sensörlere taşıyorum. Titiz metodoloji, iş birliğine açıklık ve bilimde istikrarlı ilerlemeyi önemsiyorum.",
+
+        homeStats: {
+            articles: 4,
+            conferences: 13,
+            focus: "3B baskılı elektrokimyasal sensörler ve hesaplamalı ilaç keşfi"
+        },
+
+        researchInterests: [
+            "Hesaplamalı Kimya",
+            "Moleküler Yerleştirme ve MD",
+            "ADME / ADMET Profilleme",
+            "Elektrokimyasal Algılama",
+            "3B Baskılı Elektrotlar",
+            "Kemoinformatik"
+        ],
+
+        thesis: {
+            degree: "Kimya Yüksek Lisans",
+            degreeLabel: "Yüksek Lisans Tezi",
+            title: "Endokrin Bozucu Nitro-Polisiklik Aromatik Hidrokarbonların (Nitro-PAH) Tayini için 3B Baskılı Elektrotların Geliştirilmesi",
+            institution: "Ankara Üniversitesi, Fen Bilimleri Enstitüsü",
+            period: "2023–2026",
+            gpa: "3.93/4.00",
+            advisor: "Doç. Dr. Müşerref Önal",
+            summary: "Stereolitografi/FDM tabanlı 3B baskılı elektrokimyasal hücrelerde grafen katkılı elektrotların geliştirilmesi ve nitro-PAH'ların amperometrik tayini.",
+            link: "https://www.researchgate.net/profile/Harun-Nalcakan"
+        },
+
+        awards: [
+            {
+                year: 2025,
+                title: "Birincilik Poster Ödülü — MÜEFKON",
+                description: "Heterojen kanser hücre zarlarının bilgisayar destekli tasarımı ve ilaç keşfinde kullanımı. Marmara Üniversitesi Eczacılık Fakültesi Ulusal Kongresi (Mayıs 2025)."
+            }
+        ],
 
         sections: {
             home: "Ana Sayfa",
@@ -349,8 +437,21 @@ const data = {
             academicCompetency: "Akademik ve Teknik Yeterlilik",
             researchAreas: "Araştırma Alanları",
             scientificTools: "Bilimsel Araçlar",
-            conferencePapers: "Konferans Bildirileri",
+            conferencePapers: "Poster ve Konferans Sunumları",
+            conferencePapersNote: "Başlıklara tıklayarak ResearchGate'te görüntüleyebilirsiniz.",
             peerReviewed: "Hakemli Makaleler",
+            thesis: "Yüksek Lisans Tezi",
+            thesisAdvisor: "Danışman",
+            thesisGpa: "GNO",
+            awards: "Ödüller ve Başarılar",
+            researchFocus: "Araştırma Odakları",
+            atAGlance: "Özet Bakış",
+            publicationsCount: "Hakemli makale",
+            conferenceCount: "Poster ve konferans sunumu",
+            currentFocus: "Güncel odak",
+            explorePublications: "Yayınları İncele",
+            researchPortfolio: "Araştırma Portföyü",
+            viewOnResearchGate: "ResearchGate'te Görüntüle",
             profilePhoto: "Profil Fotoğrafı",
             nglAttribution: "NGL Viewer ile desteklenmektedir",
             footerTagline: "Computational Minimalism ile geliştirildi.",
@@ -503,6 +604,11 @@ const data = {
                 }
             ],
             conferences: [
+                {
+                    year: 2025,
+                    title: "Heterojen Kanser Hücre Membranlarının Bilgisayar Destekli Tasarımı ve İlaç Keşfinde Kullanımı",
+                    venue: "Marmara Üniversitesi Eczacılık Fakültesi Ulusal Kongresi — MÜEFKON (Mayıs 2025) · Birincilik Poster Ödülü"
+                },
                 {
                     year: 2023,
                     title: "Crafting Excellence in LIM Kinase 1 Inhibition: Pharmacophore-Based Virtual Screening and AI-Boosted ADMET Insight",

@@ -17,6 +17,22 @@ function isValidLink(link) {
     return Boolean(link && link !== '#' && !String(link).endsWith('#'));
 }
 
+function buildResearchGateSearchLink(title, authorName) {
+    const query = encodeURIComponent(`${title} ${authorName || ''}`.trim());
+    return `https://www.researchgate.net/search/publication?q=${query}`;
+}
+
+function resolvePublicationLink(item, content) {
+    if (isValidLink(item.link)) return item.link;
+    if (isValidLink(item.doi_link)) return item.doi_link;
+    if (isValidLink(item.researchgate_link)) return item.researchgate_link;
+    const profile = content.contact?.researchgate;
+    if (item.title && isValidLink(profile)) {
+        return buildResearchGateSearchLink(item.title, content.name);
+    }
+    return profile || '#';
+}
+
 function getPagePath(page) {
     return page === 'index' ? '' : `${page}.html`;
 }
@@ -676,6 +692,51 @@ function renderHomePage(content) {
     `;
 
     // Highlights Section (Latest News)
+    const stats = content.homeStats || {};
+    const statsHTML = `
+        <section class="container mx-auto px-4 md:px-6 py-10 max-w-5xl">
+            <h2 class="text-xl md:text-2xl font-bold mb-6 font-mono text-center">${content.sections.atAGlance || ''}</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-6">
+                <div class="home-stat-card p-5 rounded-lg fade-in text-center">
+                    <div class="text-3xl md:text-4xl font-bold font-mono mb-1">${stats.articles || 0}</div>
+                    <p class="text-sm opacity-80">${content.sections.publicationsCount || ''}</p>
+                </div>
+                <div class="home-stat-card p-5 rounded-lg fade-in text-center" style="animation-delay: 0.08s">
+                    <div class="text-3xl md:text-4xl font-bold font-mono mb-1">${stats.conferences || 0}</div>
+                    <p class="text-sm opacity-80">${content.sections.conferenceCount || ''}</p>
+                </div>
+                <div class="home-stat-card p-5 rounded-lg fade-in text-center sm:col-span-1" style="animation-delay: 0.16s">
+                    <p class="text-xs uppercase tracking-wide opacity-60 mb-2 font-mono">${content.sections.currentFocus || ''}</p>
+                    <p class="text-sm md:text-base leading-relaxed">${stats.focus || ''}</p>
+                </div>
+            </div>
+        </section>
+    `;
+
+    const focusHTML = content.researchInterests && content.researchInterests.length > 0 ? `
+        <section class="container mx-auto px-4 md:px-6 pb-8 max-w-4xl">
+            <h2 class="text-xl md:text-2xl font-bold mb-4 font-mono text-center">${content.sections.researchFocus || ''}</h2>
+            <div class="flex flex-wrap justify-center gap-2 md:gap-3">
+                ${content.researchInterests.map((tag, index) => `
+                    <span class="research-tag fade-in" style="animation-delay: ${index * 0.05}s">${tag}</span>
+                `).join('')}
+            </div>
+        </section>
+    ` : '';
+
+    const ctaHTML = `
+        <section class="container mx-auto px-4 md:px-6 pb-12 max-w-3xl">
+            <div class="flex flex-wrap justify-center gap-3 md:gap-4">
+                <a href="publications.html" class="home-cta-btn fade-in">${content.sections.explorePublications || content.sections.publications}</a>
+                <a href="portfolio.html" class="home-cta-btn fade-in" style="animation-delay: 0.08s">${content.sections.researchPortfolio || content.sections.portfolio}</a>
+                <a href="about.html" class="home-cta-btn fade-in" style="animation-delay: 0.16s">${content.sections.about}</a>
+                ${isValidLink(content.contact?.researchgate) ? `
+                    <a href="${content.contact.researchgate}" target="_blank" rel="noopener" class="home-cta-btn home-cta-btn-accent fade-in" style="animation-delay: 0.24s">${content.sections.viewOnResearchGate || 'ResearchGate'}</a>
+                ` : ''}
+            </div>
+        </section>
+    `;
+
     const highlightsHTML = content.news && content.news.length > 0 ? `
         <section class="container mx-auto px-4 md:px-6 py-12 max-w-4xl">
             <h2 class="text-2xl md:text-3xl font-bold mb-8 font-mono text-center">${content.sections.news}</h2>
@@ -695,7 +756,7 @@ function renderHomePage(content) {
         </section>
     ` : '';
 
-    mainContent.innerHTML = heroHTML + highlightsHTML;
+    mainContent.innerHTML = heroHTML + statsHTML + focusHTML + ctaHTML + highlightsHTML;
 
     // Initialize NGL viewer after DOM is updated
     initNGLViewer();
@@ -797,16 +858,67 @@ function renderAboutPage(content) {
         `)
         .join('');
 
+    const interestsHTML = content.researchInterests && content.researchInterests.length > 0 ? `
+        <div class="mb-10">
+            <h2 class="text-xl md:text-2xl font-bold mb-4 font-mono">${content.sections.researchFocus || ''}</h2>
+            <div class="flex flex-wrap gap-2 md:gap-3">
+                ${content.researchInterests.map(tag => `<span class="research-tag">${tag}</span>`).join('')}
+            </div>
+        </div>
+    ` : '';
+
+    const thesis = content.thesis || {};
+    const thesisHTML = thesis.title ? `
+        <div class="thesis-card p-6 rounded-lg mb-12 fade-in">
+            <h2 class="text-xl md:text-2xl font-bold mb-4 font-mono">${content.sections.thesis || ''}</h2>
+            <div class="space-y-2 text-sm md:text-base">
+                <p><span class="font-semibold font-mono">${thesis.degreeLabel || thesis.degree || ''}</span>${thesis.period ? ` · ${thesis.period}` : ''}</p>
+                <h3 class="text-base md:text-lg font-semibold leading-snug">${thesis.title}</h3>
+                <p class="opacity-90">${thesis.institution || ''}</p>
+                ${thesis.advisor ? `<p class="opacity-80">${content.sections.thesisAdvisor || ''}: ${thesis.advisor}</p>` : ''}
+                ${thesis.gpa ? `<p class="opacity-80">${content.sections.thesisGpa || ''}: ${thesis.gpa}</p>` : ''}
+                ${thesis.summary ? `<p class="opacity-90 leading-relaxed mt-3">${thesis.summary}</p>` : ''}
+            </div>
+            ${isValidLink(thesis.link) ? `
+                <a href="${thesis.link}" target="_blank" rel="noopener" class="inline-block mt-4 text-sm font-mono publication-title-link">
+                    ${content.sections.viewOnResearchGate || 'ResearchGate'} →
+                </a>
+            ` : ''}
+        </div>
+    ` : '';
+
+    const awardsHTML = content.awards && content.awards.length > 0 ? `
+        <div class="mb-12">
+            <h2 class="text-xl md:text-2xl font-bold mb-4 font-mono">${content.sections.awards || ''}</h2>
+            <div class="space-y-4">
+                ${content.awards.map((award, index) => `
+                    <div class="highlight-card p-4 md:p-5 rounded-lg fade-in" style="animation-delay: ${index * 0.08}s">
+                        <div class="flex flex-col md:flex-row gap-2 md:gap-4">
+                            <span class="text-sm font-mono opacity-75 md:min-w-[60px]">${award.year || ''}</span>
+                            <div>
+                                <h3 class="font-semibold font-mono mb-1">${award.title}</h3>
+                                <p class="text-sm opacity-90 leading-relaxed">${award.description}</p>
+                            </div>
+                        </div>
+                    </div>
+                `).join('')}
+            </div>
+        </div>
+    ` : '';
+
     mainContent.innerHTML = `
         <section class="container mx-auto px-4 md:px-6 py-12 max-w-5xl">
             <div class="fade-in">
                 <h1 class="text-3xl md:text-4xl font-bold mb-8 font-mono">${content.sections.about}</h1>
-                <div class="mb-12">
+                <div class="mb-10">
                     <p class="text-base md:text-lg leading-relaxed mb-4">${content.bio}</p>
                     <p class="text-base md:text-lg leading-relaxed">${content.about}</p>
                 </div>
-                
+
+                ${interestsHTML}
                 ${cvButtonHTML}
+                ${thesisHTML}
+                ${awardsHTML}
                 
                 <!-- Work & Education Timeline -->
                 <div class="mb-16">
@@ -861,14 +973,21 @@ function renderPublicationsPage(content) {
 
     const conferencesHTML = groupConferencesByYear(conferences)
         .map((group, groupIndex) => {
-            const itemsHTML = group.items.map((conf, index) => `
+            const itemsHTML = group.items.map((conf, index) => {
+                const confLink = resolvePublicationLink(conf, content);
+                const titleMarkup = isValidLink(confLink) && confLink !== '#'
+                    ? `<a href="${confLink}" target="_blank" rel="noopener" class="publication-title-link">${conf.title}</a>`
+                    : `<span class="publication-title-link">${conf.title}</span>`;
+
+                return `
                 <div class="publication-item mb-5 fade-in" style="animation-delay: ${((groupIndex * 0.15) + (index * 0.08))}s">
                     <h3 class="text-lg font-semibold mb-1">
-                        <span class="publication-title-link">${conf.title}</span>
+                        ${titleMarkup}
                     </h3>
                     <p class="publication-citation">${conf.venue}</p>
                 </div>
-            `).join('');
+            `;
+            }).join('');
 
             return `
                 <div class="conference-year-group mb-8">
@@ -889,7 +1008,8 @@ function renderPublicationsPage(content) {
                 </div>
                 ${conferencesHTML ? `
                 <div class="mt-10">
-                    <h2 class="text-2xl md:text-3xl font-bold mb-6 font-mono">${content.sections.conferencePapers}</h2>
+                    <h2 class="text-2xl md:text-3xl font-bold mb-2 font-mono">${content.sections.conferencePapers}</h2>
+                    ${content.sections.conferencePapersNote ? `<p class="text-sm opacity-75 mb-6">${content.sections.conferencePapersNote}</p>` : ''}
                     ${conferencesHTML}
                 </div>
                 ` : ''}
