@@ -12,6 +12,7 @@ const data = {
         email: "hnalcakan@ankara.edu.tr",
         location: "Ankara, Türkiye",
         cvLink: "assets/cv/harun-nalcakan-cv.pdf",
+        profileImage: "assets/images/profile.jpg",
 
         site: {
             baseUrl: "https://harunalcakan.github.io",
@@ -20,15 +21,14 @@ const data = {
         },
 
         // Hero / About
-        heroIntro: "Bridging molecular-scale modeling with experimental validation in electrochemical sensing and drug discovery.",
+        heroIntro: "Computational and experimental chemistry at Ankara University — from in silico modeling to electrochemical sensing.",
         heroGreeting: "Hello, I'm",
         heroAffiliationShort: "Ankara University",
-        bio: "I am a Research Assistant at Ankara University, where I integrate computational chemistry—molecular docking, dynamics, and ADME profiling—with experimental work on electrochemical sensing platforms. I aim to connect predictive in silico models with measurable laboratory outcomes.",
-        about: "My path began in computational organic chemistry and cheminformatics; I am now extending this foundation toward 3D-printed electrochemical sensors for environmental and pharmaceutical analysis. I value rigorous methodology, open collaboration, and steady progress in science.",
+        bio: "Research Assistant in the Department of Chemistry at Ankara University. I work at the interface of computational chemistry and electrochemical sensing, connecting in silico predictions with experimental validation.",
 
         homeStats: {
             articles: 4,
-            conferences: 13,
+            conferences: 12,
             focus: "3D-printed electrochemical sensors & computational drug discovery"
         },
 
@@ -42,30 +42,26 @@ const data = {
         ],
 
         thesis: {
-            degree: "M.Sc. in Chemistry",
             degreeLabel: "Master's Thesis",
-            title: "Development of 3D-Printed Electrodes for the Determination of Nitro-Polycyclic Aromatic Hydrocarbons (Nitro-PAHs)",
-            institution: "Ankara University, Graduate School of Natural and Applied Sciences",
-            period: "2023–2026",
+            title: "Development of 3D-printed electrodes using polylactic acid-based conductive filament and their application in amperometric determination of nitro-polycyclic aromatic hydrocarbons",
+            year: "2026",
+            type: "M.Sc.",
+            language: "Turkish",
+            subject: "Chemistry",
+            institution: "Ankara University / Graduate School of Natural and Applied Sciences / Department of Chemistry / Chemistry Program",
+            advisors: "Prof. Dr. Müşerref Önal",
+            coAdvisor: "Dr. Gülbin Kurtay",
             gpa: "3.93/4.00",
-            advisor: "Assoc. Prof. Müşerref Önal",
-            summary: "Stereolithography/FDM-based 3D-printed electrochemical cells with graphene-doped electrodes for the amperometric detection of endocrine-disrupting nitro-PAHs.",
             link: "https://www.researchgate.net/profile/Harun-Nalcakan"
         },
 
-        awards: [
-            {
-                year: 2025,
-                title: "First Place Poster Award — MÜEFKON",
-                description: "Computer-aided design of heterogeneous cancer cell membranes for drug discovery. Marmara University Faculty of Pharmacy National Congress (May 2025)."
-            }
-        ],
+        portfolioIntro: "Interactive molecular visualization — a glimpse into the structural models that inform my computational work.",
 
         // Section labels used by main.js (navbar, headings, toggles)
         sections: {
             home: "Home",
             about: "About",
-            portfolio: "Research Portfolio",
+            portfolio: "Methods & Tools",
             publications: "Publications",
             contact: "Contact",
             news: "Latest News",
@@ -81,7 +77,14 @@ const data = {
             peerReviewed: "Peer-Reviewed Articles",
             thesis: "Master's Thesis",
             thesisAdvisor: "Advisor",
+            thesisCoAdvisor: "Co-advisor",
+            thesisYear: "Year",
+            thesisType: "Degree",
+            thesisLanguage: "Language",
+            thesisSubject: "Subject",
             thesisGpa: "GPA",
+            molecularVisualization: "Molecular Visualization",
+            closePhoto: "Close",
             awards: "Awards & Recognition",
             researchFocus: "Research Focus",
             atAGlance: "At a Glance",
@@ -89,7 +92,7 @@ const data = {
             conferenceCount: "Poster & conference presentations",
             currentFocus: "Current focus",
             explorePublications: "Explore Publications",
-            researchPortfolio: "Research Portfolio",
+            researchPortfolio: "Methods & Tools",
             viewOnResearchGate: "View on ResearchGate",
             profilePhoto: "Profile Photo",
             nglAttribution: "Powered by NGL Viewer",
@@ -101,7 +104,7 @@ const data = {
         pageTitles: {
             index: "Harun Nalçakan — Academic Portfolio",
             about: "About — Harun Nalçakan",
-            portfolio: "Research Portfolio — Harun Nalçakan",
+            portfolio: "Methods & Tools — Harun Nalçakan",
             publications: "Publications — Harun Nalçakan",
             contact: "Contact — Harun Nalçakan"
         },
@@ -109,7 +112,7 @@ const data = {
         metaDescriptions: {
             index: "Harun Nalçakan — Research Assistant at Ankara University. Computational and experimental chemistry, electrochemical sensing, and drug discovery.",
             about: "Biography, education, and work experience of Harun Nalçakan, Research Assistant in Chemistry at Ankara University.",
-            portfolio: "Research areas, scientific tools, and technical competencies in computational and experimental chemistry.",
+            portfolio: "Methods, scientific tools, molecular visualization, and technical competencies in computational and experimental chemistry.",
             publications: "Peer-reviewed articles and conference presentations by Harun Nalçakan in computational chemistry and drug discovery.",
             contact: "Contact Harun Nalçakan — email, ORCID, ResearchGate, LinkedIn, and GitHub."
         },
@@ -129,30 +132,29 @@ const data = {
             {
                 degree: "Ph.D. in Chemistry",
                 institution: "Ankara University",
-                year: "2026-Ongoing",
-                description: "Advanced doctoral research phase."
+                year: "2026–Ongoing",
+                description: ""
             },
             {
                 degree: "M.Sc. in Chemistry",
                 institution: "Ankara University",
-                year: "2023-2026",
-                description: "GPA: 3.93/4.00 | Thesis: 3D-Printed Electrodes for Nitro-PAH determination."
+                year: "2023–2026",
+                description: "GPA: 3.93/4.00"
             },
             {
                 degree: "B.Sc. in Chemistry",
                 institution: "Ankara University",
-                year: "2016-2021",
+                year: "2016–2021",
                 description: "GPA: 3.34/4.00"
             }
         ],
 
-        // Work Experience
         workExperience: [
             {
                 role: "Research Assistant",
-                institution: "Ankara University",
-                year: "2023-Present",
-                description: "Focusing on surface chemistry and computational modeling."
+                institution: "Ankara University, Department of Chemistry",
+                year: "2023–Present",
+                description: ""
             }
         ],
 
@@ -249,11 +251,6 @@ const data = {
                 }
             ],
             conferences: [
-                {
-                    year: 2025,
-                    title: "Computer-Aided Design of Heterogeneous Cancer Cell Membranes for Drug Discovery",
-                    venue: "Marmara University Faculty of Pharmacy National Congress — MÜEFKON (May 2025) · First Place Poster Award"
-                },
                 {
                     year: 2023,
                     title: "Crafting Excellence in LIM Kinase 1 Inhibition: Pharmacophore-Based Virtual Screening and AI-Boosted ADMET Insight",
@@ -374,6 +371,7 @@ const data = {
         email: "hnalcakan@ankara.edu.tr",
         location: "Ankara, Türkiye",
         cvLink: "assets/cv/harun-nalcakan-cv.pdf",
+        profileImage: "assets/images/profile.jpg",
 
         site: {
             baseUrl: "https://harunalcakan.github.io",
@@ -382,15 +380,14 @@ const data = {
         },
 
         // Hero / Hakkımda
-        heroIntro: "Moleküler ölçekteki modellemeyi elektrokimyasal algılama ve ilaç keşfinde deneysel doğrulamayla buluşturuyorum.",
+        heroIntro: "Ankara Üniversitesi'nde hesaplamalı ve deneysel kimya — in silico modellemeden elektrokimyasal algılamaya.",
         heroGreeting: "Merhaba, ben",
         heroAffiliationShort: "Ankara Üniversitesi",
-        bio: "Ankara Üniversitesi'nde araştırma görevlisi olarak hesaplamalı kimya (moleküler yerleştirme, dinamik simülasyonlar, ADME profilleme) ile elektrokimyasal algılama platformları üzerine deneysel çalışmaları bir arada yürütüyorum. In silico öngörüleri ölçülebilir laboratuvar sonuçlarıyla ilişkilendirmeyi hedefliyorum.",
-        about: "Araştırma yolculuğuma hesaplamalı organik kimya ve kemoinformatik ile başladım; bu birikimi çevresel ve farmasötik analiz için 3B baskılı elektrokimyasal sensörlere taşıyorum. Titiz metodoloji, iş birliğine açıklık ve bilimde istikrarlı ilerlemeyi önemsiyorum.",
+        bio: "Ankara Üniversitesi Kimya Bölümü'nde araştırma görevlisiyim. Hesaplamalı kimya ile elektrokimyasal algılamayı bir arada yürütüyor; in silico öngörüleri deneysel doğrulamayla ilişkilendiriyorum.",
 
         homeStats: {
             articles: 4,
-            conferences: 13,
+            conferences: 12,
             focus: "3B baskılı elektrokimyasal sensörler ve hesaplamalı ilaç keşfi"
         },
 
@@ -404,29 +401,25 @@ const data = {
         ],
 
         thesis: {
-            degree: "Kimya Yüksek Lisans",
             degreeLabel: "Yüksek Lisans Tezi",
-            title: "Endokrin Bozucu Nitro-Polisiklik Aromatik Hidrokarbonların (Nitro-PAH) Tayini için 3B Baskılı Elektrotların Geliştirilmesi",
-            institution: "Ankara Üniversitesi, Fen Bilimleri Enstitüsü",
-            period: "2023–2026",
+            title: "Polilaktik asit tabanlı iletken filament kullanılarak 3b baskılı elektrotların geliştirilmesi ve nitro-polisiklik aromatik hidrokarbonların amperometrik tayininde uygulanması",
+            year: "2026",
+            type: "Yüksek Lisans",
+            language: "Türkçe",
+            subject: "Kimya",
+            institution: "Ankara Üniversitesi / Fen Bilimleri Enstitüsü / Kimya Anabilim Dalı / Kimya Bilim Dalı",
+            advisors: "Prof. Dr. Müşerref Önal",
+            coAdvisor: "Dr. Öğr. Üyesi Gülbin Kurtay",
             gpa: "3.93/4.00",
-            advisor: "Doç. Dr. Müşerref Önal",
-            summary: "Stereolitografi/FDM tabanlı 3B baskılı elektrokimyasal hücrelerde grafen katkılı elektrotların geliştirilmesi ve nitro-PAH'ların amperometrik tayini.",
             link: "https://www.researchgate.net/profile/Harun-Nalcakan"
         },
 
-        awards: [
-            {
-                year: 2025,
-                title: "Birincilik Poster Ödülü — MÜEFKON",
-                description: "Heterojen kanser hücre zarlarının bilgisayar destekli tasarımı ve ilaç keşfinde kullanımı. Marmara Üniversitesi Eczacılık Fakültesi Ulusal Kongresi (Mayıs 2025)."
-            }
-        ],
+        portfolioIntro: "Etkileşimli moleküler görselleştirme — hesaplamalı çalışmalarıma yön veren yapısal modellere kısa bir bakış.",
 
         sections: {
             home: "Ana Sayfa",
             about: "Hakkımda",
-            portfolio: "Araştırma Portföyü",
+            portfolio: "Yöntemler ve Araçlar",
             publications: "Yayınlar",
             contact: "İletişim",
             news: "Haberler",
@@ -442,7 +435,14 @@ const data = {
             peerReviewed: "Hakemli Makaleler",
             thesis: "Yüksek Lisans Tezi",
             thesisAdvisor: "Danışman",
+            thesisCoAdvisor: "Eş danışman",
+            thesisYear: "Yıl",
+            thesisType: "Tür",
+            thesisLanguage: "Dil",
+            thesisSubject: "Konu",
             thesisGpa: "GNO",
+            molecularVisualization: "Moleküler Görselleştirme",
+            closePhoto: "Kapat",
             awards: "Ödüller ve Başarılar",
             researchFocus: "Araştırma Odakları",
             atAGlance: "Özet Bakış",
@@ -450,7 +450,7 @@ const data = {
             conferenceCount: "Poster ve konferans sunumu",
             currentFocus: "Güncel odak",
             explorePublications: "Yayınları İncele",
-            researchPortfolio: "Araştırma Portföyü",
+            researchPortfolio: "Yöntemler ve Araçlar",
             viewOnResearchGate: "ResearchGate'te Görüntüle",
             profilePhoto: "Profil Fotoğrafı",
             nglAttribution: "NGL Viewer ile desteklenmektedir",
@@ -462,7 +462,7 @@ const data = {
         pageTitles: {
             index: "Harun Nalçakan — Akademik Portföy",
             about: "Hakkımda — Harun Nalçakan",
-            portfolio: "Araştırma Portföyü — Harun Nalçakan",
+            portfolio: "Yöntemler ve Araçlar — Harun Nalçakan",
             publications: "Yayınlar — Harun Nalçakan",
             contact: "İletişim — Harun Nalçakan"
         },
@@ -470,7 +470,7 @@ const data = {
         metaDescriptions: {
             index: "Harun Nalçakan — Ankara Üniversitesi Kimya Bölümü Araştırma Görevlisi. Hesaplamalı ve deneysel kimya, elektrokimyasal algılama ve ilaç keşfi.",
             about: "Ankara Üniversitesi Kimya Bölümü Araştırma Görevlisi Harun Nalçakan'ın özgeçmişi, eğitimi ve iş deneyimi.",
-            portfolio: "Hesaplamalı ve deneysel kimya alanında araştırma alanları, bilimsel araçlar ve teknik yeterlilikler.",
+            portfolio: "Hesaplamalı ve deneysel kimyada yöntemler, bilimsel araçlar, moleküler görselleştirme ve teknik yeterlilikler.",
             publications: "Harun Nalçakan'ın hesaplamalı kimya ve ilaç keşfi alanındaki hakemli makaleleri ve konferans bildirileri.",
             contact: "Harun Nalçakan ile iletişim — e-posta, ORCID, ResearchGate, LinkedIn ve GitHub."
         },
@@ -489,19 +489,19 @@ const data = {
             {
                 degree: "Kimya Doktora",
                 institution: "Ankara Üniversitesi",
-                year: "2026-Devam ediyor",
-                description: "İleri doktora araştırma aşaması."
+                year: "2026–Devam ediyor",
+                description: ""
             },
             {
                 degree: "Kimya Yüksek Lisans",
                 institution: "Ankara Üniversitesi",
-                year: "2023-2026",
-                description: "GNO: 3.93/4.00 | Tez: Nitro-PAH tayini için 3B baskılı elektrotların geliştirilmesi."
+                year: "2023–2026",
+                description: "GNO: 3.93/4.00"
             },
             {
                 degree: "Kimya Lisans",
                 institution: "Ankara Üniversitesi",
-                year: "2016-2021",
+                year: "2016–2021",
                 description: "GNO: 3.34/4.00"
             }
         ],
@@ -509,9 +509,9 @@ const data = {
         workExperience: [
             {
                 role: "Araştırma Görevlisi",
-                institution: "Ankara Üniversitesi",
-                year: "2023-Günümüz",
-                description: "Yüzey kimyası ve hesaplamalı modelleme üzerine odaklanmaktadır."
+                institution: "Ankara Üniversitesi, Kimya Bölümü",
+                year: "2023–Günümüz",
+                description: ""
             }
         ],
 
@@ -604,11 +604,6 @@ const data = {
                 }
             ],
             conferences: [
-                {
-                    year: 2025,
-                    title: "Heterojen Kanser Hücre Membranlarının Bilgisayar Destekli Tasarımı ve İlaç Keşfinde Kullanımı",
-                    venue: "Marmara Üniversitesi Eczacılık Fakültesi Ulusal Kongresi — MÜEFKON (Mayıs 2025) · Birincilik Poster Ödülü"
-                },
                 {
                     year: 2023,
                     title: "Crafting Excellence in LIM Kinase 1 Inhibition: Pharmacophore-Based Virtual Screening and AI-Boosted ADMET Insight",

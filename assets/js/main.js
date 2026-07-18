@@ -11,6 +11,8 @@ let mobileMenuClickHandler = null;
 let mobileMenuOutsideClickHandler = null;
 let mobileMenuResizeHandler = null;
 let nglResizeHandler = null;
+let profileLightboxHandler = null;
+let profileLightboxKeyHandler = null;
 
 // Utility helpers
 function isValidLink(link) {
@@ -35,6 +37,113 @@ function resolvePublicationLink(item, content) {
 
 function getPagePath(page) {
     return page === 'index' ? '' : `${page}.html`;
+}
+
+function getProfileInitials(content) {
+    const first = (content.firstName || content.name?.split(' ')[0] || '').charAt(0);
+    const last = (content.lastName || content.name?.split(' ').slice(1).join(' ') || '').charAt(0);
+    return (first + last).toUpperCase() || 'HN';
+}
+
+function getFlagSVG(lang) {
+    if (lang === 'tr') {
+        return `<svg class="lang-flag-icon" viewBox="0 0 3 2" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect width="3" height="2" fill="#E30A17"/><circle cx="1.15" cy="1" r="0.4" fill="#fff"/><circle cx="1.28" cy="1" r="0.32" fill="#E30A17"/><polygon fill="#fff" points="1.7,0.78 1.77,0.97 1.97,0.97 1.81,1.09 1.88,1.28 1.7,1.16 1.52,1.28 1.59,1.09 1.43,0.97 1.63,0.97"/></svg>`;
+    }
+    return `<svg class="lang-flag-icon" viewBox="0 0 60 30" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><clipPath id="gb-s"><path d="M0,0 v30 h60 v-30 z"/></clipPath><clipPath id="gb-t"><path d="M30,15 h30 v15 z v-15 h-30 z h-30 v15 z v-15 h30 z"/></clipPath><g clip-path="url(#gb-s)"><path d="M0,0 v30 h60 v-30 z" fill="#012169"/><path d="M0,0 L60,30 M60,0 L0,30" stroke="#fff" stroke-width="6"/><path d="M0,0 L60,30 M60,0 L0,30" clip-path="url(#gb-t)" stroke="#C8102E" stroke-width="4"/><path d="M30,0 v30 M0,15 h60" stroke="#fff" stroke-width="10"/><path d="M30,0 v30 M0,15 h60" stroke="#C8102E" stroke-width="6"/></g></svg>`;
+}
+
+function buildNavAvatarHTML(content) {
+    const initials = getProfileInitials(content);
+    const imageSrc = content.profileImage || '';
+    const label = content.sections?.profilePhoto || 'Profile photo';
+
+    if (imageSrc) {
+        return `
+            <button type="button" id="nav-profile-avatar" class="nav-profile-avatar" aria-label="${label}">
+                <img src="${imageSrc}" alt="" class="nav-profile-img" onerror="this.remove(); this.parentElement.classList.add('nav-profile-avatar-fallback-only');">
+                <span class="nav-profile-fallback">${initials}</span>
+            </button>
+        `;
+    }
+
+    return `
+        <button type="button" id="nav-profile-avatar" class="nav-profile-avatar nav-profile-avatar-fallback-only" aria-label="${label}">
+            <span class="nav-profile-fallback">${initials}</span>
+        </button>
+    `;
+}
+
+function closeProfileLightbox() {
+    const lightbox = document.getElementById('profile-lightbox');
+    if (lightbox) {
+        lightbox.classList.add('hidden');
+        document.body.classList.remove('lightbox-open');
+    }
+}
+
+function setupProfileLightbox(content) {
+    const avatar = document.getElementById('nav-profile-avatar');
+    const imageSrc = content.profileImage;
+    if (!avatar) return;
+
+    if (profileLightboxHandler) {
+        avatar.removeEventListener('click', profileLightboxHandler);
+    }
+
+    profileLightboxHandler = () => {
+        if (!imageSrc) return;
+
+        let lightbox = document.getElementById('profile-lightbox');
+        if (!lightbox) {
+            lightbox = document.createElement('div');
+            lightbox.id = 'profile-lightbox';
+            lightbox.className = 'profile-lightbox hidden';
+            lightbox.innerHTML = `
+                <div class="profile-lightbox-backdrop" data-close-lightbox></div>
+                <figure class="profile-lightbox-content">
+                    <button type="button" class="profile-lightbox-close" data-close-lightbox aria-label="${content.sections.closePhoto || 'Close'}">&times;</button>
+                    <img id="profile-lightbox-img" src="" alt="${content.name}" class="profile-lightbox-img">
+                </figure>
+            `;
+            document.body.appendChild(lightbox);
+            lightbox.querySelectorAll('[data-close-lightbox]').forEach(el => {
+                el.addEventListener('click', closeProfileLightbox);
+            });
+            profileLightboxKeyHandler = (e) => {
+                if (e.key === 'Escape') closeProfileLightbox();
+            };
+            document.addEventListener('keydown', profileLightboxKeyHandler);
+        }
+
+        const img = document.getElementById('profile-lightbox-img');
+        if (img) img.src = imageSrc;
+        lightbox.classList.remove('hidden');
+        document.body.classList.add('lightbox-open');
+    };
+
+    avatar.addEventListener('click', profileLightboxHandler);
+}
+
+function sortTimelineByYear(items) {
+    return [...items].sort((a, b) => {
+        const yearA = parseInt(String(a.year).split(/[–-]/)[0], 10) || 0;
+        const yearB = parseInt(String(b.year).split(/[–-]/)[0], 10) || 0;
+        return yearB - yearA;
+    });
+}
+
+function buildTimelineHTML(items, baseDelay = 0) {
+    return items.map((item, index) => `
+        <div class="timeline-item fade-in" style="animation-delay: ${baseDelay + index * 0.1}s">
+            <div class="timeline-marker"></div>
+            <div class="timeline-content">
+                <div class="timeline-badge">${item.year}</div>
+                <h3 class="timeline-title font-mono font-bold text-lg md:text-xl mb-1">${item.title}</h3>
+                <p class="timeline-institution text-base md:text-lg mb-2 font-semibold">${item.institution}</p>
+                ${item.description ? `<p class="timeline-description text-sm md:text-base opacity-90">${item.description}</p>` : ''}
+            </div>
+        </div>
+    `).join('');
 }
 
 function getAbsolutePageUrl(content, page) {
@@ -253,10 +362,13 @@ function injectNavbar() {
         <nav class="fixed top-0 w-full z-50 backdrop-blur-sm bg-opacity-90 border-b transition-colors duration-300 navbar-anthracite" id="navbar">
             <div class="container mx-auto px-4 md:px-6 py-4">
                 <div class="flex justify-between items-center">
-                    <div class="font-mono text-sm md:text-base lg:text-lg">
-                        <a href="index.html" class="nav-brand-link" id="nav-brand">
-                            <span class="nav-prompt">></span> <span id="typewriter-text" class="typewriter-nav"></span>
-                        </a>
+                    <div class="flex items-center gap-2 md:gap-3 min-w-0">
+                        ${buildNavAvatarHTML(content)}
+                        <div class="font-mono text-sm md:text-base lg:text-lg min-w-0">
+                            <a href="index.html" class="nav-brand-link" id="nav-brand">
+                                <span class="nav-prompt">></span> <span id="typewriter-text" class="typewriter-nav"></span>
+                            </a>
+                        </div>
                     </div>
                     <div class="flex items-center gap-2 md:gap-4 lg:gap-6 relative">
                         <!-- Desktop Navigation -->
@@ -287,10 +399,9 @@ function injectNavbar() {
                         <!-- Language Toggle Pill Button -->
                         <button id="language-toggle-btn" class="language-toggle-pill ${currentLanguage === 'tr' ? 'language-toggle-active' : ''}" aria-label="Toggle language">
                             <span class="language-toggle-track">
-                                <span class="language-toggle-slider">
-                                    <span class="language-toggle-flag language-flag-en">🇬🇧</span>
-                                    <span class="language-toggle-flag language-flag-tr">🇹🇷</span>
-                                </span>
+                                <span class="language-flag-slot language-flag-en-slot">${getFlagSVG('en')}</span>
+                                <span class="language-flag-slot language-flag-tr-slot">${getFlagSVG('tr')}</span>
+                                <span class="language-toggle-slider"></span>
                             </span>
                         </button>
                         <button id="theme-toggle" class="btn-toggle text-xs md:text-sm">${currentTheme === 'dark' ? `☀️ ${content.sections.theme_light}` : `🌙 ${content.sections.theme_dark}`}</button>
@@ -316,6 +427,8 @@ function injectNavbar() {
     // Setup theme toggle
     setupThemeToggle();
     updateThemeToggle();
+
+    setupProfileLightbox(content);
 }
 
 // Typewriter Effect for Navbar Brand (Infinite Loop)
@@ -648,45 +761,17 @@ function renderHomePage(content) {
     const mainContent = document.querySelector('main');
     if (!mainContent) return;
 
-    // Compute full name for greeting (aligned with typewriter data)
-    const firstName = content.firstName || (content.name ? content.name.split(' ')[0] : '');
-    const lastName = content.lastName || (content.name ? content.name.split(' ').slice(1).join(' ') : '');
-    const fullName = `${firstName} ${lastName}`.trim();
-
     const heroSubtitle = `${content.title} · ${content.heroAffiliationShort || ''}`;
 
-    // Hero Section: top visual row (profile + 3D viewer) and bottom text block
     const heroHTML = `
-        <section class="container mx-auto px-4 md:px-6 pt-24 pb-16 min-h-[60vh] flex items-center">
-            <div class="w-full fade-in max-w-5xl mx-auto flex flex-col gap-10">
-
-                <!-- Top row: Profile + 3D viewer -->
-                <div class="w-full flex flex-col md:flex-row items-center justify-center gap-8 md:gap-16">
-                    <div class="flex justify-center w-full md:w-auto">
-                        <div class="w-40 h-40 md:w-48 md:h-48 rounded-full border-2 flex items-center justify-center overflow-hidden home-profile-circle">
-                            <span class="text-xs md:text-sm opacity-70 home-profile-placeholder">${content.sections.profilePhoto}</span>
-                        </div>
-                    </div>
-                    <div class="flex justify-center w-full md:w-auto">
-                        <div id="ngl-viewer-container" class="ngl-viewer-container"></div>
-                    </div>
-                </div>
-
-                <p class="ngl-attribution w-full text-center md:text-right">${content.sections.nglAttribution}</p>
-
-                <!-- Bottom: Intro text -->
-                <div class="w-full text-center space-y-4">
-                    <p class="text-sm md:text-base uppercase tracking-wide hero-greeting">${content.heroGreeting}</p>
-                    <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight hero-heading">
-                        ${fullName || firstName || ''}
-                    </h1>
-                    <p class="text-sm md:text-base hero-subtitle">
-                        ${heroSubtitle}
-                    </p>
-                    <p class="text-base md:text-lg leading-relaxed mt-4 max-w-xl mx-auto">
-                        ${content.heroIntro}
-                    </p>
-                </div>
+        <section class="container mx-auto px-4 md:px-6 pt-28 pb-12 min-h-[40vh] flex items-center">
+            <div class="w-full fade-in max-w-3xl mx-auto text-center space-y-5">
+                <p class="text-lg md:text-xl lg:text-2xl leading-relaxed home-hero-intro">
+                    ${content.heroIntro}
+                </p>
+                <p class="text-sm md:text-base hero-subtitle">
+                    ${heroSubtitle}
+                </p>
             </div>
         </section>
     `;
@@ -757,12 +842,9 @@ function renderHomePage(content) {
     ` : '';
 
     mainContent.innerHTML = heroHTML + statsHTML + focusHTML + ctaHTML + highlightsHTML;
-
-    // Initialize NGL viewer after DOM is updated
-    initNGLViewer();
 }
 
-// NGL Viewer Initialization (homepage)
+// NGL Viewer Initialization (portfolio page)
 function initNGLViewer() {
     if (typeof NGL === 'undefined') return;
 
@@ -801,68 +883,45 @@ function renderAboutPage(content) {
     if (!mainContent) return;
 
     const cvButtonHTML = content.cvLink && isValidLink(content.cvLink) ? `
-        <div class="mb-8">
+        <div class="mb-10">
             <a href="${content.cvLink}" target="_blank" rel="noopener" download class="inline-block btn-toggle">
                 ${content.sections.downloadCV}
             </a>
         </div>
     ` : '';
 
-    // Timeline: Combine work experience and education, sorted by year (most recent first)
-    const timelineItems = [];
-    
-    // Add work experience
-    if (content.workExperience && content.workExperience.length > 0) {
-        content.workExperience.forEach(item => {
-            timelineItems.push({
-                type: 'work',
-                title: item.role,
-                institution: item.institution,
-                year: item.year,
-                description: item.description
-            });
-        });
-    }
-    
-    // Add education
-    if (content.education && content.education.length > 0) {
-        content.education.forEach(item => {
-            timelineItems.push({
-                type: 'education',
-                title: item.degree,
-                institution: item.institution,
-                year: item.year,
-                description: item.description
-            });
-        });
-    }
+    const workItems = sortTimelineByYear(
+        (content.workExperience || []).map(item => ({
+            title: item.role,
+            institution: item.institution,
+            year: item.year,
+            description: item.description
+        }))
+    );
 
-    // Sort by year (extract start year for sorting)
-    timelineItems.sort((a, b) => {
-        const yearA = parseInt(a.year.split('-')[0]) || 0;
-        const yearB = parseInt(b.year.split('-')[0]) || 0;
-        return yearB - yearA; // Most recent first
-    });
+    const educationItems = sortTimelineByYear(
+        (content.education || []).map(item => ({
+            title: item.degree,
+            institution: item.institution,
+            year: item.year,
+            description: item.description
+        }))
+    );
 
-    const timelineHTML = timelineItems
-        .map((item, index) => `
-            <div class="timeline-item fade-in" style="animation-delay: ${index * 0.1}s">
-                <div class="timeline-marker"></div>
-                <div class="timeline-content">
-                    <div class="timeline-badge">${item.year}</div>
-                    <h3 class="timeline-title font-mono font-bold text-lg md:text-xl mb-1">${item.title}</h3>
-                    <p class="timeline-institution text-base md:text-lg mb-2 font-semibold">${item.institution}</p>
-                    <p class="timeline-description text-sm md:text-base opacity-90">${item.description}</p>
-                </div>
+    const workTimelineHTML = workItems.length > 0 ? `
+        <div class="mb-12">
+            <h2 class="text-2xl md:text-3xl font-bold mb-8 font-mono">${content.sections.workExperience}</h2>
+            <div class="timeline-container">
+                ${buildTimelineHTML(workItems)}
             </div>
-        `)
-        .join('');
+        </div>
+    ` : '';
 
-    const interestsHTML = content.researchInterests && content.researchInterests.length > 0 ? `
-        <div class="mb-10">
-            <h2 class="text-xl md:text-2xl font-bold mb-4 font-mono">${content.sections.researchFocus || ''}</h2>
-            <div class="flex flex-wrap gap-2 md:gap-3">
-                ${content.researchInterests.map(tag => `<span class="research-tag">${tag}</span>`).join('')}
+    const educationTimelineHTML = educationItems.length > 0 ? `
+        <div class="mb-16">
+            <h2 class="text-2xl md:text-3xl font-bold mb-8 font-mono">${content.sections.education}</h2>
+            <div class="timeline-container">
+                ${buildTimelineHTML(educationItems, 0.05)}
             </div>
         </div>
     ` : '';
@@ -872,12 +931,15 @@ function renderAboutPage(content) {
         <div class="thesis-card p-6 rounded-lg mb-12 fade-in">
             <h2 class="text-xl md:text-2xl font-bold mb-4 font-mono">${content.sections.thesis || ''}</h2>
             <div class="space-y-2 text-sm md:text-base">
-                <p><span class="font-semibold font-mono">${thesis.degreeLabel || thesis.degree || ''}</span>${thesis.period ? ` · ${thesis.period}` : ''}</p>
                 <h3 class="text-base md:text-lg font-semibold leading-snug">${thesis.title}</h3>
                 <p class="opacity-90">${thesis.institution || ''}</p>
-                ${thesis.advisor ? `<p class="opacity-80">${content.sections.thesisAdvisor || ''}: ${thesis.advisor}</p>` : ''}
+                ${thesis.year ? `<p class="opacity-80">${content.sections.thesisYear || ''}: ${thesis.year}</p>` : ''}
+                ${thesis.type ? `<p class="opacity-80">${content.sections.thesisType || ''}: ${thesis.type}</p>` : ''}
+                ${thesis.language ? `<p class="opacity-80">${content.sections.thesisLanguage || ''}: ${thesis.language}</p>` : ''}
+                ${thesis.subject ? `<p class="opacity-80">${content.sections.thesisSubject || ''}: ${thesis.subject}</p>` : ''}
+                ${thesis.advisors ? `<p class="opacity-80">${content.sections.thesisAdvisor || ''}: ${thesis.advisors}</p>` : ''}
+                ${thesis.coAdvisor ? `<p class="opacity-80">${content.sections.thesisCoAdvisor || ''}: ${thesis.coAdvisor}</p>` : ''}
                 ${thesis.gpa ? `<p class="opacity-80">${content.sections.thesisGpa || ''}: ${thesis.gpa}</p>` : ''}
-                ${thesis.summary ? `<p class="opacity-90 leading-relaxed mt-3">${thesis.summary}</p>` : ''}
             </div>
             ${isValidLink(thesis.link) ? `
                 <a href="${thesis.link}" target="_blank" rel="noopener" class="inline-block mt-4 text-sm font-mono publication-title-link">
@@ -887,46 +949,18 @@ function renderAboutPage(content) {
         </div>
     ` : '';
 
-    const awardsHTML = content.awards && content.awards.length > 0 ? `
-        <div class="mb-12">
-            <h2 class="text-xl md:text-2xl font-bold mb-4 font-mono">${content.sections.awards || ''}</h2>
-            <div class="space-y-4">
-                ${content.awards.map((award, index) => `
-                    <div class="highlight-card p-4 md:p-5 rounded-lg fade-in" style="animation-delay: ${index * 0.08}s">
-                        <div class="flex flex-col md:flex-row gap-2 md:gap-4">
-                            <span class="text-sm font-mono opacity-75 md:min-w-[60px]">${award.year || ''}</span>
-                            <div>
-                                <h3 class="font-semibold font-mono mb-1">${award.title}</h3>
-                                <p class="text-sm opacity-90 leading-relaxed">${award.description}</p>
-                            </div>
-                        </div>
-                    </div>
-                `).join('')}
-            </div>
-        </div>
-    ` : '';
-
     mainContent.innerHTML = `
         <section class="container mx-auto px-4 md:px-6 py-12 max-w-5xl">
             <div class="fade-in">
                 <h1 class="text-3xl md:text-4xl font-bold mb-8 font-mono">${content.sections.about}</h1>
                 <div class="mb-10">
-                    <p class="text-base md:text-lg leading-relaxed mb-4">${content.bio}</p>
-                    <p class="text-base md:text-lg leading-relaxed">${content.about}</p>
+                    <p class="text-base md:text-lg leading-relaxed">${content.bio}</p>
                 </div>
 
-                ${interestsHTML}
                 ${cvButtonHTML}
                 ${thesisHTML}
-                ${awardsHTML}
-                
-                <!-- Work & Education Timeline -->
-                <div class="mb-16">
-                    <h2 class="text-2xl md:text-3xl font-bold mb-8 font-mono">${content.sections.workAndEducation}</h2>
-                    <div class="timeline-container">
-                        ${timelineHTML}
-                    </div>
-                </div>
+                ${workTimelineHTML}
+                ${educationTimelineHTML}
             </div>
         </section>
     `;
@@ -1112,6 +1146,13 @@ function renderPortfolioPage(content) {
         <section class="container mx-auto px-4 md:px-6 py-12 max-w-6xl">
             <div class="fade-in">
                 <h1 class="text-3xl md:text-4xl font-bold mb-8 font-mono text-center">${content.sections.portfolio}</h1>
+
+                <div class="mb-16 portfolio-ngl-section">
+                    <h2 class="text-2xl md:text-3xl font-bold mb-3 font-mono">${content.sections.molecularVisualization}</h2>
+                    <p class="text-sm md:text-base opacity-90 leading-relaxed mb-6 max-w-3xl">${content.portfolioIntro || ''}</p>
+                    <div id="ngl-viewer-container" class="ngl-viewer-container ngl-viewer-portfolio mx-auto"></div>
+                    <p class="ngl-attribution text-center md:text-right mt-3">${content.sections.nglAttribution}</p>
+                </div>
                 
                 <div class="mb-16">
                     <h2 class="text-2xl md:text-3xl font-bold mb-6 font-mono">${content.sections.researchAreas}</h2>
@@ -1130,6 +1171,8 @@ function renderPortfolioPage(content) {
             </div>
         </section>
     `;
+
+    initNGLViewer();
 }
 
 // Contact Page Render
@@ -1205,22 +1248,22 @@ function renderContactPage(content) {
             <div class="fade-in">
                 <h1 class="text-3xl md:text-4xl font-bold mb-8 font-mono text-center">${content.sections.contact}</h1>
                 
-                <div class="mb-12 text-center">
-                    <h2 class="text-2xl md:text-3xl font-bold mb-4 font-mono">${contact.affiliation || content.affiliation}</h2>
-                    <p class="text-lg mb-2 opacity-90">${contact.location || content.location}</p>
+                <div class="mb-10 text-center contact-intro">
+                    <h2 class="text-xl md:text-2xl font-bold mb-3 font-mono">${contact.affiliation || content.affiliation}</h2>
+                    <p class="text-sm md:text-base opacity-90">${contact.location || content.location}</p>
                 </div>
 
                 <div class="mb-12">
                     <div class="contact-info-card p-6 md:p-8 rounded-lg text-center">
-                        <h3 class="text-xl font-bold mb-4 font-mono">${labels.email}</h3>
-                        <a href="mailto:${contact.email || content.email}" class="text-lg md:text-xl underline break-all">
+                        <h3 class="text-lg font-bold mb-3 font-mono">${labels.email}</h3>
+                        <a href="mailto:${contact.email || content.email}" class="text-base md:text-lg underline break-all contact-email-link">
                             ${contact.email || content.email}
                         </a>
                     </div>
                 </div>
 
                 <div class="mb-8">
-                    <h2 class="text-2xl font-bold mb-6 font-mono text-center">${labels.academicLinks}</h2>
+                    <h2 class="text-xl font-bold mb-6 font-mono text-center">${labels.academicLinks}</h2>
                     ${academicLinksHTML}
                 </div>
             </div>
