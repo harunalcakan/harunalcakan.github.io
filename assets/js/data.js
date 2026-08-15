@@ -85,11 +85,15 @@ const data = {
         sections: {
             home: "Home",
             about: "About",
-            portfolio: "Methods & Tools",
+            research: "Research",
             publications: "Publications",
             contact: "Contact",
-            news: "Latest News",
-            literatureNotes: "From the Literature",
+            news: "News",
+            literatureNotes: "News",
+            selectedPublications: "Selected publications",
+            viewAllPublications: "View all publications →",
+            homeDepartment: "Department of Chemistry",
+            homeAt: "at",
             downloadCV: "Download CV",
             education: "Education",
             workExperience: "Work Experience",
@@ -118,7 +122,6 @@ const data = {
             conferenceCount: "Poster & conference presentations",
             currentFocus: "Current focus",
             explorePublications: "Explore Publications",
-            researchPortfolio: "Methods & Tools",
             viewOnResearchGate: "View on ResearchGate",
             profilePhoto: "Profile Photo",
             nglAttribution: "Powered by NGL Viewer",
@@ -130,7 +133,7 @@ const data = {
         pageTitles: {
             index: "Harun Nalçakan — Academic Portfolio",
             about: "About — Harun Nalçakan",
-            portfolio: "Methods & Tools — Harun Nalçakan",
+            research: "Research — Harun Nalçakan",
             publications: "Publications — Harun Nalçakan",
             contact: "Contact — Harun Nalçakan"
         },
@@ -138,7 +141,7 @@ const data = {
         metaDescriptions: {
             index: "Harun Nalçakan — Research Assistant at Ankara University. DFT, molecular docking, molecular dynamics, and experimental chemistry.",
             about: "Biography, education, and work experience of Harun Nalçakan, Research Assistant in Chemistry at Ankara University.",
-            portfolio: "Methods, scientific tools, and technical competencies in computational and experimental chemistry.",
+            research: "Research areas, methods, competencies, and visual snapshots from computational and experimental chemistry work.",
             publications: "Peer-reviewed articles and conference presentations by Harun Nalçakan in computational chemistry and drug discovery.",
             contact: "Contact Harun Nalçakan — email, ORCID, ResearchGate, LinkedIn, and GitHub."
         },
@@ -468,11 +471,15 @@ const data = {
         sections: {
             home: "Ana Sayfa",
             about: "Hakkımda",
-            portfolio: "Yöntemler ve Araçlar",
+            research: "Araştırma",
             publications: "Yayınlar",
             contact: "İletişim",
             news: "Haberler",
-            literatureNotes: "Literatürden Notlar",
+            literatureNotes: "Haberler",
+            selectedPublications: "Seçilmiş yayınlar",
+            viewAllPublications: "Tüm yayınlar →",
+            homeDepartment: "Kimya Bölümü",
+            homeAt: "",
             downloadCV: "CV İndir",
             education: "Eğitim",
             workExperience: "İş Deneyimi",
@@ -501,7 +508,6 @@ const data = {
             conferenceCount: "Poster ve konferans sunumu",
             currentFocus: "Güncel odak alanı",
             explorePublications: "Yayınları İncele",
-            researchPortfolio: "Yöntemler ve Araçlar",
             viewOnResearchGate: "ResearchGate'te Görüntüle",
             profilePhoto: "Profil Fotoğrafı",
             nglAttribution: "NGL Viewer ile desteklenmektedir",
@@ -513,7 +519,7 @@ const data = {
         pageTitles: {
             index: "Harun Nalçakan — Akademik Portföy",
             about: "Hakkımda — Harun Nalçakan",
-            portfolio: "Yöntemler ve Araçlar — Harun Nalçakan",
+            research: "Araştırma — Harun Nalçakan",
             publications: "Yayınlar — Harun Nalçakan",
             contact: "İletişim — Harun Nalçakan"
         },
@@ -521,7 +527,7 @@ const data = {
         metaDescriptions: {
             index: "Harun Nalçakan — Ankara Üniversitesi Kimya Bölümü Araştırma Görevlisi. DFT, moleküler kenetleme, moleküler dinamik ve deneysel kimya.",
             about: "Ankara Üniversitesi Kimya Bölümü Araştırma Görevlisi Harun Nalçakan'ın özgeçmişi, eğitim geçmişi ve iş deneyimi.",
-            portfolio: "Hesaplamalı ve deneysel kimyada yöntemler, bilimsel araçlar ve teknik yeterlilikler.",
+            research: "Hesaplamalı ve deneysel kimyada araştırma alanları, yöntemler, yeterlilikler ve çalışma görselleri.",
             publications: "Harun Nalçakan'ın hesaplamalı kimya ve ilaç keşfi alanındaki hakemli makaleleri ve konferans bildirileri.",
             contact: "Harun Nalçakan ile iletişim — e-posta, ORCID, ResearchGate, LinkedIn ve GitHub."
         },

@@ -132,6 +132,83 @@ function sortTimelineByYear(items) {
     });
 }
 
+function buildHomeTitleLine(content) {
+    if (currentLanguage === 'tr') {
+        return `${content.title}, ${content.heroAffiliationShort} ${content.sections.homeDepartment}`;
+    }
+    const at = content.sections.homeAt ? ` ${content.sections.homeAt} ` : ' at ';
+    return `${content.title}${at}${content.sections.homeDepartment}, @${content.heroAffiliationShort}`;
+}
+
+function buildHomeProfileSidebarHTML(content) {
+    const initials = getProfileInitials(content);
+    const imageSrc = content.profileImage || '';
+    const contact = content.contact || {};
+
+    const photoHTML = imageSrc
+        ? `<img src="${imageSrc}" alt="${content.name}" class="home-profile-large-img" onerror="this.remove(); this.parentElement.classList.add('home-profile-large-fallback');">`
+        : '';
+
+    return `
+        <aside class="home-hero-sidebar fade-in">
+            <div class="home-profile-large ${imageSrc ? '' : 'home-profile-large-fallback'}">
+                ${photoHTML}
+                <span class="home-profile-large-initials">${initials}</span>
+            </div>
+            <div class="home-sidebar-info">
+                <p>${content.sections.homeDepartment}</p>
+                <p>${content.heroAffiliationShort || contact.affiliation || content.affiliation}</p>
+                <p>${contact.location || content.location}</p>
+            </div>
+        </aside>
+    `;
+}
+
+function buildHomeWorkGlimpseCompactHTML(item, content) {
+    if (!item || item.type !== 'ngl') return '';
+    return `
+        <div class="home-work-glimpse fade-in">
+            <p class="home-work-glimpse-label font-mono text-sm mb-3">${content.sections.workGlimpse || ''}</p>
+            <div id="ngl-viewer-container-home" class="ngl-viewer-container ngl-viewer-home mx-auto" data-pdb="${item.pdbCode || '1crn'}"></div>
+            <p class="ngl-attribution text-right mt-2">${content.sections.nglAttribution || ''}</p>
+        </div>
+    `;
+}
+
+function buildSelectedPublicationsHTML(content, limit = 2) {
+    const articles = content.publications?.articles || [];
+    if (!articles.length) return '';
+
+    return `
+        <section class="container mx-auto px-4 md:px-6 py-10 max-w-5xl home-selected-pubs">
+            <h2 class="text-2xl md:text-3xl font-bold mb-6 font-mono lowercase">${content.sections.selectedPublications || ''}</h2>
+            <div class="space-y-6">
+                ${articles.slice(0, limit).map((pub, index) => {
+                    const doiLink = pub.doi_link || pub.link || '#';
+                    const yearMatch = (pub.apa_citation || '').match(/\b(20\d{2})\b/);
+                    const year = yearMatch ? yearMatch[1] : '';
+                    return `
+                        <article class="home-selected-pub-item fade-in" style="animation-delay: ${index * 0.08}s">
+                            <div class="flex flex-col md:flex-row gap-4 md:gap-6">
+                                <div class="flex-1 min-w-0">
+                                    <h3 class="text-base md:text-lg font-semibold mb-2 leading-snug">
+                                        <a href="${doiLink}" target="_blank" rel="noopener" class="publication-title-link">${pub.title}</a>
+                                    </h3>
+                                    <p class="publication-citation text-sm">${pub.apa_citation || ''}</p>
+                                </div>
+                                ${year ? `<div class="home-selected-pub-year font-mono shrink-0">${year}</div>` : ''}
+                            </div>
+                        </article>
+                    `;
+                }).join('')}
+            </div>
+            <p class="mt-6">
+                <a href="publications.html" class="publication-title-link text-sm font-mono">${content.sections.viewAllPublications || ''}</a>
+            </p>
+        </section>
+    `;
+}
+
 function buildWorkGlimpseHTML(item, index, content) {
     if (item.type === 'ngl') {
         return `
@@ -162,7 +239,7 @@ function buildWorkGlimpseHTML(item, index, content) {
 function initNGLViewers() {
     if (typeof NGL === 'undefined') return;
 
-    const containers = document.querySelectorAll('[id^="ngl-viewer-container-"]');
+    const containers = document.querySelectorAll('[id^="ngl-viewer-container"]');
     if (!containers.length) return;
 
     if (nglResizeHandler) {
@@ -410,7 +487,7 @@ function injectNavbar() {
     const navLinks = [
         { href: 'index.html', label: content.sections.home, id: 'nav-home' },
         { href: 'about.html', label: content.sections.about, id: 'nav-about' },
-        { href: 'portfolio.html', label: content.sections.portfolio, id: 'nav-portfolio' },
+        { href: 'research.html', label: content.sections.research, id: 'nav-research' },
         { href: 'publications.html', label: content.sections.publications, id: 'nav-publications' },
         { href: 'contact.html', label: content.sections.contact, id: 'nav-contact' }
     ];
@@ -804,8 +881,9 @@ function renderCurrentPage() {
         case 'about':
             renderAboutPage(content);
             break;
+        case 'research':
         case 'portfolio':
-            renderPortfolioPage(content);
+            renderResearchPage(content);
             break;
         case 'publications':
             renderPublicationsPage(content);
@@ -823,93 +901,48 @@ function renderHomePage(content) {
     const mainContent = document.querySelector('main');
     if (!mainContent) return;
 
-    const heroSubtitle = `${content.title} · ${content.heroAffiliationShort || ''}`;
+    const firstGlimpse = (content.workGlimpses || [])[0];
+    const workGlimpseHTML = buildHomeWorkGlimpseCompactHTML(firstGlimpse, content);
 
     const heroHTML = `
-        <section class="container mx-auto px-4 md:px-6 pt-28 pb-12 min-h-[40vh] flex items-center">
-            <div class="w-full fade-in max-w-3xl mx-auto text-center space-y-5">
-                <p class="text-lg md:text-xl lg:text-2xl leading-relaxed home-hero-intro">
-                    ${content.heroIntro}
-                </p>
-                <p class="text-sm md:text-base hero-subtitle">
-                    ${heroSubtitle}
-                </p>
+        <section class="container mx-auto px-4 md:px-6 pt-28 pb-10 max-w-6xl">
+            <div class="home-hero-grid fade-in">
+                <div class="home-hero-main">
+                    <h1 class="home-hero-name text-3xl md:text-4xl lg:text-5xl font-bold mb-3">${content.name}</h1>
+                    <p class="home-hero-title text-base md:text-lg mb-5 opacity-90">${buildHomeTitleLine(content)}</p>
+                    <p class="home-hero-bio text-base md:text-lg leading-relaxed">${content.heroIntro}</p>
+                    ${workGlimpseHTML}
+                </div>
+                ${buildHomeProfileSidebarHTML(content)}
             </div>
         </section>
     `;
 
-    // Highlights Section (Latest News)
-    const stats = content.homeStats || {};
-    const statsHTML = `
-        <section class="container mx-auto px-4 md:px-6 py-10 max-w-5xl">
-            <h2 class="text-xl md:text-2xl font-bold mb-6 font-mono text-center">${content.sections.atAGlance || ''}</h2>
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-6">
-                <div class="home-stat-card p-5 rounded-lg fade-in text-center">
-                    <div class="text-3xl md:text-4xl font-bold font-mono mb-1">${stats.articles || 0}</div>
-                    <p class="text-sm opacity-80">${content.sections.publicationsCount || ''}</p>
-                </div>
-                <div class="home-stat-card p-5 rounded-lg fade-in text-center" style="animation-delay: 0.08s">
-                    <div class="text-3xl md:text-4xl font-bold font-mono mb-1">${stats.conferences || 0}</div>
-                    <p class="text-sm opacity-80">${content.sections.conferenceCount || ''}</p>
-                </div>
-                <div class="home-stat-card p-5 rounded-lg fade-in text-center sm:col-span-1" style="animation-delay: 0.16s">
-                    <p class="text-xs uppercase tracking-wide opacity-60 mb-2 font-mono">${content.sections.currentFocus || ''}</p>
-                    <p class="text-sm md:text-base leading-relaxed">${stats.focus || ''}</p>
-                </div>
-            </div>
-        </section>
-    `;
+    const newsItems = content.literatureNotes && content.literatureNotes.length > 0
+        ? content.literatureNotes
+        : (content.news || []);
 
-    const focusHTML = content.researchInterests && content.researchInterests.length > 0 ? `
-        <section class="container mx-auto px-4 md:px-6 pb-8 max-w-4xl">
-            <h2 class="text-xl md:text-2xl font-bold mb-4 font-mono text-center">${content.sections.researchFocus || ''}</h2>
-            <div class="flex flex-wrap justify-center gap-2 md:gap-3">
-                ${content.researchInterests.map((tag, index) => `
-                    <span class="research-tag fade-in" style="animation-delay: ${index * 0.05}s">${tag}</span>
-                `).join('')}
-            </div>
-        </section>
-    ` : '';
-
-    const ctaHTML = `
-        <section class="container mx-auto px-4 md:px-6 pb-12 max-w-3xl">
-            <div class="flex flex-wrap justify-center gap-3 md:gap-4">
-                <a href="publications.html" class="home-cta-btn fade-in">${content.sections.explorePublications || content.sections.publications}</a>
-                <a href="portfolio.html" class="home-cta-btn fade-in" style="animation-delay: 0.08s">${content.sections.researchPortfolio || content.sections.portfolio}</a>
-                <a href="about.html" class="home-cta-btn fade-in" style="animation-delay: 0.16s">${content.sections.about}</a>
-                ${isValidLink(content.contact?.researchgate) ? `
-                    <a href="${content.contact.researchgate}" target="_blank" rel="noopener" class="home-cta-btn home-cta-btn-accent fade-in" style="animation-delay: 0.24s">${content.sections.viewOnResearchGate || 'ResearchGate'}</a>
-                ` : ''}
-            </div>
-        </section>
-    `;
-
-    const literatureHTML = content.literatureNotes && content.literatureNotes.length > 0 ? `
-        <section class="container mx-auto px-4 md:px-6 py-12 max-w-4xl literature-section">
-            <h2 class="text-2xl md:text-3xl font-bold mb-3 font-mono text-center">${content.sections.literatureNotes || ''}</h2>
-            ${content.literatureNotesIntro ? `<p class="literature-section-intro text-center mb-8 max-w-2xl mx-auto">${content.literatureNotesIntro}</p>` : ''}
-            <div class="space-y-5">
-                ${content.literatureNotes.map((item, index) => `
-                    <article class="fade-in literature-note-card p-5 md:p-6 rounded-lg" style="animation-delay: ${index * 0.1}s">
-                        <div class="flex flex-col md:flex-row items-start gap-3 md:gap-4">
-                            <time class="literature-note-date text-xs md:text-sm font-mono md:min-w-[110px] shrink-0">${formatDate(item.date)}</time>
-                            <div class="flex-1 min-w-0">
-                                <h3 class="literature-note-title text-base md:text-lg font-semibold mb-2 font-mono">${item.title}</h3>
-                                <p class="literature-note-summary leading-relaxed">${item.summary}</p>
-                                ${item.tags && item.tags.length > 0 ? `
-                                    <div class="flex flex-wrap gap-2 mt-3">
-                                        ${item.tags.map(tag => `<span class="literature-note-tag">${tag}</span>`).join('')}
-                                    </div>
-                                ` : ''}
-                            </div>
+    const newsHTML = newsItems.length > 0 ? `
+        <section class="container mx-auto px-4 md:px-6 py-10 max-w-5xl home-news-section">
+            <h2 class="text-2xl md:text-3xl font-bold mb-6 font-mono lowercase">${content.sections.news || ''}</h2>
+            <div class="home-news-list">
+                ${newsItems.slice(0, 5).map((item, index) => `
+                    <div class="home-news-row fade-in" style="animation-delay: ${index * 0.06}s">
+                        <time class="home-news-date font-mono">${formatDate(item.date)}</time>
+                        <div class="home-news-body">
+                            ${item.title ? `<strong>${item.title}.</strong> ` : ''}${item.summary || item.content || ''}
                         </div>
-                    </article>
+                    </div>
                 `).join('')}
             </div>
         </section>
     ` : '';
 
-    mainContent.innerHTML = heroHTML + statsHTML + focusHTML + ctaHTML + literatureHTML;
+    const selectedPubsHTML = buildSelectedPublicationsHTML(content, 2);
+
+    mainContent.innerHTML = heroHTML + newsHTML + selectedPubsHTML;
+
+    initNGLViewers();
 }
 
 // About Page Render
@@ -1087,8 +1120,8 @@ function renderPublicationsPage(content) {
     `;
 }
 
-// Portfolio Page Render
-function renderPortfolioPage(content) {
+// Research Page Render
+function renderResearchPage(content) {
     const mainContent = document.querySelector('main');
     if (!mainContent) return;
 
@@ -1191,7 +1224,12 @@ function renderPortfolioPage(content) {
     mainContent.innerHTML = `
         <section class="container mx-auto px-4 md:px-6 py-12 max-w-6xl">
             <div class="fade-in">
-                <h1 class="text-3xl md:text-4xl font-bold mb-8 font-mono text-center">${content.sections.portfolio}</h1>
+                <h1 class="text-3xl md:text-4xl font-bold mb-4 font-mono">${content.sections.research}</h1>
+                ${content.researchInterests && content.researchInterests.length > 0 ? `
+                    <div class="flex flex-wrap gap-2 mb-10">
+                        ${content.researchInterests.map(tag => `<span class="research-tag">${tag}</span>`).join('')}
+                    </div>
+                ` : ''}
 
                 ${workGlimpsesHTML}
                 
