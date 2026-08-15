@@ -1,5 +1,6 @@
 // THE CONTENT DATABASE - Harun Nalçakan
-// This file defines the multilingual content structure consumed by main.js.
+// All site text lives here. To add a literature note, edit literatureNotes under "en" and "tr".
+// To add a work glimpse (portfolio page), edit workGlimpses — use type "ngl" or "image".
 
 const data = {
     "en": {
@@ -21,24 +22,25 @@ const data = {
         },
 
         // Hero / About
-        heroIntro: "Computational and experimental chemistry at Ankara University — from in silico modeling to electrochemical sensing.",
+        heroIntro: "Research Assistant in the Department of Chemistry at Ankara University. In computational chemistry, I work on DFT, molecular docking, and molecular dynamics; I am also building experience in electrochemistry, materials characterization, and experimental physical chemistry.",
         heroGreeting: "Hello, I'm",
         heroAffiliationShort: "Ankara University",
-        bio: "Research Assistant in the Department of Chemistry at Ankara University. I work at the interface of computational chemistry and electrochemical sensing, connecting in silico predictions with experimental validation.",
+        bio: "Research Assistant in the Department of Chemistry at Ankara University. My main focus is computational chemistry — DFT, molecular docking, and molecular dynamics — while I continue to develop my skills in electrochemistry, materials characterization, and laboratory-based physical chemistry.",
 
         homeStats: {
             articles: 4,
             conferences: 12,
-            focus: "3D-printed electrochemical sensors & computational drug discovery"
+            focus: "DFT, molecular docking & MD; growing experimental work in electrochemistry and materials"
         },
 
         researchInterests: [
-            "Computational Chemistry",
-            "Molecular Docking & MD",
+            "DFT",
+            "Molecular Docking",
+            "Molecular Dynamics",
             "ADME / ADMET Profiling",
-            "Electrochemical Sensing",
-            "3D-Printed Electrodes",
-            "Cheminformatics"
+            "Cheminformatics",
+            "Electrochemistry",
+            "Materials Characterization",
         ],
 
         thesis: {
@@ -57,6 +59,28 @@ const data = {
 
         portfolioIntro: "Interactive molecular visualization — a glimpse into the structural models that inform my computational work.",
 
+        // Methods & Tools — visual work snapshots (add entries in both "en" and "tr")
+        workGlimpsesIntro: "A glimpse from my work — visual snapshots of the models, methods, and experiments behind my research.",
+        workGlimpses: [
+            {
+                type: "ngl",
+                title: "Molecular structure exploration",
+                caption: "Interactive visualization of protein structures — part of my docking and molecular dynamics workflows.",
+                pdbCode: "1crn"
+            }
+        ],
+
+        // Homepage — literature reading notes (add new entries at the top)
+        literatureNotesIntro: "Short notes from my literature reading — methods, ideas, and takeaways I find worth sharing.",
+        literatureNotes: [
+            {
+                date: "2026-07-15",
+                title: "3D-printed electrodes for environmental sensing",
+                summary: "Recent work on conductive filaments and amperometric detection highlights how additive manufacturing can lower prototyping costs in electrochemical analysis. I am tracking design choices that affect sensitivity and reproducibility.",
+                tags: ["Electrochemistry", "3D printing"]
+            }
+        ],
+
         // Section labels used by main.js (navbar, headings, toggles)
         sections: {
             home: "Home",
@@ -65,6 +89,7 @@ const data = {
             publications: "Publications",
             contact: "Contact",
             news: "Latest News",
+            literatureNotes: "From the Literature",
             downloadCV: "Download CV",
             education: "Education",
             workExperience: "Work Experience",
@@ -84,6 +109,7 @@ const data = {
             thesisSubject: "Subject",
             thesisGpa: "GPA",
             molecularVisualization: "Molecular Visualization",
+            workGlimpse: "A Glimpse from My Work",
             closePhoto: "Close",
             awards: "Awards & Recognition",
             researchFocus: "Research Focus",
@@ -110,9 +136,9 @@ const data = {
         },
 
         metaDescriptions: {
-            index: "Harun Nalçakan — Research Assistant at Ankara University. Computational and experimental chemistry, electrochemical sensing, and drug discovery.",
+            index: "Harun Nalçakan — Research Assistant at Ankara University. DFT, molecular docking, molecular dynamics, and experimental chemistry.",
             about: "Biography, education, and work experience of Harun Nalçakan, Research Assistant in Chemistry at Ankara University.",
-            portfolio: "Methods, scientific tools, molecular visualization, and technical competencies in computational and experimental chemistry.",
+            portfolio: "Methods, scientific tools, and technical competencies in computational and experimental chemistry.",
             publications: "Peer-reviewed articles and conference presentations by Harun Nalçakan in computational chemistry and drug discovery.",
             contact: "Contact Harun Nalçakan — email, ORCID, ResearchGate, LinkedIn, and GitHub."
         },
@@ -380,24 +406,25 @@ const data = {
         },
 
         // Hero / Hakkımda
-        heroIntro: "Ankara Üniversitesi'nde hesaplamalı ve deneysel kimya — in silico modellemeden elektrokimyasal algılamaya.",
+        heroIntro: "Ankara Üniversitesi Kimya Bölümü'nde araştırma görevlisiyim. Hesaplamalı kimyada DFT, moleküler kenetleme ve moleküler dinamik konularına odaklanıyor; elektrokimya, malzeme karakterizasyonu ve deneysel fizikokimya alanlarında da deneyim kazanmaya devam ediyorum.",
         heroGreeting: "Merhaba, ben",
         heroAffiliationShort: "Ankara Üniversitesi",
-        bio: "Ankara Üniversitesi Kimya Bölümü'nde araştırma görevlisiyim. Hesaplamalı kimya ile elektrokimyasal algılamayı bir arada yürütüyor; in silico öngörüleri deneysel doğrulamayla ilişkilendiriyorum.",
+        bio: "Ankara Üniversitesi Kimya Bölümü'nde araştırma görevlisiyim. Ana odağım hesaplamalı kimya — DFT, moleküler kenetleme ve moleküler dinamik —; elektrokimya, malzeme karakterizasyonu ve deneysel fizikokimya konularında da kendimi geliştirmeye devam ediyorum.",
 
         homeStats: {
             articles: 4,
             conferences: 12,
-            focus: "3B baskılı elektrokimyasal sensörler ve hesaplamalı ilaç keşfi"
+            focus: "DFT, moleküler kenetleme ve MD; elektrokimya ve malzeme karakterizasyonunda gelişen deneysel çalışmalar"
         },
 
         researchInterests: [
-            "Hesaplamalı Kimya",
-            "Moleküler Yerleştirme ve MD",
+            "DFT",
+            "Moleküler Kenetleme",
+            "Moleküler Dinamik",
             "ADME / ADMET Profilleme",
-            "Elektrokimyasal Algılama",
-            "3B Baskılı Elektrotlar",
-            "Kemoinformatik"
+            "Kemoinformatik",
+            "Elektrokimya",
+            "Malzeme Karakterizasyonu",
         ],
 
         thesis: {
@@ -416,6 +443,28 @@ const data = {
 
         portfolioIntro: "Etkileşimli moleküler görselleştirme — hesaplamalı çalışmalarıma yön veren yapısal modellere kısa bir bakış.",
 
+        // Yöntemler ve Araçlar — çalışma görselleri (her iki dilde de ekleyin)
+        workGlimpsesIntro: "Çalışmalarımdan bir kesit — araştırmalarıma yön veren modeller, yöntemler ve deneysel çalışmalardan görsel notlar.",
+        workGlimpses: [
+            {
+                type: "ngl",
+                title: "Moleküler yapı incelemesi",
+                caption: "Protein yapılarının etkileşimli görselleştirmesi — moleküler kenetleme ve dinamik çalışmalarımın parçası.",
+                pdbCode: "1crn"
+            }
+        ],
+
+        // Ana sayfa — literatür okuma notları (yeni notları en üste ekleyin)
+        literatureNotesIntro: "Literatür taramalarımdan derlediğim kısa notlar: yöntemler, fikirler ve paylaşmaya değer bulduğum çıkarımlar.",
+        literatureNotes: [
+            {
+                date: "2026-07-15",
+                title: "Çevresel analiz için 3B baskılı elektrotlar",
+                summary: "İletken filamentler ve amperometrik tayin üzerine güncel çalışmalar, katmanlı üretimin elektrokimyasal analizde prototipleme maliyetlerini nasıl düşürebileceğini gösteriyor. Hassasiyet ve tekrarlanabilirliği etkileyen tasarım tercihlerini yakından takip ediyorum.",
+                tags: ["Elektrokimya", "3B baskı"]
+            }
+        ],
+
         sections: {
             home: "Ana Sayfa",
             about: "Hakkımda",
@@ -423,6 +472,7 @@ const data = {
             publications: "Yayınlar",
             contact: "İletişim",
             news: "Haberler",
+            literatureNotes: "Literatürden Notlar",
             downloadCV: "CV İndir",
             education: "Eğitim",
             workExperience: "İş Deneyimi",
@@ -442,13 +492,14 @@ const data = {
             thesisSubject: "Konu",
             thesisGpa: "GNO",
             molecularVisualization: "Moleküler Görselleştirme",
+            workGlimpse: "Çalışmalarımdan Bir Kesit",
             closePhoto: "Kapat",
             awards: "Ödüller ve Başarılar",
             researchFocus: "Araştırma Odakları",
-            atAGlance: "Özet Bakış",
+            atAGlance: "Genel Bakış",
             publicationsCount: "Hakemli makale",
             conferenceCount: "Poster ve konferans sunumu",
-            currentFocus: "Güncel odak",
+            currentFocus: "Güncel odak alanı",
             explorePublications: "Yayınları İncele",
             researchPortfolio: "Yöntemler ve Araçlar",
             viewOnResearchGate: "ResearchGate'te Görüntüle",
@@ -468,9 +519,9 @@ const data = {
         },
 
         metaDescriptions: {
-            index: "Harun Nalçakan — Ankara Üniversitesi Kimya Bölümü Araştırma Görevlisi. Hesaplamalı ve deneysel kimya, elektrokimyasal algılama ve ilaç keşfi.",
-            about: "Ankara Üniversitesi Kimya Bölümü Araştırma Görevlisi Harun Nalçakan'ın özgeçmişi, eğitimi ve iş deneyimi.",
-            portfolio: "Hesaplamalı ve deneysel kimyada yöntemler, bilimsel araçlar, moleküler görselleştirme ve teknik yeterlilikler.",
+            index: "Harun Nalçakan — Ankara Üniversitesi Kimya Bölümü Araştırma Görevlisi. DFT, moleküler kenetleme, moleküler dinamik ve deneysel kimya.",
+            about: "Ankara Üniversitesi Kimya Bölümü Araştırma Görevlisi Harun Nalçakan'ın özgeçmişi, eğitim geçmişi ve iş deneyimi.",
+            portfolio: "Hesaplamalı ve deneysel kimyada yöntemler, bilimsel araçlar ve teknik yeterlilikler.",
             publications: "Harun Nalçakan'ın hesaplamalı kimya ve ilaç keşfi alanındaki hakemli makaleleri ve konferans bildirileri.",
             contact: "Harun Nalçakan ile iletişim — e-posta, ORCID, ResearchGate, LinkedIn ve GitHub."
         },
@@ -541,13 +592,13 @@ const data = {
         researchAreas: [
             {
                 title: "Elektrokimyasal Algılama Platformları",
-                description: "Hem deneysel protokoller hem de hesaplamalı modelleme ile ileri elektrokimyasal sensörlerin tasarımı ve optimizasyonu.",
-                methodology: "Yüzey kimyası, elektrokimyasal analiz ve yapı–özellik ilişkileri."
+                description: "Deneysel protokoller ile hesaplamalı modellemeyi bir arada kullanarak gelişmiş elektrokimyasal sensörlerin tasarımı ve optimizasyonu üzerine çalışıyorum.",
+                methodology: "Yüzey kimyası, elektrokimyasal analiz, moleküler modelleme ve yapı–işlev ilişkileri."
             },
             {
                 title: "Hesaplamalı İlaç Keşfi",
-                description: "Moleküler etkileşimlerin in silico olarak incelenmesi ve ligand tasarımına destek sağlanması.",
-                methodology: "Kemoinformatik, moleküler yerleştirme ve temel ADME incelemeleri."
+                description: "Moleküler etkileşimlerin in silico düzeyde incelenmesi; ligand tasarımı ve etki mekanizması çalışmalarına metodolojik destek.",
+                methodology: "Kemoinformatik, moleküler yerleştirme, MD simülasyonları ve ADME profilleme."
             }
         ],
 

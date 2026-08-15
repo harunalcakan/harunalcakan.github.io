@@ -10,9 +10,9 @@ let themeToggleHandler = null;
 let mobileMenuClickHandler = null;
 let mobileMenuOutsideClickHandler = null;
 let mobileMenuResizeHandler = null;
-let nglResizeHandler = null;
 let profileLightboxHandler = null;
 let profileLightboxKeyHandler = null;
+let nglResizeHandler = null;
 
 // Utility helpers
 function isValidLink(link) {
@@ -130,6 +130,68 @@ function sortTimelineByYear(items) {
         const yearB = parseInt(String(b.year).split(/[–-]/)[0], 10) || 0;
         return yearB - yearA;
     });
+}
+
+function buildWorkGlimpseHTML(item, index, content) {
+    if (item.type === 'ngl') {
+        return `
+            <article class="work-glimpse-item fade-in" style="animation-delay: ${index * 0.1}s">
+                <h3 class="work-glimpse-title text-lg md:text-xl font-semibold mb-2 font-mono">${item.title}</h3>
+                ${item.caption ? `<p class="work-glimpse-caption text-sm md:text-base mb-4 max-w-3xl">${item.caption}</p>` : ''}
+                <div id="ngl-viewer-container-${index}" class="ngl-viewer-container ngl-viewer-portfolio mx-auto" data-pdb="${item.pdbCode || '1crn'}"></div>
+                <p class="ngl-attribution text-center md:text-right mt-3">${content.sections.nglAttribution || ''}</p>
+            </article>
+        `;
+    }
+
+    if (item.type === 'image' && item.image) {
+        return `
+            <article class="work-glimpse-item fade-in" style="animation-delay: ${index * 0.1}s">
+                <h3 class="work-glimpse-title text-lg md:text-xl font-semibold mb-2 font-mono">${item.title}</h3>
+                ${item.caption ? `<p class="work-glimpse-caption text-sm md:text-base mb-4 max-w-3xl">${item.caption}</p>` : ''}
+                <figure class="work-glimpse-figure mx-auto">
+                    <img src="${item.image}" alt="${item.title}" class="work-glimpse-image" loading="lazy">
+                </figure>
+            </article>
+        `;
+    }
+
+    return '';
+}
+
+function initNGLViewers() {
+    if (typeof NGL === 'undefined') return;
+
+    const containers = document.querySelectorAll('[id^="ngl-viewer-container-"]');
+    if (!containers.length) return;
+
+    if (nglResizeHandler) {
+        window.removeEventListener('resize', nglResizeHandler);
+        nglResizeHandler = null;
+    }
+
+    const stages = [];
+
+    containers.forEach(container => {
+        container.innerHTML = '';
+        try {
+            const stage = new NGL.Stage(container, { backgroundColor: 'transparent' });
+            stages.push(stage);
+            const pdbCode = container.dataset.pdb || data[currentLanguage]?.pdbCode || '1crn';
+            stage.loadFile(`rcsb://${pdbCode}`).then(component => {
+                component.addRepresentation('cartoon', { colorScheme: 'chainid' });
+                component.autoView();
+                stage.setSpin(true);
+            });
+        } catch (e) {
+            console.error('NGL viewer initialization failed:', e);
+        }
+    });
+
+    if (stages.length) {
+        nglResizeHandler = () => stages.forEach(stage => stage.handleResize());
+        window.addEventListener('resize', nglResizeHandler);
+    }
 }
 
 function buildTimelineHTML(items, baseDelay = 0) {
@@ -822,17 +884,23 @@ function renderHomePage(content) {
         </section>
     `;
 
-    const highlightsHTML = content.news && content.news.length > 0 ? `
-        <section class="container mx-auto px-4 md:px-6 py-12 max-w-4xl">
-            <h2 class="text-2xl md:text-3xl font-bold mb-8 font-mono text-center">${content.sections.news}</h2>
-            <div class="space-y-4">
-                ${content.news.slice(0, 3).map((item, index) => `
-                    <article class="fade-in highlight-card p-4 md:p-5 rounded-lg" style="animation-delay: ${index * 0.1}s">
-                        <div class="flex flex-col md:flex-row items-start gap-3">
-                            <div class="text-xs md:text-sm opacity-75 font-mono md:min-w-[110px]">${formatDate(item.date)}</div>
-                            <div class="flex-1">
-                                <h3 class="text-base md:text-lg font-semibold mb-1 font-mono">${item.title}</h3>
-                                <p class="text-sm md:text-base opacity-90 leading-relaxed">${item.content}</p>
+    const literatureHTML = content.literatureNotes && content.literatureNotes.length > 0 ? `
+        <section class="container mx-auto px-4 md:px-6 py-12 max-w-4xl literature-section">
+            <h2 class="text-2xl md:text-3xl font-bold mb-3 font-mono text-center">${content.sections.literatureNotes || ''}</h2>
+            ${content.literatureNotesIntro ? `<p class="literature-section-intro text-center mb-8 max-w-2xl mx-auto">${content.literatureNotesIntro}</p>` : ''}
+            <div class="space-y-5">
+                ${content.literatureNotes.map((item, index) => `
+                    <article class="fade-in literature-note-card p-5 md:p-6 rounded-lg" style="animation-delay: ${index * 0.1}s">
+                        <div class="flex flex-col md:flex-row items-start gap-3 md:gap-4">
+                            <time class="literature-note-date text-xs md:text-sm font-mono md:min-w-[110px] shrink-0">${formatDate(item.date)}</time>
+                            <div class="flex-1 min-w-0">
+                                <h3 class="literature-note-title text-base md:text-lg font-semibold mb-2 font-mono">${item.title}</h3>
+                                <p class="literature-note-summary leading-relaxed">${item.summary}</p>
+                                ${item.tags && item.tags.length > 0 ? `
+                                    <div class="flex flex-wrap gap-2 mt-3">
+                                        ${item.tags.map(tag => `<span class="literature-note-tag">${tag}</span>`).join('')}
+                                    </div>
+                                ` : ''}
                             </div>
                         </div>
                     </article>
@@ -841,40 +909,7 @@ function renderHomePage(content) {
         </section>
     ` : '';
 
-    mainContent.innerHTML = heroHTML + statsHTML + focusHTML + ctaHTML + highlightsHTML;
-}
-
-// NGL Viewer Initialization (portfolio page)
-function initNGLViewer() {
-    if (typeof NGL === 'undefined') return;
-
-    const container = document.getElementById('ngl-viewer-container');
-    if (!container) return;
-
-    if (nglResizeHandler) {
-        window.removeEventListener('resize', nglResizeHandler);
-        nglResizeHandler = null;
-    }
-
-    container.innerHTML = '';
-
-    try {
-        const stage = new NGL.Stage(container, { backgroundColor: 'transparent' });
-
-        nglResizeHandler = () => stage.handleResize();
-        window.addEventListener('resize', nglResizeHandler);
-
-        const pdbCode = data[currentLanguage]?.pdbCode || '1crn';
-        stage.loadFile(`rcsb://${pdbCode}`).then(component => {
-            component.addRepresentation('cartoon', {
-                colorScheme: 'chainid'
-            });
-            component.autoView();
-            stage.setSpin(true);
-        });
-    } catch (e) {
-        console.error('NGL viewer initialization failed:', e);
-    }
+    mainContent.innerHTML = heroHTML + statsHTML + focusHTML + ctaHTML + literatureHTML;
 }
 
 // About Page Render
@@ -1142,17 +1177,23 @@ function renderPortfolioPage(content) {
         </div>
     `;
 
+    const workGlimpses = content.workGlimpses || [];
+    const workGlimpsesHTML = workGlimpses.length > 0 ? `
+        <div class="mb-16 work-glimpses-section">
+            <h2 class="text-2xl md:text-3xl font-bold mb-3 font-mono">${content.sections.workGlimpse || ''}</h2>
+            ${content.workGlimpsesIntro ? `<p class="work-glimpses-intro text-sm md:text-base mb-8 max-w-3xl">${content.workGlimpsesIntro}</p>` : ''}
+            <div class="space-y-12">
+                ${workGlimpses.map((item, index) => buildWorkGlimpseHTML(item, index, content)).join('')}
+            </div>
+        </div>
+    ` : '';
+
     mainContent.innerHTML = `
         <section class="container mx-auto px-4 md:px-6 py-12 max-w-6xl">
             <div class="fade-in">
                 <h1 class="text-3xl md:text-4xl font-bold mb-8 font-mono text-center">${content.sections.portfolio}</h1>
 
-                <div class="mb-16 portfolio-ngl-section">
-                    <h2 class="text-2xl md:text-3xl font-bold mb-3 font-mono">${content.sections.molecularVisualization}</h2>
-                    <p class="text-sm md:text-base opacity-90 leading-relaxed mb-6 max-w-3xl">${content.portfolioIntro || ''}</p>
-                    <div id="ngl-viewer-container" class="ngl-viewer-container ngl-viewer-portfolio mx-auto"></div>
-                    <p class="ngl-attribution text-center md:text-right mt-3">${content.sections.nglAttribution}</p>
-                </div>
+                ${workGlimpsesHTML}
                 
                 <div class="mb-16">
                     <h2 class="text-2xl md:text-3xl font-bold mb-6 font-mono">${content.sections.researchAreas}</h2>
@@ -1172,7 +1213,7 @@ function renderPortfolioPage(content) {
         </section>
     `;
 
-    initNGLViewer();
+    initNGLViewers();
 }
 
 // Contact Page Render

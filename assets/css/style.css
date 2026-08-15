@@ -179,6 +179,140 @@ body.light-mode .home-hero-intro {
     color: var(--text-light);
 }
 
+/* Literature notes (homepage) */
+.literature-section-intro {
+    opacity: 0.88;
+}
+
+body.lang-tr .literature-section-intro {
+    font-size: 1.05rem;
+    line-height: 1.7;
+}
+
+.literature-note-card {
+    border: 1px solid;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+body.light-mode .literature-note-card {
+    border-color: var(--border-light);
+    background-color: #f9fafb;
+}
+
+body.dark-mode .literature-note-card {
+    border-color: var(--border-dark);
+    background-color: #1a1a1a;
+}
+
+.literature-note-card:hover {
+    transform: translateY(-2px);
+}
+
+body.dark-mode .literature-note-card:hover {
+    box-shadow: 0 8px 24px rgba(0, 255, 65, 0.12);
+    border-color: rgba(0, 255, 65, 0.35);
+}
+
+body.light-mode .literature-note-card:hover {
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+.literature-note-summary {
+    font-size: 0.95rem;
+    opacity: 0.92;
+}
+
+body.lang-tr .literature-note-summary {
+    font-size: 1.05rem;
+    line-height: 1.75;
+    opacity: 0.95;
+}
+
+body.lang-tr .home-hero-intro {
+    font-size: 1.35rem;
+    line-height: 1.65;
+}
+
+body.lang-tr .hero-subtitle {
+    font-size: 0.95rem;
+}
+
+/* Work glimpses (Methods & Tools) */
+.work-glimpses-intro {
+    opacity: 0.88;
+    line-height: 1.65;
+}
+
+body.lang-tr .work-glimpses-intro {
+    font-size: 1.05rem;
+    line-height: 1.7;
+}
+
+.work-glimpse-item + .work-glimpse-item {
+    padding-top: 0.5rem;
+    border-top: 1px solid;
+}
+
+body.light-mode .work-glimpse-item + .work-glimpse-item {
+    border-color: var(--border-light);
+}
+
+body.dark-mode .work-glimpse-item + .work-glimpse-item {
+    border-color: var(--border-dark);
+}
+
+.work-glimpse-caption {
+    opacity: 0.9;
+    line-height: 1.65;
+}
+
+body.lang-tr .work-glimpse-caption {
+    font-size: 1.02rem;
+}
+
+.work-glimpse-figure {
+    max-width: 100%;
+    margin: 0;
+}
+
+.work-glimpse-image {
+    width: 100%;
+    max-height: 480px;
+    object-fit: contain;
+    border-radius: 15px;
+    border: 1px solid;
+}
+
+body.light-mode .work-glimpse-image {
+    border-color: #e2e8f0;
+    background: #fff;
+}
+
+body.dark-mode .work-glimpse-image {
+    border-color: #334155;
+    background: #0f172a;
+}
+
+.literature-note-tag {
+    display: inline-block;
+    padding: 0.2rem 0.6rem;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-family: 'Fira Code', monospace;
+    border: 1px solid;
+}
+
+body.light-mode .literature-note-tag {
+    border-color: var(--border-light);
+    background: #fff;
+}
+
+body.dark-mode .literature-note-tag {
+    border-color: rgba(0, 255, 65, 0.25);
+    background: rgba(0, 255, 65, 0.08);
+    color: var(--accent-dark);
+}
+
 /* Hero main heading typography (clean sans-serif, distinct from navbar brand) */
 .hero-heading {
     font-family: 'Inter', sans-serif;
