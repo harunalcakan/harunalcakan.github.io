@@ -28,7 +28,7 @@ const data = {
 
         homeStats: {
             articles: 4,
-            conferences: 12,
+            conferences: 14,
             focus: "DFT, molecular docking & MD; growing experimental work in electrochemistry and materials"
         },
 
@@ -242,6 +242,16 @@ const data = {
             ],
             conferences: [
                 {
+                    year: 2025,
+                    title: "Integrative In Silico Evaluation of Sulfonamide Derivatives as Dual Carbonic Anhydrase I and II Inhibitors via Molecular Docking and ADME/T Profiling",
+                    venue: "Oral presentation — 2nd International Conference on Modern Problems of Theoretical & Experimental Chemistry (December 18–19, 2025, Baku State University, Baku, Azerbaijan)"
+                },
+                {
+                    year: 2025,
+                    title: "Integrative In Silico Evaluation of Sulfonamide Derivatives as Dual Carbonic Anhydrase I and II Inhibitors via Molecular Docking and ADME/T Profiling",
+                    venue: "Oral presentation — 2nd International Conference on Modern Problems of Theoretical & Experimental Chemistry (December 18–19, 2025, Baku State University, Baku, Azerbaijan)"
+                },
+                {
                     year: 2023,
                     title: "Crafting Excellence in LIM Kinase 1 Inhibition: Pharmacophore-Based Virtual Screening and AI-Boosted ADMET Insight",
                     venue: "9th International BAU Drug Design Congress (November 2023)"
@@ -385,7 +395,7 @@ const data = {
 
         homeStats: {
             articles: 4,
-            conferences: 12,
+            conferences: 14,
             focus: "DFT, moleküler kenetleme ve MD; elektrokimya ve malzeme karakterizasyonunda gelişen deneysel çalışmalar"
         },
 
@@ -593,6 +603,16 @@ const data = {
                 }
             ],
             conferences: [
+                {
+                    year: 2025,
+                    title: "Integrative In Silico Evaluation of Sulfonamide Derivatives as Dual Carbonic Anhydrase I and II Inhibitors via Molecular Docking and ADME/T Profiling",
+                    venue: "Sözlü sunum — Teorik ve Deneysel Kimyanın Modern Problemleri 2. Uluslararası Konferansı (18–19 Aralık 2025, Bakü Devlet Üniversitesi, Bakü, Azerbaycan)"
+                },
+                {
+                    year: 2025,
+                    title: "Integrative In Silico Evaluation of Sulfonamide Derivatives as Dual Carbonic Anhydrase I and II Inhibitors via Molecular Docking and ADME/T Profiling",
+                    venue: "Sözlü sunum — Teorik ve Deneysel Kimyanın Modern Problemleri 2. Uluslararası Konferansı (18–19 Aralık 2025, Bakü Devlet Üniversitesi, Bakü, Azerbaycan)"
+                },
                 {
                     year: 2023,
                     title: "Crafting Excellence in LIM Kinase 1 Inhibition: Pharmacophore-Based Virtual Screening and AI-Boosted ADMET Insight",
