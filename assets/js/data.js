@@ -29,6 +29,7 @@ const data = {
         homeStats: {
             articles: 4,
             conferences: 14,
+            citations: 14,
             focus: "DFT, molecular docking & MD; growing experimental work in electrochemistry and materials"
         },
 
@@ -106,6 +107,8 @@ const data = {
             atAGlance: "At a Glance",
             publicationsCount: "Peer-reviewed articles",
             conferenceCount: "Poster & conference presentations",
+            citationsCount: "Total citations",
+            viewOnGoogleScholar: "View on Google Scholar →",
             currentFocus: "Current focus",
             explorePublications: "Explore Publications",
             profilePhoto: "Profile Photo",
@@ -364,7 +367,8 @@ const data = {
             orcid: "https://orcid.org/0000-0003-3821-8681",
             linkedin: "https://linkedin.com/in/nalcakanharun",
             github: "https://github.com/harunalcakan",
-            researchgate: "https://www.researchgate.net/profile/Harun-Nalcakan"
+            researchgate: "https://www.researchgate.net/profile/Harun-Nalcakan",
+            googleScholar: "https://scholar.google.com/citations?user=z6mdC6kAAAAJ&hl=en&oi=ao"
         }
     },
 
@@ -395,6 +399,7 @@ const data = {
         homeStats: {
             articles: 4,
             conferences: 14,
+            citations: 14,
             focus: "DFT, moleküler kenetleme ve MD; elektrokimya ve malzeme karakterizasyonunda gelişen deneysel çalışmalar"
         },
 
@@ -471,6 +476,8 @@ const data = {
             atAGlance: "Genel Bakış",
             publicationsCount: "Hakemli makale",
             conferenceCount: "Poster ve konferans sunumu",
+            citationsCount: "Toplam atıf",
+            viewOnGoogleScholar: "Google Scholar'da görüntüle →",
             currentFocus: "Güncel odak alanı",
             explorePublications: "Yayınları İncele",
             profilePhoto: "Profil Fotoğrafı",
@@ -724,7 +731,8 @@ const data = {
             orcid: "https://orcid.org/0000-0003-3821-8681",
             linkedin: "https://linkedin.com/in/nalcakanharun",
             github: "https://github.com/harunalcakan",
-            researchgate: "https://www.researchgate.net/profile/Harun-Nalcakan"
+            researchgate: "https://www.researchgate.net/profile/Harun-Nalcakan",
+            googleScholar: "https://scholar.google.com/citations?user=z6mdC6kAAAAJ&hl=en&oi=ao"
         }
     }
 };

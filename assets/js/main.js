@@ -131,6 +131,39 @@ function buildHomeTitleLine(content) {
     return `${content.title}${at}${content.sections.homeDepartment}, @${content.heroAffiliationShort}`;
 }
 
+function buildHomeStatsHTML(content) {
+    const stats = content.homeStats;
+    if (!stats) return '';
+
+    const scholarLink = content.contact?.googleScholar;
+    const cards = [
+        { value: stats.articles, label: content.sections.publicationsCount },
+        { value: stats.conferences, label: content.sections.conferenceCount },
+        { value: stats.citations, label: content.sections.citationsCount }
+    ].filter(card => card.value != null && card.label);
+
+    if (cards.length === 0) return '';
+
+    return `
+        <section class="container mx-auto px-4 md:px-6 py-10 max-w-5xl home-stats-section">
+            <h2 class="text-2xl md:text-3xl font-bold mb-6 font-mono">${content.sections.atAGlance || ''}</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                ${cards.map((card, index) => `
+                    <div class="home-stat-card p-5 md:p-6 rounded-lg text-center fade-in" style="animation-delay: ${index * 0.08}s">
+                        <p class="home-stat-value text-3xl md:text-4xl font-bold font-mono mb-2">${card.value}</p>
+                        <p class="home-stat-label text-sm opacity-80">${card.label}</p>
+                    </div>
+                `).join('')}
+            </div>
+            ${isValidLink(scholarLink) ? `
+                <p class="mt-5 text-sm">
+                    <a href="${scholarLink}" target="_blank" rel="noopener" class="publication-title-link font-mono">${content.sections.viewOnGoogleScholar || ''}</a>
+                </p>
+            ` : ''}
+        </section>
+    `;
+}
+
 function buildHomeProfileSidebarHTML(content) {
     const initials = getProfileInitials(content);
     const imageSrc = content.profileImage || '';
@@ -915,7 +948,9 @@ function renderHomePage(content) {
         </section>
     ` : '';
 
-    mainContent.innerHTML = heroHTML + literatureHTML;
+    const statsHTML = buildHomeStatsHTML(content);
+
+    mainContent.innerHTML = heroHTML + statsHTML + literatureHTML;
 
     initNGLViewers();
 }

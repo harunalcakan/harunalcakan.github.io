@@ -1336,6 +1336,26 @@ body.dark-mode .conference-year-heading {
 }
 
 /* Home page — stats, tags, CTAs */
+.home-stats-section {
+    border-top: 1px solid;
+}
+
+body.light-mode .home-stats-section {
+    border-color: var(--border-light);
+}
+
+body.dark-mode .home-stats-section {
+    border-color: var(--border-dark);
+}
+
+.home-stat-value {
+    line-height: 1.1;
+}
+
+.home-stat-label {
+    line-height: 1.4;
+}
+
 .home-stat-card {
     border: 1px solid;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
