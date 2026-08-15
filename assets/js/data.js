@@ -313,14 +313,20 @@ const data = {
             software: "Software",
             developed: [
                 {
-                    name: "ADVISOR",
-                    description: "Concept for a computational workflow platform.",
+                    name: "ADViSOR",
+                    description: "Concept for a molecular docking validation program.",
                     link: "#",
                     project_status: "Idea stage"
                 },
                 {
                     name: "SnapChem",
-                    description: "Concept for chemical data visualization.",
+                    description: "Concept for a mobile molecule drawing app.",
+                    link: "#",
+                    project_status: "Idea stage"
+                },
+                {
+                    name: "Chemify",
+                    description: "Concept for a chemical calculation module and related tools.",
                     link: "#",
                     project_status: "Idea stage"
                 }
@@ -658,14 +664,20 @@ const data = {
             software: "Yazılım",
             developed: [
                 {
-                    name: "ADVISOR",
-                    description: "Hesaplamalı iş akışı platformu konsepti.",
+                    name: "ADViSOR",
+                    description: "Moleküler kenetleme validasyon programı konsepti.",
                     link: "#",
                     project_status: "Fikir aşamasında"
                 },
                 {
                     name: "SnapChem",
-                    description: "Kimyasal veri görselleştirme konsepti.",
+                    description: "Mobil molekül çizim uygulaması konsepti.",
+                    link: "#",
+                    project_status: "Fikir aşamasında"
+                },
+                {
+                    name: "Chemify",
+                    description: "Kimyasal hesaplama modülü ve ilgili araçlar konsepti.",
                     link: "#",
                     project_status: "Fikir aşamasında"
                 }
