@@ -1181,9 +1181,8 @@ function renderResearchPage(content) {
         ? [...content.tools.softwareItems]
         : [];
 
-    ['VMD', 'R'].forEach(tag => {
-        if (!techTagsBase.includes(tag)) techTagsBase.push(tag);
-    });
+    const locale = currentLanguage === 'tr' ? 'tr' : 'en';
+    techTagsBase.sort((a, b) => a.localeCompare(b, locale, { sensitivity: 'base' }));
 
     const techTagsHTML = techTagsBase
         .map(tag => `<span class="tech-badge">${tag}</span>`)
@@ -1232,7 +1231,10 @@ function renderResearchPage(content) {
                 <h1 class="text-3xl md:text-4xl font-bold mb-4 font-mono">${content.sections.research}</h1>
                 ${content.researchInterests && content.researchInterests.length > 0 ? `
                     <div class="flex flex-wrap gap-2 mb-10">
-                        ${content.researchInterests.map(tag => `<span class="research-tag">${tag}</span>`).join('')}
+                        ${[...content.researchInterests]
+                            .sort((a, b) => a.localeCompare(b, currentLanguage === 'tr' ? 'tr' : 'en', { sensitivity: 'base' }))
+                            .map(tag => `<span class="research-tag">${tag}</span>`)
+                            .join('')}
                     </div>
                 ` : ''}
 
@@ -1246,12 +1248,15 @@ function renderResearchPage(content) {
                 </div>
                 ${technicalModulesHTML}
 
+                ${content.tools?.developed?.length ? `
                 <div class="mb-12">
-                    <h2 class="text-2xl md:text-3xl font-bold mb-6 font-mono">${content.sections.scientificTools}</h2>
+                    <h2 class="text-2xl md:text-3xl font-bold mb-2 font-mono">${content.sections.digitalIdeas || content.tools.developedTitle}</h2>
+                    ${content.sections.digitalIdeasNote ? `<p class="text-sm md:text-base opacity-80 mb-6 max-w-3xl">${content.sections.digitalIdeasNote}</p>` : ''}
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         ${scientificToolsHTML}
                     </div>
                 </div>
+                ` : ''}
             </div>
         </section>
     `;

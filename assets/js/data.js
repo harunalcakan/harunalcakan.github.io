@@ -33,13 +33,13 @@ const data = {
         },
 
         researchInterests: [
-            "DFT",
-            "Molecular Docking",
-            "Molecular Dynamics",
             "ADME / ADMET Profiling",
             "Cheminformatics",
+            "DFT",
             "Electrochemistry",
             "Materials Characterization",
+            "Molecular Docking",
+            "Molecular Dynamics"
         ],
 
         thesis: {
@@ -92,7 +92,9 @@ const data = {
             workAndEducation: "Work Experience & Education",
             academicCompetency: "Academic & Technical Competency",
             researchAreas: "Research Areas",
-            scientificTools: "Scientific Tools",
+            digitalIdeas: "Digital Ideas",
+            digitalIdeasNote: "Concept-stage ideas for scientific workflows — early development, not released tools.",
+            ideaStage: "Idea stage",
             conferencePapers: "Poster & Conference Presentations",
             conferencePapersNote: "Click any title to view on ResearchGate.",
             peerReviewed: "Peer-Reviewed Articles",
@@ -218,12 +220,7 @@ const data = {
                 ]
             },
             software: {
-                title: "Software & Technical Stack",
-                skills: [
-                    "Python, MATLAB, R",
-                    "Gaussian, AutoDock, VMD",
-                    "Scientific Computing"
-                ]
+                title: "Software & Technical Stack"
             }
         },
 
@@ -317,23 +314,23 @@ const data = {
 
         // Tools / software (used by portfolio and tools views)
         tools: {
-            developedTitle: "Developed Tools",
-            techStackTitle: "Tech Stack",
+            developedTitle: "Digital Ideas",
+            techStackTitle: "Software & Technical Stack",
             viewProject: "View Project",
             hardware: "Hardware",
             software: "Software",
             developed: [
                 {
                     name: "ADVISOR",
-                    description: "Advanced computational platform.",
+                    description: "Concept for a computational workflow platform.",
                     link: "#",
-                    project_status: "Under Development"
+                    project_status: "Idea stage"
                 },
                 {
                     name: "SnapChem",
-                    description: "Chemical data visualization tool.",
+                    description: "Concept for chemical data visualization.",
                     link: "#",
-                    project_status: "Under Development"
+                    project_status: "Idea stage"
                 }
             ],
             hardwareItems: [
@@ -342,10 +339,12 @@ const data = {
                 "Laboratory equipment"
             ],
             softwareItems: [
+                "AutoDock Vina",
                 "Gaussian",
-                "AutoDock",
-                "Python",
-                "MATLAB"
+                "GROMACS",
+                "Quantum ESPRESSO",
+                "VESTA",
+                "VMD"
             ]
         },
 
@@ -393,13 +392,13 @@ const data = {
         },
 
         researchInterests: [
-            "DFT",
-            "Moleküler Kenetleme",
-            "Moleküler Dinamik",
             "ADME / ADMET Profilleme",
-            "Kemoinformatik",
+            "DFT",
             "Elektrokimya",
+            "Kemoinformatik",
             "Malzeme Karakterizasyonu",
+            "Moleküler Dinamik",
+            "Moleküler Kenetleme"
         ],
 
         thesis: {
@@ -451,7 +450,9 @@ const data = {
             workAndEducation: "İş Deneyimi ve Eğitim",
             academicCompetency: "Akademik ve Teknik Yeterlilik",
             researchAreas: "Araştırma Alanları",
-            scientificTools: "Bilimsel Araçlar",
+            digitalIdeas: "Dijital Fikirler",
+            digitalIdeasNote: "Bilimsel iş akışlarına yönelik fikir aşamasındaki konseptler — erken geliştirme, yayımlanmış araçlar değil.",
+            ideaStage: "Fikir aşamasında",
             conferencePapers: "Poster ve Konferans Sunumları",
             conferencePapersNote: "Başlıklara tıklayarak ResearchGate'te görüntüleyebilirsiniz.",
             peerReviewed: "Hakemli Makaleler",
@@ -574,12 +575,7 @@ const data = {
                 ]
             },
             software: {
-                title: "Yazılım ve Teknik Altyapı",
-                skills: [
-                    "Python, MATLAB, R",
-                    "Gaussian, AutoDock, VMD",
-                    "Bilimsel Hesaplama"
-                ]
+                title: "Yazılım ve Teknik Altyapı"
             }
         },
 
@@ -671,23 +667,23 @@ const data = {
         },
 
         tools: {
-            developedTitle: "Geliştirilen Araçlar",
-            techStackTitle: "Teknoloji Yığını",
+            developedTitle: "Dijital Fikirler",
+            techStackTitle: "Yazılım ve Teknik Altyapı",
             viewProject: "Projeyi Görüntüle",
             hardware: "Donanım",
             software: "Yazılım",
             developed: [
                 {
                     name: "ADVISOR",
-                    description: "Gelişmiş hesaplamalı platform.",
+                    description: "Hesaplamalı iş akışı platformu konsepti.",
                     link: "#",
-                    project_status: "Geliştirme Aşamasında"
+                    project_status: "Fikir aşamasında"
                 },
                 {
                     name: "SnapChem",
-                    description: "Kimyasal veri görselleştirme aracı.",
+                    description: "Kimyasal veri görselleştirme konsepti.",
                     link: "#",
-                    project_status: "Geliştirme Aşamasında"
+                    project_status: "Fikir aşamasında"
                 }
             ],
             hardwareItems: [
@@ -696,10 +692,12 @@ const data = {
                 "Laboratuvar ekipmanları"
             ],
             softwareItems: [
+                "AutoDock Vina",
                 "Gaussian",
-                "AutoDock",
-                "Python",
-                "MATLAB"
+                "GROMACS",
+                "Quantum ESPRESSO",
+                "VESTA",
+                "VMD"
             ]
         },
 
