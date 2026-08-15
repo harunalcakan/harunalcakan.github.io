@@ -43,17 +43,13 @@ const data = {
         ],
 
         thesis: {
-            degreeLabel: "Master's Thesis",
+            degreeLabel: "MSc Thesis",
             title: "Development of 3D-printed electrodes using polylactic acid-based conductive filament and their application in amperometric determination of nitro-polycyclic aromatic hydrocarbons",
             year: "2026",
             type: "M.Sc.",
             language: "Turkish",
             subject: "Chemistry",
-            institution: "Ankara University / Graduate School of Natural and Applied Sciences / Department of Chemistry / Chemistry Program",
-            advisors: "Prof. Dr. Müşerref Önal",
-            coAdvisor: "Dr. Gülbin Kurtay",
-            gpa: "3.93/4.00",
-            link: "https://www.researchgate.net/profile/Harun-Nalcakan"
+            institution: "Ankara University / Graduate School of Natural and Applied Sciences / Department of Chemistry / Chemistry Program"
         },
 
         portfolioIntro: "Interactive molecular visualization — a glimpse into the structural models that inform my computational work.",
@@ -98,14 +94,11 @@ const data = {
             conferencePapers: "Poster & Conference Presentations",
             conferencePapersNote: "Click any title to view on ResearchGate.",
             peerReviewed: "Peer-Reviewed Articles",
-            thesis: "Master's Thesis",
-            thesisAdvisor: "Advisor",
-            thesisCoAdvisor: "Co-advisor",
+            thesis: "MSc Thesis",
             thesisYear: "Year",
             thesisType: "Degree",
             thesisLanguage: "Language",
             thesisSubject: "Subject",
-            thesisGpa: "GPA",
             molecularVisualization: "Molecular Visualization",
             workGlimpse: "A Glimpse from My Work",
             closePhoto: "Close",
@@ -116,7 +109,6 @@ const data = {
             conferenceCount: "Poster & conference presentations",
             currentFocus: "Current focus",
             explorePublications: "Explore Publications",
-            viewOnResearchGate: "View on ResearchGate",
             profilePhoto: "Profile Photo",
             nglAttribution: "Powered by NGL Viewer",
             footerTagline: "Built with Computational Minimalism.",
@@ -135,8 +127,8 @@ const data = {
 
         metaDescriptions: {
             index: "Harun Nalçakan — Research Assistant at Ankara University. DFT, molecular docking, molecular dynamics, and experimental chemistry.",
-            about: "Biography, education, and work experience of Harun Nalçakan, Research Assistant in Chemistry at Ankara University.",
-            research: "Research areas, methods, competencies, and visual snapshots from computational and experimental chemistry work.",
+            about: "Education, thesis, and work experience of Harun Nalçakan, Research Assistant in Chemistry at Ankara University.",
+            research: "Research areas, methods, and competencies in computational and experimental chemistry.",
             notes: "Reading notes and short takeaways from literature reviews in computational and experimental chemistry.",
             publications: "Peer-reviewed articles and conference presentations by Harun Nalçakan in computational chemistry and drug discovery.",
             contact: "Contact Harun Nalçakan — email, ORCID, ResearchGate, LinkedIn, and GitHub."
@@ -408,11 +400,7 @@ const data = {
             type: "Yüksek Lisans",
             language: "Türkçe",
             subject: "Kimya",
-            institution: "Ankara Üniversitesi / Fen Bilimleri Enstitüsü / Kimya Anabilim Dalı / Kimya Bilim Dalı",
-            advisors: "Prof. Dr. Müşerref Önal",
-            coAdvisor: "Dr. Öğr. Üyesi Gülbin Kurtay",
-            gpa: "3.93/4.00",
-            link: "https://www.researchgate.net/profile/Harun-Nalcakan"
+            institution: "Ankara Üniversitesi / Fen Bilimleri Enstitüsü / Kimya Anabilim Dalı / Kimya Bilim Dalı"
         },
 
         portfolioIntro: "Etkileşimli moleküler görselleştirme — hesaplamalı çalışmalarıma yön veren yapısal modellere kısa bir bakış.",
@@ -457,13 +445,10 @@ const data = {
             conferencePapersNote: "Başlıklara tıklayarak ResearchGate'te görüntüleyebilirsiniz.",
             peerReviewed: "Hakemli Makaleler",
             thesis: "Yüksek Lisans Tezi",
-            thesisAdvisor: "Danışman",
-            thesisCoAdvisor: "Eş danışman",
             thesisYear: "Yıl",
             thesisType: "Tür",
             thesisLanguage: "Dil",
             thesisSubject: "Konu",
-            thesisGpa: "GNO",
             molecularVisualization: "Moleküler Görselleştirme",
             workGlimpse: "Çalışmalarımdan Bir Kesit",
             closePhoto: "Kapat",
@@ -474,7 +459,6 @@ const data = {
             conferenceCount: "Poster ve konferans sunumu",
             currentFocus: "Güncel odak alanı",
             explorePublications: "Yayınları İncele",
-            viewOnResearchGate: "ResearchGate'te Görüntüle",
             profilePhoto: "Profil Fotoğrafı",
             nglAttribution: "NGL Viewer ile desteklenmektedir",
             footerTagline: "Computational Minimalism ile geliştirildi.",
@@ -493,8 +477,8 @@ const data = {
 
         metaDescriptions: {
             index: "Harun Nalçakan — Ankara Üniversitesi Kimya Bölümü Araştırma Görevlisi. DFT, moleküler kenetleme, moleküler dinamik ve deneysel kimya.",
-            about: "Ankara Üniversitesi Kimya Bölümü Araştırma Görevlisi Harun Nalçakan'ın özgeçmişi, eğitim geçmişi ve iş deneyimi.",
-            research: "Hesaplamalı ve deneysel kimyada araştırma alanları, yöntemler, yeterlilikler ve çalışma görselleri.",
+            about: "Ankara Üniversitesi Kimya Bölümü Araştırma Görevlisi Harun Nalçakan'ın eğitimi, tezi ve iş deneyimi.",
+            research: "Hesaplamalı ve deneysel kimyada araştırma alanları, yöntemler ve yeterlilikler.",
             notes: "Literatür taramalarından derlenen kısa notlar ve çıkarımlar — hesaplamalı ve deneysel kimya.",
             publications: "Harun Nalçakan'ın hesaplamalı kimya ve ilaç keşfi alanındaki hakemli makaleleri ve konferans bildirileri.",
             contact: "Harun Nalçakan ile iletişim — e-posta, ORCID, ResearchGate, LinkedIn ve GitHub."

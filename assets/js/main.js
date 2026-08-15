@@ -1010,15 +1010,7 @@ function renderAboutPage(content) {
                 ${thesis.type ? `<p class="opacity-80">${content.sections.thesisType || ''}: ${thesis.type}</p>` : ''}
                 ${thesis.language ? `<p class="opacity-80">${content.sections.thesisLanguage || ''}: ${thesis.language}</p>` : ''}
                 ${thesis.subject ? `<p class="opacity-80">${content.sections.thesisSubject || ''}: ${thesis.subject}</p>` : ''}
-                ${thesis.advisors ? `<p class="opacity-80">${content.sections.thesisAdvisor || ''}: ${thesis.advisors}</p>` : ''}
-                ${thesis.coAdvisor ? `<p class="opacity-80">${content.sections.thesisCoAdvisor || ''}: ${thesis.coAdvisor}</p>` : ''}
-                ${thesis.gpa ? `<p class="opacity-80">${content.sections.thesisGpa || ''}: ${thesis.gpa}</p>` : ''}
             </div>
-            ${isValidLink(thesis.link) ? `
-                <a href="${thesis.link}" target="_blank" rel="noopener" class="inline-block mt-4 text-sm font-mono publication-title-link">
-                    ${content.sections.viewOnResearchGate || 'ResearchGate'} →
-                </a>
-            ` : ''}
         </div>
     ` : '';
 
@@ -1026,9 +1018,6 @@ function renderAboutPage(content) {
         <section class="container mx-auto px-4 md:px-6 py-12 max-w-5xl">
             <div class="fade-in">
                 <h1 class="text-3xl md:text-4xl font-bold mb-8 font-mono">${content.sections.about}</h1>
-                <div class="mb-10">
-                    <p class="text-base md:text-lg leading-relaxed">${content.bio}</p>
-                </div>
 
                 ${cvButtonHTML}
                 ${thesisHTML}
@@ -1214,17 +1203,6 @@ function renderResearchPage(content) {
         </div>
     `;
 
-    const workGlimpses = content.workGlimpses || [];
-    const workGlimpsesHTML = workGlimpses.length > 0 ? `
-        <div class="mb-16 work-glimpses-section">
-            <h2 class="text-2xl md:text-3xl font-bold mb-3 font-mono">${content.sections.workGlimpse || ''}</h2>
-            ${content.workGlimpsesIntro ? `<p class="work-glimpses-intro text-sm md:text-base mb-8 max-w-3xl">${content.workGlimpsesIntro}</p>` : ''}
-            <div class="space-y-12">
-                ${workGlimpses.map((item, index) => buildWorkGlimpseHTML(item, index, content)).join('')}
-            </div>
-        </div>
-    ` : '';
-
     mainContent.innerHTML = `
         <section class="container mx-auto px-4 md:px-6 py-12 max-w-6xl">
             <div class="fade-in">
@@ -1238,8 +1216,6 @@ function renderResearchPage(content) {
                     </div>
                 ` : ''}
 
-                ${workGlimpsesHTML}
-                
                 <div class="mb-16">
                     <h2 class="text-2xl md:text-3xl font-bold mb-6 font-mono">${content.sections.researchAreas}</h2>
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
