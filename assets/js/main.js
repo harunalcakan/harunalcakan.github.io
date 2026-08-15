@@ -137,9 +137,10 @@ function buildHomeStatsHTML(content) {
 
     const scholarLink = content.contact?.googleScholar;
     const cards = [
-        { value: stats.articles, label: content.sections.publicationsCount },
-        { value: stats.conferences, label: content.sections.conferenceCount },
-        { value: stats.citations, label: content.sections.citationsCount }
+        { key: 'articles', value: stats.articles, label: content.sections.publicationsCount },
+        { key: 'conferences', value: stats.conferences, label: content.sections.conferenceCount },
+        { key: 'citations', value: stats.citations, label: content.sections.citationsCount },
+        { key: 'hIndex', value: stats.hIndex, label: content.sections.hIndexCount }
     ].filter(card => card.value != null && card.label);
 
     if (cards.length === 0) return '';
@@ -147,21 +148,61 @@ function buildHomeStatsHTML(content) {
     return `
         <section class="container mx-auto px-4 md:px-6 py-10 max-w-5xl home-stats-section">
             <h2 class="text-2xl md:text-3xl font-bold mb-6 font-mono">${content.sections.atAGlance || ''}</h2>
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
                 ${cards.map((card, index) => `
                     <div class="home-stat-card p-5 md:p-6 rounded-lg text-center fade-in" style="animation-delay: ${index * 0.08}s">
-                        <p class="home-stat-value text-3xl md:text-4xl font-bold font-mono mb-2">${card.value}</p>
+                        <p class="home-stat-value text-3xl md:text-4xl font-bold font-mono mb-2" data-stat="${card.key}">${card.value}</p>
                         <p class="home-stat-label text-sm opacity-80">${card.label}</p>
                     </div>
                 `).join('')}
             </div>
-            ${isValidLink(scholarLink) ? `
-                <p class="mt-5 text-sm">
-                    <a href="${scholarLink}" target="_blank" rel="noopener" class="publication-title-link font-mono">${content.sections.viewOnGoogleScholar || ''}</a>
-                </p>
-            ` : ''}
+            <div class="mt-5 text-sm space-y-1">
+                ${isValidLink(scholarLink) ? `
+                    <p>
+                        <a href="${scholarLink}" target="_blank" rel="noopener" class="publication-title-link font-mono">${content.sections.viewOnGoogleScholar || ''}</a>
+                    </p>
+                ` : ''}
+                ${content.sections.scholarStatsNote ? `<p class="home-scholar-note opacity-70 text-xs md:text-sm" data-scholar-updated></p>` : ''}
+            </div>
         </section>
     `;
+}
+
+async function hydrateHomeStats(content) {
+    const section = document.querySelector('.home-stats-section');
+    if (!section) return;
+
+    const statsPath = content.scholar?.statsPath || 'assets/data/scholar-stats.json';
+
+    try {
+        const response = await fetch(`${statsPath}?t=${Date.now()}`, { cache: 'no-store' });
+        if (!response.ok) return;
+
+        const live = await response.json();
+        const liveValues = {
+            articles: live.articles,
+            citations: live.citations,
+            hIndex: live.hIndex
+        };
+
+        Object.entries(liveValues).forEach(([key, value]) => {
+            if (value == null) return;
+            const element = section.querySelector(`[data-stat="${key}"]`);
+            if (element) element.textContent = value;
+        });
+
+        const updatedElement = section.querySelector('[data-scholar-updated]');
+        if (updatedElement && live.updatedAt && content.sections.scholarStatsNote) {
+            const updatedDate = new Date(live.updatedAt);
+            const locale = currentLanguage === 'tr' ? 'tr-TR' : 'en-US';
+            const formattedDate = Number.isNaN(updatedDate.getTime())
+                ? live.updatedAt
+                : updatedDate.toLocaleDateString(locale, { year: 'numeric', month: 'short', day: 'numeric' });
+            updatedElement.textContent = `${content.sections.scholarStatsNote} (${formattedDate})`;
+        }
+    } catch {
+        // Keep fallback values from data.js when live stats are unavailable.
+    }
 }
 
 function buildHomeProfileSidebarHTML(content) {
@@ -953,6 +994,7 @@ function renderHomePage(content) {
     mainContent.innerHTML = heroHTML + statsHTML + literatureHTML;
 
     initNGLViewers();
+    hydrateHomeStats(content);
 }
 
 // Literature Notes Page Render

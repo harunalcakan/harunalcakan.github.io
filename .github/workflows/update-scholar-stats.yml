@@ -1,0 +1,33 @@
+name: Update Google Scholar stats
+
+on:
+  schedule:
+    - cron: "0 6 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install -r scripts/requirements-scholar.txt
+
+      - name: Fetch Scholar metrics
+        run: python scripts/update_scholar_stats.py
+
+      - name: Commit updated stats
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "Update Google Scholar stats."
+          file_pattern: assets/data/scholar-stats.json

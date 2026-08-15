@@ -1356,6 +1356,10 @@ body.dark-mode .home-stats-section {
     line-height: 1.4;
 }
 
+.home-scholar-note {
+    line-height: 1.4;
+}
+
 .home-stat-card {
     border: 1px solid;
     transition: transform 0.3s ease, box-shadow 0.3s ease;

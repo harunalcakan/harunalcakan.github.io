@@ -30,7 +30,13 @@ const data = {
             articles: 4,
             conferences: 14,
             citations: 14,
+            hIndex: 2,
             focus: "DFT, molecular docking & MD; growing experimental work in electrochemistry and materials"
+        },
+
+        scholar: {
+            authorId: "z6mdC6kAAAAJ",
+            statsPath: "assets/data/scholar-stats.json"
         },
 
         researchInterests: [
@@ -108,7 +114,9 @@ const data = {
             publicationsCount: "Peer-reviewed articles",
             conferenceCount: "Poster & conference presentations",
             citationsCount: "Total citations",
+            hIndexCount: "h-index",
             viewOnGoogleScholar: "View on Google Scholar →",
+            scholarStatsNote: "Citation metrics sync from Google Scholar.",
             currentFocus: "Current focus",
             explorePublications: "Explore Publications",
             profilePhoto: "Profile Photo",
@@ -400,7 +408,13 @@ const data = {
             articles: 4,
             conferences: 14,
             citations: 14,
+            hIndex: 2,
             focus: "DFT, moleküler kenetleme ve MD; elektrokimya ve malzeme karakterizasyonunda gelişen deneysel çalışmalar"
+        },
+
+        scholar: {
+            authorId: "z6mdC6kAAAAJ",
+            statsPath: "assets/data/scholar-stats.json"
         },
 
         researchInterests: [
@@ -477,7 +491,9 @@ const data = {
             publicationsCount: "Hakemli makale",
             conferenceCount: "Poster ve konferans sunumu",
             citationsCount: "Toplam atıf",
+            hIndexCount: "h-indeks",
             viewOnGoogleScholar: "Google Scholar'da görüntüle →",
+            scholarStatsNote: "Atıf metrikleri Google Scholar ile senkronize edilir.",
             currentFocus: "Güncel odak alanı",
             explorePublications: "Yayınları İncele",
             profilePhoto: "Profil Fotoğrafı",
