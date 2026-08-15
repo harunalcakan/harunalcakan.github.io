@@ -19,20 +19,11 @@ function isValidLink(link) {
     return Boolean(link && link !== '#' && !String(link).endsWith('#'));
 }
 
-function buildResearchGateSearchLink(title, authorName) {
-    const query = encodeURIComponent(`${title} ${authorName || ''}`.trim());
-    return `https://www.researchgate.net/search/publication?q=${query}`;
-}
-
-function resolvePublicationLink(item, content) {
+function resolveConferenceLink(item) {
     if (isValidLink(item.link)) return item.link;
     if (isValidLink(item.doi_link)) return item.doi_link;
     if (isValidLink(item.researchgate_link)) return item.researchgate_link;
-    const profile = content.contact?.researchgate;
-    if (item.title && isValidLink(profile)) {
-        return buildResearchGateSearchLink(item.title, content.name);
-    }
-    return profile || '#';
+    return null;
 }
 
 function getPagePath(page) {
@@ -1070,8 +1061,8 @@ function renderPublicationsPage(content) {
     const conferencesHTML = groupConferencesByYear(conferences)
         .map((group, groupIndex) => {
             const itemsHTML = group.items.map((conf, index) => {
-                const confLink = resolvePublicationLink(conf, content);
-                const titleMarkup = isValidLink(confLink) && confLink !== '#'
+                const confLink = resolveConferenceLink(conf);
+                const titleMarkup = confLink
                     ? `<a href="${confLink}" target="_blank" rel="noopener" class="publication-title-link">${conf.title}</a>`
                     : `<span class="publication-title-link">${conf.title}</span>`;
 
