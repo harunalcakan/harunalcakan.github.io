@@ -606,12 +606,12 @@ const data = {
                 {
                     year: 2025,
                     title: "Integrative In Silico Evaluation of Sulfonamide Derivatives as Dual Carbonic Anhydrase I and II Inhibitors via Molecular Docking and ADME/T Profiling",
-                    venue: "Sözlü sunum — Teorik ve Deneysel Kimyanın Modern Problemleri 2. Uluslararası Konferansı (18–19 Aralık 2025, Bakü Devlet Üniversitesi, Bakü, Azerbaycan)"
+                    venue: "Oral presentation — 2nd International Conference on Modern Problems of Theoretical & Experimental Chemistry (December 18–19, 2025, Baku State University, Baku, Azerbaijan)"
                 },
                 {
                     year: 2025,
                     title: "Integrative In Silico Evaluation of Sulfonamide Derivatives as Dual Carbonic Anhydrase I and II Inhibitors via Molecular Docking and ADME/T Profiling",
-                    venue: "Sözlü sunum — Teorik ve Deneysel Kimyanın Modern Problemleri 2. Uluslararası Konferansı (18–19 Aralık 2025, Bakü Devlet Üniversitesi, Bakü, Azerbaycan)"
+                    venue: "Oral presentation — 2nd International Conference on Modern Problems of Theoretical & Experimental Chemistry (December 18–19, 2025, Baku State University, Baku, Azerbaijan)"
                 },
                 {
                     year: 2023,
