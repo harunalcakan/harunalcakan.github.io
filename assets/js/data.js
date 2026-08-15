@@ -1,6 +1,5 @@
 // THE CONTENT DATABASE - Harun Nalçakan
-// All site text lives here. To add a literature note, edit literatureNotes under "en" and "tr".
-// To add a work glimpse (portfolio page), edit workGlimpses — use type "ngl" or "image".
+// Edit "en" and "tr" blocks in parallel. Literature notes: literatureNotes array + notes.html page.
 
 const data = {
     "en": {
@@ -72,14 +71,7 @@ const data = {
 
         // Homepage — literature reading notes (add new entries at the top)
         literatureNotesIntro: "Short notes from my literature reading — methods, ideas, and takeaways I find worth sharing.",
-        literatureNotes: [
-            {
-                date: "2026-07-15",
-                title: "3D-printed electrodes for environmental sensing",
-                summary: "Recent work on conductive filaments and amperometric detection highlights how additive manufacturing can lower prototyping costs in electrochemical analysis. I am tracking design choices that affect sensitivity and reproducibility.",
-                tags: ["Electrochemistry", "3D printing"]
-            }
-        ],
+        literatureNotes: [],
 
         // Section labels used by main.js (navbar, headings, toggles)
         sections: {
@@ -89,9 +81,9 @@ const data = {
             publications: "Publications",
             contact: "Contact",
             news: "News",
-            literatureNotes: "News",
-            selectedPublications: "Selected publications",
-            viewAllPublications: "View all publications →",
+            literatureNotes: "Reading notes",
+            literatureNotesEmpty: "No reading notes yet. New notes from my literature reviews will appear here.",
+            viewAllNotes: "View all reading notes →",
             homeDepartment: "Department of Chemistry",
             homeAt: "at",
             downloadCV: "Download CV",
@@ -134,6 +126,7 @@ const data = {
             index: "Harun Nalçakan — Academic Portfolio",
             about: "About — Harun Nalçakan",
             research: "Research — Harun Nalçakan",
+            notes: "Reading Notes — Harun Nalçakan",
             publications: "Publications — Harun Nalçakan",
             contact: "Contact — Harun Nalçakan"
         },
@@ -142,6 +135,7 @@ const data = {
             index: "Harun Nalçakan — Research Assistant at Ankara University. DFT, molecular docking, molecular dynamics, and experimental chemistry.",
             about: "Biography, education, and work experience of Harun Nalçakan, Research Assistant in Chemistry at Ankara University.",
             research: "Research areas, methods, competencies, and visual snapshots from computational and experimental chemistry work.",
+            notes: "Reading notes and short takeaways from literature reviews in computational and experimental chemistry.",
             publications: "Peer-reviewed articles and conference presentations by Harun Nalçakan in computational chemistry and drug discovery.",
             contact: "Contact Harun Nalçakan — email, ORCID, ResearchGate, LinkedIn, and GitHub."
         },
@@ -187,29 +181,7 @@ const data = {
             }
         ],
 
-        // News (used by home page "Latest News" section)
-        news: [
-            {
-                date: "2024-09-01",
-                title: "Targeting LIMK1 in Alzheimer's Disease",
-                content: "Targeting LIMK1 in Alzheimer's Disease (J. Turk. Chem. Soc. Sect. A, Sept 2024)."
-            },
-            {
-                date: "2024-01-15",
-                title: "An in silico Pharmacokinetic Investigation",
-                content: "An in silico Pharmacokinetic Investigation of Organic Luminogens (Ankara Univ. Eczacilik Fak. Derg., Jan 2024)."
-            },
-            {
-                date: "2023-09-01",
-                title: "Bridging Molecular Docking to Molecular Dynamics",
-                content: "Bridging Molecular Docking to Molecular Dynamics (J. Adv. Res. Nat. Appl. Sci., Sept 2023)."
-            },
-            {
-                date: "2023-04-01",
-                title: "Computational insights into bis-N,N-dimethylaniline based D-π-A systems",
-                content: "Computational insights into bis-N,N-dimethylaniline based D-π-A systems (J. Mol. Graph. Model., April 2023)."
-            }
-        ],
+        news: [],
 
         // Research areas (used by portfolio page)
         researchAreas: [
@@ -459,14 +431,7 @@ const data = {
 
         // Ana sayfa — literatür okuma notları (yeni notları en üste ekleyin)
         literatureNotesIntro: "Literatür taramalarımdan derlediğim kısa notlar: yöntemler, fikirler ve paylaşmaya değer bulduğum çıkarımlar.",
-        literatureNotes: [
-            {
-                date: "2026-07-15",
-                title: "Çevresel analiz için 3B baskılı elektrotlar",
-                summary: "İletken filamentler ve amperometrik tayin üzerine güncel çalışmalar, katmanlı üretimin elektrokimyasal analizde prototipleme maliyetlerini nasıl düşürebileceğini gösteriyor. Hassasiyet ve tekrarlanabilirliği etkileyen tasarım tercihlerini yakından takip ediyorum.",
-                tags: ["Elektrokimya", "3B baskı"]
-            }
-        ],
+        literatureNotes: [],
 
         sections: {
             home: "Ana Sayfa",
@@ -475,9 +440,9 @@ const data = {
             publications: "Yayınlar",
             contact: "İletişim",
             news: "Haberler",
-            literatureNotes: "Haberler",
-            selectedPublications: "Seçilmiş yayınlar",
-            viewAllPublications: "Tüm yayınlar →",
+            literatureNotes: "Literatür notları",
+            literatureNotesEmpty: "Henüz literatür notu yok. Literatür taramalarımdan derlediğim notlar burada paylaşılacak.",
+            viewAllNotes: "Tüm literatür notları →",
             homeDepartment: "Kimya Bölümü",
             homeAt: "",
             downloadCV: "CV İndir",
@@ -520,6 +485,7 @@ const data = {
             index: "Harun Nalçakan — Akademik Portföy",
             about: "Hakkımda — Harun Nalçakan",
             research: "Araştırma — Harun Nalçakan",
+            notes: "Literatür Notları — Harun Nalçakan",
             publications: "Yayınlar — Harun Nalçakan",
             contact: "İletişim — Harun Nalçakan"
         },
@@ -528,6 +494,7 @@ const data = {
             index: "Harun Nalçakan — Ankara Üniversitesi Kimya Bölümü Araştırma Görevlisi. DFT, moleküler kenetleme, moleküler dinamik ve deneysel kimya.",
             about: "Ankara Üniversitesi Kimya Bölümü Araştırma Görevlisi Harun Nalçakan'ın özgeçmişi, eğitim geçmişi ve iş deneyimi.",
             research: "Hesaplamalı ve deneysel kimyada araştırma alanları, yöntemler, yeterlilikler ve çalışma görselleri.",
+            notes: "Literatür taramalarından derlenen kısa notlar ve çıkarımlar — hesaplamalı ve deneysel kimya.",
             publications: "Harun Nalçakan'ın hesaplamalı kimya ve ilaç keşfi alanındaki hakemli makaleleri ve konferans bildirileri.",
             contact: "Harun Nalçakan ile iletişim — e-posta, ORCID, ResearchGate, LinkedIn ve GitHub."
         },
@@ -572,28 +539,7 @@ const data = {
             }
         ],
 
-        news: [
-            {
-                date: "2024-09-01",
-                title: "Targeting LIMK1 in Alzheimer's Disease",
-                content: "Targeting LIMK1 in Alzheimer's Disease (J. Turk. Chem. Soc. Sect. A, Eylül 2024)."
-            },
-            {
-                date: "2024-01-15",
-                title: "An in silico Pharmacokinetic Investigation",
-                content: "An in silico Pharmacokinetic Investigation of Organic Luminogens (Ankara Univ. Eczacilik Fak. Derg., Ocak 2024)."
-            },
-            {
-                date: "2023-09-01",
-                title: "Bridging Molecular Docking to Molecular Dynamics",
-                content: "Bridging Molecular Docking to Molecular Dynamics (J. Adv. Res. Nat. Appl. Sci., Eylül 2023)."
-            },
-            {
-                date: "2023-04-01",
-                title: "Computational insights into bis-N,N-dimethylaniline based D-π-A systems",
-                content: "Computational insights into bis-N,N-dimethylaniline based D-π-A systems (J. Mol. Graph. Model., Nisan 2023)."
-            }
-        ],
+        news: [],
 
         researchAreas: [
             {

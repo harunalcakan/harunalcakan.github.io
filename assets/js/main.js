@@ -175,38 +175,23 @@ function buildHomeWorkGlimpseCompactHTML(item, content) {
     `;
 }
 
-function buildSelectedPublicationsHTML(content, limit = 2) {
-    const articles = content.publications?.articles || [];
-    if (!articles.length) return '';
-
-    return `
-        <section class="container mx-auto px-4 md:px-6 py-10 max-w-5xl home-selected-pubs">
-            <h2 class="text-2xl md:text-3xl font-bold mb-6 font-mono lowercase">${content.sections.selectedPublications || ''}</h2>
-            <div class="space-y-6">
-                ${articles.slice(0, limit).map((pub, index) => {
-                    const doiLink = pub.doi_link || pub.link || '#';
-                    const yearMatch = (pub.apa_citation || '').match(/\b(20\d{2})\b/);
-                    const year = yearMatch ? yearMatch[1] : '';
-                    return `
-                        <article class="home-selected-pub-item fade-in" style="animation-delay: ${index * 0.08}s">
-                            <div class="flex flex-col md:flex-row gap-4 md:gap-6">
-                                <div class="flex-1 min-w-0">
-                                    <h3 class="text-base md:text-lg font-semibold mb-2 leading-snug">
-                                        <a href="${doiLink}" target="_blank" rel="noopener" class="publication-title-link">${pub.title}</a>
-                                    </h3>
-                                    <p class="publication-citation text-sm">${pub.apa_citation || ''}</p>
-                                </div>
-                                ${year ? `<div class="home-selected-pub-year font-mono shrink-0">${year}</div>` : ''}
-                            </div>
-                        </article>
-                    `;
-                }).join('')}
+function buildLiteratureNotesListHTML(notes, startDelay = 0) {
+    return notes.map((item, index) => `
+        <article class="literature-note-card p-5 md:p-6 rounded-lg fade-in" style="animation-delay: ${startDelay + index * 0.08}s">
+            <div class="flex flex-col md:flex-row items-start gap-3 md:gap-4">
+                <time class="literature-note-date text-xs md:text-sm font-mono md:min-w-[110px] shrink-0">${formatDate(item.date)}</time>
+                <div class="flex-1 min-w-0">
+                    ${item.title ? `<h3 class="literature-note-title text-base md:text-lg font-semibold mb-2 font-mono">${item.title}</h3>` : ''}
+                    <p class="literature-note-summary leading-relaxed">${item.summary || item.content || ''}</p>
+                    ${item.tags && item.tags.length > 0 ? `
+                        <div class="flex flex-wrap gap-2 mt-3">
+                            ${item.tags.map(tag => `<span class="literature-note-tag">${tag}</span>`).join('')}
+                        </div>
+                    ` : ''}
+                </div>
             </div>
-            <p class="mt-6">
-                <a href="publications.html" class="publication-title-link text-sm font-mono">${content.sections.viewAllPublications || ''}</a>
-            </p>
-        </section>
-    `;
+        </article>
+    `).join('');
 }
 
 function buildWorkGlimpseHTML(item, index, content) {
@@ -489,6 +474,7 @@ function injectNavbar() {
         { href: 'about.html', label: content.sections.about, id: 'nav-about' },
         { href: 'research.html', label: content.sections.research, id: 'nav-research' },
         { href: 'publications.html', label: content.sections.publications, id: 'nav-publications' },
+        { href: 'notes.html', label: content.sections.literatureNotes, id: 'nav-notes' },
         { href: 'contact.html', label: content.sections.contact, id: 'nav-contact' }
     ];
 
@@ -888,6 +874,9 @@ function renderCurrentPage() {
         case 'publications':
             renderPublicationsPage(content);
             break;
+        case 'notes':
+            renderLiteratureNotesPage(content);
+            break;
         case 'contact':
             renderContactPage(content);
             break;
@@ -918,31 +907,47 @@ function renderHomePage(content) {
         </section>
     `;
 
-    const newsItems = content.literatureNotes && content.literatureNotes.length > 0
-        ? content.literatureNotes
-        : (content.news || []);
-
-    const newsHTML = newsItems.length > 0 ? `
-        <section class="container mx-auto px-4 md:px-6 py-10 max-w-5xl home-news-section">
-            <h2 class="text-2xl md:text-3xl font-bold mb-6 font-mono lowercase">${content.sections.news || ''}</h2>
-            <div class="home-news-list">
-                ${newsItems.slice(0, 5).map((item, index) => `
-                    <div class="home-news-row fade-in" style="animation-delay: ${index * 0.06}s">
-                        <time class="home-news-date font-mono">${formatDate(item.date)}</time>
-                        <div class="home-news-body">
-                            ${item.title ? `<strong>${item.title}.</strong> ` : ''}${item.summary || item.content || ''}
-                        </div>
-                    </div>
-                `).join('')}
+    const notes = content.literatureNotes || [];
+    const homeNotes = notes.slice(0, 3);
+    const literatureHTML = homeNotes.length > 0 ? `
+        <section class="container mx-auto px-4 md:px-6 py-10 max-w-5xl home-literature-section">
+            <h2 class="text-2xl md:text-3xl font-bold mb-3 font-mono lowercase">${content.sections.literatureNotes || ''}</h2>
+            ${content.literatureNotesIntro ? `<p class="literature-section-intro mb-6 max-w-3xl">${content.literatureNotesIntro}</p>` : ''}
+            <div class="space-y-4">
+                ${buildLiteratureNotesListHTML(homeNotes)}
             </div>
+            ${notes.length > 0 ? `
+                <p class="mt-6">
+                    <a href="notes.html" class="publication-title-link text-sm font-mono">${content.sections.viewAllNotes || ''}</a>
+                </p>
+            ` : ''}
         </section>
     ` : '';
 
-    const selectedPubsHTML = buildSelectedPublicationsHTML(content, 2);
-
-    mainContent.innerHTML = heroHTML + newsHTML + selectedPubsHTML;
+    mainContent.innerHTML = heroHTML + literatureHTML;
 
     initNGLViewers();
+}
+
+// Literature Notes Page Render
+function renderLiteratureNotesPage(content) {
+    const mainContent = document.querySelector('main');
+    if (!mainContent) return;
+
+    const notes = content.literatureNotes || [];
+    const listHTML = notes.length > 0
+        ? `<div class="space-y-4">${buildLiteratureNotesListHTML(notes)}</div>`
+        : `<p class="literature-empty-state text-base md:text-lg leading-relaxed opacity-80">${content.sections.literatureNotesEmpty || ''}</p>`;
+
+    mainContent.innerHTML = `
+        <section class="container mx-auto px-4 md:px-6 py-12 max-w-4xl">
+            <div class="fade-in">
+                <h1 class="text-3xl md:text-4xl font-bold mb-4 font-mono lowercase">${content.sections.literatureNotes || ''}</h1>
+                ${content.literatureNotesIntro ? `<p class="literature-section-intro mb-8 max-w-3xl">${content.literatureNotesIntro}</p>` : ''}
+                ${listHTML}
+            </div>
+        </section>
+    `;
 }
 
 // About Page Render

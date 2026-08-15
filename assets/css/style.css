@@ -228,6 +228,15 @@ body.lang-tr .literature-note-summary {
     opacity: 0.95;
 }
 
+.literature-empty-state {
+    max-width: 36rem;
+}
+
+body.lang-tr .literature-empty-state {
+    font-size: 1.05rem;
+    line-height: 1.75;
+}
+
 body.lang-tr .home-hero-intro {
     font-size: 1.35rem;
     line-height: 1.65;
@@ -429,6 +438,18 @@ body.dark-mode .home-profile-large {
     .ngl-viewer-home {
         height: 300px;
     }
+}
+
+.home-literature-section {
+    border-top: 1px solid;
+}
+
+body.light-mode .home-literature-section {
+    border-color: var(--border-light);
+}
+
+body.dark-mode .home-literature-section {
+    border-color: var(--border-dark);
 }
 
 .home-news-section {
