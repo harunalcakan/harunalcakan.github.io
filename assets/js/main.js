@@ -105,6 +105,7 @@ function buildNavAvatarHTML(content) {
     const initials = getProfileInitials(content);
     const imageSrc = content.profileImage || '';
     const label = content.sections?.profilePhoto || 'Profile photo';
+    const homeLabel = content.sections?.home || 'Home';
 
     if (imageSrc) {
         return `
@@ -116,9 +117,9 @@ function buildNavAvatarHTML(content) {
     }
 
     return `
-        <button type="button" id="nav-profile-avatar" class="nav-profile-avatar nav-profile-avatar-fallback-only" aria-label="${label}">
+        <a href="index.html" id="nav-profile-avatar" class="nav-profile-avatar nav-profile-avatar-fallback-only nav-profile-home-link" aria-label="${homeLabel}">
             <span class="nav-profile-fallback">${initials}</span>
-        </button>
+        </a>
     `;
 }
 
@@ -133,7 +134,7 @@ function closeProfileLightbox() {
 function setupProfileLightbox(content) {
     const avatar = document.getElementById('nav-profile-avatar');
     const imageSrc = content.profileImage;
-    if (!avatar) return;
+    if (!avatar || !imageSrc) return;
 
     if (profileLightboxHandler) {
         avatar.removeEventListener('click', profileLightboxHandler);
@@ -627,6 +628,68 @@ function getCurrentPage() {
     return page.replace('.html', '') || 'index';
 }
 
+function isHomePage() {
+    const page = getCurrentPage();
+    return page === 'index' || page === '';
+}
+
+let typewriterTimeoutId = null;
+let navBrandClickHandler = null;
+
+function cleanupTypewriter() {
+    if (typewriterTimeoutId !== null) {
+        clearTimeout(typewriterTimeoutId);
+        typewriterTimeoutId = null;
+    }
+}
+
+function closeMobileMenuIfOpen() {
+    const mobileMenu = document.getElementById('mobile-menu');
+    const menuIcon = document.getElementById('menu-icon');
+    const closeIcon = document.getElementById('close-icon');
+    if (!mobileMenu || mobileMenu.classList.contains('hidden')) return;
+
+    mobileMenu.classList.add('hidden');
+    if (menuIcon) menuIcon.classList.remove('hidden');
+    if (closeIcon) closeIcon.classList.add('hidden');
+}
+
+function setupNavBrandLink() {
+    const brand = document.getElementById('nav-brand');
+    if (!brand) return;
+
+    if (navBrandClickHandler) {
+        brand.removeEventListener('click', navBrandClickHandler);
+    }
+
+    navBrandClickHandler = (event) => {
+        closeMobileMenuIfOpen();
+
+        if (isHomePage()) {
+            event.preventDefault();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    };
+
+    brand.addEventListener('click', navBrandClickHandler);
+}
+
+function setupNavHomeLinks() {
+    setupNavBrandLink();
+
+    const avatarHomeLink = document.querySelector('.nav-profile-home-link');
+    if (!avatarHomeLink) return;
+
+    avatarHomeLink.addEventListener('click', (event) => {
+        closeMobileMenuIfOpen();
+
+        if (isHomePage()) {
+            event.preventDefault();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    });
+}
+
 // Initialize on page load
 document.addEventListener('DOMContentLoaded', () => {
     injectNavbar();
@@ -731,10 +794,13 @@ function injectNavbar() {
     updateThemeToggle();
 
     setupProfileLightbox(content);
+    setupNavHomeLinks();
 }
 
 // Typewriter Effect for Navbar Brand (Infinite Loop)
 function startTypewriter() {
+    cleanupTypewriter();
+
     const content = data[currentLanguage];
     if (!content) return;
 
@@ -745,6 +811,8 @@ function startTypewriter() {
     const lastName = content.lastName || content.name.split(' ').slice(1).join(' ') || '';
     const fullName = `${firstName} ${lastName}`.trim();
     const fullNameLength = fullName.length;
+
+    typewriterElement.style.minWidth = `${Math.max(fullNameLength, 1) + 1}ch`;
     
     let index = 0;
     let isDeleting = false;
@@ -770,11 +838,11 @@ function startTypewriter() {
             }
             
             index++;
-            setTimeout(animate, 100); // Typing speed
+            typewriterTimeoutId = setTimeout(animate, 100); // Typing speed
         } else if (!isDeleting && index >= fullNameLength) {
             // Finished typing, wait 2 seconds
             typewriterElement.innerHTML = `<span class="name-first">${firstName}</span> <span class="name-last">${lastName}</span>`;
-            setTimeout(() => {
+            typewriterTimeoutId = setTimeout(() => {
                 isDeleting = true;
                 animate();
             }, 2000);
@@ -793,19 +861,19 @@ function startTypewriter() {
                 typewriterElement.innerHTML = `<span class="name-first">${firstName}</span> <span class="name-last">${remainingLastName}</span>`;
             }
             
-            setTimeout(animate, 50); // Deleting speed (faster)
+            typewriterTimeoutId = setTimeout(animate, 50); // Deleting speed (faster)
         } else if (isDeleting && index === 0) {
             // Finished deleting, wait 0.5 seconds and restart
             typewriterElement.innerHTML = '';
             isDeleting = false;
-            setTimeout(() => {
+            typewriterTimeoutId = setTimeout(() => {
                 animate();
             }, 500);
         }
     }
 
     // Start typing after a short delay
-    setTimeout(animate, 500);
+    typewriterTimeoutId = setTimeout(animate, 500);
 }
 
 // Dynamic Footer Injection
@@ -966,6 +1034,7 @@ function toggleLanguage() {
     
     // Clean up mobile menu listeners before removing navbar
     cleanupMobileMenu();
+    cleanupTypewriter();
     
     // Remove old navbar and footer before re-injecting
     const oldNavbar = document.getElementById('navbar');
