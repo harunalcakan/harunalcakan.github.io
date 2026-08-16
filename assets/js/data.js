@@ -92,6 +92,11 @@ const data = {
             homeDepartment: "Department of Chemistry",
             homeAt: "at",
             downloadCV: "Download CV",
+            downloadPortfolioPdf: "Download portfolio summary (PDF)",
+            requestFullCv: "Request full CV",
+            portfolioPdfGenerating: "Generating PDF…",
+            requestCvSubject: "CV Request",
+            requestCvBody: "Hello,\n\nI would like to request your full CV.\n\nThank you.",
             education: "Education",
             workExperience: "Work Experience",
             teaching: "Teaching",
@@ -286,7 +291,7 @@ const data = {
                 },
                 {
                     year: 2025,
-                    title: "Integrative In Silico Evaluation of Sulfonamide Derivatives as Dual Carbonic Anhydrase I and II Inhibitors via Molecular Docking and ADME/T Profiling",
+                    title: "Rational Design and In Silico Profiling of Novel Bifunctional Scaffolds for Dual Integrin/PD-L1 Inhibition",
                     venue: "Oral presentation — 2nd International Conference on Modern Problems of Theoretical & Experimental Chemistry (December 18–19, 2025, Baku State University, Baku, Azerbaijan)"
                 },
                 {
@@ -495,6 +500,11 @@ const data = {
             homeDepartment: "Kimya Bölümü",
             homeAt: "",
             downloadCV: "CV İndir",
+            downloadPortfolioPdf: "Portföy özetini indir (PDF)",
+            requestFullCv: "Tam CV talep et",
+            portfolioPdfGenerating: "PDF hazırlanıyor…",
+            requestCvSubject: "CV Talebi",
+            requestCvBody: "Merhaba,\n\nTam CV'nizi talep etmek istiyorum.\n\nTeşekkürler.",
             education: "Eğitim",
             workExperience: "İş Deneyimi",
             teaching: "Verdiğim Dersler",
@@ -685,7 +695,7 @@ const data = {
                 },
                 {
                     year: 2025,
-                    title: "Integrative In Silico Evaluation of Sulfonamide Derivatives as Dual Carbonic Anhydrase I and II Inhibitors via Molecular Docking and ADME/T Profiling",
+                    title: "Rational Design and In Silico Profiling of Novel Bifunctional Scaffolds for Dual Integrin/PD-L1 Inhibition",
                     venue: "Oral presentation — 2nd International Conference on Modern Problems of Theoretical & Experimental Chemistry (December 18–19, 2025, Baku State University, Baku, Azerbaijan)"
                 },
                 {

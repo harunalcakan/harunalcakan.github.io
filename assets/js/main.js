@@ -544,6 +544,238 @@ function buildArticleItemHTML(pub, content, animationDelay = 0) {
     `;
 }
 
+function buildAboutActionsHTML(content) {
+    const email = content.contact?.email || content.email;
+    const requestSubject = encodeURIComponent(content.sections.requestCvSubject || 'CV Request');
+    const requestBody = encodeURIComponent(content.sections.requestCvBody || 'Hello,\n\nI would like to request your full CV.\n\nThank you.');
+    const mailto = `mailto:${email}?subject=${requestSubject}&body=${requestBody}`;
+
+    return `
+        <div class="about-actions mb-10 flex flex-wrap gap-3">
+            <button type="button" id="download-portfolio-pdf" class="btn-toggle">${content.sections.downloadPortfolioPdf || content.sections.downloadCV}</button>
+            <a href="${mailto}" class="btn-toggle about-action-link">${content.sections.requestFullCv || 'Request full CV'}</a>
+        </div>
+    `;
+}
+
+function buildPortfolioPdfMarkup(content) {
+    const contact = content.contact || {};
+    const email = contact.email || content.email;
+    const siteUrl = getAbsolutePageUrl(content, 'index');
+    const sections = content.sections || {};
+    const publications = content.publications?.articles || [];
+    const conferences = content.publications?.conferences || [];
+    const thesis = content.thesis || {};
+
+    const educationItems = (content.education || []).map((item) => `
+        <li>
+            <strong>${item.degree}</strong> — ${item.institution} (${item.year})
+            ${item.description ? `<br><span class="pdf-meta">${item.description}</span>` : ''}
+        </li>
+    `).join('');
+
+    const workItems = (content.workExperience || []).map((item) => `
+        <li><strong>${item.role}</strong> — ${item.institution} (${item.year})</li>
+    `).join('');
+
+    const teachingItems = (content.teaching || []).map((item) => `
+        <li>${item.course}</li>
+    `).join('');
+
+    const articleItems = publications.map((pub) => `
+        <li>
+            <strong>${pub.title}</strong>
+            ${pub.journal ? `<br><span class="pdf-meta">${pub.journal}${pub.year ? ` (${pub.year})` : ''}</span>` : ''}
+        </li>
+    `).join('');
+
+    const conferenceItems = conferences.map((conf) => `
+        <li>
+            <strong>${conf.title}</strong>
+            ${conf.venue ? `<br><span class="pdf-meta">${conf.venue}</span>` : ''}
+        </li>
+    `).join('');
+
+    const researchItems = (content.researchAreas || []).map((area) => `
+        <li><strong>${area.title}</strong> — ${area.description}</li>
+    `).join('');
+
+    const interestTags = (content.researchInterests || []).map((tag) => `
+        <span class="pdf-tag">${tag}</span>
+    `).join('');
+
+    const competencyGroups = [];
+    if (content.skillMatrix?.computational?.skills?.length) {
+        competencyGroups.push(content.skillMatrix.computational);
+    }
+    if (content.skillMatrix?.experimental?.skills?.length) {
+        competencyGroups.push(content.skillMatrix.experimental);
+    }
+    if (content.tools?.softwareItems?.length) {
+        competencyGroups.push({
+            title: content.skillMatrix?.software?.title || content.tools?.software || 'Software',
+            skills: content.tools.softwareItems
+        });
+    }
+
+    const competencyItems = competencyGroups.map((group) => `
+        <div class="pdf-competency-group">
+            <h3>${group.title}</h3>
+            <p>${(group.skills || []).join(' · ')}</p>
+        </div>
+    `).join('');
+
+    const thesisBlock = thesis.title ? `
+        <section class="pdf-section">
+            <h2>${sections.thesis || 'Thesis'}</h2>
+            <p><strong>${thesis.title}</strong></p>
+            <p class="pdf-meta">${[thesis.institution, thesis.year, thesis.type].filter(Boolean).join(' · ')}</p>
+        </section>
+    ` : '';
+
+    return `
+        <article class="portfolio-pdf-document">
+            <header class="pdf-header">
+                <h1>${content.name}</h1>
+                <p class="pdf-subtitle">${content.title} · ${content.affiliation}</p>
+                <p class="pdf-contact">${email} · ${content.location} · ${siteUrl.replace(/^https?:\/\//, '')}</p>
+            </header>
+
+            <section class="pdf-section">
+                <h2>${sections.about || 'Profile'}</h2>
+                <p>${content.bio || content.heroIntro || ''}</p>
+            </section>
+
+            ${content.education?.length ? `
+            <section class="pdf-section">
+                <h2>${sections.education || 'Education'}</h2>
+                <ul class="pdf-list">${educationItems}</ul>
+            </section>` : ''}
+
+            ${content.workExperience?.length ? `
+            <section class="pdf-section">
+                <h2>${sections.workExperience || 'Work Experience'}</h2>
+                <ul class="pdf-list">${workItems}</ul>
+            </section>` : ''}
+
+            ${content.teaching?.length ? `
+            <section class="pdf-section">
+                <h2>${sections.teaching || 'Teaching'}</h2>
+                <ul class="pdf-list">${teachingItems}</ul>
+            </section>` : ''}
+
+            ${thesisBlock}
+
+            ${researchItems ? `
+            <section class="pdf-section">
+                <h2>${sections.researchAreas || 'Research Areas'}</h2>
+                <ul class="pdf-list">${researchItems}</ul>
+            </section>` : ''}
+
+            ${interestTags ? `
+            <section class="pdf-section">
+                <h2>${sections.researchFocus || 'Research Focus'}</h2>
+                <div class="pdf-tags">${interestTags}</div>
+            </section>` : ''}
+
+            ${competencyItems ? `
+            <section class="pdf-section">
+                <h2>${sections.academicCompetency || 'Competencies'}</h2>
+                ${competencyItems}
+            </section>` : ''}
+
+            ${articleItems ? `
+            <section class="pdf-section">
+                <h2>${sections.peerReviewed || 'Peer-Reviewed Articles'}</h2>
+                <ul class="pdf-list">${articleItems}</ul>
+            </section>` : ''}
+
+            ${conferenceItems ? `
+            <section class="pdf-section">
+                <h2>${sections.conferencePapers || 'Conference Presentations'}</h2>
+                <ul class="pdf-list">${conferenceItems}</ul>
+            </section>` : ''}
+
+            <footer class="pdf-footer">
+                <p>${siteUrl} · ${new Date().toLocaleDateString(currentLanguage === 'tr' ? 'tr-TR' : 'en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
+            </footer>
+        </article>
+    `;
+}
+
+function loadHtml2PdfLibrary() {
+    if (window.html2pdf) {
+        return Promise.resolve(window.html2pdf);
+    }
+
+    return new Promise((resolve, reject) => {
+        const script = document.createElement('script');
+        script.src = 'https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js';
+        script.async = true;
+        script.onload = () => resolve(window.html2pdf);
+        script.onerror = () => reject(new Error('html2pdf failed to load'));
+        document.head.appendChild(script);
+    });
+}
+
+let portfolioPdfHandler = null;
+
+async function downloadPortfolioPdf(content) {
+    const button = document.getElementById('download-portfolio-pdf');
+    const defaultLabel = content.sections.downloadPortfolioPdf || content.sections.downloadCV;
+
+    if (button) {
+        button.disabled = true;
+        button.textContent = content.sections.portfolioPdfGenerating || 'Generating PDF…';
+    }
+
+    try {
+        const html2pdf = await loadHtml2PdfLibrary();
+        let container = document.getElementById('portfolio-pdf-source');
+        if (!container) {
+            container = document.createElement('div');
+            container.id = 'portfolio-pdf-source';
+            container.className = 'portfolio-pdf-source';
+            document.body.appendChild(container);
+        }
+
+        container.innerHTML = buildPortfolioPdfMarkup(content);
+        const documentNode = container.querySelector('.portfolio-pdf-document');
+        if (!documentNode) return;
+
+        await html2pdf().set({
+            margin: [10, 10, 10, 10],
+            filename: `harun-nalcakan-portfolio-${currentLanguage}.pdf`,
+            image: { type: 'jpeg', quality: 0.96 },
+            html2canvas: { scale: 2, useCORS: true, backgroundColor: '#ffffff' },
+            jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
+            pagebreak: { mode: ['css', 'legacy'] }
+        }).from(documentNode).save();
+    } catch {
+        window.alert(currentLanguage === 'tr'
+            ? 'PDF şu an oluşturulamadı. Lütfen tekrar deneyin veya e-posta ile CV talep edin.'
+            : 'Could not generate the PDF right now. Please try again or request a CV by email.');
+    } finally {
+        if (button) {
+            button.disabled = false;
+            button.textContent = defaultLabel;
+        }
+        document.getElementById('portfolio-pdf-source')?.remove();
+    }
+}
+
+function setupPortfolioPdfActions(content) {
+    const button = document.getElementById('download-portfolio-pdf');
+    if (!button) return;
+
+    if (portfolioPdfHandler) {
+        button.removeEventListener('click', portfolioPdfHandler);
+    }
+
+    portfolioPdfHandler = () => downloadPortfolioPdf(content);
+    button.addEventListener('click', portfolioPdfHandler);
+}
+
 function buildPersonSchema(content) {
     const contact = content.contact || {};
     const sameAs = [
@@ -977,21 +1209,13 @@ function injectSiteCornerStats() {
     cleanupCornerShare();
     document.getElementById('site-corner-stats')?.remove();
 
-    const fallbackCitations = content.homeStats?.citations ?? '—';
-    const locale = currentLanguage === 'tr' ? 'tr-TR' : 'en-US';
     const visitsTitle = content.sections.visitorCount || 'Visits';
-    const citationsLabel = (content.sections.citationsBadge || content.sections.citationsCount || 'Citations').toLowerCase();
 
     const cornerHTML = `
         <aside class="site-corner-stats" id="site-corner-stats" aria-label="${visitsTitle}">
             <span class="corner-stat">
                 <span id="corner-visits" class="corner-stat-value">—</span>
                 <span class="corner-stat-label">${visitsTitle.toLowerCase()}</span>
-            </span>
-            <span class="corner-stat-sep" aria-hidden="true">·</span>
-            <span class="corner-stat">
-                <span id="corner-citations" class="corner-stat-value">${Number(fallbackCitations).toLocaleString(locale)}</span>
-                <span class="corner-stat-label">${citationsLabel}</span>
             </span>
             <span class="corner-stat-sep" aria-hidden="true">·</span>
             <div class="corner-share-wrap">
@@ -1006,32 +1230,15 @@ function injectSiteCornerStats() {
     `;
 
     document.body.insertAdjacentHTML('beforeend', cornerHTML);
-    hydrateCornerStats(content);
+    hydrateCornerStats();
     setupCornerShare(content);
 }
 
-async function hydrateCornerStats(content) {
+async function hydrateCornerStats() {
     const visitsEl = document.getElementById('corner-visits');
-    const citationsEl = document.getElementById('corner-citations');
-    const locale = currentLanguage === 'tr' ? 'tr-TR' : 'en-US';
-
-    if (citationsEl) {
-        try {
-            const statsPath = content.scholar?.statsPath || 'assets/data/scholar-stats.json';
-            const response = await fetch(`${statsPath}?t=${Date.now()}`, { cache: 'no-store' });
-            if (response.ok) {
-                const live = await response.json();
-                if (live.citations != null) {
-                    citationsEl.textContent = Number(live.citations).toLocaleString(locale);
-                }
-            }
-        } catch {
-            // Keep fallback from data.js.
-        }
-    }
-
     if (!visitsEl) return;
 
+    const locale = currentLanguage === 'tr' ? 'tr-TR' : 'en-US';
     const sessionKey = 'harunalcakan-visit-counted';
 
     try {
@@ -1128,7 +1335,7 @@ function toggleTheme() {
     localStorage.setItem('theme', currentTheme);
     initializeTheme();
     renderCurrentPage();
-    hydrateCornerStats(data[currentLanguage]);
+    hydrateCornerStats();
 }
 
 function setupThemeToggle() {
@@ -1420,13 +1627,7 @@ function renderAboutPage(content) {
     const mainContent = document.querySelector('main');
     if (!mainContent) return;
 
-    const cvButtonHTML = content.cvLink && isValidLink(content.cvLink) ? `
-        <div class="mb-10">
-            <a href="${content.cvLink}" target="_blank" rel="noopener" download class="inline-block btn-toggle">
-                ${content.sections.downloadCV}
-            </a>
-        </div>
-    ` : '';
+    const aboutActionsHTML = buildAboutActionsHTML(content);
 
     const workItems = sortTimelineByYear(
         (content.workExperience || []).map(item => ({
@@ -1495,7 +1696,7 @@ function renderAboutPage(content) {
             <div class="fade-in">
                 <h1 class="text-3xl md:text-4xl font-bold mb-8 font-mono">${content.sections.about}</h1>
 
-                ${cvButtonHTML}
+                ${aboutActionsHTML}
                 ${thesisHTML}
                 ${workTimelineHTML}
                 ${teachingTimelineHTML}
@@ -1503,6 +1704,8 @@ function renderAboutPage(content) {
             </div>
         </section>
     `;
+
+    setupPortfolioPdfActions(content);
 }
 
 // Publications Page Render

@@ -934,6 +934,132 @@ body.light-mode .btn-toggle:hover {
     box-shadow: none;
 }
 
+.about-action-link {
+    display: inline-block;
+    text-decoration: none;
+    text-align: center;
+}
+
+.about-action-link:hover {
+    text-decoration: none;
+}
+
+.portfolio-pdf-source {
+    position: fixed;
+    left: -10000px;
+    top: 0;
+    width: 794px;
+    pointer-events: none;
+    opacity: 0;
+}
+
+.portfolio-pdf-document {
+    background: #ffffff;
+    color: #111827;
+    font-family: 'Inter', 'Segoe UI', sans-serif;
+    font-size: 11pt;
+    line-height: 1.45;
+    padding: 28px 32px 36px;
+}
+
+.portfolio-pdf-document .pdf-header {
+    border-bottom: 2px solid #e5e7eb;
+    margin-bottom: 18px;
+    padding-bottom: 14px;
+}
+
+.portfolio-pdf-document h1 {
+    font-size: 22pt;
+    font-weight: 700;
+    margin: 0 0 6px;
+    color: #0f172a;
+}
+
+.portfolio-pdf-document .pdf-subtitle {
+    margin: 0 0 4px;
+    color: #334155;
+    font-size: 10.5pt;
+}
+
+.portfolio-pdf-document .pdf-contact {
+    margin: 0;
+    color: #64748b;
+    font-size: 9.5pt;
+}
+
+.portfolio-pdf-document .pdf-section {
+    margin-bottom: 16px;
+    page-break-inside: avoid;
+}
+
+.portfolio-pdf-document .pdf-section h2 {
+    font-size: 12pt;
+    font-weight: 700;
+    color: #0f172a;
+    margin: 0 0 8px;
+    padding-bottom: 4px;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.portfolio-pdf-document .pdf-list {
+    margin: 0;
+    padding-left: 18px;
+}
+
+.portfolio-pdf-document .pdf-list li {
+    margin-bottom: 8px;
+}
+
+.portfolio-pdf-document .pdf-list li strong {
+    color: #111827;
+    font-weight: 600;
+}
+
+.portfolio-pdf-document .pdf-meta {
+    color: #64748b;
+    font-size: 9.5pt;
+}
+
+.portfolio-pdf-document .pdf-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.portfolio-pdf-document .pdf-tag {
+    display: inline-block;
+    padding: 3px 8px;
+    border: 1px solid #d1d5db;
+    border-radius: 999px;
+    font-size: 9pt;
+    color: #374151;
+}
+
+.portfolio-pdf-document .pdf-competency-group {
+    margin-bottom: 8px;
+}
+
+.portfolio-pdf-document .pdf-competency-group h3 {
+    font-size: 10pt;
+    margin: 0 0 3px;
+    color: #1f2937;
+}
+
+.portfolio-pdf-document .pdf-competency-group p {
+    margin: 0;
+    color: #475569;
+    font-size: 9.5pt;
+}
+
+.portfolio-pdf-document .pdf-footer {
+    margin-top: 20px;
+    padding-top: 10px;
+    border-top: 1px solid #e5e7eb;
+    color: #94a3b8;
+    font-size: 9pt;
+    text-align: center;
+}
+
 /* Smooth Scroll */
 html {
     scroll-behavior: smooth;
