@@ -1460,6 +1460,10 @@ body.dark-mode .contact-icon-link:hover {
     color: var(--accent-dark);
 }
 
+.visitor-count-line {
+    line-height: 1.4;
+}
+
 .site-footer {
     border-top: 1px solid;
 }

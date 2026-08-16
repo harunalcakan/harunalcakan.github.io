@@ -86,9 +86,9 @@ const data = {
             contactLinks: "Contact links",
             footerContactPrompt: "Questions? Send me an email!",
             news: "News",
-            literatureNotes: "Reading notes",
-            literatureNotesEmpty: "No reading notes yet. New notes from my literature reviews will appear here.",
-            viewAllNotes: "View all reading notes →",
+            literatureNotes: "Reading Notes",
+            literatureNotesEmpty: "No reading notes yet. Notes from my literature reading will appear here as I add them.",
+            viewAllNotes: "View all Reading Notes →",
             homeDepartment: "Department of Chemistry",
             homeAt: "at",
             downloadCV: "Download CV",
@@ -124,6 +124,7 @@ const data = {
             profilePhoto: "Profile Photo",
             nglAttribution: "Powered by NGL Viewer",
             footerTagline: "Built with Computational Minimalism.",
+            visitorCount: "Visits",
             theme_light: "Light",
             theme_dark: "Dark"
         },
@@ -401,17 +402,17 @@ const data = {
         },
 
         // Hero / Hakkımda
-        heroIntro: "Ankara Üniversitesi Kimya Bölümü'nde araştırma görevlisiyim. Hesaplamalı kimyada DFT, moleküler kenetleme ve moleküler dinamik konularına odaklanıyor; elektrokimya, malzeme karakterizasyonu ve deneysel fizikokimya alanlarında da deneyim kazanmaya devam ediyorum.",
+        heroIntro: "Ankara Üniversitesi Kimya Bölümü'nde araştırma görevlisiyim. Hesaplamalı kimyada DFT, moleküler kenetleme ve moleküler dinamik alanlarında çalışıyorum; elektrokimya, malzeme karakterizasyonu ve deneysel fizikokimya tarafında da deneyimimi adım adım genişletiyorum.",
         heroGreeting: "Merhaba, ben",
         heroAffiliationShort: "Ankara Üniversitesi",
-        bio: "Ankara Üniversitesi Kimya Bölümü'nde araştırma görevlisiyim. Ana odağım hesaplamalı kimya — DFT, moleküler kenetleme ve moleküler dinamik —; elektrokimya, malzeme karakterizasyonu ve deneysel fizikokimya konularında da kendimi geliştirmeye devam ediyorum.",
+        bio: "Ankara Üniversitesi Kimya Bölümü'nde araştırma görevlisiyim. Öncelikle hesaplamalı kimya — DFT, moleküler kenetleme ve moleküler dinamik — üzerine odaklanıyorum; elektrokimya, malzeme karakterizasyonu ve laboratuvar temelli fizikokimya çalışmalarında da kendimi geliştirmeye devam ediyorum.",
 
         homeStats: {
             articles: 4,
             conferences: 14,
             citations: 14,
             hIndex: 2,
-            focus: "DFT, moleküler kenetleme ve MD; elektrokimya ve malzeme karakterizasyonunda gelişen deneysel çalışmalar"
+            focus: "DFT, moleküler kenetleme ve MD; elektrokimya ile malzeme karakterizasyonunda genişleyen deneysel çalışmalar"
         },
 
         scholar: {
@@ -439,21 +440,19 @@ const data = {
             institution: "Ankara Üniversitesi / Fen Bilimleri Enstitüsü / Kimya Anabilim Dalı / Kimya Bilim Dalı"
         },
 
-        portfolioIntro: "Etkileşimli moleküler görselleştirme — hesaplamalı çalışmalarıma yön veren yapısal modellere kısa bir bakış.",
+        portfolioIntro: "Etkileşimli moleküler görselleştirme — hesaplamalı çalışmalarımda kullandığım yapısal modellere kısa bir bakış.",
 
-        // Yöntemler ve Araçlar — çalışma görselleri (her iki dilde de ekleyin)
-        workGlimpsesIntro: "Çalışmalarımdan bir kesit — araştırmalarıma yön veren modeller, yöntemler ve deneysel çalışmalardan görsel notlar.",
+        workGlimpsesIntro: "Çalışmalarımdan bir kesit — araştırmama yön veren modeller, yöntemler ve deneysel bulgulardan seçilmiş görseller.",
         workGlimpses: [
             {
                 type: "ngl",
                 title: "Moleküler yapı incelemesi",
-                caption: "Protein yapılarının etkileşimli görselleştirmesi — moleküler kenetleme ve dinamik çalışmalarımın parçası.",
+                caption: "Protein yapılarının etkileşimli görselleştirmesi; moleküler kenetleme ve dinamik çalışmalarımın bir parçası.",
                 pdbCode: "1crn"
             }
         ],
 
-        // Ana sayfa — literatür okuma notları (yeni notları en üste ekleyin)
-        literatureNotesIntro: "Literatür taramalarımdan derlediğim kısa notlar: yöntemler, fikirler ve paylaşmaya değer bulduğum çıkarımlar.",
+        literatureNotesIntro: "Okuduğum literatürden kısa notlar — yöntemler, fikirler ve paylaşmaya değer bulduğum çıkarımlar.",
         literatureNotes: [],
 
         sections: {
@@ -463,22 +462,22 @@ const data = {
             publications: "Yayınlar",
             contact: "İletişim",
             contactLinks: "İletişim bağlantıları",
-            footerContactPrompt: "Sorularınız mı var? E-posta gönderin!",
+            footerContactPrompt: "Bir sorunuz mu var? Bana e-posta gönderebilirsiniz.",
             news: "Haberler",
-            literatureNotes: "Literatür notları",
-            literatureNotesEmpty: "Henüz literatür notu yok. Literatür taramalarımdan derlediğim notlar burada paylaşılacak.",
-            viewAllNotes: "Tüm literatür notları →",
+            literatureNotes: "Literatür Notları",
+            literatureNotesEmpty: "Henüz not eklenmedi. Literatürden derlediğim notları zamanla burada paylaşacağım.",
+            viewAllNotes: "Tüm Literatür Notları →",
             homeDepartment: "Kimya Bölümü",
             homeAt: "",
             downloadCV: "CV İndir",
             education: "Eğitim",
             workExperience: "İş Deneyimi",
-            workAndEducation: "İş Deneyimi ve Eğitim",
-            academicCompetency: "Akademik ve Teknik Yeterlilik",
+            workAndEducation: "Eğitim ve İş Deneyimi",
+            academicCompetency: "Bilimsel ve Teknik Yetkinlik",
             researchAreas: "Araştırma Alanları",
             digitalIdeas: "Dijital Fikirler",
-            digitalIdeasNote: "Bilimsel iş akışlarına yönelik fikir aşamasındaki konseptler — erken geliştirme, yayımlanmış araçlar değil.",
-            ideaStage: "Fikir aşamasında",
+            digitalIdeasNote: "Bilimsel iş akışları için fikir aşamasındaki projeler — henüz geliştirme sürecindeler, yayımlanmış yazılım değiller.",
+            ideaStage: "Fikir aşaması",
             conferencePapers: "Poster ve Konferans Sunumları",
             peerReviewed: "Hakemli Makaleler",
             thesis: "Yüksek Lisans Tezi",
@@ -492,17 +491,18 @@ const data = {
             awards: "Ödüller ve Başarılar",
             researchFocus: "Araştırma Odakları",
             atAGlance: "Genel Bakış",
-            publicationsCount: "Hakemli makale",
-            conferenceCount: "Poster ve konferans sunumu",
+            publicationsCount: "Hakemli makaleler",
+            conferenceCount: "Poster ve konferans sunumları",
             citationsCount: "Toplam atıf",
             hIndexCount: "h-indeks",
-            viewOnGoogleScholar: "Google Scholar'da görüntüle →",
-            scholarStatsNote: "Atıf metrikleri Google Scholar ile senkronize edilir.",
-            currentFocus: "Güncel odak alanı",
-            explorePublications: "Yayınları İncele",
-            profilePhoto: "Profil Fotoğrafı",
-            nglAttribution: "NGL Viewer ile desteklenmektedir",
-            footerTagline: "Computational Minimalism ile geliştirildi.",
+            viewOnGoogleScholar: "Google Scholar profilim →",
+            scholarStatsNote: "Atıf verileri Google Scholar üzerinden güncellenir.",
+            currentFocus: "Güncel odak",
+            explorePublications: "Yayınlara göz at",
+            profilePhoto: "Profil fotoğrafı",
+            nglAttribution: "NGL Viewer ile görselleştirildi",
+            footerTagline: "Computational Minimalism ile tasarlandı.",
+            visitorCount: "Ziyaret",
             theme_light: "Açık",
             theme_dark: "Koyu"
         },
@@ -517,39 +517,39 @@ const data = {
         },
 
         metaDescriptions: {
-            index: "Harun Nalçakan — Ankara Üniversitesi Kimya Bölümü Araştırma Görevlisi. DFT, moleküler kenetleme, moleküler dinamik ve deneysel kimya.",
-            about: "Ankara Üniversitesi Kimya Bölümü Araştırma Görevlisi Harun Nalçakan'ın eğitimi, tezi ve iş deneyimi.",
-            research: "Hesaplamalı ve deneysel kimyada araştırma alanları, yöntemler ve yeterlilikler.",
-            notes: "Literatür taramalarından derlenen kısa notlar ve çıkarımlar — hesaplamalı ve deneysel kimya.",
-            publications: "Harun Nalçakan'ın hesaplamalı kimya ve ilaç keşfi alanındaki hakemli makaleleri ve konferans bildirileri.",
-            contact: "Harun Nalçakan ile iletişim — e-posta, ORCID, ResearchGate, LinkedIn ve GitHub."
+            index: "Harun Nalçakan — Ankara Üniversitesi Kimya Bölümü araştırma görevlisi. DFT, moleküler kenetleme, moleküler dinamik ve deneysel kimya.",
+            about: "Harun Nalçakan'ın eğitim geçmişi, yüksek lisans tezi ve iş deneyimi.",
+            research: "Hesaplamalı ve deneysel kimyada araştırma alanları, yöntemler ve yetkinlikler.",
+            notes: "Literatür okumalarından derlenen kısa notlar — hesaplamalı ve deneysel kimya.",
+            publications: "Harun Nalçakan'ın hakemli makaleleri ve konferans sunumları.",
+            contact: "Harun Nalçakan ile iletişim — e-posta, ORCID, Google Scholar, LinkedIn ve GitHub."
         },
 
         contactLabels: {
             email: "E-posta",
-            academicLinks: "Akademik Bağlantılar",
-            orcid: "Akademik Profil",
-            googleScholar: "Yayınlar ve Atıflar",
-            linkedin: "Profesyonel Ağ",
-            github: "Kod ve Projeler",
-            researchgate: "Araştırma Ağı"
+            academicLinks: "Akademik profiller",
+            orcid: "ORCID profili",
+            googleScholar: "Yayınlar ve atıflar",
+            linkedin: "LinkedIn",
+            github: "GitHub",
+            researchgate: "ResearchGate"
         },
 
         education: [
             {
-                degree: "Kimya Doktora",
+                degree: "Doktora, Kimya",
                 institution: "Ankara Üniversitesi",
-                year: "2026–Devam ediyor",
+                year: "2026–devam",
                 description: ""
             },
             {
-                degree: "Kimya Yüksek Lisans",
+                degree: "Yüksek Lisans, Kimya",
                 institution: "Ankara Üniversitesi",
                 year: "2023–2026",
                 description: "GNO: 3.93/4.00"
             },
             {
-                degree: "Kimya Lisans",
+                degree: "Lisans, Kimya",
                 institution: "Ankara Üniversitesi",
                 year: "2016–2021",
                 description: "GNO: 3.34/4.00"
@@ -560,7 +560,7 @@ const data = {
             {
                 role: "Araştırma Görevlisi",
                 institution: "Ankara Üniversitesi, Kimya Bölümü",
-                year: "2023–Günümüz",
+                year: "2023–devam",
                 description: ""
             }
         ],
@@ -570,33 +570,33 @@ const data = {
         researchAreas: [
             {
                 title: "Elektrokimyasal Algılama Platformları",
-                description: "Deneysel protokoller ile hesaplamalı modellemeyi bir arada kullanarak gelişmiş elektrokimyasal sensörlerin tasarımı ve optimizasyonu üzerine çalışıyorum.",
+                description: "Deneysel protokollerle hesaplamalı modellemeyi birlikte kullanarak elektrokimyasal sensörlerin tasarımı ve iyileştirilmesi üzerine çalışıyorum.",
                 methodology: "Yüzey kimyası, elektrokimyasal analiz, moleküler modelleme ve yapı–işlev ilişkileri."
             },
             {
                 title: "Hesaplamalı İlaç Keşfi",
-                description: "Moleküler etkileşimlerin in silico düzeyde incelenmesi; ligand tasarımı ve etki mekanizması çalışmalarına metodolojik destek.",
-                methodology: "Kemoinformatik, moleküler yerleştirme, MD simülasyonları ve ADME profilleme."
+                description: "Ligand tasarımı ve etki mekanizması çalışmalarına destek olmak için moleküler etkileşimleri in silico düzeyde inceliyorum.",
+                methodology: "Kemoinformatik, moleküler kenetleme, MD simülasyonları ve ADME profilleme."
             }
         ],
 
         skillMatrix: {
             computational: {
-                title: "In Silico (Hesaplamalı) Yetkinlik",
+                title: "In Silico (Hesaplamalı) Çalışmalar",
                 skills: [
                     "Kemoinformatik",
-                    "Moleküler Yerleştirme (Docking)",
+                    "Moleküler Kenetleme",
                     "MD Simülasyonları",
                     "DFT"
                 ]
             },
             experimental: {
-                title: "In Vitro (Deneysel) Yetkinlik",
+                title: "In Vitro (Deneysel) Çalışmalar",
                 skills: [
                     "Fizikokimya",
                     "Elektrokimya",
-                    "İleri Elektrokimyasal Algılama Platformları",
-                    "Malzeme Karakterizasyonu"
+                    "Gelişmiş elektrokimyasal sensör platformları",
+                    "Malzeme karakterizasyonu"
                 ]
             },
             software: {
@@ -710,27 +710,27 @@ const data = {
             developed: [
                 {
                     name: "ADViSOR",
-                    description: "Moleküler kenetleme validasyon programı konsepti.",
+                    description: "Moleküler kenetleme sonuçlarını değerlendirmeye yönelik bir program fikri.",
                     link: "#",
-                    project_status: "Fikir aşamasında"
+                    project_status: "Fikir aşaması"
                 },
                 {
                     name: "SnapChem",
-                    description: "Mobil molekül çizim uygulaması konsepti.",
+                    description: "Mobil ortamda molekül çizmeye yönelik bir uygulama fikri.",
                     link: "#",
-                    project_status: "Fikir aşamasında"
+                    project_status: "Fikir aşaması"
                 },
                 {
                     name: "Chemify",
-                    description: "Kimyasal hesaplama modülü ve ilgili araçlar konsepti.",
+                    description: "Kimyasal hesaplamalar için modüler bir araç seti fikri.",
                     link: "#",
-                    project_status: "Fikir aşamasında"
+                    project_status: "Fikir aşaması"
                 }
             ],
             hardwareItems: [
                 "Creality Falcon 2",
                 "3B yazıcılar",
-                "Laboratuvar ekipmanları"
+                "Laboratuvar ekipmanı"
             ],
             softwareItems: [
                 "AutoDock Vina",

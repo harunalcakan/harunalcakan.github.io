@@ -769,6 +769,11 @@ function injectFooter() {
         <footer class="site-footer container mx-auto px-6 py-8 text-center text-sm mt-12">
             ${iconsHTML ? `<div class="site-footer-icons mb-5 flex justify-center">${iconsHTML}</div>` : ''}
             <p class="site-footer-copy opacity-75">&copy; <span id="current-year"></span> ${content.name}. ${content.sections.footerTagline}</p>
+            ${content.sections.visitorCount ? `
+                <p class="visitor-count-line opacity-55 text-xs mt-2 font-mono">
+                    ${content.sections.visitorCount}: <span id="visitor-count">—</span>
+                </p>
+            ` : ''}
         </footer>
     `;
 
@@ -779,6 +784,35 @@ function injectFooter() {
     const yearElement = document.getElementById('current-year');
     if (yearElement) {
         yearElement.textContent = new Date().getFullYear();
+    }
+
+    hydrateVisitorCount();
+}
+
+async function hydrateVisitorCount() {
+    const countElement = document.getElementById('visitor-count');
+    if (!countElement) return;
+
+    const namespace = 'harunalcakan-github-io';
+    const key = 'visits';
+    const sessionKey = 'harunalcakan-visit-counted';
+
+    try {
+        if (!sessionStorage.getItem(sessionKey)) {
+            await fetch(`https://api.countapi.xyz/hit/${namespace}/${key}`);
+            sessionStorage.setItem(sessionKey, '1');
+        }
+
+        const response = await fetch(`https://api.countapi.xyz/get/${namespace}/${key}`);
+        if (!response.ok) return;
+
+        const payload = await response.json();
+        if (payload.value == null) return;
+
+        const locale = currentLanguage === 'tr' ? 'tr-TR' : 'en-US';
+        countElement.textContent = Number(payload.value).toLocaleString(locale);
+    } catch {
+        countElement.closest('.visitor-count-line')?.remove();
     }
 }
 
@@ -1036,7 +1070,7 @@ function renderHomePage(content) {
     const homeNotes = notes.slice(0, 3);
     const literatureHTML = homeNotes.length > 0 ? `
         <section class="container mx-auto px-4 md:px-6 py-10 max-w-5xl home-literature-section">
-            <h2 class="text-2xl md:text-3xl font-bold mb-3 font-mono lowercase">${content.sections.literatureNotes || ''}</h2>
+            <h2 class="text-2xl md:text-3xl font-bold mb-3 font-mono">${content.sections.literatureNotes || ''}</h2>
             ${content.literatureNotesIntro ? `<p class="literature-section-intro mb-6 max-w-3xl">${content.literatureNotesIntro}</p>` : ''}
             <div class="space-y-4">
                 ${buildLiteratureNotesListHTML(homeNotes)}
@@ -1071,7 +1105,7 @@ function renderLiteratureNotesPage(content) {
     mainContent.innerHTML = `
         <section class="container mx-auto px-4 md:px-6 py-12 max-w-4xl">
             <div class="fade-in">
-                <h1 class="text-3xl md:text-4xl font-bold mb-4 font-mono lowercase">${content.sections.literatureNotes || ''}</h1>
+                <h1 class="text-3xl md:text-4xl font-bold mb-4 font-mono">${content.sections.literatureNotes || ''}</h1>
                 ${content.literatureNotesIntro ? `<p class="literature-section-intro mb-8 max-w-3xl">${content.literatureNotesIntro}</p>` : ''}
                 ${listHTML}
             </div>
