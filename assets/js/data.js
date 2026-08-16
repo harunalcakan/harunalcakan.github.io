@@ -53,7 +53,7 @@ const data = {
             degreeLabel: "MSc Thesis",
             title: "Development of 3D-printed electrodes using polylactic acid-based conductive filament and their application in amperometric determination of nitro-polycyclic aromatic hydrocarbons",
             year: "2026",
-            type: "M.Sc.",
+            type: "MSc",
             language: "Turkish",
             subject: "Chemistry",
             institution: "Ankara University / Graduate School of Natural and Applied Sciences / Department of Chemistry / Chemistry Program"
@@ -162,19 +162,19 @@ const data = {
         // Education
         education: [
             {
-                degree: "Ph.D. in Chemistry",
+                degree: "PhD in Chemistry",
                 institution: "Ankara University",
                 year: "2026–Ongoing",
                 description: ""
             },
             {
-                degree: "M.Sc. in Chemistry",
+                degree: "MSc in Chemistry",
                 institution: "Ankara University",
                 year: "2023–2026",
                 description: "GPA: 3.93/4.00"
             },
             {
-                degree: "B.Sc. in Chemistry",
+                degree: "BSc in Chemistry",
                 institution: "Ankara University",
                 year: "2016–2021",
                 description: "GPA: 3.34/4.00"
@@ -191,21 +191,9 @@ const data = {
         ],
 
         teaching: [
-            {
-                course: "Physical Chemistry Laboratory",
-                institution: "Ankara University, Department of Chemistry",
-                year: "2023–Present"
-            },
-            {
-                course: "Basic Chemistry Laboratory",
-                institution: "Ankara University, Department of Chemistry",
-                year: "2023–Present"
-            },
-            {
-                course: "Quantum Chemistry",
-                institution: "Ankara University, Department of Chemistry",
-                year: "2023–Present"
-            }
+            { course: "Physical Chemistry Laboratory" },
+            { course: "Basic Chemistry Laboratory" },
+            { course: "Quantum Chemistry" }
         ],
 
         news: [],
@@ -434,10 +422,10 @@ const data = {
         },
 
         // Hero / Hakkımda
-        heroIntro: "Ankara Üniversitesi Kimya Bölümü'nde araştırma görevlisiyim. Hesaplamalı kimyada DFT, moleküler kenetleme ve moleküler dinamik alanlarında çalışıyorum; elektrokimya, malzeme karakterizasyonu ve deneysel fizikokimya tarafında da deneyimimi adım adım genişletiyorum.",
+        heroIntro: "Ankara Üniversitesi Kimya Bölümü'nde araştırma görevlisi olarak çalışmaktayım. Hesaplamalı kimyada DFT, moleküler kenetleme ve moleküler dinamik üzerine yoğunlaşıyorum; elektrokimya, malzeme karakterizasyonu ve deneysel fizikokimya alanlarında da çalışmalarımı sürdürüyorum.",
         heroGreeting: "Merhaba, ben",
         heroAffiliationShort: "Ankara Üniversitesi",
-        bio: "Ankara Üniversitesi Kimya Bölümü'nde araştırma görevlisiyim. Öncelikle hesaplamalı kimya — DFT, moleküler kenetleme ve moleküler dinamik — üzerine odaklanıyorum; elektrokimya, malzeme karakterizasyonu ve laboratuvar temelli fizikokimya çalışmalarında da kendimi geliştirmeye devam ediyorum.",
+        bio: "Ankara Üniversitesi Kimya Bölümü'nde araştırma görevlisi olarak çalışmaktayım. Önceliğim hesaplamalı kimya — DFT, moleküler kenetleme ve moleküler dinamik —; aynı zamanda elektrokimya, malzeme karakterizasyonu ve laboratuvar temelli fizikokimya çalışmalarına da yön veriyorum.",
 
         homeStats: {
             articles: 4,
@@ -600,21 +588,9 @@ const data = {
         ],
 
         teaching: [
-            {
-                course: "Fizikokimya Laboratuvarı",
-                institution: "Ankara Üniversitesi, Kimya Bölümü",
-                year: "2023–devam"
-            },
-            {
-                course: "Temel Kimya Laboratuvarı",
-                institution: "Ankara Üniversitesi, Kimya Bölümü",
-                year: "2023–devam"
-            },
-            {
-                course: "Kuantum Kimyası",
-                institution: "Ankara Üniversitesi, Kimya Bölümü",
-                year: "2023–devam"
-            }
+            { course: "Fizikokimya Laboratuvarı" },
+            { course: "Temel Kimya Laboratuvarı" },
+            { course: "Kuantum Kimyası" }
         ],
 
         news: [],

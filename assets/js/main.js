@@ -438,10 +438,21 @@ function buildTimelineHTML(items, baseDelay = 0) {
         <div class="timeline-item fade-in" style="animation-delay: ${baseDelay + index * 0.1}s">
             <div class="timeline-marker"></div>
             <div class="timeline-content">
-                <div class="timeline-badge">${item.year}</div>
+                ${item.year ? `<div class="timeline-badge">${item.year}</div>` : ''}
                 <h3 class="timeline-title font-mono font-bold text-lg md:text-xl mb-1">${item.title}</h3>
-                <p class="timeline-institution text-base md:text-lg mb-2 font-semibold">${item.institution}</p>
+                ${item.institution ? `<p class="timeline-institution text-base md:text-lg mb-2 font-semibold">${item.institution}</p>` : ''}
                 ${item.description ? `<p class="timeline-description text-sm md:text-base opacity-90">${item.description}</p>` : ''}
+            </div>
+        </div>
+    `).join('');
+}
+
+function buildTeachingListHTML(items, baseDelay = 0) {
+    return items.map((item, index) => `
+        <div class="timeline-item teaching-item fade-in" style="animation-delay: ${baseDelay + index * 0.1}s">
+            <div class="timeline-marker"></div>
+            <div class="timeline-content">
+                <h3 class="timeline-title font-mono font-bold text-lg md:text-xl mb-0">${item.course}</h3>
             </div>
         </div>
     `).join('');
@@ -1282,18 +1293,13 @@ function renderAboutPage(content) {
         </div>
     ` : '';
 
-    const teachingItems = (content.teaching || []).map(item => ({
-        title: item.course,
-        institution: item.institution,
-        year: item.year,
-        description: item.description || ''
-    }));
+    const teachingItems = content.teaching || [];
 
     const teachingTimelineHTML = teachingItems.length > 0 ? `
         <div class="mb-12">
             <h2 class="text-2xl md:text-3xl font-bold mb-8 font-mono">${content.sections.teaching}</h2>
-            <div class="timeline-container">
-                ${buildTimelineHTML(teachingItems, 0.05)}
+            <div class="timeline-container teaching-list">
+                ${buildTeachingListHTML(teachingItems, 0.05)}
             </div>
         </div>
     ` : '';
