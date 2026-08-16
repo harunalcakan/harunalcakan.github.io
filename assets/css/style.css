@@ -1579,7 +1579,7 @@ body.dark-mode .contact-icon-link:hover {
     position: fixed;
     right: 0.65rem;
     bottom: 0.45rem;
-    z-index: 40;
+    z-index: 45;
     display: flex;
     align-items: center;
     gap: 0.3rem;
@@ -1587,9 +1587,10 @@ body.dark-mode .contact-icon-link:hover {
     font-size: 0.625rem;
     line-height: 1;
     letter-spacing: 0.01em;
-    opacity: 0.38;
+    opacity: 0.48;
     transition: opacity 0.2s ease;
     user-select: none;
+    pointer-events: auto;
 }
 
 .site-corner-stats:hover,

@@ -947,6 +947,22 @@ function injectFooter() {
 
 let cornerShareOutsideHandler = null;
 
+const VISIT_COUNTER_KEY = 'harunalcakan-github-io-visits';
+const VISIT_COUNTER_API = 'https://countapi.mileshilliard.com/api/v1';
+
+async function fetchVisitCounter(increment = false) {
+    const action = increment ? 'hit' : 'get';
+    const response = await fetch(`${VISIT_COUNTER_API}/${action}/${VISIT_COUNTER_KEY}`);
+    if (!response.ok) return null;
+
+    const payload = await response.json();
+    const rawValue = payload.value ?? payload.count;
+    if (rawValue == null || rawValue === '') return null;
+
+    const parsed = Number(rawValue);
+    return Number.isNaN(parsed) ? null : parsed;
+}
+
 function cleanupCornerShare() {
     if (cornerShareOutsideHandler) {
         document.removeEventListener('click', cornerShareOutsideHandler);
@@ -1014,23 +1030,24 @@ async function hydrateCornerStats(content) {
 
     if (!visitsEl) return;
 
-    const namespace = 'harunalcakan-github-io';
-    const key = 'visits';
     const sessionKey = 'harunalcakan-visit-counted';
 
     try {
+        let visitCount = null;
+
         if (!sessionStorage.getItem(sessionKey)) {
-            await fetch(`https://api.countapi.xyz/hit/${namespace}/${key}`);
+            visitCount = await fetchVisitCounter(true);
             sessionStorage.setItem(sessionKey, '1');
+        } else {
+            visitCount = await fetchVisitCounter(false);
+            if (visitCount == null) {
+                visitCount = await fetchVisitCounter(true);
+            }
         }
 
-        const response = await fetch(`https://api.countapi.xyz/get/${namespace}/${key}`);
-        if (!response.ok) return;
-
-        const payload = await response.json();
-        if (payload.value == null) return;
-
-        visitsEl.textContent = Number(payload.value).toLocaleString(locale);
+        if (visitCount != null) {
+            visitsEl.textContent = visitCount.toLocaleString(locale);
+        }
     } catch {
         visitsEl.textContent = '—';
     }
@@ -1109,6 +1126,7 @@ function toggleTheme() {
     localStorage.setItem('theme', currentTheme);
     initializeTheme();
     renderCurrentPage();
+    hydrateCornerStats(data[currentLanguage]);
 }
 
 function setupThemeToggle() {
