@@ -1162,6 +1162,22 @@ function renderAboutPage(content) {
         </div>
     ` : '';
 
+    const teachingItems = (content.teaching || []).map(item => ({
+        title: item.course,
+        institution: item.institution,
+        year: item.year,
+        description: item.description || ''
+    }));
+
+    const teachingTimelineHTML = teachingItems.length > 0 ? `
+        <div class="mb-12">
+            <h2 class="text-2xl md:text-3xl font-bold mb-8 font-mono">${content.sections.teaching}</h2>
+            <div class="timeline-container">
+                ${buildTimelineHTML(teachingItems, 0.05)}
+            </div>
+        </div>
+    ` : '';
+
     const thesis = content.thesis || {};
     const thesisHTML = thesis.title ? `
         <div class="thesis-card p-6 rounded-lg mb-12 fade-in">
@@ -1185,6 +1201,7 @@ function renderAboutPage(content) {
                 ${cvButtonHTML}
                 ${thesisHTML}
                 ${workTimelineHTML}
+                ${teachingTimelineHTML}
                 ${educationTimelineHTML}
             </div>
         </section>
@@ -1303,7 +1320,7 @@ function renderResearchPage(content) {
         `)
         .join('');
 
-    // Technical Modules section (In Silico / In Vitro + Software & Tools)
+    // Technical Modules section (computational / experimental + software)
     const skillMatrix = content.skillMatrix || {};
     const computationalSkills = skillMatrix.computational?.skills || [];
     const experimentalSkills = skillMatrix.experimental?.skills || [];

@@ -94,6 +94,7 @@ const data = {
             downloadCV: "Download CV",
             education: "Education",
             workExperience: "Work Experience",
+            teaching: "Teaching",
             workAndEducation: "Work Experience & Education",
             academicCompetency: "Academic & Technical Competency",
             researchAreas: "Research Areas",
@@ -188,6 +189,24 @@ const data = {
             }
         ],
 
+        teaching: [
+            {
+                course: "Physical Chemistry Laboratory",
+                institution: "Ankara University, Department of Chemistry",
+                year: "2023–Present"
+            },
+            {
+                course: "Basic Chemistry Laboratory",
+                institution: "Ankara University, Department of Chemistry",
+                year: "2023–Present"
+            },
+            {
+                course: "Quantum Chemistry",
+                institution: "Ankara University, Department of Chemistry",
+                year: "2023–Present"
+            }
+        ],
+
         news: [],
 
         // Research areas (used by portfolio page)
@@ -216,7 +235,7 @@ const data = {
                 ]
             },
             experimental: {
-                title: "In Vitro (Experimental) Expertise",
+                title: "Experimental Expertise",
                 skills: [
                     "Physical Chemistry",
                     "Electrochemistry",
@@ -472,6 +491,7 @@ const data = {
             downloadCV: "CV İndir",
             education: "Eğitim",
             workExperience: "İş Deneyimi",
+            teaching: "Verdiğim Dersler",
             workAndEducation: "Eğitim ve İş Deneyimi",
             academicCompetency: "Bilimsel ve Teknik Yetkinlik",
             researchAreas: "Araştırma Alanları",
@@ -565,6 +585,24 @@ const data = {
             }
         ],
 
+        teaching: [
+            {
+                course: "Fizikokimya Laboratuvarı",
+                institution: "Ankara Üniversitesi, Kimya Bölümü",
+                year: "2023–devam"
+            },
+            {
+                course: "Temel Kimya Laboratuvarı",
+                institution: "Ankara Üniversitesi, Kimya Bölümü",
+                year: "2023–devam"
+            },
+            {
+                course: "Kuantum Kimyası",
+                institution: "Ankara Üniversitesi, Kimya Bölümü",
+                year: "2023–devam"
+            }
+        ],
+
         news: [],
 
         researchAreas: [
@@ -591,7 +629,7 @@ const data = {
                 ]
             },
             experimental: {
-                title: "In Vitro (Deneysel) Çalışmalar",
+                title: "Deneysel Çalışmalar",
                 skills: [
                     "Fizikokimya",
                     "Elektrokimya",
