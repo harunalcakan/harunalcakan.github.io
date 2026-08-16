@@ -705,6 +705,7 @@ function setupNavHomeLinks() {
 document.addEventListener('DOMContentLoaded', () => {
     injectNavbar();
     injectFooter();
+    injectSiteCornerStats();
     initializeTheme();
     initializeLanguage();
     updatePageMeta();
@@ -899,11 +900,6 @@ function injectFooter() {
         <footer class="site-footer container mx-auto px-6 py-8 text-center text-sm mt-12">
             ${iconsHTML ? `<div class="site-footer-icons mb-5 flex justify-center">${iconsHTML}</div>` : ''}
             <p class="site-footer-copy opacity-75">&copy; <span id="current-year"></span> ${content.name}. ${content.sections.footerTagline}</p>
-            ${content.sections.visitorCount ? `
-                <p class="visitor-count-line opacity-55 text-xs mt-2 font-mono">
-                    ${content.sections.visitorCount}: <span id="visitor-count">—</span>
-                </p>
-            ` : ''}
         </footer>
     `;
 
@@ -915,13 +911,76 @@ function injectFooter() {
     if (yearElement) {
         yearElement.textContent = new Date().getFullYear();
     }
-
-    hydrateVisitorCount();
 }
 
-async function hydrateVisitorCount() {
-    const countElement = document.getElementById('visitor-count');
-    if (!countElement) return;
+let cornerShareOutsideHandler = null;
+
+function cleanupCornerShare() {
+    if (cornerShareOutsideHandler) {
+        document.removeEventListener('click', cornerShareOutsideHandler);
+        cornerShareOutsideHandler = null;
+    }
+}
+
+function injectSiteCornerStats() {
+    const content = data[currentLanguage];
+    if (!content) return;
+
+    cleanupCornerShare();
+    document.getElementById('site-corner-stats')?.remove();
+
+    const fallbackCitations = content.homeStats?.citations ?? '—';
+    const locale = currentLanguage === 'tr' ? 'tr-TR' : 'en-US';
+    const visitsTitle = content.sections.visitorCount || 'Visits';
+    const citationsTitle = content.sections.citationsCount || 'Citations';
+
+    const cornerHTML = `
+        <aside class="site-corner-stats" id="site-corner-stats" aria-label="${visitsTitle}">
+            <span class="corner-stat" title="${visitsTitle}">
+                <span id="corner-visits" class="corner-stat-value">—</span>
+            </span>
+            <span class="corner-stat-sep" aria-hidden="true">·</span>
+            <span class="corner-stat" title="${citationsTitle}">
+                <span id="corner-citations" class="corner-stat-value">${Number(fallbackCitations).toLocaleString(locale)}</span>
+            </span>
+            <span class="corner-stat-sep" aria-hidden="true">·</span>
+            <div class="corner-share-wrap">
+                <button type="button" class="corner-share-btn" id="corner-share-btn" aria-expanded="false" aria-haspopup="true">${content.sections.cornerShare || 'share'}</button>
+                <div class="corner-share-menu hidden" id="corner-share-menu" role="menu">
+                    <a href="#" class="corner-share-item" data-share="linkedin" role="menuitem">${content.sections.cornerShareLinkedIn || 'LinkedIn'}</a>
+                    <a href="#" class="corner-share-item" data-share="x" role="menuitem">${content.sections.cornerShareX || 'X'}</a>
+                    <button type="button" class="corner-share-item" data-share="copy" role="menuitem">${content.sections.cornerCopyLink || 'copy'}</button>
+                </div>
+            </div>
+        </aside>
+    `;
+
+    document.body.insertAdjacentHTML('beforeend', cornerHTML);
+    hydrateCornerStats(content);
+    setupCornerShare(content);
+}
+
+async function hydrateCornerStats(content) {
+    const visitsEl = document.getElementById('corner-visits');
+    const citationsEl = document.getElementById('corner-citations');
+    const locale = currentLanguage === 'tr' ? 'tr-TR' : 'en-US';
+
+    if (citationsEl) {
+        try {
+            const statsPath = content.scholar?.statsPath || 'assets/data/scholar-stats.json';
+            const response = await fetch(`${statsPath}?t=${Date.now()}`, { cache: 'no-store' });
+            if (response.ok) {
+                const live = await response.json();
+                if (live.citations != null) {
+                    citationsEl.textContent = Number(live.citations).toLocaleString(locale);
+                }
+            }
+        } catch {
+            // Keep fallback from data.js.
+        }
+    }
+
+    if (!visitsEl) return;
 
     const namespace = 'harunalcakan-github-io';
     const key = 'visits';
@@ -939,11 +998,68 @@ async function hydrateVisitorCount() {
         const payload = await response.json();
         if (payload.value == null) return;
 
-        const locale = currentLanguage === 'tr' ? 'tr-TR' : 'en-US';
-        countElement.textContent = Number(payload.value).toLocaleString(locale);
+        visitsEl.textContent = Number(payload.value).toLocaleString(locale);
     } catch {
-        countElement.closest('.visitor-count-line')?.remove();
+        visitsEl.textContent = '—';
     }
+}
+
+function setupCornerShare(content) {
+    const btn = document.getElementById('corner-share-btn');
+    const menu = document.getElementById('corner-share-menu');
+    if (!btn || !menu) return;
+
+    btn.addEventListener('click', (event) => {
+        event.stopPropagation();
+        const willOpen = menu.classList.contains('hidden');
+        menu.classList.toggle('hidden', !willOpen);
+        btn.setAttribute('aria-expanded', willOpen ? 'true' : 'false');
+    });
+
+    menu.querySelector('[data-share="linkedin"]')?.addEventListener('click', (event) => {
+        event.preventDefault();
+        const url = encodeURIComponent(window.location.href);
+        window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${url}`, '_blank', 'noopener,noreferrer');
+        menu.classList.add('hidden');
+        btn.setAttribute('aria-expanded', 'false');
+    });
+
+    menu.querySelector('[data-share="x"]')?.addEventListener('click', (event) => {
+        event.preventDefault();
+        const url = encodeURIComponent(window.location.href);
+        const text = encodeURIComponent(document.title);
+        window.open(`https://twitter.com/intent/tweet?url=${url}&text=${text}`, '_blank', 'noopener,noreferrer');
+        menu.classList.add('hidden');
+        btn.setAttribute('aria-expanded', 'false');
+    });
+
+    menu.querySelector('[data-share="copy"]')?.addEventListener('click', async () => {
+        const copyBtn = menu.querySelector('[data-share="copy"]');
+        const originalLabel = copyBtn.textContent;
+
+        try {
+            await navigator.clipboard.writeText(window.location.href);
+            copyBtn.textContent = content.sections.cornerCopied || 'copied';
+            setTimeout(() => {
+                copyBtn.textContent = originalLabel;
+            }, 1400);
+        } catch {
+            // Clipboard unavailable — keep menu open briefly.
+        }
+
+        menu.classList.add('hidden');
+        btn.setAttribute('aria-expanded', 'false');
+    });
+
+    cornerShareOutsideHandler = (event) => {
+        if (menu.classList.contains('hidden')) return;
+        if (btn.contains(event.target) || menu.contains(event.target)) return;
+
+        menu.classList.add('hidden');
+        btn.setAttribute('aria-expanded', 'false');
+    };
+
+    document.addEventListener('click', cornerShareOutsideHandler);
 }
 
 // Theme Management
@@ -1046,10 +1162,12 @@ function toggleLanguage() {
     // Clean up mobile menu listeners before removing navbar
     cleanupMobileMenu();
     cleanupTypewriter();
+    cleanupCornerShare();
     
     // Remove old navbar and footer before re-injecting
     const oldNavbar = document.getElementById('navbar');
     const oldFooter = document.querySelector('footer');
+    document.getElementById('site-corner-stats')?.remove();
     if (oldNavbar) oldNavbar.remove();
     if (oldFooter) oldFooter.remove();
     
@@ -1058,6 +1176,7 @@ function toggleLanguage() {
     updatePageMeta();
     renderCurrentPage();
     injectFooter();
+    injectSiteCornerStats();
 }
 
 function updateLanguageToggle() {
