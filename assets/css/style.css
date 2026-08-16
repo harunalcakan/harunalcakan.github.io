@@ -1465,22 +1465,26 @@ body.light-mode .timeline-title {
     }
 }
 
-/* Conference year groups (publications page) */
+/* Publication year groups (peer-reviewed + conferences) */
+.publication-year-heading,
 .conference-year-heading {
     padding-bottom: 0.5rem;
     border-bottom: 2px solid;
 }
 
+body.light-mode .publication-year-heading,
 body.light-mode .conference-year-heading {
     color: var(--text-light);
     border-color: var(--border-light);
 }
 
+body.dark-mode .publication-year-heading,
 body.dark-mode .conference-year-heading {
     color: var(--accent-dark);
     border-color: rgba(0, 255, 65, 0.35);
 }
 
+.publication-year-group:last-child,
 .conference-year-group:last-child {
     margin-bottom: 0;
 }

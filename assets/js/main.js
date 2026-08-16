@@ -50,9 +50,7 @@ function extractDoiId(link) {
 }
 
 function buildPublicationMetaBadgesHTML(pub, content) {
-    const journalLabel = pub.journal
-        ? `${pub.journal}${pub.year ? `, ${pub.year}` : ''}`
-        : '';
+    const journalLabel = pub.journal || '';
     const citationCount = pub.citations ?? 0;
     const doiId = extractDoiId(pub.doi_link || pub.link);
     const citationsLabel = content.sections.citationsBadge || 'Citations';
@@ -510,6 +508,40 @@ function groupConferencesByYear(conferences) {
     return Array.from(groups.entries())
         .sort((a, b) => b[0] - a[0])
         .map(([year, items]) => ({ year, items }));
+}
+
+function groupArticlesByYear(articles) {
+    const groups = new Map();
+    articles.forEach(article => {
+        const year = Number(article.year) || 0;
+        if (!groups.has(year)) groups.set(year, []);
+        groups.get(year).push(article);
+    });
+    return Array.from(groups.entries())
+        .sort((a, b) => b[0] - a[0])
+        .map(([year, items]) => ({ year, items }));
+}
+
+function buildArticleItemHTML(pub, content, animationDelay = 0) {
+    const doiLink = pub.doi_link || pub.link || '#';
+    const apaCitation = pub.apa_citation || [
+        pub.authors,
+        pub.year ? `(${pub.year}).` : '',
+        pub.title,
+        pub.venue
+    ].filter(Boolean).join(' ');
+
+    return `
+        <div class="publication-item mb-6 fade-in" style="animation-delay: ${animationDelay}s">
+            <h3 class="text-xl font-semibold mb-2">
+                <a href="${doiLink}" target="_blank" rel="noopener" class="publication-title-link">${pub.title}</a>
+            </h3>
+            <p class="publication-citation">
+                ${apaCitation}
+            </p>
+            ${buildPublicationMetaBadgesHTML(pub, content)}
+        </div>
+    `;
 }
 
 function buildPersonSchema(content) {
@@ -1469,26 +1501,17 @@ function renderPublicationsPage(content) {
         ? publicationsData.conferences
         : [];
 
-    const publicationsHTML = articles
-        .map((pub, index) => {
-            const doiLink = pub.doi_link || pub.link || '#';
-            const apaCitation = pub.apa_citation || [
-                pub.authors,
-                pub.year ? `(${pub.year}).` : '',
-                pub.title,
-                pub.venue
-            ].filter(Boolean).join(' ');
+    const publicationsHTML = groupArticlesByYear(articles)
+        .map((group, groupIndex) => {
+            const itemsHTML = group.items.map((pub, index) =>
+                buildArticleItemHTML(pub, content, (groupIndex * 0.15) + (index * 0.08))
+            ).join('');
 
             return `
-            <div class="publication-item mb-6 fade-in" style="animation-delay: ${index * 0.1}s">
-                <h3 class="text-xl font-semibold mb-2">
-                    <a href="${doiLink}" target="_blank" rel="noopener" class="publication-title-link">${pub.title}</a>
-                </h3>
-                <p class="publication-citation">
-                    ${apaCitation}
-                </p>
-                ${buildPublicationMetaBadgesHTML(pub, content)}
-            </div>
+                <div class="publication-year-group mb-8">
+                    <h3 class="publication-year-heading text-xl md:text-2xl font-bold mb-4 font-mono">${group.year}</h3>
+                    ${itemsHTML}
+                </div>
             `;
         })
         .join('');
@@ -1513,7 +1536,7 @@ function renderPublicationsPage(content) {
 
             return `
                 <div class="conference-year-group mb-8">
-                    <h3 class="conference-year-heading text-xl md:text-2xl font-bold mb-4 font-mono">${group.year}</h3>
+                    <h3 class="publication-year-heading text-xl md:text-2xl font-bold mb-4 font-mono">${group.year}</h3>
                     ${itemsHTML}
                 </div>
             `;
