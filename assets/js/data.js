@@ -103,6 +103,7 @@ const data = {
             ideaStage: "Idea stage",
             conferencePapers: "Poster & Conference Presentations",
             peerReviewed: "Peer-Reviewed Articles",
+            citationsBadge: "Citations",
             thesis: "MSc Thesis",
             thesisYear: "Year",
             thesisType: "Degree",
@@ -253,21 +254,33 @@ const data = {
             articles: [
                 {
                     title: "Targeting LIMK1 in Alzheimer's Disease: A Multifaceted Computational Investigation Involving ADMET, Virtual Screening, Molecular Docking, and Molecular Dynamics",
+                    journal: "Journal of the Turkish Chemical Society Section A: Chemistry",
+                    year: 2024,
+                    citations: 0,
                     apa_citation: "Eşkin, D., Nalçakan, H., Kurtay, G., Akkan, Y., Türk, M., & Uras, B. (2024). Targeting LIMK1 in Alzheimer's Disease: A Multifaceted Computational Investigation Involving ADMET, Virtual Screening, Molecular Docking, and Molecular Dynamics. Journal of the Turkish Chemical Society Section A: Chemistry, 11(4), 1425–1440.",
                     doi_link: "https://doi.org/10.18596/jotcsa.1465547"
                 },
                 {
                     title: "An In Silico Pharmacokinetic Investigation of Organic Luminogens: Understanding the NIR AIEgens and Their Interactions with Serum Albumins",
+                    journal: "Journal of Faculty of Pharmacy of Ankara University",
+                    year: 2024,
+                    citations: 3,
                     apa_citation: "Nalçakan, H., Kurtay, G., Özdil, D. T., & Yılmaz, Z. (2024). An In Silico Pharmacokinetic Investigation of Organic Luminogens: Understanding the NIR AIEgens and Their Interactions with Serum Albumins. Journal of Faculty of Pharmacy of Ankara University, 48(1), 56–74.",
                     doi_link: "https://doi.org/10.33483/jfpau.1335047"
                 },
                 {
                     title: "Bridging Molecular Docking to Molecular Dynamics to Enlighten Recognition Processes of Tailored D-A/D-A-D Types' AIEgens with HSA/BSA",
+                    journal: "Journal of Advanced Research in Natural and Applied Sciences",
+                    year: 2023,
+                    citations: 1,
                     apa_citation: "Nalçakan, H., & Kurtay, G. (2023). Bridging Molecular Docking to Molecular Dynamics to Enlighten Recognition Processes of Tailored D-A/D-A-D Types' AIEgens with HSA/BSA. Journal of Advanced Research in Natural and Applied Sciences, 9(3).",
                     doi_link: "https://doi.org/10.28979/jarnas.1186322"
                 },
                 {
                     title: "Computational insights into bis-N,N-dimethylaniline based D-π-A photosensitizers bearing divergent-type of π-linkers for DSSCs",
+                    journal: "Journal of Molecular Graphics and Modelling",
+                    year: 2023,
+                    citations: 10,
                     apa_citation: "Nalçakan, H., Kurtay, G., Sarıkavak, K., & Sevin, F. (2023). Computational insights into bis-N,N-dimethylaniline based D-π-A photosensitizers bearing divergent-type of π-linkers for DSSCs. Journal of Molecular Graphics and Modelling, 120, 108485.",
                     doi_link: "https://doi.org/10.1016/j.jmgm.2023.108485"
                 }
@@ -500,6 +513,7 @@ const data = {
             ideaStage: "Fikir aşaması",
             conferencePapers: "Poster ve Konferans Sunumları",
             peerReviewed: "Hakemli Makaleler",
+            citationsBadge: "Atıf",
             thesis: "Yüksek Lisans Tezi",
             thesisYear: "Yıl",
             thesisType: "Tür",
@@ -646,21 +660,33 @@ const data = {
             articles: [
                 {
                     title: "Targeting LIMK1 in Alzheimer's Disease: A Multifaceted Computational Investigation Involving ADMET, Virtual Screening, Molecular Docking, and Molecular Dynamics",
+                    journal: "Journal of the Turkish Chemical Society Section A: Chemistry",
+                    year: 2024,
+                    citations: 0,
                     apa_citation: "Eşkin, D., Nalçakan, H., Kurtay, G., Akkan, Y., Türk, M., & Uras, B. (2024). Targeting LIMK1 in Alzheimer's Disease: A Multifaceted Computational Investigation Involving ADMET, Virtual Screening, Molecular Docking, and Molecular Dynamics. Journal of the Turkish Chemical Society Section A: Chemistry, 11(4), 1425–1440.",
                     doi_link: "https://doi.org/10.18596/jotcsa.1465547"
                 },
                 {
                     title: "An In Silico Pharmacokinetic Investigation of Organic Luminogens: Understanding the NIR AIEgens and Their Interactions with Serum Albumins",
+                    journal: "Journal of Faculty of Pharmacy of Ankara University",
+                    year: 2024,
+                    citations: 3,
                     apa_citation: "Nalçakan, H., Kurtay, G., Özdil, D. T., & Yılmaz, Z. (2024). An In Silico Pharmacokinetic Investigation of Organic Luminogens: Understanding the NIR AIEgens and Their Interactions with Serum Albumins. Journal of Faculty of Pharmacy of Ankara University, 48(1), 56–74.",
                     doi_link: "https://doi.org/10.33483/jfpau.1335047"
                 },
                 {
                     title: "Bridging Molecular Docking to Molecular Dynamics to Enlighten Recognition Processes of Tailored D-A/D-A-D Types' AIEgens with HSA/BSA",
+                    journal: "Journal of Advanced Research in Natural and Applied Sciences",
+                    year: 2023,
+                    citations: 1,
                     apa_citation: "Nalçakan, H., & Kurtay, G. (2023). Bridging Molecular Docking to Molecular Dynamics to Enlighten Recognition Processes of Tailored D-A/D-A-D Types' AIEgens with HSA/BSA. Journal of Advanced Research in Natural and Applied Sciences, 9(3).",
                     doi_link: "https://doi.org/10.28979/jarnas.1186322"
                 },
                 {
                     title: "Computational insights into bis-N,N-dimethylaniline based D-π-A photosensitizers bearing divergent-type of π-linkers for DSSCs",
+                    journal: "Journal of Molecular Graphics and Modelling",
+                    year: 2023,
+                    citations: 10,
                     apa_citation: "Nalçakan, H., Kurtay, G., Sarıkavak, K., & Sevin, F. (2023). Computational insights into bis-N,N-dimethylaniline based D-π-A photosensitizers bearing divergent-type of π-linkers for DSSCs. Journal of Molecular Graphics and Modelling, 120, 108485.",
                     doi_link: "https://doi.org/10.1016/j.jmgm.2023.108485"
                 }

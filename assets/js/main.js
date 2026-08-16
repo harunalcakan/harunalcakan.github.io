@@ -43,6 +43,57 @@ function getFlagSVG(lang) {
     return `<svg class="lang-flag-icon" viewBox="0 0 60 30" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><clipPath id="gb-s"><path d="M0,0 v30 h60 v-30 z"/></clipPath><clipPath id="gb-t"><path d="M30,15 h30 v15 z v-15 h-30 z h-30 v15 z v-15 h30 z"/></clipPath><g clip-path="url(#gb-s)"><path d="M0,0 v30 h60 v-30 z" fill="#012169"/><path d="M0,0 L60,30 M60,0 L0,30" stroke="#fff" stroke-width="6"/><path d="M0,0 L60,30 M60,0 L0,30" clip-path="url(#gb-t)" stroke="#C8102E" stroke-width="4"/><path d="M30,0 v30 M0,15 h60" stroke="#fff" stroke-width="10"/><path d="M30,0 v30 M0,15 h60" stroke="#C8102E" stroke-width="6"/></g></svg>`;
 }
 
+function extractDoiId(link) {
+    if (!link) return null;
+    const match = String(link).match(/10\.\d{4,9}\/[-._;()/:A-Z0-9]+/i);
+    return match ? match[0] : null;
+}
+
+function buildPublicationMetaBadgesHTML(pub, content) {
+    const journalLabel = pub.journal
+        ? `${pub.journal}${pub.year ? `, ${pub.year}` : ''}`
+        : '';
+    const citationCount = pub.citations ?? 0;
+    const doiId = extractDoiId(pub.doi_link || pub.link);
+    const citationsLabel = content.sections.citationsBadge || 'Citations';
+
+    if (!journalLabel && citationCount == null) return '';
+
+    return `
+        <div class="publication-meta-badges">
+            ${journalLabel ? `<span class="pub-meta-badge pub-meta-journal">${journalLabel}</span>` : ''}
+            <span class="pub-meta-badge pub-meta-citations">
+                <span class="pub-meta-citations-label">${citationsLabel}</span>
+                <span class="pub-meta-citations-value"${doiId ? ` data-citation-doi="${doiId}"` : ''}>${citationCount}</span>
+            </span>
+        </div>
+    `;
+}
+
+async function hydratePublicationCitations() {
+    const elements = document.querySelectorAll('[data-citation-doi]');
+    if (elements.length === 0) return;
+
+    await Promise.all(Array.from(elements).map(async (element) => {
+        const doi = element.getAttribute('data-citation-doi');
+        if (!doi) return;
+
+        try {
+            const response = await fetch(
+                `https://api.semanticscholar.org/graph/v1/paper/DOI:${encodeURIComponent(doi)}?fields=citationCount`
+            );
+            if (!response.ok) return;
+
+            const payload = await response.json();
+            if (typeof payload.citationCount === 'number') {
+                element.textContent = payload.citationCount;
+            }
+        } catch {
+            // Keep fallback citation count from data.js.
+        }
+    }));
+}
+
 function getThemeIconSvg(showSun) {
     if (showSun) {
         return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path></svg>`;
@@ -1242,6 +1293,7 @@ function renderPublicationsPage(content) {
                 <p class="publication-citation">
                     ${apaCitation}
                 </p>
+                ${buildPublicationMetaBadgesHTML(pub, content)}
             </div>
             `;
         })
@@ -1292,6 +1344,8 @@ function renderPublicationsPage(content) {
             </div>
         </section>
     `;
+
+    hydratePublicationCitations();
 }
 
 // Research Page Render

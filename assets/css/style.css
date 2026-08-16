@@ -757,6 +757,103 @@ body.light-mode .publication-item:hover {
     padding-left: 1.5rem;
 }
 
+.publication-meta-badges {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 0.75rem;
+}
+
+.pub-meta-badge {
+    display: inline-flex;
+    align-items: center;
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    line-height: 1.2;
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.pub-meta-journal {
+    padding: 0.3rem 0.55rem;
+    border: 1px solid currentColor;
+    opacity: 0.85;
+}
+
+body.dark-mode .pub-meta-journal {
+    color: #e5e7eb;
+    border-color: rgba(229, 231, 235, 0.45);
+}
+
+body.light-mode .pub-meta-journal {
+    color: #374151;
+    border-color: rgba(55, 65, 81, 0.35);
+}
+
+.pub-meta-citations {
+    padding: 0;
+    border: none;
+    background: transparent;
+}
+
+.pub-meta-citations-label {
+    padding: 0.3rem 0.45rem;
+    font-size: 0.68rem;
+    font-weight: 600;
+    text-transform: none;
+}
+
+body.dark-mode .pub-meta-citations-label {
+    background: #f3f4f6;
+    color: #111827;
+}
+
+body.light-mode .pub-meta-citations-label {
+    background: #111827;
+    color: #f9fafb;
+}
+
+.pub-meta-citations-value {
+    position: relative;
+    min-width: 1.75rem;
+    padding: 0.3rem 0.5rem;
+    text-align: center;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+}
+
+body.dark-mode .pub-meta-citations-value {
+    background: #f3f4f6;
+    color: #111827;
+}
+
+body.light-mode .pub-meta-citations-value {
+    background: #111827;
+    color: #f9fafb;
+}
+
+.pub-meta-citations-value::before {
+    content: '';
+    position: absolute;
+    left: -5px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 0;
+    height: 0;
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid transparent;
+}
+
+body.dark-mode .pub-meta-citations-value::before {
+    border-right: 5px solid #f3f4f6;
+}
+
+body.light-mode .pub-meta-citations-value::before {
+    border-right: 5px solid #111827;
+}
+
 /* Links */
 a {
     transition: color 0.3s ease;
