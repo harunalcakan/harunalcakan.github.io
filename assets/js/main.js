@@ -980,16 +980,18 @@ function injectSiteCornerStats() {
     const fallbackCitations = content.homeStats?.citations ?? '—';
     const locale = currentLanguage === 'tr' ? 'tr-TR' : 'en-US';
     const visitsTitle = content.sections.visitorCount || 'Visits';
-    const citationsTitle = content.sections.citationsCount || 'Citations';
+    const citationsLabel = (content.sections.citationsBadge || content.sections.citationsCount || 'Citations').toLowerCase();
 
     const cornerHTML = `
         <aside class="site-corner-stats" id="site-corner-stats" aria-label="${visitsTitle}">
-            <span class="corner-stat" title="${visitsTitle}">
+            <span class="corner-stat">
                 <span id="corner-visits" class="corner-stat-value">—</span>
+                <span class="corner-stat-label">${visitsTitle.toLowerCase()}</span>
             </span>
             <span class="corner-stat-sep" aria-hidden="true">·</span>
-            <span class="corner-stat" title="${citationsTitle}">
+            <span class="corner-stat">
                 <span id="corner-citations" class="corner-stat-value">${Number(fallbackCitations).toLocaleString(locale)}</span>
+                <span class="corner-stat-label">${citationsLabel}</span>
             </span>
             <span class="corner-stat-sep" aria-hidden="true">·</span>
             <div class="corner-share-wrap">
