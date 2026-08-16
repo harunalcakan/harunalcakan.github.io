@@ -43,6 +43,13 @@ function getFlagSVG(lang) {
     return `<svg class="lang-flag-icon" viewBox="0 0 60 30" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><clipPath id="gb-s"><path d="M0,0 v30 h60 v-30 z"/></clipPath><clipPath id="gb-t"><path d="M30,15 h30 v15 z v-15 h-30 z h-30 v15 z v-15 h30 z"/></clipPath><g clip-path="url(#gb-s)"><path d="M0,0 v30 h60 v-30 z" fill="#012169"/><path d="M0,0 L60,30 M60,0 L0,30" stroke="#fff" stroke-width="6"/><path d="M0,0 L60,30 M60,0 L0,30" clip-path="url(#gb-t)" stroke="#C8102E" stroke-width="4"/><path d="M30,0 v30 M0,15 h60" stroke="#fff" stroke-width="10"/><path d="M30,0 v30 M0,15 h60" stroke="#C8102E" stroke-width="6"/></g></svg>`;
 }
 
+function getThemeIconSvg(showSun) {
+    if (showSun) {
+        return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path></svg>`;
+    }
+    return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 14.5A7.5 7.5 0 0 1 9.5 3 6.5 6.5 0 1 0 14.5 21 7.5 7.5 0 0 1 21 14.5Z"></path></svg>`;
+}
+
 function buildNavAvatarHTML(content) {
     const initials = getProfileInitials(content);
     const imageSrc = content.profileImage || '';
@@ -163,6 +170,59 @@ function buildHomeStatsHTML(content) {
                     </p>
                 ` : ''}
                 ${content.sections.scholarStatsNote ? `<p class="home-scholar-note opacity-70 text-xs md:text-sm" data-scholar-updated></p>` : ''}
+            </div>
+        </section>
+    `;
+}
+
+function getContactIconSvg(name) {
+    const icons = {
+        email: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="m3 7 9 6 9-6"></path></svg>`,
+        orcid: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm-1.2 4.2h2.4v9.6h-2.4V6.2Zm5.8 0c1.32 0 2.4 1.08 2.4 2.4s-1.08 2.4-2.4 2.4-2.4-1.08-2.4-2.4 1.08-2.4 2.4-2.4Z"></path></svg>`,
+        scholar: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 3 1 9l4 2.18V17l7 3.82 7-3.82v-5.64L23 9 12 3Zm0 2.18 6.9 3.76-2.4 1.3L12 7.78 7.5 10.24l-2.4-1.3L12 5.18ZM5 12.82 12 16.6l7-3.78V17l-7 3.82L5 17v-4.18Z"></path></svg>`,
+        github: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48 0-.24-.01-.87-.01-1.7-2.78.6-3.37-1.34-3.37-1.34-.46-1.16-1.12-1.47-1.12-1.47-.92-.63.07-.62.07-.62 1.02.07 1.55 1.04 1.55 1.04.9 1.55 2.36 1.1 2.94.84.09-.66.35-1.1.64-1.35-2.22-.25-4.56-1.11-4.56-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.02A9.6 9.6 0 0 1 12 6.84c.85 0 1.71.11 2.51.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.37.2 2.39.1 2.64.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.69-4.57 4.94.36.31.68.92.68 1.85 0 1.34-.01 2.42-.01 2.75 0 .27.18.58.69.48A10 10 0 0 0 12 2Z"></path></svg>`,
+        linkedin: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.98 3.5C4.98 4.88 3.86 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM.24 8.01h4.52V23H.24V8.01zM8.09 8.01h4.33v2.05h.06c.6-1.14 2.08-2.35 4.28-2.35 4.58 0 5.43 3.01 5.43 6.93V23h-4.52v-6.98c0-1.66-.03-3.79-2.31-3.79-2.31 0-2.66 1.8-2.66 3.66V23H8.09V8.01z"></path></svg>`
+    };
+    return icons[name] || '';
+}
+
+function buildContactIconsHTML(content) {
+    const contact = content.contact || {};
+    const labels = content.contactLabels || {};
+    const links = [
+        { href: `mailto:${contact.email || content.email}`, label: labels.email || 'Email', icon: 'email', external: false },
+        { href: contact.orcid, label: 'ORCID', icon: 'orcid', external: true },
+        { href: contact.googleScholar, label: 'Google Scholar', icon: 'scholar', external: true },
+        { href: contact.github, label: 'GitHub', icon: 'github', external: true },
+        { href: contact.linkedin, label: 'LinkedIn', icon: 'linkedin', external: true }
+    ].filter(link => link.icon === 'email' || isValidLink(link.href));
+
+    if (links.length === 0) return '';
+
+    return `
+        <nav class="contact-icons" aria-label="${content.sections.contactLinks || 'Contact'}">
+            ${links.map(link => `
+                <a href="${link.href}"
+                   class="contact-icon-link"
+                   ${link.external ? 'target="_blank" rel="noopener"' : ''}
+                   aria-label="${link.label}"
+                   title="${link.label}">
+                    ${getContactIconSvg(link.icon)}
+                </a>
+            `).join('')}
+        </nav>
+    `;
+}
+
+function buildHomeContactSectionHTML(content) {
+    const iconsHTML = buildContactIconsHTML(content);
+    if (!iconsHTML) return '';
+
+    return `
+        <section id="contact" class="container mx-auto px-4 md:px-6 py-10 max-w-5xl home-contact-section">
+            ${content.sections.footerContactPrompt ? `<p class="home-contact-prompt text-center text-sm md:text-base mb-5">${content.sections.footerContactPrompt}</p>` : ''}
+            <div class="flex justify-center">
+                ${iconsHTML}
             </div>
         </section>
     `;
@@ -539,8 +599,7 @@ function injectNavbar() {
         { href: 'about.html', label: content.sections.about, id: 'nav-about' },
         { href: 'research.html', label: content.sections.research, id: 'nav-research' },
         { href: 'publications.html', label: content.sections.publications, id: 'nav-publications' },
-        { href: 'notes.html', label: content.sections.literatureNotes, id: 'nav-notes' },
-        { href: 'contact.html', label: content.sections.contact, id: 'nav-contact' }
+        { href: 'notes.html', label: content.sections.literatureNotes, id: 'nav-notes' }
     ];
 
     const activeClass = (link) => {
@@ -550,19 +609,19 @@ function injectNavbar() {
 
     const navbarHTML = `
         <nav class="fixed top-0 w-full z-50 backdrop-blur-sm bg-opacity-90 border-b transition-colors duration-300 navbar-anthracite" id="navbar">
-            <div class="container mx-auto px-4 md:px-6 py-4">
-                <div class="flex justify-between items-center">
-                    <div class="flex items-center gap-2 md:gap-3 min-w-0">
+            <div class="container mx-auto px-4 md:px-6 py-2.5">
+                <div class="flex justify-between items-center gap-3">
+                    <div class="flex items-center gap-2 min-w-0">
                         ${buildNavAvatarHTML(content)}
-                        <div class="font-mono text-sm md:text-base lg:text-lg min-w-0">
+                        <div class="font-mono text-sm md:text-base min-w-0">
                             <a href="index.html" class="nav-brand-link" id="nav-brand">
                                 <span class="nav-prompt">></span> <span id="typewriter-text" class="typewriter-nav"></span>
                             </a>
                         </div>
                     </div>
-                    <div class="flex items-center gap-2 md:gap-4 lg:gap-6 relative">
+                    <div class="flex items-center gap-1.5 lg:gap-2 relative shrink-0">
                         <!-- Desktop Navigation -->
-                        <div class="hidden lg:flex gap-4">
+                        <div class="hidden lg:flex items-center gap-0.5 xl:gap-1 nav-links-desktop">
                             ${navLinks.map(link => `
                                 <a href="${link.href}" class="nav-link ${activeClass(link)}" id="${link.id}">
                                     ${link.label}
@@ -587,6 +646,7 @@ function injectNavbar() {
                             </div>
                         </div>
                         <!-- Language Toggle Pill Button -->
+                        <div class="navbar-controls flex items-center gap-1.5">
                         <button id="language-toggle-btn" class="language-toggle-pill ${currentLanguage === 'tr' ? 'language-toggle-active' : ''}" aria-label="Toggle language">
                             <span class="language-toggle-track">
                                 <span class="language-flag-slot language-flag-en-slot">${getFlagSVG('en')}</span>
@@ -594,7 +654,8 @@ function injectNavbar() {
                                 <span class="language-toggle-slider"></span>
                             </span>
                         </button>
-                        <button id="theme-toggle" class="btn-toggle text-xs md:text-sm">${currentTheme === 'dark' ? `☀️ ${content.sections.theme_light}` : `🌙 ${content.sections.theme_dark}`}</button>
+                        <button id="theme-toggle" class="theme-toggle-btn" aria-label="${currentTheme === 'dark' ? content.sections.theme_light : content.sections.theme_dark}">${getThemeIconSvg(currentTheme === 'dark')}</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -701,9 +762,13 @@ function injectFooter() {
     const content = data[currentLanguage];
     if (!content) return;
 
+    const isHome = getCurrentPage() === 'index';
+    const iconsHTML = isHome ? '' : buildContactIconsHTML(content);
+
     const footerHTML = `
-        <footer class="container mx-auto px-6 py-8 text-center opacity-75 text-sm mt-12">
-            <p>&copy; <span id="current-year"></span> ${content.name}. ${content.sections.footerTagline}</p>
+        <footer class="site-footer container mx-auto px-6 py-8 text-center text-sm mt-12">
+            ${iconsHTML ? `<div class="site-footer-icons mb-5 flex justify-center">${iconsHTML}</div>` : ''}
+            <p class="site-footer-copy opacity-75">&copy; <span id="current-year"></span> ${content.name}. ${content.sections.footerTagline}</p>
         </footer>
     `;
 
@@ -753,17 +818,15 @@ function setupThemeToggle() {
 
 function updateThemeToggle() {
     const themeBtn = document.getElementById('theme-toggle');
-    if (themeBtn) {
-        const content = data[currentLanguage];
-        if (content && content.sections) {
-            const lightLabel = content.sections.theme_light || 'Light';
-            const darkLabel = content.sections.theme_dark || 'Dark';
-            themeBtn.textContent = currentTheme === 'dark' ? `☀️ ${lightLabel}` : `🌙 ${darkLabel}`;
-        } else {
-            // Fallback if translations not available
-            themeBtn.textContent = currentTheme === 'dark' ? '☀️ Light' : '🌙 Dark';
-        }
-    }
+    if (!themeBtn) return;
+
+    const content = data[currentLanguage];
+    const lightLabel = content?.sections?.theme_light || 'Light mode';
+    const darkLabel = content?.sections?.theme_dark || 'Dark mode';
+    const label = currentTheme === 'dark' ? lightLabel : darkLabel;
+
+    themeBtn.setAttribute('aria-label', label);
+    themeBtn.innerHTML = getThemeIconSvg(currentTheme === 'dark');
 }
 
 function updateNavbarBackground() {
@@ -942,9 +1005,6 @@ function renderCurrentPage() {
         case 'notes':
             renderLiteratureNotesPage(content);
             break;
-        case 'contact':
-            renderContactPage(content);
-            break;
         default:
             renderHomePage(content);
     }
@@ -990,8 +1050,9 @@ function renderHomePage(content) {
     ` : '';
 
     const statsHTML = buildHomeStatsHTML(content);
+    const contactHTML = buildHomeContactSectionHTML(content);
 
-    mainContent.innerHTML = heroHTML + statsHTML + literatureHTML;
+    mainContent.innerHTML = heroHTML + statsHTML + literatureHTML + contactHTML;
 
     initNGLViewers();
     hydrateHomeStats(content);
@@ -1306,102 +1367,6 @@ function renderResearchPage(content) {
     `;
 
     initNGLViewers();
-}
-
-// Contact Page Render
-function renderContactPage(content) {
-    const mainContent = document.querySelector('main');
-    if (!mainContent) return;
-
-    const contact = content.contact || {};
-    const labels = content.contactLabels || {};
-    
-    const academicLinksHTML = `
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-            ${contact.orcid ? `
-                <a href="${contact.orcid}" target="_blank" rel="noopener" class="contact-link-card p-6 rounded-lg fade-in">
-                    <div class="flex items-center gap-4">
-                        <span class="text-3xl">🔬</span>
-                        <div>
-                            <h3 class="text-lg font-bold font-mono">ORCID</h3>
-                            <p class="text-sm opacity-75">${labels.orcid}</p>
-                        </div>
-                    </div>
-                </a>
-            ` : ''}
-            ${contact.googleScholar && isValidLink(contact.googleScholar) ? `
-                <a href="${contact.googleScholar}" target="_blank" rel="noopener" class="contact-link-card p-6 rounded-lg fade-in">
-                    <div class="flex items-center gap-4">
-                        <span class="text-3xl">📚</span>
-                        <div>
-                            <h3 class="text-lg font-bold font-mono">Google Scholar</h3>
-                            <p class="text-sm opacity-75">${labels.googleScholar}</p>
-                        </div>
-                    </div>
-                </a>
-            ` : ''}
-            ${contact.researchgate && isValidLink(contact.researchgate) ? `
-                <a href="${contact.researchgate}" target="_blank" rel="noopener" class="contact-link-card p-6 rounded-lg fade-in">
-                    <div class="flex items-center gap-4">
-                        <span class="text-3xl">📖</span>
-                        <div>
-                            <h3 class="text-lg font-bold font-mono">ResearchGate</h3>
-                            <p class="text-sm opacity-75">${labels.researchgate}</p>
-                        </div>
-                    </div>
-                </a>
-            ` : ''}
-            ${contact.linkedin && isValidLink(contact.linkedin) ? `
-                <a href="${contact.linkedin}" target="_blank" rel="noopener" class="contact-link-card p-6 rounded-lg fade-in">
-                    <div class="flex items-center gap-4">
-                        <span class="text-3xl">💼</span>
-                        <div>
-                            <h3 class="text-lg font-bold font-mono">LinkedIn</h3>
-                            <p class="text-sm opacity-75">${labels.linkedin}</p>
-                        </div>
-                    </div>
-                </a>
-            ` : ''}
-            ${contact.github && isValidLink(contact.github) ? `
-                <a href="${contact.github}" target="_blank" rel="noopener" class="contact-link-card p-6 rounded-lg fade-in">
-                    <div class="flex items-center gap-4">
-                        <span class="text-3xl">💻</span>
-                        <div>
-                            <h3 class="text-lg font-bold font-mono">GitHub</h3>
-                            <p class="text-sm opacity-75">${labels.github}</p>
-                        </div>
-                    </div>
-                </a>
-            ` : ''}
-        </div>
-    `;
-
-    mainContent.innerHTML = `
-        <section class="container mx-auto px-4 md:px-6 py-12 max-w-4xl">
-            <div class="fade-in">
-                <h1 class="text-3xl md:text-4xl font-bold mb-8 font-mono text-center">${content.sections.contact}</h1>
-                
-                <div class="mb-10 text-center contact-intro">
-                    <h2 class="text-xl md:text-2xl font-bold mb-3 font-mono">${contact.affiliation || content.affiliation}</h2>
-                    <p class="text-sm md:text-base opacity-90">${contact.location || content.location}</p>
-                </div>
-
-                <div class="mb-12">
-                    <div class="contact-info-card p-6 md:p-8 rounded-lg text-center">
-                        <h3 class="text-lg font-bold mb-3 font-mono">${labels.email}</h3>
-                        <a href="mailto:${contact.email || content.email}" class="text-base md:text-lg underline break-all contact-email-link">
-                            ${contact.email || content.email}
-                        </a>
-                    </div>
-                </div>
-
-                <div class="mb-8">
-                    <h2 class="text-xl font-bold mb-6 font-mono text-center">${labels.academicLinks}</h2>
-                    ${academicLinksHTML}
-                </div>
-            </div>
-        </section>
-    `;
 }
 
 // Utility Functions
