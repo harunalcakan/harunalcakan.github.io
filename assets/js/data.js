@@ -28,7 +28,7 @@ const data = {
 
         homeStats: {
             articles: 4,
-            conferences: 14,
+            conferences: 16,
             citations: 14,
             hIndex: 2,
             focus: "DFT, molecular docking & MD; growing experimental work in electrochemistry and materials"
@@ -285,6 +285,16 @@ const data = {
             ],
             conferences: [
                 {
+                    year: 2026,
+                    title: "Computational Surface Modeling of Lunar Ilmenite for CO₂ Capture toward In-Situ Resource Utilization",
+                    venue: "Poster presentation — 20th International Nanoscience and Nanotechnology Conference (NanoTR-20) (August 26–29, 2026, Izmir Institute of Technology, Gülbahçe–İYTE Campus, Urla, İzmir, Türkiye)"
+                },
+                {
+                    year: 2026,
+                    title: "Quantum Mechanical Assessment of Adsorption Dynamics in Lisinopril-Single Walled Carbon Nanotube Complexes as Drug Delivery System",
+                    venue: "Poster presentation — 20th International Nanoscience and Nanotechnology Conference (NanoTR-20) (August 26–29, 2026, Izmir Institute of Technology, Gülbahçe–İYTE Campus, Urla, İzmir, Türkiye)"
+                },
+                {
                     year: 2025,
                     title: "Integrative In Silico Evaluation of Sulfonamide Derivatives as Dual Carbonic Anhydrase I and II Inhibitors via Molecular Docking and ADME/T Profiling",
                     venue: "Oral presentation — 2nd International Conference on Modern Problems of Theoretical & Experimental Chemistry (December 18–19, 2025, Baku State University, Baku, Azerbaijan)"
@@ -439,7 +449,7 @@ const data = {
 
         homeStats: {
             articles: 4,
-            conferences: 14,
+            conferences: 16,
             citations: 14,
             hIndex: 2,
             focus: "DFT, moleküler kenetleme ve MD; elektrokimya ile malzeme karakterizasyonunda genişleyen deneysel çalışmalar"
@@ -688,6 +698,16 @@ const data = {
                 }
             ],
             conferences: [
+                {
+                    year: 2026,
+                    title: "Computational Surface Modeling of Lunar Ilmenite for CO₂ Capture toward In-Situ Resource Utilization",
+                    venue: "Poster presentation — 20th International Nanoscience and Nanotechnology Conference (NanoTR-20) (August 26–29, 2026, Izmir Institute of Technology, Gülbahçe–İYTE Campus, Urla, İzmir, Türkiye)"
+                },
+                {
+                    year: 2026,
+                    title: "Quantum Mechanical Assessment of Adsorption Dynamics in Lisinopril-Single Walled Carbon Nanotube Complexes as Drug Delivery System",
+                    venue: "Poster presentation — 20th International Nanoscience and Nanotechnology Conference (NanoTR-20) (August 26–29, 2026, Izmir Institute of Technology, Gülbahçe–İYTE Campus, Urla, İzmir, Türkiye)"
+                },
                 {
                     year: 2025,
                     title: "Integrative In Silico Evaluation of Sulfonamide Derivatives as Dual Carbonic Anhydrase I and II Inhibitors via Molecular Docking and ADME/T Profiling",
