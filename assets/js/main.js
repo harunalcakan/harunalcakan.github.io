@@ -545,15 +545,9 @@ function buildArticleItemHTML(pub, content, animationDelay = 0) {
 }
 
 function buildAboutActionsHTML(content) {
-    const email = content.contact?.email || content.email;
-    const requestSubject = encodeURIComponent(content.sections.requestCvSubject || 'CV Request');
-    const requestBody = encodeURIComponent(content.sections.requestCvBody || 'Hello,\n\nI would like to request your full CV.\n\nThank you.');
-    const mailto = `mailto:${email}?subject=${requestSubject}&body=${requestBody}`;
-
     return `
-        <div class="about-actions mb-10 flex flex-wrap gap-3">
-            <button type="button" id="download-portfolio-pdf" class="btn-toggle">${content.sections.downloadPortfolioPdf || content.sections.downloadCV}</button>
-            <a href="${mailto}" class="btn-toggle about-action-link">${content.sections.requestFullCv || 'Request full CV'}</a>
+        <div class="about-actions mb-10">
+            <button type="button" id="download-portfolio-pdf" class="btn-toggle">${content.sections.downloadCV}</button>
         </div>
     `;
 }
@@ -722,7 +716,7 @@ let portfolioPdfHandler = null;
 
 async function downloadPortfolioPdf(content) {
     const button = document.getElementById('download-portfolio-pdf');
-    const defaultLabel = content.sections.downloadPortfolioPdf || content.sections.downloadCV;
+    const defaultLabel = content.sections.downloadCV;
 
     if (button) {
         button.disabled = true;
@@ -1694,7 +1688,8 @@ function renderAboutPage(content) {
     mainContent.innerHTML = `
         <section class="container mx-auto px-4 md:px-6 py-12 max-w-5xl">
             <div class="fade-in">
-                <h1 class="text-3xl md:text-4xl font-bold mb-8 font-mono">${content.sections.about}</h1>
+                <h1 class="text-3xl md:text-4xl font-bold mb-6 font-mono">${content.sections.about}</h1>
+                ${content.bio ? `<p class="about-lead text-base md:text-lg leading-relaxed mb-10 max-w-3xl">${content.bio}</p>` : ''}
 
                 ${aboutActionsHTML}
                 ${thesisHTML}

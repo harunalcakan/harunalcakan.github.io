@@ -21,17 +21,17 @@ const data = {
         },
 
         // Hero / About
-        heroIntro: "Research Assistant in the Department of Chemistry at Ankara University. In computational chemistry, I work on DFT, molecular docking, and molecular dynamics; I am also building experience in electrochemistry, materials characterization, and experimental physical chemistry.",
+        heroIntro: "I am a research assistant in Chemistry at Ankara University. I try to see the same molecule on the screen and at the electrode: DFT, docking and short MD on one side; 3D-printed carbon surfaces and voltammetry on the other.",
         heroGreeting: "Hello, I'm",
         heroAffiliationShort: "Ankara University",
-        bio: "Research Assistant in the Department of Chemistry at Ankara University. My main focus is computational chemistry — DFT, molecular docking, and molecular dynamics — while I continue to develop my skills in electrochemistry, materials characterization, and laboratory-based physical chemistry.",
+        bio: "I came to chemistry from the computational side. I wanted to see where a molecule sits, how it moves, and why a drug or a pollutant is reduced at a given potential. Docking, molecular dynamics and DFT are still most of my week. In the last few years the bench has caught up: 3D-printed and laser-carbonised electrodes, surface characterisation, and square-wave voltammetry of nitroaromatics. My MSc wrote that laboratory story; the PhD is an attempt to keep the two ends — prediction and measured current — on the same question. I am early in the path. The claim I am willing to make is a clean notebook, not a first discovery.",
 
         homeStats: {
             articles: 4,
             conferences: 16,
             citations: 14,
             hIndex: 2,
-            focus: "DFT, molecular docking & MD; growing experimental work in electrochemistry and materials"
+            focus: "Same molecule, two views: DFT / docking / MD, and voltammetry at printed carbon"
         },
 
         scholar: {
@@ -59,21 +59,21 @@ const data = {
             institution: "Ankara University / Graduate School of Natural and Applied Sciences / Department of Chemistry / Chemistry Program"
         },
 
-        portfolioIntro: "Interactive molecular visualization — a glimpse into the structural models that inform my computational work.",
+        portfolioIntro: "A structure I can turn in the browser — the same habit I use before a docking or MD run.",
 
         // Methods & Tools — visual work snapshots (add entries in both "en" and "tr")
-        workGlimpsesIntro: "A glimpse from my work — visual snapshots of the models, methods, and experiments behind my research.",
+        workGlimpsesIntro: "A few frames from the desk: a structure, a method, a voltammogram.",
         workGlimpses: [
             {
                 type: "ngl",
                 title: "Molecular structure exploration",
-                caption: "Interactive visualization of protein structures — part of my docking and molecular dynamics workflows.",
+                caption: "Turning a protein in the browser before docking or a short MD run — the first check that the model is even the right one.",
                 pdbCode: "1crn"
             }
         ],
 
         // Homepage — literature reading notes (add new entries at the top)
-        literatureNotesIntro: "Short notes from my literature reading — methods, ideas, and takeaways I find worth sharing.",
+        literatureNotesIntro: "Notes I keep while reading: a method that worked, a claim I did not buy, a figure I wish I had drawn.",
         literatureNotes: [],
 
         // Section labels used by main.js (navbar, headings, toggles)
@@ -92,11 +92,7 @@ const data = {
             homeDepartment: "Department of Chemistry",
             homeAt: "at",
             downloadCV: "Download CV",
-            downloadPortfolioPdf: "Download portfolio summary (PDF)",
-            requestFullCv: "Request full CV",
             portfolioPdfGenerating: "Generating PDF…",
-            requestCvSubject: "CV Request",
-            requestCvBody: "Hello,\n\nI would like to request your full CV.\n\nThank you.",
             education: "Education",
             workExperience: "Work Experience",
             teaching: "Teaching",
@@ -152,7 +148,7 @@ const data = {
 
         metaDescriptions: {
             index: "Harun Nalçakan — Research Assistant at Ankara University. DFT, molecular docking, molecular dynamics, and experimental chemistry.",
-            about: "Education, thesis, and work experience of Harun Nalçakan, Research Assistant in Chemistry at Ankara University.",
+            about: "How Harun Nalçakan works: computational chemistry, 3D-printed electrodes, and an MSc on nitroaromatic voltammetry.",
             research: "Research areas, methods, and competencies in computational and experimental chemistry.",
             notes: "Reading notes and short takeaways from literature reviews in computational and experimental chemistry.",
             publications: "Peer-reviewed articles and conference presentations by Harun Nalçakan in computational chemistry and drug discovery.",
@@ -196,7 +192,7 @@ const data = {
                 role: "Research Assistant",
                 institution: "Ankara University, Department of Chemistry",
                 year: "2023–Present",
-                description: ""
+                description: "Teaching labs and problem sessions; research split between computational screening and electrochemical electrodes."
             }
         ],
 
@@ -212,13 +208,13 @@ const data = {
         researchAreas: [
             {
                 title: "Electrochemical Sensing Platforms",
-                description: "Design and optimization of advanced electrochemical sensors using both experimental protocols and computational modeling.",
-                methodology: "Surface chemistry, electrochemical analysis, molecular modeling, and structure–function correlation."
+                description: "Voltammetry of nitroaromatics and related phenols at 3D-printed and laser-carbonised carbon. The question is simple: when the surface changes, what does the wave do?",
+                methodology: "Square-wave and cyclic voltammetry, electrode activation, and a cautious reading of peak current against electrode architecture."
             },
             {
                 title: "Computational Drug Discovery",
-                description: "In silico exploration of molecular interactions to support ligand design and mechanism-of-action studies.",
-                methodology: "Cheminformatics, molecular docking, MD simulations, and basic ADME profiling."
+                description: "I screen ligand–target poses with docking and short MD, then pass the shortlist through a rough ADME filter. Most of my conference posters live on this line.",
+                methodology: "Cheminformatics, docking, MD, and basic ADME estimates — treated as a filter, not as a proof."
             }
         ],
 
@@ -442,17 +438,17 @@ const data = {
         },
 
         // Hero / Hakkımda
-        heroIntro: "Ankara Üniversitesi Kimya Bölümü'nde araştırma görevlisi olarak çalışmaktayım. Hesaplamalı kimyada DFT, moleküler kenetleme ve moleküler dinamik üzerine yoğunlaşıyorum; elektrokimya, malzeme karakterizasyonu ve deneysel fizikokimya alanlarında da çalışmalarımı sürdürüyorum.",
+        heroIntro: "Ankara Üniversitesi Kimya Bölümü'nde araştırma görevlisiyim. Aynı molekülü hem ekranda hem elektrotta görmeye çalışıyorum: bir yanda DFT, kenetleme ve kısa moleküler dinamik; diğer yanda 3B baskılı karbon yüzeyler ve voltametri.",
         heroGreeting: "Merhaba, ben",
         heroAffiliationShort: "Ankara Üniversitesi",
-        bio: "Ankara Üniversitesi Kimya Bölümü'nde araştırma görevlisi olarak çalışmaktayım. Önceliğim hesaplamalı kimya — DFT, moleküler kenetleme ve moleküler dinamik —; aynı zamanda elektrokimya, malzeme karakterizasyonu ve laboratuvar temelli fizikokimya çalışmalarına da yön veriyorum.",
+        bio: "Kimyaya hesaplamalı taraftan girdim. Bir molekülün nereye oturduğunu, nasıl hareket ettiğini ve bir ilacın ya da kirleticinin neden o potansiyelde indirgendiğini görmek istedim. Kenetleme, moleküler dinamik ve DFT hâlâ haftamın büyük kısmı. Son yıllarda tezgâh yetişti: 3B baskılı ve lazerle karbonize elektrotlar, yüzey karakterizasyonu, nitroaromatiğin kare dalga voltametrisi. Yüksek lisans o laboratuvar hikâyesini yazdı; doktora, tahmin ile ölçülen akımı aynı soruya bakacak şekilde tutma denemesi. Yolun başındayım. Söylemeye razı olduğum şey bir ilk keşif değil, düzgün tutulmuş bir defter.",
 
         homeStats: {
             articles: 4,
             conferences: 16,
             citations: 14,
             hIndex: 2,
-            focus: "DFT, moleküler kenetleme ve MD; elektrokimya ile malzeme karakterizasyonunda genişleyen deneysel çalışmalar"
+            focus: "Aynı molekül, iki bakış: DFT / kenetleme / MD ve baskılı karbonda voltametri"
         },
 
         scholar: {
@@ -480,19 +476,19 @@ const data = {
             institution: "Ankara Üniversitesi / Fen Bilimleri Enstitüsü / Kimya Anabilim Dalı / Kimya Bilim Dalı"
         },
 
-        portfolioIntro: "Etkileşimli moleküler görselleştirme — hesaplamalı çalışmalarımda kullandığım yapısal modellere kısa bir bakış.",
+        portfolioIntro: "Tarayıcıda çevirebildiğim bir yapı — kenetleme veya dinamik koşusundan önce yaptığım alışkanlığın ta kendisi.",
 
-        workGlimpsesIntro: "Çalışmalarımdan bir kesit — araştırmama yön veren modeller, yöntemler ve deneysel bulgulardan seçilmiş görseller.",
+        workGlimpsesIntro: "Masadan birkaç kare: bir yapı, bir yöntem, bir voltammogram.",
         workGlimpses: [
             {
                 type: "ngl",
                 title: "Moleküler yapı incelemesi",
-                caption: "Protein yapılarının etkileşimli görselleştirmesi; moleküler kenetleme ve dinamik çalışmalarımın bir parçası.",
+                caption: "Kenetleme veya kısa bir MD öncesi proteini tarayıcıda çevirmek — modelin doğru model olup olmadığına bakmanın ilk hali.",
                 pdbCode: "1crn"
             }
         ],
 
-        literatureNotesIntro: "Okuduğum literatürden kısa notlar — yöntemler, fikirler ve paylaşmaya değer bulduğum çıkarımlar.",
+        literatureNotesIntro: "Okurken tuttuğum notlar: işe yarayan bir yöntem, satın almadığım bir iddia, keşke benim çizdiğim bir şekil.",
         literatureNotes: [],
 
         sections: {
@@ -510,11 +506,7 @@ const data = {
             homeDepartment: "Kimya Bölümü",
             homeAt: "",
             downloadCV: "CV İndir",
-            downloadPortfolioPdf: "Portföy özetini indir (PDF)",
-            requestFullCv: "Tam CV talep et",
             portfolioPdfGenerating: "PDF hazırlanıyor…",
-            requestCvSubject: "CV Talebi",
-            requestCvBody: "Merhaba,\n\nTam CV'nizi talep etmek istiyorum.\n\nTeşekkürler.",
             education: "Eğitim",
             workExperience: "İş Deneyimi",
             teaching: "Verdiğim Dersler",
@@ -570,7 +562,7 @@ const data = {
 
         metaDescriptions: {
             index: "Harun Nalçakan — Ankara Üniversitesi Kimya Bölümü araştırma görevlisi. DFT, moleküler kenetleme, moleküler dinamik ve deneysel kimya.",
-            about: "Harun Nalçakan'ın eğitim geçmişi, yüksek lisans tezi ve iş deneyimi.",
+            about: "Harun Nalçakan nasıl çalışır: hesaplamalı kimya, 3B baskılı elektrotlar ve nitroaromatiğin voltametrisi üzerine bir yüksek lisans.",
             research: "Hesaplamalı ve deneysel kimyada araştırma alanları, yöntemler ve yetkinlikler.",
             notes: "Literatür okumalarından derlenen kısa notlar — hesaplamalı ve deneysel kimya.",
             publications: "Harun Nalçakan'ın hakemli makaleleri ve konferans sunumları.",
@@ -613,7 +605,7 @@ const data = {
                 role: "Araştırma Görevlisi",
                 institution: "Ankara Üniversitesi, Kimya Bölümü",
                 year: "2023–devam",
-                description: ""
+                description: "Laboratuvar ve problem saatleri; araştırma hattı hesaplamalı tarama ile elektrokimyasal elektrotlar arasında."
             }
         ],
 
@@ -628,13 +620,13 @@ const data = {
         researchAreas: [
             {
                 title: "Elektrokimyasal Algılama Platformları",
-                description: "Deneysel protokollerle hesaplamalı modellemeyi birlikte kullanarak elektrokimyasal sensörlerin tasarımı ve iyileştirilmesi üzerine çalışıyorum.",
-                methodology: "Yüzey kimyası, elektrokimyasal analiz, moleküler modelleme ve yapı–işlev ilişkileri."
+                description: "3B baskılı ve lazerle karbonize karbon yüzeylerde nitroaromatiğin ve yakın fenollerin voltametrisi. Soru sade: yüzey değişince dalga ne yapıyor?",
+                methodology: "Kare dalga ve dönüşümlü voltametri, elektrot aktivasyonu; pik akımını elektrot mimarisine karşı temkinli okumak."
             },
             {
                 title: "Hesaplamalı İlaç Keşfi",
-                description: "Ligand tasarımı ve etki mekanizması çalışmalarına destek olmak için moleküler etkileşimleri in silico düzeyde inceliyorum.",
-                methodology: "Kemoinformatik, moleküler kenetleme, MD simülasyonları ve ADME profilleme."
+                description: "Ligand–hedef pozunu kenetleme ve kısa MD ile tarayıp kısa listeyi kaba bir ADME süzgecinden geçiriyorum. Kongre posterlerimin çoğu bu hatta.",
+                methodology: "Kemoinformatik, kenetleme, MD ve temel ADME tahmini — kanıt değil, süzgeç."
             }
         ],
 
