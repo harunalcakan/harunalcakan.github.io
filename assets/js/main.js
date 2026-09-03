@@ -1838,12 +1838,23 @@ function renderResearchPage(content) {
         </div>
     `).join('');
 
+    const interests = [...(content.researchInterests || [])];
+    interests.sort((a, b) => a.localeCompare(b, locale, { sensitivity: 'base' }));
+    const tagsHTML = interests.length > 0 ? `
+        <div class="mb-16">
+            <div class="flex flex-wrap gap-2">
+                ${interests.map(tag => `<span class="research-tag">${tag}</span>`).join('')}
+            </div>
+        </div>
+    ` : '';
+
     mainContent.innerHTML = `
         <section class="container mx-auto px-4 md:px-6 py-12 max-w-6xl">
             <div class="fade-in">
                 <h1 class="text-3xl md:text-4xl font-bold mb-10 font-mono">${content.sections.research}</h1>
-                ${projectsHTML}
                 ${researchAreasHTML}
+                ${projectsHTML}
+                ${tagsHTML}
                 ${methodsHTML}
                 ${developed.length ? `
                 <div class="mb-12">
