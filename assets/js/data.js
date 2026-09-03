@@ -31,7 +31,7 @@ const data = {
             conferences: 16,
             citations: 14,
             hIndex: 2,
-            focus: "Primarily computational chemistry (DFT, docking, MD), with experimental electrochemistry"
+            focus: "Computational chemistry: DFT, molecular docking, and molecular dynamics"
         },
 
         scholar: {
@@ -43,7 +43,6 @@ const data = {
             "ADME / ADMET Profiling",
             "Cheminformatics",
             "DFT",
-            "Electrochemistry",
             "Materials Characterization",
             "Molecular Docking",
             "Molecular Dynamics"
@@ -154,10 +153,10 @@ const data = {
         },
 
         metaDescriptions: {
-            index: "Harun Nalçakan — Research Assistant at Ankara University. Computational chemistry (DFT, docking, MD) with complementary experimental electrochemistry.",
-            about: "Academic profile of Harun Nalçakan — computational chemistry research, experimental physical chemistry, and teaching at Ankara University.",
-            research: "Research areas, methods, and competencies in computational and experimental chemistry.",
-            notes: "Reading notes and short takeaways from literature reviews in computational and experimental chemistry.",
+            index: "Harun Nalçakan — Research Assistant at Ankara University. Computational chemistry: DFT, molecular docking, molecular dynamics, and drug discovery.",
+            about: "Academic profile of Harun Nalçakan — computational chemistry research and teaching at Ankara University.",
+            research: "Research focus, projects, and methods in computational chemistry.",
+            notes: "Reading notes and short takeaways from literature reviews in computational chemistry.",
             publications: "Peer-reviewed articles and conference presentations by Harun Nalçakan in computational chemistry and drug discovery.",
             contact: "Contact Harun Nalçakan — email, ORCID, ResearchGate, LinkedIn, and GitHub."
         },
@@ -199,7 +198,7 @@ const data = {
                 role: "Research Assistant",
                 institution: "Ankara University, Department of Chemistry",
                 year: "2023–Present",
-                description: "Undergraduate laboratory instruction and research in computational chemistry and electrochemical sensing."
+                description: "Undergraduate laboratory instruction and research in computational chemistry."
             }
         ],
 
@@ -219,23 +218,11 @@ const data = {
                 title: "Investigation of the Interactions of Sulfonamide Derivatives with Carbonic Anhydrase Enzymes Using Density Functional Theory, Molecular Docking, Molecular Dynamics, and ADMET Methods, and Theoretical and Experimental Evaluation of Their Adsorption Behavior on Selected Nanoparticle Surfaces",
                 period: "Dec 2025 – Jun 2027",
                 status: "Ongoing"
-            },
-            {
-                code: "FBA-2024-3247",
-                type: "Research Universities Support Program",
-                role: "Researcher",
-                title: "Investigation of the Corrosion Resistance of Graphene-Doped Printed Electrodes in Electrochemical Cells Fabricated by Stereolithography/Fused Deposition Modeling and Their Application in the Amperometric Determination of Endocrine-Disrupting Nitro-Polycyclic Aromatic Hydrocarbons",
-                period: "Apr 2024 – Oct 2026",
-                status: "Ongoing"
             }
         ],
 
         // Research focus (used by research page)
         researchAreas: [
-            {
-                title: "Electrochemical Sensing Platforms",
-                description: "Experimental and computational development of electrochemical sensors."
-            },
             {
                 title: "Computational Drug Discovery",
                 description: "In silico studies of molecular interactions for ligand design and mechanism elucidation."
@@ -257,8 +244,6 @@ const data = {
                 title: "Experimental Expertise",
                 skills: [
                     "Physical Chemistry",
-                    "Electrochemistry",
-                    "Advanced Electrochemical Sensing Platforms",
                     "Material Characterization"
                 ]
             },
@@ -472,7 +457,7 @@ const data = {
             conferences: 16,
             citations: 14,
             hIndex: 2,
-            focus: "Ağırlıklı hesaplamalı kimya (DFT, kenetleme, MD); deneysel elektrokimya"
+            focus: "Hesaplamalı kimya: DFT, moleküler kenetleme ve moleküler dinamik"
         },
 
         scholar: {
@@ -483,7 +468,6 @@ const data = {
         researchInterests: [
             "ADME / ADMET Profilleme",
             "DFT",
-            "Elektrokimya",
             "Kemoinformatik",
             "Malzeme Karakterizasyonu",
             "Moleküler Dinamik",
@@ -592,10 +576,10 @@ const data = {
         },
 
         metaDescriptions: {
-            index: "Harun Nalçakan — Ankara Üniversitesi Kimya Bölümü araştırma görevlisi. Ağırlıklı hesaplamalı kimya (DFT, kenetleme, MD) ve deneysel elektrokimya.",
-            about: "Harun Nalçakan'ın akademik profili — hesaplamalı kimya araştırmaları, deneysel fizikokimya ve öğretim faaliyetleri.",
-            research: "Hesaplamalı ve deneysel kimyada araştırma alanları, yöntemler ve yetkinlikler.",
-            notes: "Literatür okumalarından derlenen kısa notlar — hesaplamalı ve deneysel kimya.",
+            index: "Harun Nalçakan — Ankara Üniversitesi Kimya Bölümü araştırma görevlisi. Hesaplamalı kimya: DFT, moleküler kenetleme, moleküler dinamik ve ilaç keşfi.",
+            about: "Harun Nalçakan'ın akademik profili — hesaplamalı kimya araştırmaları ve öğretim faaliyetleri.",
+            research: "Hesaplamalı kimyada araştırma odağı, projeler ve yöntemler.",
+            notes: "Literatür okumalarından derlenen kısa notlar — hesaplamalı kimya.",
             publications: "Harun Nalçakan'ın hakemli makaleleri ve konferans sunumları.",
             contact: "Harun Nalçakan ile iletişim — e-posta, ORCID, Google Scholar, LinkedIn ve GitHub."
         },
@@ -636,7 +620,7 @@ const data = {
                 role: "Araştırma Görevlisi",
                 institution: "Ankara Üniversitesi, Kimya Bölümü",
                 year: "2023–devam",
-                description: "Laboratuvar dersleri ve hesaplamalı kimya ile elektrokimyasal algılama alanında araştırma."
+                description: "Laboratuvar dersleri ve hesaplamalı kimya alanında araştırma."
             }
         ],
 
@@ -656,22 +640,10 @@ const data = {
                 title: "Sülfonamid Türevlerinin Karbonik Anhidraz Enzimleri ile Etkileşimlerinin Yoğunluk Fonksiyonel Teorisi Moleküler Kenetleme Moleküler Dinamik ve ADMET Yöntemleriyle İncelenmesi ve Bazı Nanopartikül Yüzeylerindeki Adsorpsiyon Davranışlarının Teorik ve Deneysel Olarak Değerlendirilmesi",
                 period: "Ara 2025 – Haz 2027",
                 status: "Yürüyen proje"
-            },
-            {
-                code: "FBA-2024-3247",
-                type: "Araştırma Üniversiteleri",
-                role: "Araştırmacı",
-                title: "Stereolitografi/Eriyik Yığma Modellemesi ile Baskılanmış Elektrokimyasal Hücrelerde Grafen Katkılı Baskı Elektrotların Korozyon Dayanımının İncelenmesi ve Endokrin Bozucu Nitro-Polisiklik Aromatik Hidrokarbonların Amperometrik Tayininde Kullanımı",
-                period: "Nis 2024 – Eki 2026",
-                status: "Yürüyen proje"
             }
         ],
 
         researchAreas: [
-            {
-                title: "Elektrokimyasal Algılama Platformları",
-                description: "Elektrokimyasal sensörlerin deneysel ve hesaplamalı geliştirilmesi."
-            },
             {
                 title: "Hesaplamalı İlaç Keşfi",
                 description: "Ligand tasarımı ve etki mekanizması için moleküler etkileşimlerin in silico incelenmesi."
@@ -692,8 +664,6 @@ const data = {
                 title: "Deneysel Çalışmalar",
                 skills: [
                     "Fizikokimya",
-                    "Elektrokimya",
-                    "Gelişmiş elektrokimyasal sensör platformları",
                     "Malzeme karakterizasyonu"
                 ]
             },
