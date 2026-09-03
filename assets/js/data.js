@@ -98,13 +98,14 @@ const data = {
             teaching: "Teaching",
             workAndEducation: "Work Experience & Education",
             academicCompetency: "Academic & Technical Competency",
-            researchAreas: "Research Areas",
+            researchAreas: "Research Focus",
             projects: "Projects",
             projectCode: "Project code",
             projectRole: "Role",
             projectType: "Type",
             projectPeriod: "Period",
             projectStatus: "Status",
+            methodsSoftware: "Methods & Software",
             digitalIdeas: "Digital Ideas",
             digitalIdeasNote: "Concept-stage ideas for scientific workflows — early development, not released tools.",
             ideaStage: "Idea stage",
@@ -229,17 +230,15 @@ const data = {
             }
         ],
 
-        // Research areas (used by portfolio page)
+        // Research focus (used by research page)
         researchAreas: [
             {
                 title: "Electrochemical Sensing Platforms",
-                description: "Design and optimization of electrochemical sensors using experimental protocols and computational modeling.",
-                methodology: "Surface chemistry, voltammetric analysis, materials characterization, and structure–function correlation."
+                description: "Experimental and computational development of electrochemical sensors."
             },
             {
                 title: "Computational Drug Discovery",
-                description: "In silico investigation of molecular interactions to support ligand design and mechanism-of-action studies.",
-                methodology: "Cheminformatics, molecular docking, MD simulations, and ADME profiling."
+                description: "In silico studies of molecular interactions for ligand design and mechanism elucidation."
             }
         ],
 
@@ -537,13 +536,14 @@ const data = {
             teaching: "Verdiğim Dersler",
             workAndEducation: "Eğitim ve İş Deneyimi",
             academicCompetency: "Bilimsel ve Teknik Yetkinlik",
-            researchAreas: "Araştırma Alanları",
+            researchAreas: "Araştırma Odağı",
             projects: "Projeler",
             projectCode: "Proje kodu",
             projectRole: "Görev",
             projectType: "Tür",
             projectPeriod: "Süre",
             projectStatus: "Durum",
+            methodsSoftware: "Yöntemler ve Yazılımlar",
             digitalIdeas: "Dijital Fikirler",
             digitalIdeasNote: "Bilimsel iş akışları için fikir aşamasındaki projeler — henüz geliştirme sürecindeler, yayımlanmış yazılım değiller.",
             ideaStage: "Fikir aşaması",
@@ -670,13 +670,11 @@ const data = {
         researchAreas: [
             {
                 title: "Elektrokimyasal Algılama Platformları",
-                description: "Deneysel protokollerle hesaplamalı modellemeyi birlikte kullanarak elektrokimyasal sensörlerin tasarımı ve iyileştirilmesi.",
-                methodology: "Yüzey kimyası, voltametrik analiz, malzeme karakterizasyonu ve yapı–işlev ilişkileri."
+                description: "Elektrokimyasal sensörlerin deneysel ve hesaplamalı geliştirilmesi."
             },
             {
                 title: "Hesaplamalı İlaç Keşfi",
-                description: "Ligand tasarımı ve etki mekanizması çalışmalarına destek olmak için moleküler etkileşimlerin in silico incelenmesi.",
-                methodology: "Kemoinformatik, moleküler kenetleme, MD simülasyonları ve ADME profilleme."
+                description: "Ligand tasarımı ve etki mekanizması için moleküler etkileşimlerin in silico incelenmesi."
             }
         ],
 

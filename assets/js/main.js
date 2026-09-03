@@ -591,23 +591,15 @@ function buildPortfolioPdfMarkup(content) {
     `).join('');
 
     const researchItems = (content.researchAreas || []).map((area) => `
-        <li><strong>${area.title}</strong> — ${area.description}</li>
+        <li><strong>${area.title}</strong>${area.description ? ` — ${area.description}` : ''}</li>
     `).join('');
 
-    const interestTags = (content.researchInterests || []).map((tag) => `
-        <span class="pdf-tag">${tag}</span>
-    `).join('');
+    const interestTags = '';
 
     const competencyGroups = [];
-    if (content.skillMatrix?.computational?.skills?.length) {
-        competencyGroups.push(content.skillMatrix.computational);
-    }
-    if (content.skillMatrix?.experimental?.skills?.length) {
-        competencyGroups.push(content.skillMatrix.experimental);
-    }
     if (content.tools?.softwareItems?.length) {
         competencyGroups.push({
-            title: content.skillMatrix?.software?.title || content.tools?.software || 'Software',
+            title: content.sections.methodsSoftware || content.skillMatrix?.software?.title || content.tools?.software || 'Software',
             skills: content.tools.softwareItems
         });
     }
@@ -674,7 +666,7 @@ function buildPortfolioPdfMarkup(content) {
 
             ${competencyItems ? `
             <section class="pdf-section">
-                <h2>${sections.academicCompetency || 'Competencies'}</h2>
+                <h2>${sections.methodsSoftware || sections.academicCompetency || 'Methods & Software'}</h2>
                 ${competencyItems}
             </section>` : ''}
 
@@ -1808,118 +1800,56 @@ function renderResearchPage(content) {
         </div>
     ` : '';
 
-    const researchAreasHTML = content.researchAreas
-        .map((area, index) => `
-            <div class="research-area-card p-6 rounded-lg fade-in" style="animation-delay: ${index * 0.1}s">
-                <h3 class="text-2xl font-bold mb-3 font-mono">${area.title}</h3>
-                <p class="text-base mb-4 leading-relaxed">${area.description}</p>
-                ${area.methodology ? `<p class="text-sm opacity-75 italic">${area.methodology}</p>` : ''}
-            </div>
-        `)
-        .join('');
-
-    const scientificToolsHTML = content.tools.developed
-        .map((tool, index) => `
-            <div class="tool-card p-6 rounded-lg fade-in" style="animation-delay: ${index * 0.1}s">
-                <h3 class="text-2xl font-bold mb-3 font-mono">${tool.name}</h3>
-                <p class="text-base mb-4 leading-relaxed">${tool.description}</p>
-                ${isValidLink(tool.link) ? `<a href="${tool.link}" target="_blank" rel="noopener" class="underline">${content.tools.viewProject}</a>` : ''}
-                ${!isValidLink(tool.link) && tool.project_status ? `<p class="text-sm opacity-75 italic">${tool.project_status}</p>` : ''}
-            </div>
-        `)
-        .join('');
-
-    // Technical Modules section (computational / experimental + software)
-    const skillMatrix = content.skillMatrix || {};
-    const computationalSkills = skillMatrix.computational?.skills || [];
-    const experimentalSkills = skillMatrix.experimental?.skills || [];
-    const computationalTitle = skillMatrix.computational?.title || content.sections.academicCompetency;
-    const experimentalTitle = skillMatrix.experimental?.title || content.sections.academicCompetency;
-    const softwareTitle = skillMatrix.software?.title || content.tools.software;
-
-    const inSilicoListHTML = computationalSkills
-        .map(skill => `
-            <li class="flex items-start">
-                <span class="about-skill-bullet mr-2">•</span>
-                <span>${skill}</span>
-            </li>
-        `)
-        .join('');
-
-    const inVitroListHTML = experimentalSkills
-        .map(skill => `
-            <li class="flex items-start">
-                <span class="about-skill-bullet mr-2">•</span>
-                <span>${skill}</span>
-            </li>
-        `)
-        .join('');
-
-    const techTagsBase = (content.tools && Array.isArray(content.tools.softwareItems))
-        ? [...content.tools.softwareItems]
-        : [];
-
-    const locale = currentLanguage === 'tr' ? 'tr' : 'en';
-    techTagsBase.sort((a, b) => a.localeCompare(b, locale, { sensitivity: 'base' }));
-
-    const techTagsHTML = techTagsBase
-        .map(tag => `<span class="tech-badge">${tag}</span>`)
-        .join('');
-
-    const technicalModulesHTML = `
+    const researchAreas = content.researchAreas || [];
+    const researchAreasHTML = researchAreas.length > 0 ? `
         <div class="mb-16">
-            <h2 class="text-2xl md:text-3xl font-bold mb-6 font-mono">${content.sections.academicCompetency}</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-                <div class="research-area-card p-6 rounded-lg">
-                    <h3 class="text-xl font-semibold mb-3 module-heading">${computationalTitle}</h3>
-                    <ul class="space-y-2 text-sm md:text-base">
-                        ${inSilicoListHTML}
-                    </ul>
-                </div>
-                <div class="research-area-card p-6 rounded-lg">
-                    <h3 class="text-xl font-semibold mb-3 module-heading">${experimentalTitle}</h3>
-                    <ul class="space-y-2 text-sm md:text-base">
-                        ${inVitroListHTML}
-                    </ul>
-                </div>
-            </div>
-            <div>
-                <h3 class="text-xl font-semibold mb-3 module-heading">${softwareTitle}</h3>
-                <div class="flex flex-wrap gap-2">
-                    ${techTagsHTML}
-                </div>
+            <h2 class="text-2xl md:text-3xl font-bold mb-6 font-mono">${content.sections.researchAreas || 'Research Focus'}</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                ${researchAreas.map((area, index) => `
+                    <div class="research-area-card p-6 rounded-lg fade-in" style="animation-delay: ${index * 0.1}s">
+                        <h3 class="text-xl md:text-2xl font-bold mb-2 font-mono">${area.title}</h3>
+                        ${area.description ? `<p class="text-base leading-relaxed opacity-90">${area.description}</p>` : ''}
+                    </div>
+                `).join('')}
             </div>
         </div>
-    `;
+    ` : '';
+
+    const softwareItems = [...(content.tools?.softwareItems || [])];
+    const locale = currentLanguage === 'tr' ? 'tr' : 'en';
+    softwareItems.sort((a, b) => a.localeCompare(b, locale, { sensitivity: 'base' }));
+
+    const methodsHTML = softwareItems.length > 0 ? `
+        <div class="mb-16">
+            <h2 class="text-2xl md:text-3xl font-bold mb-6 font-mono">${content.sections.methodsSoftware || content.tools?.software || 'Methods & Software'}</h2>
+            <div class="flex flex-wrap gap-2">
+                ${softwareItems.map(tag => `<span class="tech-badge">${tag}</span>`).join('')}
+            </div>
+        </div>
+    ` : '';
+
+    const developed = content.tools?.developed || [];
+    const scientificToolsHTML = developed.map((tool, index) => `
+        <div class="tool-card p-6 rounded-lg fade-in" style="animation-delay: ${index * 0.1}s">
+            <h3 class="text-2xl font-bold mb-2 font-mono">${tool.name}</h3>
+            ${tool.description ? `<p class="text-base mb-3 leading-relaxed opacity-90">${tool.description}</p>` : ''}
+            ${isValidLink(tool.link) ? `<a href="${tool.link}" target="_blank" rel="noopener" class="underline">${content.tools.viewProject}</a>` : ''}
+            ${!isValidLink(tool.link) && tool.project_status ? `<p class="text-sm opacity-75 italic">${tool.project_status}</p>` : ''}
+        </div>
+    `).join('');
 
     mainContent.innerHTML = `
         <section class="container mx-auto px-4 md:px-6 py-12 max-w-6xl">
             <div class="fade-in">
-                <h1 class="text-3xl md:text-4xl font-bold mb-4 font-mono">${content.sections.research}</h1>
-                ${content.researchInterests && content.researchInterests.length > 0 ? `
-                    <div class="flex flex-wrap gap-2 mb-10">
-                        ${[...content.researchInterests]
-                            .sort((a, b) => a.localeCompare(b, currentLanguage === 'tr' ? 'tr' : 'en', { sensitivity: 'base' }))
-                            .map(tag => `<span class="research-tag">${tag}</span>`)
-                            .join('')}
-                    </div>
-                ` : ''}
-
+                <h1 class="text-3xl md:text-4xl font-bold mb-10 font-mono">${content.sections.research}</h1>
                 ${projectsHTML}
-
-                <div class="mb-16">
-                    <h2 class="text-2xl md:text-3xl font-bold mb-6 font-mono">${content.sections.researchAreas}</h2>
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                        ${researchAreasHTML}
-                    </div>
-                </div>
-                ${technicalModulesHTML}
-
-                ${content.tools?.developed?.length ? `
+                ${researchAreasHTML}
+                ${methodsHTML}
+                ${developed.length ? `
                 <div class="mb-12">
                     <h2 class="text-2xl md:text-3xl font-bold mb-2 font-mono">${content.sections.digitalIdeas || content.tools.developedTitle}</h2>
                     ${content.sections.digitalIdeasNote ? `<p class="text-sm md:text-base opacity-80 mb-6 max-w-3xl">${content.sections.digitalIdeasNote}</p>` : ''}
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                         ${scientificToolsHTML}
                     </div>
                 </div>
@@ -1927,8 +1857,6 @@ function renderResearchPage(content) {
             </div>
         </section>
     `;
-
-    initNGLViewers();
 }
 
 // Utility Functions
