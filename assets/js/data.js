@@ -214,7 +214,7 @@ const data = {
             {
                 code: "FBG-2025-4390",
                 type: "Directed project",
-                role: "Principal Investigator",
+                role: "Researcher",
                 title: "Investigation of the Interactions of Sulfonamide Derivatives with Carbonic Anhydrase Enzymes Using Density Functional Theory, Molecular Docking, Molecular Dynamics, and ADMET Methods, and Theoretical and Experimental Evaluation of Their Adsorption Behavior on Selected Nanoparticle Surfaces",
                 period: "Dec 2025 – Jun 2027",
                 status: "Ongoing"
@@ -222,7 +222,7 @@ const data = {
             {
                 code: "FBA-2024-3247",
                 type: "Research Universities Support Program",
-                role: "Principal Investigator",
+                role: "Researcher",
                 title: "Investigation of the Corrosion Resistance of Graphene-Doped Printed Electrodes in Electrochemical Cells Fabricated by Stereolithography/Fused Deposition Modeling and Their Application in the Amperometric Determination of Endocrine-Disrupting Nitro-Polycyclic Aromatic Hydrocarbons",
                 period: "Apr 2024 – Oct 2026",
                 status: "Ongoing"
@@ -652,7 +652,7 @@ const data = {
             {
                 code: "FBG-2025-4390",
                 type: "Güdümlü",
-                role: "Yönetici",
+                role: "Araştırmacı",
                 title: "Sülfonamid Türevlerinin Karbonik Anhidraz Enzimleri ile Etkileşimlerinin Yoğunluk Fonksiyonel Teorisi Moleküler Kenetleme Moleküler Dinamik ve ADMET Yöntemleriyle İncelenmesi ve Bazı Nanopartikül Yüzeylerindeki Adsorpsiyon Davranışlarının Teorik ve Deneysel Olarak Değerlendirilmesi",
                 period: "Ara 2025 – Haz 2027",
                 status: "Yürüyen proje"
@@ -660,7 +660,7 @@ const data = {
             {
                 code: "FBA-2024-3247",
                 type: "Araştırma Üniversiteleri",
-                role: "Yönetici",
+                role: "Araştırmacı",
                 title: "Stereolitografi/Eriyik Yığma Modellemesi ile Baskılanmış Elektrokimyasal Hücrelerde Grafen Katkılı Baskı Elektrotların Korozyon Dayanımının İncelenmesi ve Endokrin Bozucu Nitro-Polisiklik Aromatik Hidrokarbonların Amperometrik Tayininde Kullanımı",
                 period: "Nis 2024 – Eki 2026",
                 status: "Yürüyen proje"
