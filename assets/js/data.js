@@ -21,17 +21,17 @@ const data = {
         },
 
         // Hero / About
-        heroIntro: "Research Assistant in the Department of Chemistry at Ankara University. My work spans computational chemistry (DFT, molecular docking, and molecular dynamics) and experimental electrochemistry.",
+        heroIntro: "Research Assistant in the Department of Chemistry at Ankara University. My research is centered on computational chemistry—DFT, molecular docking, and molecular dynamics—and is complemented by experimental studies in electrochemistry and materials characterization.",
         heroGreeting: "Hello, I'm",
         heroAffiliationShort: "Ankara University",
-        bio: "I am a Research Assistant in the Department of Chemistry at Ankara University. My research integrates computational chemistry—DFT, molecular docking, and molecular dynamics—with experimental physical chemistry, including 3D-printed carbon electrodes, materials characterization, and voltammetric analysis. I am pursuing a PhD in Chemistry at Ankara University, following an MSc thesis on conductive 3D-printed electrodes for the detection of nitro-polycyclic aromatic hydrocarbons. I also contribute to teaching in physical chemistry, general chemistry, and quantum chemistry laboratories.",
+        bio: "I am a Research Assistant in the Department of Chemistry at Ankara University. My work centers on computational chemistry: I apply density functional theory, molecular docking, and molecular dynamics to probe molecular structure, reactivity, and biomolecular interactions. Alongside this computational focus, I pursue experimental physical chemistry—developing 3D-printed carbon electrodes, characterizing materials, and performing voltammetric analysis. I am currently a PhD candidate in Chemistry at Ankara University. My MSc thesis concerned conductive 3D-printed electrodes for the amperometric determination of nitro-polycyclic aromatic hydrocarbons. I also teach in physical chemistry, general chemistry, and quantum chemistry laboratory courses.",
 
         homeStats: {
             articles: 4,
             conferences: 16,
             citations: 14,
             hIndex: 2,
-            focus: "Computational and experimental chemistry: DFT, docking, MD, and electrochemical sensing"
+            focus: "Primarily computational chemistry (DFT, docking, MD), with experimental electrochemistry"
         },
 
         scholar: {
@@ -147,8 +147,8 @@ const data = {
         },
 
         metaDescriptions: {
-            index: "Harun Nalçakan — Research Assistant at Ankara University. DFT, molecular docking, molecular dynamics, and experimental chemistry.",
-            about: "Education, research, and work experience of Harun Nalçakan, Research Assistant in Chemistry at Ankara University.",
+            index: "Harun Nalçakan — Research Assistant at Ankara University. Computational chemistry (DFT, docking, MD) with complementary experimental electrochemistry.",
+            about: "Academic profile of Harun Nalçakan — computational chemistry research, experimental physical chemistry, and teaching at Ankara University.",
             research: "Research areas, methods, and competencies in computational and experimental chemistry.",
             notes: "Reading notes and short takeaways from literature reviews in computational and experimental chemistry.",
             publications: "Peer-reviewed articles and conference presentations by Harun Nalçakan in computational chemistry and drug discovery.",
@@ -438,17 +438,17 @@ const data = {
         },
 
         // Hero / Hakkımda
-        heroIntro: "Ankara Üniversitesi Kimya Bölümü'nde araştırma görevlisiyim. Hesaplamalı kimya (DFT, moleküler kenetleme, moleküler dinamik) ile deneysel elektrokimya alanlarında çalışmaktayım.",
+        heroIntro: "Ankara Üniversitesi Kimya Bölümü'nde araştırma görevlisiyim. Araştırmalarımı ağırlıklı olarak hesaplamalı kimya alanında—DFT, moleküler kenetleme ve moleküler dinamik—yürütmekle birlikte, elektrokimya ve malzeme karakterizasyonu kapsamında deneysel çalışmalar da yapmaktayım.",
         heroGreeting: "Merhaba, ben",
         heroAffiliationShort: "Ankara Üniversitesi",
-        bio: "Ankara Üniversitesi Kimya Bölümü'nde araştırma görevlisi olarak çalışmaktayım. Araştırmalarım; DFT, moleküler kenetleme ve moleküler dinamik gibi hesaplamalı yöntemleri, 3B baskılı karbon elektrotlar, malzeme karakterizasyonu ve voltametrik analiz içeren deneysel fizikokimya ile bir arada yürütmektedir. Ankara Üniversitesi'nde doktora eğitimime devam etmekteyim. Yüksek lisans tezim, nitro-polisiklik aromatik hidrokarbonların tayini için iletken filamentli 3B baskılı elektrotların geliştirilmesini konu almaktadır. Fizikokimya, temel kimya ve kuantum kimyası laboratuvarlarında eğitime katkı sağlamaktayım.",
+        bio: "Ankara Üniversitesi Kimya Bölümü'nde araştırma görevlisi olarak çalışmaktayım. Araştırmalarımın odağında hesaplamalı kimya yer almaktadır; yoğunluk fonksiyoneli teorisi (DFT), moleküler kenetleme ve moleküler dinamik yöntemleriyle moleküler yapı, reaktivite ve biyomoleküler etkileşimleri inceliyorum. Bu hesaplamalı çerçeveye paralel olarak, 3B baskılı karbon elektrotların geliştirilmesi, malzeme karakterizasyonu ve voltametrik analiz gibi deneysel fizikokimya çalışmaları da yürütüyorum. Ankara Üniversitesi'nde doktora eğitimime devam etmekteyim. Yüksek lisans tezim, nitro-polisiklik aromatik hidrokarbonların amperometrik tayini için iletken filamentli 3B baskılı elektrotların geliştirilmesini konu almıştır. Fizikokimya, temel kimya ve kuantum kimyası laboratuvarlarında eğitime katkı sağlamaktayım.",
 
         homeStats: {
             articles: 4,
             conferences: 16,
             citations: 14,
             hIndex: 2,
-            focus: "Hesaplamalı ve deneysel kimya: DFT, kenetleme, MD ve elektrokimyasal algılama"
+            focus: "Ağırlıklı hesaplamalı kimya (DFT, kenetleme, MD); deneysel elektrokimya"
         },
 
         scholar: {
@@ -561,8 +561,8 @@ const data = {
         },
 
         metaDescriptions: {
-            index: "Harun Nalçakan — Ankara Üniversitesi Kimya Bölümü araştırma görevlisi. DFT, moleküler kenetleme, moleküler dinamik ve deneysel kimya.",
-            about: "Harun Nalçakan'ın eğitim geçmişi, araştırma alanları ve iş deneyimi.",
+            index: "Harun Nalçakan — Ankara Üniversitesi Kimya Bölümü araştırma görevlisi. Ağırlıklı hesaplamalı kimya (DFT, kenetleme, MD) ve deneysel elektrokimya.",
+            about: "Harun Nalçakan'ın akademik profili — hesaplamalı kimya araştırmaları, deneysel fizikokimya ve öğretim faaliyetleri.",
             research: "Hesaplamalı ve deneysel kimyada araştırma alanları, yöntemler ve yetkinlikler.",
             notes: "Literatür okumalarından derlenen kısa notlar — hesaplamalı ve deneysel kimya.",
             publications: "Harun Nalçakan'ın hakemli makaleleri ve konferans sunumları.",

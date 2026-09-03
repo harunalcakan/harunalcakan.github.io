@@ -1552,9 +1552,6 @@ function renderHomePage(content) {
     const mainContent = document.querySelector('main');
     if (!mainContent) return;
 
-    const firstGlimpse = (content.workGlimpses || [])[0];
-    const workGlimpseHTML = buildHomeWorkGlimpseCompactHTML(firstGlimpse, content);
-
     const heroHTML = `
         <section class="container mx-auto px-4 md:px-6 pt-28 pb-10 max-w-6xl">
             <div class="home-hero-grid fade-in">
@@ -1562,7 +1559,6 @@ function renderHomePage(content) {
                     <h1 class="home-hero-name text-3xl md:text-4xl lg:text-5xl font-bold mb-3">${content.name}</h1>
                     <p class="home-hero-title text-base md:text-lg mb-5 opacity-90">${buildHomeTitleLine(content)}</p>
                     <p class="home-hero-bio text-base md:text-lg leading-relaxed">${content.heroIntro}</p>
-                    ${workGlimpseHTML}
                 </div>
                 ${buildHomeProfileSidebarHTML(content)}
             </div>
@@ -1591,7 +1587,6 @@ function renderHomePage(content) {
 
     mainContent.innerHTML = heroHTML + statsHTML + literatureHTML + contactHTML;
 
-    initNGLViewers();
     hydrateHomeStats(content);
 }
 
