@@ -1558,7 +1558,7 @@ function renderHomePage(content) {
                 <div class="home-hero-main">
                     <h1 class="home-hero-name text-3xl md:text-4xl lg:text-5xl font-bold mb-3">${content.name}</h1>
                     <p class="home-hero-title text-base md:text-lg mb-5 opacity-90">${buildHomeTitleLine(content)}</p>
-                    <p class="home-hero-bio text-base md:text-lg leading-relaxed">${content.heroIntro}</p>
+                    ${content.heroIntro ? `<p class="home-hero-bio text-base md:text-lg leading-relaxed">${content.heroIntro}</p>` : ''}
                 </div>
                 ${buildHomeProfileSidebarHTML(content)}
             </div>
