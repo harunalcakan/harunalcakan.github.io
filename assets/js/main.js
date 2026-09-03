@@ -522,6 +522,18 @@ function groupArticlesByYear(articles) {
         .map(([year, items]) => ({ year, items }));
 }
 
+function resolveResearchAreaLabel(content, areaId) {
+    if (!areaId) return '';
+    const match = (content.researchAreas || []).find((area) => area.id === areaId);
+    return match?.title || areaId;
+}
+
+function buildResearchAreaBadgeHTML(pub, content) {
+    const label = resolveResearchAreaLabel(content, pub.researchArea);
+    if (!label) return '';
+    return `<span class="research-tag research-area-badge">${label}</span>`;
+}
+
 function buildArticleItemHTML(pub, content, animationDelay = 0) {
     const doiLink = pub.doi_link || pub.link || '#';
     const apaCitation = pub.apa_citation || [
@@ -530,6 +542,7 @@ function buildArticleItemHTML(pub, content, animationDelay = 0) {
         pub.title,
         pub.venue
     ].filter(Boolean).join(' ');
+    const areaBadge = buildResearchAreaBadgeHTML(pub, content);
 
     return `
         <div class="publication-item mb-6 fade-in" style="animation-delay: ${animationDelay}s">
@@ -540,6 +553,7 @@ function buildArticleItemHTML(pub, content, animationDelay = 0) {
                 ${apaCitation}
             </p>
             ${buildPublicationMetaBadgesHTML(pub, content)}
+            ${areaBadge ? `<div class="flex flex-wrap gap-2 mt-3">${areaBadge}</div>` : ''}
         </div>
     `;
 }
@@ -590,9 +604,16 @@ function buildPortfolioPdfMarkup(content) {
         </li>
     `).join('');
 
-    const researchItems = (content.researchAreas || []).map((area) => `
-        <li><strong>${area.title}</strong>${area.description ? ` — ${area.description}` : ''}</li>
-    `).join('');
+    const researchItems = (content.researchAreas || []).map((area) => {
+        const topics = (area.topics || [])
+            .map((topic) => `<li><em>${topic.title}</em>${topic.description ? ` — ${topic.description}` : ''}</li>`)
+            .join('');
+        return `
+        <li>
+            <strong>${area.title}</strong>${area.description ? ` — ${area.description}` : ''}
+            ${topics ? `<ul class="pdf-list">${topics}</ul>` : ''}
+        </li>`;
+    }).join('');
 
     const interestTags = '';
 
@@ -1728,6 +1749,7 @@ function renderPublicationsPage(content) {
                 const titleMarkup = confLink
                     ? `<a href="${confLink}" target="_blank" rel="noopener" class="publication-title-link">${conf.title}</a>`
                     : `<span class="publication-title-link">${conf.title}</span>`;
+                const areaBadge = buildResearchAreaBadgeHTML(conf, content);
 
                 return `
                 <div class="publication-item mb-5 fade-in" style="animation-delay: ${((groupIndex * 0.15) + (index * 0.08))}s">
@@ -1735,6 +1757,7 @@ function renderPublicationsPage(content) {
                         ${titleMarkup}
                     </h3>
                     <p class="publication-citation">${conf.venue}</p>
+                    ${areaBadge ? `<div class="flex flex-wrap gap-2 mt-3">${areaBadge}</div>` : ''}
                 </div>
             `;
             }).join('');
@@ -1804,12 +1827,23 @@ function renderResearchPage(content) {
     const researchAreasHTML = researchAreas.length > 0 ? `
         <div class="mb-16">
             <h2 class="text-2xl md:text-3xl font-bold mb-6 font-mono">${content.sections.researchAreas || 'Research Focus'}</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="space-y-6">
                 ${researchAreas.map((area, index) => `
-                    <div class="research-area-card p-6 rounded-lg fade-in" style="animation-delay: ${index * 0.1}s">
-                        <h3 class="text-xl md:text-2xl font-bold mb-2 font-mono">${area.title}</h3>
-                        ${area.description ? `<p class="text-base leading-relaxed opacity-90">${area.description}</p>` : ''}
-                    </div>
+                    <article class="research-area-card p-6 md:p-8 rounded-lg fade-in" style="animation-delay: ${index * 0.1}s" ${area.id ? `data-research-area="${area.id}"` : ''}>
+                        <h3 class="text-xl md:text-2xl font-bold mb-3 font-mono">${area.title}</h3>
+                        ${area.description ? `<p class="text-base md:text-lg leading-relaxed opacity-90 mb-5 max-w-4xl">${area.description}</p>` : ''}
+                        ${(area.topics || []).length ? `
+                            <p class="text-xs md:text-sm font-mono uppercase tracking-wide opacity-60 mb-3">${content.sections.researchTopics || 'Focus areas'}</p>
+                            <ul class="research-topic-list space-y-4">
+                                ${area.topics.map((topic) => `
+                                    <li class="research-topic-item">
+                                        <h4 class="text-base md:text-lg font-semibold mb-1 font-mono">${topic.title}</h4>
+                                        ${topic.description ? `<p class="text-sm md:text-base leading-relaxed opacity-85">${topic.description}</p>` : ''}
+                                    </li>
+                                `).join('')}
+                            </ul>
+                        ` : ''}
+                    </article>
                 `).join('')}
             </div>
         </div>

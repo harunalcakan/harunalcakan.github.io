@@ -1350,6 +1350,25 @@ body.light-mode .research-area-card:hover {
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
 }
 
+.research-topic-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.research-topic-item + .research-topic-item {
+    border-top: 1px solid;
+    padding-top: 1rem;
+}
+
+body.light-mode .research-topic-item + .research-topic-item {
+    border-color: var(--border-light);
+}
+
+body.dark-mode .research-topic-item + .research-topic-item {
+    border-color: var(--border-dark);
+}
+
 /* Tool Cards */
 .tool-card {
     transition: transform 0.3s ease, box-shadow 0.3s ease;

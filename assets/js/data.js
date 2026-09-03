@@ -98,6 +98,7 @@ const data = {
             workAndEducation: "Work Experience & Education",
             academicCompetency: "Academic & Technical Competency",
             researchAreas: "Research Focus",
+            researchTopics: "Focus areas",
             projects: "Projects",
             projectCode: "Project code",
             projectRole: "Role",
@@ -232,8 +233,42 @@ const data = {
         // Research focus (used by research page)
         researchAreas: [
             {
-                title: "Computational Drug Discovery",
-                description: "In silico studies of molecular interactions for ligand design and mechanism elucidation."
+                id: "computational-biomedicine",
+                title: "Computational Biomedicine & Drug Discovery",
+                description: "Integrating molecular docking, molecular dynamics (MD) simulations, and AI-boosted in silico ADMET screening to accelerate rational drug design and characterize biomolecular recognition mechanisms.",
+                topics: [
+                    {
+                        title: "Structure- & Ligand-Based Drug Design",
+                        description: "Kinase and enzyme inhibition campaigns focusing on JAK1/JAK2, LIMK1, TRK, KRAS, SGLT1, and dual CA I/II inhibitors."
+                    },
+                    {
+                        title: "Immuno-Oncology & Dual Inhibitors",
+                        description: "Rational design of bifunctional scaffolds targeting Integrin/PD-L1 pathways."
+                    },
+                    {
+                        title: "Bio-Optical Probes & Protein Interactions",
+                        description: "Recognition kinetics and binding mechanisms of tailored D-A/D-A-D type NIR AIEgens with serum albumins (HSA/BSA) and applications in photodynamic therapy (PDT)."
+                    }
+                ]
+            },
+            {
+                id: "materials-energy",
+                title: "Materials, Energy & Surface Modeling",
+                description: "Quantum mechanical (QM/DFT) modeling and multiscale simulations of surfaces, functional nanomaterials, and optoelectronic interfaces.",
+                topics: [
+                    {
+                        title: "Solar Energy Conversion (DSSC)",
+                        description: "Rational design and photophysical characterization of bis-N,N-dimethylaniline-based D-π-A photosensitizers with divergent linkers for dye-sensitized solar cells."
+                    },
+                    {
+                        title: "Extraterrestrial Surface Chemistry & ISRU",
+                        description: "Computational surface modeling of lunar ilmenite interfaces for CO₂ capture and in-situ resource utilization."
+                    },
+                    {
+                        title: "Nanocarriers & Adsorption Dynamics",
+                        description: "Quantum mechanical evaluation of drug delivery systems utilizing single-walled carbon nanotubes (SWCNT) and active pharmaceutical complexes."
+                    }
+                ]
             }
         ],
 
@@ -265,6 +300,7 @@ const data = {
             articles: [
                 {
                     title: "Targeting LIMK1 in Alzheimer's Disease: A Multifaceted Computational Investigation Involving ADMET, Virtual Screening, Molecular Docking, and Molecular Dynamics",
+                    researchArea: "computational-biomedicine",
                     journal: "Journal of the Turkish Chemical Society Section A: Chemistry",
                     year: 2024,
                     citations: 0,
@@ -273,6 +309,7 @@ const data = {
                 },
                 {
                     title: "An In Silico Pharmacokinetic Investigation of Organic Luminogens: Understanding the NIR AIEgens and Their Interactions with Serum Albumins",
+                    researchArea: "computational-biomedicine",
                     journal: "Journal of Faculty of Pharmacy of Ankara University",
                     year: 2024,
                     citations: 3,
@@ -281,6 +318,7 @@ const data = {
                 },
                 {
                     title: "Bridging Molecular Docking to Molecular Dynamics to Enlighten Recognition Processes of Tailored D-A/D-A-D Types' AIEgens with HSA/BSA",
+                    researchArea: "computational-biomedicine",
                     journal: "Journal of Advanced Research in Natural and Applied Sciences",
                     year: 2023,
                     citations: 1,
@@ -289,6 +327,7 @@ const data = {
                 },
                 {
                     title: "Computational insights into bis-N,N-dimethylaniline based D-π-A photosensitizers bearing divergent-type of π-linkers for DSSCs",
+                    researchArea: "materials-energy",
                     journal: "Journal of Molecular Graphics and Modelling",
                     year: 2023,
                     citations: 10,
@@ -300,81 +339,97 @@ const data = {
                 {
                     year: 2026,
                     title: "Computational Surface Modeling of Lunar Ilmenite for CO₂ Capture toward In-Situ Resource Utilization",
+                    researchArea: "materials-energy",
                     venue: "Poster presentation — 20th International Nanoscience and Nanotechnology Conference (NanoTR-20) (August 26–29, 2026, Izmir Institute of Technology, Gülbahçe–İYTE Campus, Urla, İzmir, Türkiye)"
                 },
                 {
                     year: 2026,
                     title: "Quantum Mechanical Assessment of Adsorption Dynamics in Lisinopril-Single Walled Carbon Nanotube Complexes as Drug Delivery System",
+                    researchArea: "materials-energy",
                     venue: "Poster presentation — 20th International Nanoscience and Nanotechnology Conference (NanoTR-20) (August 26–29, 2026, Izmir Institute of Technology, Gülbahçe–İYTE Campus, Urla, İzmir, Türkiye)"
                 },
                 {
                     year: 2025,
                     title: "Integrative In Silico Evaluation of Sulfonamide Derivatives as Dual Carbonic Anhydrase I and II Inhibitors via Molecular Docking and ADME/T Profiling",
+                    researchArea: "computational-biomedicine",
                     venue: "Oral presentation — 2nd International Conference on Modern Problems of Theoretical & Experimental Chemistry (December 18–19, 2025, Baku State University, Baku, Azerbaijan)"
                 },
                 {
                     year: 2025,
                     title: "Rational Design and In Silico Profiling of Novel Bifunctional Scaffolds for Dual Integrin/PD-L1 Inhibition",
+                    researchArea: "computational-biomedicine",
                     venue: "Oral presentation — 2nd International Conference on Modern Problems of Theoretical & Experimental Chemistry (December 18–19, 2025, Baku State University, Baku, Azerbaijan)"
                 },
                 {
                     year: 2023,
                     title: "Crafting Excellence in LIM Kinase 1 Inhibition: Pharmacophore-Based Virtual Screening and AI-Boosted ADMET Insight",
+                    researchArea: "computational-biomedicine",
                     venue: "9th International BAU Drug Design Congress (November 2023)"
                 },
                 {
                     year: 2023,
                     title: "Guiding TRK Inhibition Strategies: Revelations from Pharmacophore-Based Virtual Screening and AI-Facilitated In Silico ADMET Profiling",
+                    researchArea: "computational-biomedicine",
                     venue: "9th International BAU Drug Design Congress (November 2023)"
                 },
                 {
                     year: 2023,
                     title: "Assessment of KRAS Inhibitors through Pharmacophore-Based Virtual Screening and AI-Enhanced ADMET Profiling via the Pharmit Server",
+                    researchArea: "computational-biomedicine",
                     venue: "9th International BAU Drug Design Congress (November 2023)"
                 },
                 {
                     year: 2023,
                     title: "Computational Evaluation of potent SGLT1 Inhibitors: Sotagliflozin Derivatives Explored with AI-Guided ADMET Assessment",
+                    researchArea: "computational-biomedicine",
                     venue: "9th International BAU Drug Design Congress (November 2023)"
                 },
                 {
                     year: 2023,
                     title: "Alzheimer's Alchemy: Unveiling the Dual-Inhibitory Potential of Tacrine-Donepezil Hybrids",
+                    researchArea: "computational-biomedicine",
                     venue: "6th International Eurasian Conference on Biological and Chemical Sciences (October 2023)"
                 },
                 {
                     year: 2023,
                     title: "Computational Modeling of Novel Filgotinib Derivatives as Potent Janus Kinase (JAK1/JAK2) Inhibitors",
+                    researchArea: "computational-biomedicine",
                     venue: "11. International Drug Chemistry Conference (March 2023)"
                 },
                 {
                     year: 2023,
                     title: "Molecular Docking and in-silico ADMET Studies of Newly Designed Pyrrolo[2,3-d]pyrimidine Derivatives to Inhibit Janus Kinases",
+                    researchArea: "computational-biomedicine",
                     venue: "11. International Drug Chemistry Conference (March 2023)"
                 },
                 {
                     year: 2022,
                     title: "Molecular Docking, in silico ADMET Analyses and Computational Approach of Novel Fedratinib Derivatives as Potent JAK2 Inhibitors",
+                    researchArea: "computational-biomedicine",
                     venue: "8th International BAU Drug Design Congress (December 2022)"
                 },
                 {
                     year: 2022,
                     title: "Computational Modelling of Abrocitinib Derivatives/Metabolites and Unveiling their Janus Kinase (JAK) Inhibitory Activities",
+                    researchArea: "computational-biomedicine",
                     venue: "5th International Eurasian Conference on Biological and Chemical Sciences (November 2022)"
                 },
                 {
                     year: 2022,
                     title: "Boyaya Duyarlı Güneş Hücrelerine Yönelik Yeni D-π-A Tipi Organik Boyarmaddelerin Teorik Olarak Modellenmesi ve İncelenmesi",
+                    researchArea: "materials-energy",
                     venue: "34. Ulusal Kimya Kongresi (Eylül 2022)"
                 },
                 {
                     year: 2022,
                     title: "Molecular Docking Approach to Enlighten Photodynamic Therapy Applicability of the Tailored D-A or D-A-D Types' AIEgens",
+                    researchArea: "computational-biomedicine",
                     venue: "2. Computer-Aided Drug Design Symposium and Workshop (Mayıs 2022)"
                 },
                 {
                     year: 2021,
                     title: "Molecular Design and Theoretical Investigation of bis-N,N-dimethylaniline-based Novel D-π-a Photosensitizers",
+                    researchArea: "materials-energy",
                     venue: "5th International Organic Chemistry Congress (October 2021)"
                 }
             ]
@@ -529,6 +584,7 @@ const data = {
             workAndEducation: "Eğitim ve İş Deneyimi",
             academicCompetency: "Bilimsel ve Teknik Yetkinlik",
             researchAreas: "Araştırma Odağı",
+            researchTopics: "Odak alanları",
             projects: "Projeler",
             projectCode: "Proje kodu",
             projectRole: "Görev",
@@ -661,8 +717,42 @@ const data = {
 
         researchAreas: [
             {
-                title: "Hesaplamalı İlaç Keşfi",
-                description: "Ligand tasarımı ve etki mekanizması için moleküler etkileşimlerin in silico incelenmesi."
+                id: "computational-biomedicine",
+                title: "Hesaplamalı Biyokimya ve İlaç Keşfi",
+                description: "Rasyonel ilaç tasarımını hızlandırmak ve biyomoleküler tanıma mekanizmalarını karakterize etmek için moleküler kenetleme, moleküler dinamik (MD) simülasyonları ve yapay zekâ destekli in silico ADMET taramasını bütünleştiriyorum.",
+                topics: [
+                    {
+                        title: "Yapı ve Ligand Temelli İlaç Tasarımı",
+                        description: "JAK1/JAK2, LIMK1, TRK, KRAS, SGLT1 ve çift CA I/II inhibitörlerine odaklanan kinaz ve enzim inhibisyonu çalışmaları."
+                    },
+                    {
+                        title: "İmmüno-onkoloji ve Çift İnhibitörler",
+                        description: "Integrin/PD-L1 yollarını hedefleyen bifonksiyonel iskeletlerin rasyonel tasarımı."
+                    },
+                    {
+                        title: "Biyo-optik Problar ve Protein Etkileşimleri",
+                        description: "Özel tasarlanmış D-A/D-A-D tipindeki NIR AIEgenlerin serum albuminleri (HSA/BSA) ile tanıma kinetiği ve bağlanma mekanizmaları; fotodinamik terapi (PDT) uygulamaları."
+                    }
+                ]
+            },
+            {
+                id: "materials-energy",
+                title: "Malzeme, Enerji ve Yüzey Modellemesi",
+                description: "Yüzeylerin, işlevsel nanomalzemelerin ve optoelektronik arayüzlerin kuantum mekaniksel (QM/DFT) modellemesi ve çok ölçekli simülasyonları.",
+                topics: [
+                    {
+                        title: "Güneş Enerjisi Dönüşümü (DSSC)",
+                        description: "Boya duyarlı güneş hücreleri için farklı bağlayıcılara sahip bis-N,N-dimetilanilin temelli D-π-A fotosensitizerlerin rasyonel tasarımı ve fotofiziksel karakterizasyonu."
+                    },
+                    {
+                        title: "Dünya Dışı Yüzey Kimyası ve ISRU",
+                        description: "CO₂ yakalama ve yerinde kaynak kullanımı (ISRU) için ay ilmenit arayüzlerinin hesaplamalı yüzey modellemesi."
+                    },
+                    {
+                        title: "Nanotaşıyıcılar ve Adsorpsiyon Dinamiği",
+                        description: "Tek duvarlı karbon nanotüpler (SWCNT) ve aktif farmasötik kompleksler kullanan ilaç salım sistemlerinin kuantum mekaniksel değerlendirilmesi."
+                    }
+                ]
             }
         ],
 
@@ -692,6 +782,7 @@ const data = {
             articles: [
                 {
                     title: "Targeting LIMK1 in Alzheimer's Disease: A Multifaceted Computational Investigation Involving ADMET, Virtual Screening, Molecular Docking, and Molecular Dynamics",
+                    researchArea: "computational-biomedicine",
                     journal: "Journal of the Turkish Chemical Society Section A: Chemistry",
                     year: 2024,
                     citations: 0,
@@ -700,6 +791,7 @@ const data = {
                 },
                 {
                     title: "An In Silico Pharmacokinetic Investigation of Organic Luminogens: Understanding the NIR AIEgens and Their Interactions with Serum Albumins",
+                    researchArea: "computational-biomedicine",
                     journal: "Journal of Faculty of Pharmacy of Ankara University",
                     year: 2024,
                     citations: 3,
@@ -708,6 +800,7 @@ const data = {
                 },
                 {
                     title: "Bridging Molecular Docking to Molecular Dynamics to Enlighten Recognition Processes of Tailored D-A/D-A-D Types' AIEgens with HSA/BSA",
+                    researchArea: "computational-biomedicine",
                     journal: "Journal of Advanced Research in Natural and Applied Sciences",
                     year: 2023,
                     citations: 1,
@@ -716,6 +809,7 @@ const data = {
                 },
                 {
                     title: "Computational insights into bis-N,N-dimethylaniline based D-π-A photosensitizers bearing divergent-type of π-linkers for DSSCs",
+                    researchArea: "materials-energy",
                     journal: "Journal of Molecular Graphics and Modelling",
                     year: 2023,
                     citations: 10,
@@ -727,81 +821,97 @@ const data = {
                 {
                     year: 2026,
                     title: "Computational Surface Modeling of Lunar Ilmenite for CO₂ Capture toward In-Situ Resource Utilization",
+                    researchArea: "materials-energy",
                     venue: "Poster presentation — 20th International Nanoscience and Nanotechnology Conference (NanoTR-20) (August 26–29, 2026, Izmir Institute of Technology, Gülbahçe–İYTE Campus, Urla, İzmir, Türkiye)"
                 },
                 {
                     year: 2026,
                     title: "Quantum Mechanical Assessment of Adsorption Dynamics in Lisinopril-Single Walled Carbon Nanotube Complexes as Drug Delivery System",
+                    researchArea: "materials-energy",
                     venue: "Poster presentation — 20th International Nanoscience and Nanotechnology Conference (NanoTR-20) (August 26–29, 2026, Izmir Institute of Technology, Gülbahçe–İYTE Campus, Urla, İzmir, Türkiye)"
                 },
                 {
                     year: 2025,
                     title: "Integrative In Silico Evaluation of Sulfonamide Derivatives as Dual Carbonic Anhydrase I and II Inhibitors via Molecular Docking and ADME/T Profiling",
+                    researchArea: "computational-biomedicine",
                     venue: "Oral presentation — 2nd International Conference on Modern Problems of Theoretical & Experimental Chemistry (December 18–19, 2025, Baku State University, Baku, Azerbaijan)"
                 },
                 {
                     year: 2025,
                     title: "Rational Design and In Silico Profiling of Novel Bifunctional Scaffolds for Dual Integrin/PD-L1 Inhibition",
+                    researchArea: "computational-biomedicine",
                     venue: "Oral presentation — 2nd International Conference on Modern Problems of Theoretical & Experimental Chemistry (December 18–19, 2025, Baku State University, Baku, Azerbaijan)"
                 },
                 {
                     year: 2023,
                     title: "Crafting Excellence in LIM Kinase 1 Inhibition: Pharmacophore-Based Virtual Screening and AI-Boosted ADMET Insight",
+                    researchArea: "computational-biomedicine",
                     venue: "9th International BAU Drug Design Congress (November 2023)"
                 },
                 {
                     year: 2023,
                     title: "Guiding TRK Inhibition Strategies: Revelations from Pharmacophore-Based Virtual Screening and AI-Facilitated In Silico ADMET Profiling",
+                    researchArea: "computational-biomedicine",
                     venue: "9th International BAU Drug Design Congress (November 2023)"
                 },
                 {
                     year: 2023,
                     title: "Assessment of KRAS Inhibitors through Pharmacophore-Based Virtual Screening and AI-Enhanced ADMET Profiling via the Pharmit Server",
+                    researchArea: "computational-biomedicine",
                     venue: "9th International BAU Drug Design Congress (November 2023)"
                 },
                 {
                     year: 2023,
                     title: "Computational Evaluation of potent SGLT1 Inhibitors: Sotagliflozin Derivatives Explored with AI-Guided ADMET Assessment",
+                    researchArea: "computational-biomedicine",
                     venue: "9th International BAU Drug Design Congress (November 2023)"
                 },
                 {
                     year: 2023,
                     title: "Alzheimer's Alchemy: Unveiling the Dual-Inhibitory Potential of Tacrine-Donepezil Hybrids",
+                    researchArea: "computational-biomedicine",
                     venue: "6th International Eurasian Conference on Biological and Chemical Sciences (October 2023)"
                 },
                 {
                     year: 2023,
                     title: "Computational Modeling of Novel Filgotinib Derivatives as Potent Janus Kinase (JAK1/JAK2) Inhibitors",
+                    researchArea: "computational-biomedicine",
                     venue: "11. International Drug Chemistry Conference (March 2023)"
                 },
                 {
                     year: 2023,
                     title: "Molecular Docking and in-silico ADMET Studies of Newly Designed Pyrrolo[2,3-d]pyrimidine Derivatives to Inhibit Janus Kinases",
+                    researchArea: "computational-biomedicine",
                     venue: "11. International Drug Chemistry Conference (March 2023)"
                 },
                 {
                     year: 2022,
                     title: "Molecular Docking, in silico ADMET Analyses and Computational Approach of Novel Fedratinib Derivatives as Potent JAK2 Inhibitors",
+                    researchArea: "computational-biomedicine",
                     venue: "8th International BAU Drug Design Congress (December 2022)"
                 },
                 {
                     year: 2022,
                     title: "Computational Modelling of Abrocitinib Derivatives/Metabolites and Unveiling their Janus Kinase (JAK) Inhibitory Activities",
+                    researchArea: "computational-biomedicine",
                     venue: "5th International Eurasian Conference on Biological and Chemical Sciences (November 2022)"
                 },
                 {
                     year: 2022,
                     title: "Boyaya Duyarlı Güneş Hücrelerine Yönelik Yeni D-π-A Tipi Organik Boyarmaddelerin Teorik Olarak Modellenmesi ve İncelenmesi",
+                    researchArea: "materials-energy",
                     venue: "34. Ulusal Kimya Kongresi (Eylül 2022)"
                 },
                 {
                     year: 2022,
                     title: "Molecular Docking Approach to Enlighten Photodynamic Therapy Applicability of the Tailored D-A or D-A-D Types' AIEgens",
+                    researchArea: "computational-biomedicine",
                     venue: "2. Computer-Aided Drug Design Symposium and Workshop (Mayıs 2022)"
                 },
                 {
                     year: 2021,
                     title: "Molecular Design and Theoretical Investigation of bis-N,N-dimethylaniline-based Novel D-π-a Photosensitizers",
+                    researchArea: "materials-energy",
                     venue: "5th International Organic Chemistry Congress (October 2021)"
                 }
             ]
