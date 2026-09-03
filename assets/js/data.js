@@ -398,19 +398,19 @@ const data = {
             developed: [
                 {
                     name: "ADViSOR",
-                    description: "Concept for a molecular docking validation program.",
+                    description: "To be announced.",
                     link: "#",
                     project_status: "Idea stage"
                 },
                 {
                     name: "SnapChem",
-                    description: "Concept for a mobile molecule drawing app.",
+                    description: "To be announced.",
                     link: "#",
                     project_status: "Idea stage"
                 },
                 {
                     name: "Chemify",
-                    description: "Concept for a chemical calculation module and related tools.",
+                    description: "To be announced.",
                     link: "#",
                     project_status: "Idea stage"
                 }
@@ -832,19 +832,19 @@ const data = {
             developed: [
                 {
                     name: "ADViSOR",
-                    description: "Moleküler kenetleme sonuçlarını değerlendirmeye yönelik bir program fikri.",
+                    description: "Duyurulacaktır.",
                     link: "#",
                     project_status: "Fikir aşaması"
                 },
                 {
                     name: "SnapChem",
-                    description: "Mobil ortamda molekül çizmeye yönelik bir uygulama fikri.",
+                    description: "Duyurulacaktır.",
                     link: "#",
                     project_status: "Fikir aşaması"
                 },
                 {
                     name: "Chemify",
-                    description: "Kimyasal hesaplamalar için modüler bir araç seti fikri.",
+                    description: "Duyurulacaktır.",
                     link: "#",
                     project_status: "Fikir aşaması"
                 }
