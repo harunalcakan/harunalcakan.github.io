@@ -1783,6 +1783,31 @@ function renderResearchPage(content) {
     const mainContent = document.querySelector('main');
     if (!mainContent) return;
 
+    const projects = content.projects || [];
+    const projectsHTML = projects.length > 0 ? `
+        <div class="mb-16">
+            <h2 class="text-2xl md:text-3xl font-bold mb-6 font-mono">${content.sections.projects || 'Projects'}</h2>
+            <div class="space-y-6">
+                ${projects.map((project, index) => `
+                    <article class="research-project-item publication-item mb-2 fade-in" style="animation-delay: ${index * 0.08}s">
+                        <h3 class="text-lg md:text-xl font-semibold mb-2 leading-snug">${project.title}</h3>
+                        <p class="publication-citation text-sm md:text-base mb-2">
+                            <span class="font-mono">${project.code || ''}</span>
+                            ${project.code && project.type ? ' · ' : ''}${project.type || ''}
+                            ${(project.code || project.type) && project.role ? ' · ' : ''}${project.role || ''}
+                        </p>
+                        <p class="text-sm opacity-80">
+                            ${[
+                                project.period ? `${content.sections.projectPeriod || 'Period'}: ${project.period}` : '',
+                                project.status ? `${content.sections.projectStatus || 'Status'}: ${project.status}` : ''
+                            ].filter(Boolean).join(' · ')}
+                        </p>
+                    </article>
+                `).join('')}
+            </div>
+        </div>
+    ` : '';
+
     const researchAreasHTML = content.researchAreas
         .map((area, index) => `
             <div class="research-area-card p-6 rounded-lg fade-in" style="animation-delay: ${index * 0.1}s">
@@ -1879,6 +1904,8 @@ function renderResearchPage(content) {
                             .join('')}
                     </div>
                 ` : ''}
+
+                ${projectsHTML}
 
                 <div class="mb-16">
                     <h2 class="text-2xl md:text-3xl font-bold mb-6 font-mono">${content.sections.researchAreas}</h2>

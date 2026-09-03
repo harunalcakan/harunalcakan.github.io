@@ -99,6 +99,12 @@ const data = {
             workAndEducation: "Work Experience & Education",
             academicCompetency: "Academic & Technical Competency",
             researchAreas: "Research Areas",
+            projects: "Projects",
+            projectCode: "Project code",
+            projectRole: "Role",
+            projectType: "Type",
+            projectPeriod: "Period",
+            projectStatus: "Status",
             digitalIdeas: "Digital Ideas",
             digitalIdeasNote: "Concept-stage ideas for scientific workflows — early development, not released tools.",
             ideaStage: "Idea stage",
@@ -203,6 +209,25 @@ const data = {
         ],
 
         news: [],
+
+        projects: [
+            {
+                code: "FBG-2025-4390",
+                type: "Directed project",
+                role: "Principal Investigator",
+                title: "Investigation of the Interactions of Sulfonamide Derivatives with Carbonic Anhydrase Enzymes Using Density Functional Theory, Molecular Docking, Molecular Dynamics, and ADMET Methods, and Theoretical and Experimental Evaluation of Their Adsorption Behavior on Selected Nanoparticle Surfaces",
+                period: "Dec 2025 – Jun 2027",
+                status: "Ongoing"
+            },
+            {
+                code: "FBA-2024-3247",
+                type: "Research Universities Support Program",
+                role: "Principal Investigator",
+                title: "Investigation of the Corrosion Resistance of Graphene-Doped Printed Electrodes in Electrochemical Cells Fabricated by Stereolithography/Fused Deposition Modeling and Their Application in the Amperometric Determination of Endocrine-Disrupting Nitro-Polycyclic Aromatic Hydrocarbons",
+                period: "Apr 2024 – Oct 2026",
+                status: "Ongoing"
+            }
+        ],
 
         // Research areas (used by portfolio page)
         researchAreas: [
@@ -513,6 +538,12 @@ const data = {
             workAndEducation: "Eğitim ve İş Deneyimi",
             academicCompetency: "Bilimsel ve Teknik Yetkinlik",
             researchAreas: "Araştırma Alanları",
+            projects: "Projeler",
+            projectCode: "Proje kodu",
+            projectRole: "Görev",
+            projectType: "Tür",
+            projectPeriod: "Süre",
+            projectStatus: "Durum",
             digitalIdeas: "Dijital Fikirler",
             digitalIdeasNote: "Bilimsel iş akışları için fikir aşamasındaki projeler — henüz geliştirme sürecindeler, yayımlanmış yazılım değiller.",
             ideaStage: "Fikir aşaması",
@@ -616,6 +647,25 @@ const data = {
         ],
 
         news: [],
+
+        projects: [
+            {
+                code: "FBG-2025-4390",
+                type: "Güdümlü",
+                role: "Yönetici",
+                title: "Sülfonamid Türevlerinin Karbonik Anhidraz Enzimleri ile Etkileşimlerinin Yoğunluk Fonksiyonel Teorisi Moleküler Kenetleme Moleküler Dinamik ve ADMET Yöntemleriyle İncelenmesi ve Bazı Nanopartikül Yüzeylerindeki Adsorpsiyon Davranışlarının Teorik ve Deneysel Olarak Değerlendirilmesi",
+                period: "Ara 2025 – Haz 2027",
+                status: "Yürüyen proje"
+            },
+            {
+                code: "FBA-2024-3247",
+                type: "Araştırma Üniversiteleri",
+                role: "Yönetici",
+                title: "Stereolitografi/Eriyik Yığma Modellemesi ile Baskılanmış Elektrokimyasal Hücrelerde Grafen Katkılı Baskı Elektrotların Korozyon Dayanımının İncelenmesi ve Endokrin Bozucu Nitro-Polisiklik Aromatik Hidrokarbonların Amperometrik Tayininde Kullanımı",
+                period: "Nis 2024 – Eki 2026",
+                status: "Yürüyen proje"
+            }
+        ],
 
         researchAreas: [
             {
